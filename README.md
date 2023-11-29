@@ -1,4 +1,4 @@
-# DeskIt---Hot-Desk-Booking-System
+# DeskIt-Hot-Desk-Booking-System
 
 ### Sprint_01 Backlog
 1. Login - c/o Azhelle
