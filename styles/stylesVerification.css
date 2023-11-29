@@ -1,4 +1,175 @@
 * {
+    box-sizing: border-box;
     margin: 0;
+    border: 0;
+}
+
+
+/* navbar */
+.navbar-custom {
+    background-color: #FCF8F8;
+}
+.navbar {
+    box-shadow: 0 4px 2px -3px gray;
+}
+
+.navbar .navbar-brand {
+    padding: 10px;
+}
+.navbar-brand img {
+    width: 210px; 
+    height: 37px;
+    padding-left: 15%;
+}
+
+.navbar .nav-item {
+    padding-right: 15px;
+}
+
+#navbarSupportedContent > a{
+    font-size: small;
+    background-color: #FBB503;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+    color: white;
+}
+
+
+/* main & form */
+
+.col{
+    /* border-color: black;
+    border-width: 1px;
+    border-style:solid; */
     padding: 0;
+}
+
+main {
+    margin: 10vh 15vw
+}
+
+h1 {
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 23px;
+}
+
+h6 {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+#verification-image {
+    margin-top: 10vh;
+    height: 60%;
+}
+
+form {
+    margin: auto;
+    width: 85%;
+    height: 52%;
+    background-color: #f8de9c ;
+    border-radius: 15px;
+    padding: 3.5vh 1vh;
+}
+
+form label {
+    /* visibility: hidden; */
+    margin-left: -55%
+}
+
+form input {
+    border-radius: 5px;
+    width: 45px;
+    height: 40px;
+    margin: 2vh 2px;
+}
+
+form input:last-child {
+    width: 90%;
+    border-radius: 10px;
+    background-color: #fbb503;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.footnote {
+    margin: auto;
+    height: 22%;
+    width: 55%;
+    background-color: #EDEDED;
+
+}
+
+.footnote p {
+    color: #2B6472;
+    padding: 12px 15px;
+    font-size: 13px;
+    text-align: justify;
+}
+
+
+
+
+/* footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EDEDED;
+}
+
+footer div {
+    flex-basis: 50%;
+    margin: 3%;
+    
+}
+
+.left-info {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding-left: 3%;
+    
+}
+.left-info > div .a {
+    padding: 5px;
+}
+.left-info img  {
+    width: 140px; 
+    height: 33px;
+}
+
+.left-info .book {
+    background-color: #FBB503;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+    color: white;
+}
+.right-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+}
+
+
+.right-info > div.a .aa {
+    padding: 10px;
+}
+
+.right-info > div.b i {
+    padding: 10px;
+}
+
+.copyright {
+    display: flex;
+    padding: 2%;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    border-top: 1px solid gray;
 }
