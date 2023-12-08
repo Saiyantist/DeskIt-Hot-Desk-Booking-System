@@ -1,0 +1,160 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+
+.head-uHome {
+    position: relative;
+    
+}
+
+.head-uHome h1 {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+
+}
+
+.head-uHome a {
+    position: absolute;
+    background-color: #FBB503;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+    color: white;
+    text-decoration: none;
+    top: 60%;
+    left: 45%;
+    z-index: 1;
+}
+
+.head-uHome img {
+    opacity: 0.4;
+}
+
+.myBook-container {
+    margin: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.my-bookings {
+    display: flex;
+    align-items: start;
+    margin-bottom: -1.2%;
+}
+h5 {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #FBB503;
+    padding-bottom: 15px;
+}
+
+.calendar-image {
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    background-color: #ECECEC;
+    padding: 50px;
+}
+
+.second-row {
+    
+    background-color: #EDEDED;
+}
+.row-container {
+    display: flex;
+    flex-basis: 50%;
+    margin: 10%;
+}
+.first-info {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+.first-info h4 {
+    font-size: 18px;
+    color: #FBB503;
+}
+
+p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.first-info h6 {
+    
+    padding: 0 20px 0 0;
+}
+
+.second-image {
+    padding: 50px;
+}
+
+/* footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer div {
+    flex-basis: 50%;
+    margin: 3%;
+    
+}
+
+.left-info {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding-left: 3%;
+    
+}
+.left-info > div .a {
+    padding: 5px;
+}
+.left-info img  {
+    width: 140px; 
+    height: 33px;
+}
+
+.left-info .book {
+    background-color: #FBB503;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+    color: white;
+}
+.right-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+}
+
+
+.right-info > div.a .aa {
+    padding: 10px;
+}
+
+.right-info > div.b i {
+    padding: 10px;
+}
+
+.copyright {
+    display: flex;
+    padding: 2%;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    border-top: 1px solid gray;
+    
+
+}

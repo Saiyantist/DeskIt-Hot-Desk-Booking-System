@@ -1,0 +1,36 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+body {
+    background-color: #FCF8F8;
+}
+
+main .info-container { 
+    display: flex;
+    justify-content: center;
+    align-items: start; 
+    margin: 40px;
+}
+main .first-info {
+    padding: 20px;
+    border: 1px solid #FBB503;
+    border-radius: 20px;
+    border-top-width: 20px;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image img {
+    width: 25vw;
+    border: 1px solid black;
+    margin: 30px;
+    padding: 20px;
+    border-radius: 10px;
+}

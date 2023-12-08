@@ -13,30 +13,9 @@
 
 </head>
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-custom">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="../images/logo.png" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class=" collapse navbar-collapse justify-content-lg-end px-2" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-lg-0 px-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Desk Booking</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-        
-        </ul>
-        
-        <a class="navbar-brand login" href="#">LOGIN</a>
-      </div>
-    </div>
-  </nav>
+  <?php 
+      include "landingNavbar.php"; 
+    ?>
   <container>
     <div>
       <img src="../images/phone.png" alt="Phone"/>

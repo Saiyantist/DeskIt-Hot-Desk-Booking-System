@@ -1,0 +1,44 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+
+/* navbar */
+.navbar-custom {
+    background-color: #FCF8F8;
+}
+.navbar {
+    box-shadow: 0 4px 2px -3px gray;
+}
+
+.navbar .navbar-brand {
+    padding: 10px;
+}
+.navbar-brand img {
+    width: 210px; 
+    height: 37px;
+    padding-left: 15%;
+}
+
+.navbar .nav-item {
+    padding-right: 15px;
+}
+
+#navbarSupportedContent > a{
+    font-size: small;
+    background-color: #FBB503;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+    color: white;
+}
+
+.nav-indicator {
+    position: absolute;
+    bottom: -2px; /* Adjust as needed to align with the bottom of the links */
+    height: 2px;
+    background-color: blue; /* Change color as desired */
+    transition: 0.3s ease-in-out; /* Smooth transition */
+    z-index: 1; /* Ensure it's above the links */
+  }
