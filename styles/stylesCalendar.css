@@ -67,3 +67,19 @@ main td.calendar-day, td.calendar-day-np {
 body i {
     padding: 30px;
 }
+
+.myBook-container {
+    margin: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.calendar-image {
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    background-color: #ECECEC;
+    padding: 50px;
+}

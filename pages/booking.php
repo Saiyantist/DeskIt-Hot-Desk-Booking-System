@@ -29,9 +29,27 @@
             <a href=""><img src="../images/floor1.png" class="img-fluid"></a>
             <a href=""><img src="../images/floor2.png" class="img-fluid"></a>
         </section>
-        
+
+        <section>
+            <div class="myBook-container">
+                
+                <div class="calendar-image">
+                <?php 
+                    include "calendar.php"; 
+                ?>  
+                </div>
+            </div>
+        </section>
+        <section class="desk">
+        <?php
+            $numberOfRectangles = 5;
+            for ($i = 0; $i < $numberOfRectangles; $i++) {
+                echo '<i class="fa-solid fa-square-full" data-index="' . $i . '"></i>';
+            }
+        ?>
+
+        </section>
     </main>
-    
     
     
 </body>

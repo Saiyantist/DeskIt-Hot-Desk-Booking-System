@@ -35,14 +35,6 @@
     opacity: 0.4;
 }
 
-.myBook-container {
-    margin: 100px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-}
-
 .my-bookings {
     display: flex;
     align-items: start;
@@ -55,29 +47,23 @@ h5 {
     padding-bottom: 15px;
 }
 
-.calendar-image {
-    display: flex;
-    /* align-items: center; */
-    flex-direction: column;
-    background-color: #ECECEC;
-    padding: 50px;
-}
-
 .second-row {
-    
     background-color: #EDEDED;
 }
+
 .row-container {
     display: flex;
     flex-basis: 50%;
     margin: 10%;
 }
+
 .first-info {
     display: flex;
     justify-content: center;
     align-items: start;
     flex-direction: column;
 }
+
 .first-info h4 {
     font-size: 18px;
     color: #FBB503;

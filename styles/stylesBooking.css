@@ -13,6 +13,7 @@ main .info-container {
     justify-content: center;
     align-items: start; 
     margin: 40px;
+    position: relative;
 }
 main .first-info {
     padding: 20px;
@@ -33,4 +34,16 @@ main .first-info {
     margin: 30px;
     padding: 20px;
     border-radius: 10px;
+}
+
+/* book*/
+.desk i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #FBB503;
+    margin: 5px;
+    cursor: pointer;
+
 }
