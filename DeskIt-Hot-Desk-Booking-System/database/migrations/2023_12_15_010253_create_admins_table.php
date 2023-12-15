@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->int('verefication_code')->unsigned();
+            $table->integer('verefication_code')->unsigned();
             $table->timestamps();
         });
     }
