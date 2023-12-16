@@ -14,14 +14,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
+
     <body class="font-sans text-gray-900 antialiased">
-        @include('layouts.nav')
+
         <div class="min-h-screen min-w-screen flex flex-row sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900 mr-16">
             <div class=" sm:max-w-md flex justify-center items-end mt-40">
                 <img src="/images/phone.png" alt="">
             </div>
-            <div class="w-full sm:max-w-md mt-20 flex flex-col sm:justify-center items-center ">
-                <h1>WELCOME!</h1>
+            <div class="w-full sm:max-w-md mt-20 flex flex-col sm:justify-center items-center">
+                <h1 style="font-size: 25pt; font-weight: bold;">WELCOME!</h1>
                 <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-yellowA dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                     {{ $slot }}
                 </div>
