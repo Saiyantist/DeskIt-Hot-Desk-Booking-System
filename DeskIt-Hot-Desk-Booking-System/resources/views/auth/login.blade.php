@@ -84,7 +84,7 @@
         </div>
         <div class="flex justify-center items-center">
             <button class="mt-4 bg-yellowB rounded-xl py-2 w-full">
-                {{ __('LOGIN') }}
+                {{ __('NEXT') }}
             </button>       
         </div>
         <div class="flex items-center justify-end mt-1">

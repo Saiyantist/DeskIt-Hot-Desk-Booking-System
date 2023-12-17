@@ -18,7 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
-Route::get('/login', [UserController::class, 'show'])->name('login');
+Route::get('/login', [UserController::class, 'login'])->name('login');
+
+// Check sa main for the original code for ln 20.
+
+// Route::get('/test', [UserController::class, 'index'])->name('test');
+
+// Route::get('/verification', [UserController::class, '']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
