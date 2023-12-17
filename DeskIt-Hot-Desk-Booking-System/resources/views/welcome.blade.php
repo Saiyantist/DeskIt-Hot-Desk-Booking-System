@@ -1,10 +1,10 @@
 @extends('layouts.layout')
 
 @section('content')
-<main>
+<main id="welcome">
     <section id="home" class="first-row page-section">
         <div class="first-info">
-            <h5>DESK BOOKING SYSTEM </h5>
+            <h5 class="welcome">DESK BOOKING SYSTEM </h5>
             <p>Desk and Meeting Room Booking made <span>easy, fast & affordable.</span></p>
         </div>
         <div class="first-image">
