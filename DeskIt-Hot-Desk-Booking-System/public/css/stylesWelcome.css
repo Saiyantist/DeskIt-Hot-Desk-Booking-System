@@ -6,65 +6,68 @@
 }
 
 /* body */
-main .first-row {
+#welcome {
+    margin-top: 3%;
+}
+#welcome .first-row {
     padding: 40px ;
     padding-top: 45px;
     display: flex;
     background-color: #FCF8F8;
 }
 
-main .second-row {
+#welcome .second-row {
     padding: 40px;
     padding-top: 40px;
     display: flex;
     background-color: #EDEDED;
 }
 
-main div {
+#welcome div {
     flex-basis: 50%;
     margin: 3%;
 }
 
-main .first-info {
+#welcome .first-info {
     display: flex;
     padding-left: 40px;
     flex-direction: column;
     justify-content: center;
     align-items: start;
 }
-main h5{
+#welcome h5 .welcome{
     font-size: 20px;
     color: #FBB503;
 }
 
-main p {
+#welcome p {
     font-size: 40px;
     font-weight: bold;
 }
 
-main span {
+#welcome span {
     color: #FBB503;
 }
 
-main .first-image {
+#welcome .first-image {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-main .first-image img{
+#welcome .first-image img{
     margin: 10px;
     width: 300px;
     height: 300px;
     border-radius: 5px;
 }
 
-main .second-image {
+#welcome .second-image {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-main .second-image img{
+#welcome .second-image img{
     
     margin: 10px;
     width: 400px;
@@ -72,13 +75,13 @@ main .second-image img{
     border-radius: 5px;
 }
 
-main .third-image {
+#welcome .third-image {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-main .third-image img{
+#welcome .third-image img{
     
     margin: 10px;
     width: 250px;
@@ -86,7 +89,7 @@ main .third-image img{
     border-radius: 5px;
 }
 
-main .third-row {
+#welcome .third-row {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,24 +97,24 @@ main .third-row {
     padding: 40px;
     padding-top: 40px;
 }
-main .third-info {
+#welcome .third-info {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-main .first-list {
+#welcome .first-list {
     display: flex;
     justify-content: space-between;
     margin: 10px;
     border-top: 1px solid #FBB503;
 }
 
-main .first-list ul {
+#welcome .first-list ul {
     padding: 60px;
 }
 
-main .first-list li {
+#welcome .first-list li {
     padding: 5px;
 }
 
