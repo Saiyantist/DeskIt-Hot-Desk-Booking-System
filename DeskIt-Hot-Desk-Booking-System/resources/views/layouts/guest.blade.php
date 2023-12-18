@@ -21,8 +21,11 @@
             <div class=" sm:max-w-md flex justify-center items-end mt-40">
                 <img src="/images/phone.png" alt="">
             </div>
-            <div class="w-full sm:max-w-md mt-15 flex flex-col sm:justify-center items-center">
-                {{ $slot }}
+            <div class="w-full sm:max-w-md mt-20 flex flex-col sm:justify-center items-center">
+                <h1 style="font-size: 25pt; font-weight: bold;">WELCOME!</h1>
+                <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-yellowA dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+                    {{ $slot }}
+                </div>
             </div>
             
            
