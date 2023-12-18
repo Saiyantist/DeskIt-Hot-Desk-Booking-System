@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
-Route::get('/login', [UserController::class, 'login'])->name('login');
 
-// Check sa main for the original code for ln 20.
+// Route::get('/login', [EmployeeController::class, 'showLogin'])->name('login');
+// Route::post('/login', [EmployeeController::class, 'authenticate']);
+
+// Route::get('/s3cret/register', [EmployeeController::class, 'showRegister'])->name('register');
+// Route::post('/s3cret/register', [EmployeeController::class, 'register'])->name('register.store');
 
 // Route::get('/test', [UserController::class, 'index'])->name('test');
 
