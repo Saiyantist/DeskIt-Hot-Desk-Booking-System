@@ -88,12 +88,19 @@
     }
     /* sample usages */
     
-    echo '<div class="date-my">
-            <i class="fa-solid fa-less-than"></i>
-            <h2>DECEMBER 2023</h2>
-            <i class="fa-solid fa-greater-than"></i>
-        </div>';
-    echo draw_calendar(12, 2023);
+    
+    /** 
+     * Call these inside the view/home/booking/calendar.blade.php
+     * 
+     * under @include(layouts.calendar)
+    */
+
+    // echo '<div class="date-my">
+    //         <i class="fa-solid fa-less-than"></i>
+    //         <h2>DECEMBER 2023</h2>
+    //         <i class="fa-solid fa-greater-than"></i>
+    //     </div>';
+    // echo draw_calendar(12, 2023);
     ?>
 
 </body>
