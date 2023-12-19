@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,10 +45,18 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->prefix('home/booking')->group(function () {
+
     Route::get('/calendar', [HomeController::class,'show'])->name('home.booking.calendar');
     Route::get('/floor', [HomeController::class,'floor'])->name('home.booking.floor');
+
+    
     Route::get('/floor1', [HomeController::class,'floor1'])->name('home.booking.floor1');
+    Route::post('/floor1', [BookingController::class, 'storeBookingDate']);
+    Route::post('/floor1', [BookingController::class, 'storeBookingDesk']);
+
     Route::get('/floor2', [HomeController::class,'floor2'])->name('home.booking.floor2');
+    Route::post('/floor2', [BookingController::class, 'store']);
+
     Route::get('/notification', [HomeController::class,'notif'])->name('home.notif');
 });
 
