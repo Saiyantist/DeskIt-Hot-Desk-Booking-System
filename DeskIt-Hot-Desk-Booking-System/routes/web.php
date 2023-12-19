@@ -21,6 +21,18 @@ Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
 Route::get('/login', [UserController::class, 'show'])->name('login');
 
 Route::get('/dashboard', function () {
+    $user = Auth::user();
+
+    $hasAllowedRole = $user->hasAnyRole('admin', 'superadmin');
+
+
+    if ($hasAllowedRole === 'admin') {
+        return view('admin.dashboard');
+    }
+    if ($hasAllowedRole === 'superadmin') {
+        return view('superadmin.dashboard');
+    }
+
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
