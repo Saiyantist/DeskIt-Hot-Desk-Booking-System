@@ -15,6 +15,16 @@
 
             <div class="calendar-image">
                 @include('layouts.calendar')
+
+                <?= '<div class="date-my">
+                    <i class="fa-solid fa-less-than"></i>
+                    <h2>DECEMBER 2023</h2>
+                    <i class="fa-solid fa-greater-than"></i>
+                </div>';
+                ?>
+
+                <?= draw_calendar(12, 2023); ?>
+                
             </div>
         </div>
     </section>

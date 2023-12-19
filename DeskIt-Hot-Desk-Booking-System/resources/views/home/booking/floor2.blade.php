@@ -23,7 +23,7 @@
                     <div x-show="open" class="absolute right-0 z-10 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md">
                       <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <div class="calendar-image">
-                            @include('layouts.calendar')
+                            @include_once('layouts.calendar')
                         </div>
                         
                       </div>
