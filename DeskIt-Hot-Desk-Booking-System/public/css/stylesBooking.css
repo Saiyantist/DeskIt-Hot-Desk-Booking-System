@@ -51,6 +51,30 @@ main .first-in {
 
 }
 
+.desk {
+    border: 1px solid black;
+}
+.modals {
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+    border-top: 25px solid #FBB503;
+    border-top-right-radius: 0;
+    opacity: 2;
+}
+
+.close {
+    display: flex;
+    justify-content: end;
+}
+
+main.modal-open {
+    opacity: 0.5;
+    pointer-events: none; 
+}
+
+.modal-backdrop.show {
+   opacity: 0 !important; 
+}
+
 @media (max-width: 600px) {
     .image {
         display: flex;

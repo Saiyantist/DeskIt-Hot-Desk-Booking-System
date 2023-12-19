@@ -6,7 +6,6 @@
             <div class="myBook-container custom-border">
                 
                 <div class="calendar-image">
-                    <p class="fs-2 -mt-5">Desk #1</p> {{-- need to insert automation --}}
                     <p class="fs-5 font-light mb-10">Kindly choose your preferred date from the available options to secure your desk booking and ensure a seamless and timely experience.</p>
                     @include('layouts.calendar')
                     <div class="custom-div-a">
