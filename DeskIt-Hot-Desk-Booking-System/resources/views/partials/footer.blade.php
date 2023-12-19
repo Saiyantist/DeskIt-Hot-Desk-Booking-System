@@ -12,7 +12,7 @@
             </div>
 
             <div class="a">
-                <a class="navbar-brand book" href="#">Book a demo</a>
+                <a class="navbar-brand book" href="{{route('login')}}">Book a desk</a>
             </div>
 
 

@@ -28,7 +28,7 @@
     @endif
     {{-- page content --}}
     @yield('content')
-    @if (request()->routeIs('welcome') || request()->routeIs('dashboard'))
+    @if (request()->routeIs('welcome'))
     @include('partials.footer')
     @else
      <!-- Show nothing -->

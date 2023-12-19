@@ -17,37 +17,6 @@
     <!-- Session Status -->
     
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    {{--  I have put some logic for this to happen, if you agree, you can just delete this comments--}}
-    <!-- Sariling Navbar -->
-    <!-- kase dapat hindi na makita 'yung "LOGIN" button if nasa login na. -->
-{{--     
-    <section id="navigation">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-custom">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="{{route('welcome')}}"><img src="/images/logo.png" alt="logo" ></a>
-                <div class="justify-content-lg-end d-flex flex-row  px-2" id="collapsibleNavbar">
-                
-                    <ul class="navbar-nav nav-menu mb-lg-0 px-3" id=btn>
-                        <li class="nav-item">
-                        <a class="nav-link activ" href="{{route('welcome')}}#home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{route('welcome')}}#desk-booking">Desk Booking</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class=" nav-link" href="{{route('welcome')}}#features">Features</a>
-                        </li>
-                    </ul> 
-
-                    <div class="hamburger">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </section> --}}
 
     <!-- Burger script -->
     <script src="{{ asset('js/myScript.js') }}"></script>
