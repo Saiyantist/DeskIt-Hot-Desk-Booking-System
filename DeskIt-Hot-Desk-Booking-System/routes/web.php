@@ -23,13 +23,13 @@ Route::get('/login', [UserController::class, 'show'])->name('login');
 Route::get('/dashboard', function () {
     $user = Auth::user();
 
-    $hasAllowedRole = $user->hasAnyRole('admin');
-    $hasSuperRole = $user->hasAnyRole('superadmin');
+    $hasAllowedRole = $user->hasAnyRole('admin', 'superadmin');
 
-    if ($hasAllowedRole) {
+
+    if ($hasAllowedRole === 'admin') {
         return view('admin.dashboard');
     }
-    if ($hasSuperRole) {
+    if ($hasAllowedRole === 'superadmin') {
         return view('superadmin.dashboard');
     }
 
