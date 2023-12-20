@@ -5,7 +5,7 @@
         
         <img src="../images/head-uHome.png" class="img-fluid">
         <h1>Welcome! Let's find the right workspace for you.</h1>
-        <a class="book" href="{{route('home.booking.calendar')}}">Book a desk</a>
+        <a class="book" href="{{route('home.book')}}">Book a desk</a>
     </div>
     <section>
         <div class="myBook-container">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </section>
-    
+
     @endsection
 
 </x-app-layout>

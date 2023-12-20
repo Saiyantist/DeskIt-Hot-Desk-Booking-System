@@ -1,3 +1,4 @@
+{{-- should be disregard --}}
 @extends('layouts.layout')
 <x-app-layout>
     @section('content')
@@ -28,7 +29,7 @@
 
 
                     <div class="custom-div-a">
-                        <a class="custom-a fs-5 w-100" href="{{route('home.booking.floor')}}">Next</a>
+                        <a class="custom-a fs-5 w-100" href="{{route('home.book')}}">Next</a>
                     </div>
                 </div>
             </div>

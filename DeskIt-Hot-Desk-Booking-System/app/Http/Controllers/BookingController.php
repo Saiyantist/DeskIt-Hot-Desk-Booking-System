@@ -1,12 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    //
+    public function book(): View {
+        return view('home.book');
+    }
+    public function desks(): View {
+        return view('home.booking.desks');
+    }
+    public function floor1(): View {
+        return view('home.booking.floor1');
+    }
+    public function floor2(): View {
+        return view('home.booking.floor2');
+    }
 
     public function storeBookingDesk(){
 
