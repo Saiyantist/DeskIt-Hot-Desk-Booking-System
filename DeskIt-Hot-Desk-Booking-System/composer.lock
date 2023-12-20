@@ -1881,7 +1881,7 @@
             "time": "2023-10-17T14:13:20+00:00"
         },
         {
-            "name": "livewire/livewire",
+            "name": "livewire/ ",
             "version": "v2.12.6",
             "source": {
                 "type": "git",
