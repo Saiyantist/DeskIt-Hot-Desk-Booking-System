@@ -20,10 +20,9 @@ main .first-in {
     border: 1px solid #FBB503;
     border-radius: 20px;
     border-top-width: 20px;
-    width: 60%;
+    width: 250px;
     
 }
-
 .image {
     display: flex;
     justify-content: center;
@@ -75,6 +74,15 @@ main.modal-open {
    opacity: 0 !important; 
 }
 
+#date::placeholder {
+    color: white; 
+    text-align: center;
+}
+
+.floors {
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
     .image {
         display: flex;
@@ -89,4 +97,16 @@ main.modal-open {
         padding: 20px;
         border-radius: 10px;
     }
+}
+
+.custom-a {
+    display: flex;
+    justify-content: center;
+    background-color: #FBB503;
+    margin: 2%;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
 }
