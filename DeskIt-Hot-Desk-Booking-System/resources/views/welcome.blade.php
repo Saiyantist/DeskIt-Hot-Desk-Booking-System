@@ -8,13 +8,13 @@
             <p>Desk and Meeting Room Booking made <span>easy, fast & affordable.</span></p>
         </div>
         <div class="first-image">
-            <img src="../images/image1.png" class="img-fluid">
+            <img src="../images/hotdesk-image1.jpg" class="img-fluid">
         </div>
     </section>
 
     <section class="second-row">
         <div class="second-image">
-            <img src="../images/image1.png" class="img-fluid">
+            <img src="../images/hotdesk-image2.jpg" class="img-fluid">
         </div>
         <div class="first-info">
             <h5>SCHEDULE IN A ‘SNAP’</h5>
@@ -28,7 +28,7 @@
 
     <section class="first-row">
         <div class="third-image">
-            <img src="../images/image1.png" class="img-fluid">
+            <img src="../images/hotdesk-image3.jpg" class="img-fluid">
         </div>
         <div class="first-info">
             <h5>UP & RUNNING IN MINUTES</h5>
@@ -48,7 +48,7 @@
                 the way you manage and optimise your workspace</h6>
         </div>
         <div class="first-image">
-            <img src="../images/image1.png" class="img-fluid">
+            <img src="../images/hotdesk-image4.png" class="img-fluid">
         </div>
 
     </section>
