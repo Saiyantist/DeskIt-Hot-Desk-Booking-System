@@ -55,7 +55,7 @@
                     <div class="relative inline-block text-left">
                         <p 
                             class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-md w-56 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline">
-                            Desk
+                            Next
                         </p>
                     </div>
                 </div>
