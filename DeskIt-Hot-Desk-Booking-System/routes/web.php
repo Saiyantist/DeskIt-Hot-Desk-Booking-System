@@ -17,24 +17,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('n', function () {
+//     if(auth()->user()){
+//         auth()->user()->assignRole('employee');
+//     }
+//     return ('hello');
+// });
+
 Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
 Route::get('/login', [UserController::class, 'show'])->name('login');
 
+//verification if user has any roles
 Route::get('/dashboard', function () {
     $user = Auth::user();
 
     $hasAllowedRole = $user->hasAnyRole('admin', 'superadmin');
 
-
-    if ($hasAllowedRole === 'admin') {
-        return view('admin.dashboard');
-    }
-    if ($hasAllowedRole === 'superadmin') {
-        return view('superadmin.dashboard');
+    if ($hasAllowedRole) {
+        if ($user->hasRole('admin')) {
+            return view('admin.dashboard');
+        } elseif ($user->hasRole('superadmin')) {
+            return view('superadmin.dashboard');
+        }
     }
 
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//get to the admin page
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
+
+//get to the super admin page
+Route::get('/superadmin/dashboard', function () {
+    return view('superadmin.dashboard');
+})->middleware(['auth', 'verified'])->name('superadmin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/my-profile', [ProfileController::class, 'show'])->name('profile.profile');
