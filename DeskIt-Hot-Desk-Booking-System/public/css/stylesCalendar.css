@@ -151,3 +151,7 @@ body i {
     width: 100px;
     height: 30px;
 }
+
+.input-group-append {
+    cursor: pointer;
+  }

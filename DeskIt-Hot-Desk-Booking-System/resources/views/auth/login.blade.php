@@ -23,7 +23,6 @@
     
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -51,6 +50,8 @@
                 <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
             </label>
         </div>
+
+        <!-- Log In -->
         <div class="flex justify-center items-center">
             <button class="mt-4 bg-yellowB rounded-xl py-2 w-full">
                 {{ __('LOGIN') }}
@@ -64,5 +65,5 @@
             @endif
         </div>
         
-        </form>
+    </form>
 </x-guest-layout> 
