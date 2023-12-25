@@ -42,9 +42,11 @@ class Booking extends Component
              *  INSERT LOGIC to show DeskMap's availability. 
              */
 
-            dd($this->date,$this->floor, $selected);           // for testing purpose
+            // dd($this->date,$this->floor, $selected);           // for testing purpose
 
-            return $selected; // return something
+            return view('livewire.booking',[ // return something
+                "selected" => $selected,
+            ]);
         }
 
         
@@ -82,7 +84,6 @@ class Booking extends Component
 
     public function render()
     {
-        // $hasSelected = $this->selected;
         return view('livewire.booking',[
             // 'selected' => $hasSelected    // test para gumana 'yung @if() that contains modal code, but ayaw talaga. 
         ]);
