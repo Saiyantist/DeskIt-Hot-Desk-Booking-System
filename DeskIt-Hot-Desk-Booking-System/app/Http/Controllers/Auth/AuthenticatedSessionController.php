@@ -27,8 +27,6 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-        $request->user()->sendEmailVerificationNotification();
-        
         $user = Auth::user();
 
         if ($user->hasRole('admin')) {
@@ -45,13 +43,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $user = Auth::user();
-
-        if ($user) {
-            $user->email_verified_at = null;
-            $user->save();
-        }
-
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
