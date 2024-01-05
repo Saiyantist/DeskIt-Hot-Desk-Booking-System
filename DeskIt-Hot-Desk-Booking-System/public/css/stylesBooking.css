@@ -65,10 +65,10 @@ main .first-in {
     justify-content: end;
 }
 
-main.modal-open {
+/* main.modal-open {
     opacity: 0.5;
     pointer-events: none; 
-}
+} */
 
 .modal-backdrop.show {
    opacity: 0 !important; 

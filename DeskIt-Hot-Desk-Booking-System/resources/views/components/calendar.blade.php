@@ -17,6 +17,8 @@
     <script src="https://kit.fontawesome.com/8d7ba59e72.js" crossorigin="anonymous"></script>
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 </head>
 
 <body>
@@ -25,22 +27,42 @@
         <form method="POST" action="">
           @csrf
           <div class="col-12" >
-            <div class="input-group date" id="datepicker">
-              <input type="text" placeholder="Choose Date" class="form-control bg-warning text-light text-center" id="date" 
-              wire:click="selectedDate"/>
-              <span class="input-group-append" >
+            <div class="input-group date">
+              <input  {{--name="datepicker"--}}
+              type="date" class="form-control bg-warning text-light text-center" id="datepicker"
+              wire:model="date"
+              />
+              {{-- <span class="input-group-append" >
                 <span class="input-group-text bg-light d-block">
                   <i class="fa fa-calendar"></i>
                 </span>
-              </span>
+              </span> --}}
             </div>
           </div>
         </form>
       </section>
     <script>
-      $(function(){
-        $('#date').datepicker();
-        });
+
+      /** attempted to restrict choosing past dates
+       * 
+       *  solution:
+       *  validation logic sa book() function on the Booking.php of livewire, which will throw an error sa UI.
+       */
+
+      // var today = new Date().toISOString().split('T')[0];
+      // document.getElementsByName("datepicker")[0].setAttribute('min', today);
+
+
+      // $(document).ready(function(){
+      //   $('#datepicker').datepicker({minDate: 0});
+      // });
+      
+      // attempted to set wire:model date's value to value of input
+      // document.addEventListener('livewire:initialized', function (){
+      // let component = @this;
+      // console.log(component.date)
+      // component.set('date') = date;
+      // });
     </script>
 
 </body>

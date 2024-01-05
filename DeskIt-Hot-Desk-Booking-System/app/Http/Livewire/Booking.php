@@ -3,40 +3,90 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Http\Controllers\Auth;
+
+use function PHPUnit\Framework\returnValue;
 
 class Booking extends Component
 {
+
+    public $date;
+    public $floor= "1";
+
+    public $selected = false;
     
-    public $dateSelected = false;
-    public $floorSelected = false;
-    public $showNextButton = false;
+    // public $rules = [
+    //     'date' => 'required',
+    //     'floor' => 'required',
+    // ];
 
+    // public function selectedDate()
+    // {
+    //     $this->dateSelected = true;
+    // }
 
-    public function selectedDate()
-    {
-        $this->dateSelected = true;
-        $this->showNextButton = true;
-    }
-
-    public function selectedFloor()
-    {
-        $this->floorSelected = true;
-        $this->showNextButton = true;
-    }
+    // public function selectedFloor()
+    // {
+    //     $this->floorSelected = true;
+    // }
     
-
-    public function navigateToDesk()
+    
+    /**DESK AVAILABILITY */
+    public function refreshMap() 
     {
-        // Perform any necessary actions before navigation
+        if($this->date && $this->floor){
+            $this->selected = true;
+            $selected = $this->selected;
 
-        $this->redirect('desks');
+            /**  
+             *  INSERT LOGIC to show DeskMap's availability. 
+             */
+
+            // dd($this->date,$this->floor, $selected);           // for testing purpose
+
+            return view('livewire.booking',[ // return something
+                "selected" => $selected,
+            ]);
+        }
+
+        
     }
+
+    public function book()
+    {
+        /**  
+         *  INSERT Validation Logic, if desk is available for booking. 
+         */
+
+        $status = "booked";
+
+        Booking::create([
+            "booking_date" => $this->date,    /** This whole block doesn't work yet.. */
+            "status" => $status,            
+            "user_id" => Auth::user(),
+            // "desk_id" => 101,
+        ]);
+
+        dd($status); 
+    }
+
+
+
+    // public function navigateToDesk()
+    // { 
+    //     if( $this->dateSelected && $this->floorSelected){
+    //         // Perform any necessary actions before navigation
+    //         $this->redirect('desks');
+    //     }
+    // }
 
 
 
     public function render()
     {
-        return view('livewire.booking');
+        return view('livewire.booking',[
+            // 'selected' => $hasSelected    // test para gumana 'yung @if() that contains modal code, but ayaw talaga. 
+        ]);
 
     }
 }

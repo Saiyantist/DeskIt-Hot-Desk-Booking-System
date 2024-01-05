@@ -24,9 +24,10 @@
     <section class="container"  >
         <form method="POST" action="">
           @csrf
-          <select class="form-select bg-warning text-light text-center floors" aria-label="Default select example"  wire:click="selectedFloor" >
-            <option value="" selected disabled class="text-light">Choose floor</option>
-            <option value="1">Floor 1</option>
+          <select class="form-select bg-warning text-light text-center floors"
+          wire:model="floor" 
+          >
+            <option value="1" selected >Floor 1</option>
             <option value="2">Floor 2</option>
           </select>
           
@@ -35,3 +36,5 @@
 </body>
 
 </html>
+
+@livewireScripts
