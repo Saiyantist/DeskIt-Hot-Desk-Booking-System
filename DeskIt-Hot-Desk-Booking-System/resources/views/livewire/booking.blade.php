@@ -126,10 +126,23 @@
                 <div class="mr-8">
                     <div class="flex items-start ">
                         <div class="b-chair m-3">
-                            @for ($i = 101; $i < 105; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
-                                    src="{{ asset('images/left-chair.svg') }}" class="flex w-14 my-1"
-                                    alt="SVG Image"></a>
-                            @endfor
+
+                            <div id="101" class="flex w-14 my-1">
+                                <a class="modalTrigger" data-modal-id='101'><img src="{{ asset('images/left-chair.svg') }}"  alt="SVG Image"></a>
+                            </div>
+
+                            <div id="102" class="flex w-14 my-1">
+                                <a><img src="{{ asset('images/left-chair.svg') }}"  alt="SVG Image"></a>
+                            </div>
+
+                            <div id="103" class="flex w-14 my-1">
+                                <a><img src="{{ asset('images/left-chair.svg') }}"  alt="SVG Image"></a>
+                            </div>
+
+                            <div id="104" class="flex w-14 my-1">
+                                <a><img src="{{ asset('images/left-chair.svg') }}"  alt="SVG Image"></a>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -139,42 +152,127 @@
                 <div class="mx-2">
 
                     {{-- First Row --}}
-                    <div class="flex justify-center items-start">
-                        <div class="b-chair m-3 mb-5">
-                            @for ($i = 105; $i < 111; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
-                                    src="{{ asset('images/bottom-chair.svg') }}" class=" inline-flex h-14"
-                                    alt="SVG Image"></a>
-                            @endfor
+                    <div class="justify-center items-start">
+                        <div class="flex b-chair m-3 mb-5">
+
+                            <div id="105">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="106">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="107">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="108">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="109">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="110">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class=" inline-flex h-14"></a>
+                            </div>
+
                         </div>
                     </div>
 
                     {{-- Second Row --}}
-                    <div class="flex justify-center items-center">
-                        <div class="b-chair m-3">
-                            @for ($i = 111; $i < 117; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
-                                    src="{{ asset('images/top-chair.svg') }}" class=" inline-flex h-14"
-                                    alt="SVG Image"></a>
-                                @endfor
+                    <div class="justify-center items-start">
+                        <div class="flex b-chair m-3">
+
+                            <div id="111">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="112">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="113">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="114">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="115">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="116">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class=" inline-flex h-14"></a>
+                            </div>
+                            
                         </div>
                     </div>
 
                     {{-- Third Row --}}
-                    <div class="flex justify-center items-center">
-                        <div class="b-chair mb-5">
-                            @for ($i = 117; $i < 123; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
-                                    src="{{ asset('images/bottom-chair.svg') }}" class=" inline-flex h-14"
-                                    alt="SVG Image"></a>
-                                @endfor
+                    <div class="justify-center items-start">
+                        <div class="flex b-chair m-3 mb-5">
+
+                            <div id="105">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="106">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="107">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="108">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="109">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="110">
+                                <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" class=" inline-flex h-14"></a>
+                            </div>
+
                         </div>
                     </div>
 
+
                     {{-- Fourth Row --}}
-                    <div class="flex justify-center items-end">
-                        <div class="b-chair m-3">
-                            @for ($i = 123; $i < 129; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
-                                    src="{{ asset('images/top-chair.svg') }}" class=" inline-flex h-14"
-                                    alt="SVG Image"></a>
-                                @endfor
+                    <div class="justify-center items-start">
+                        <div class="flex b-chair m-3">
+
+                            <div id="117">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="118">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="119">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="120">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="121">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class="h-14 mx-1 "></a>
+                            </div>
+
+                            <div id="122">
+                                <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" class=" inline-flex h-14"></a>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -184,20 +282,25 @@
                 <div class="ml-10 mr-3 mt-3">
                     {{-- Upper Desks --}}
                         <div class="b-chair m-3 flex flex-row items-end">
-                            <a class="modalTrigger" data-modal-id="129"><img
-                                    src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14"
-                                    alt="SVG Image"></a>
-                            <a class="modalTrigger" data-modal-id="130"><img
-                                    src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14"
-                                    alt="SVG Image"></a>
+
+                            <div id="129">
+                                <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
+                            </div>
+
+                            <div id="130">
+                                <a><img src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
+                            </div>
                         </div>
+
                         <div class="b-chair flex -m-4 flex-row justify-start items-start">
-                            <a class="modalTrigger" data-modal-id="132"><img
-                                    src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14"
-                                    alt="SVG Image"></a>
-                            <a class="modalTrigger" data-modal-id="131"><img
-                                    src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14"
-                                    alt="SVG Image"></a>
+
+                            <div id="132">
+                                <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
+                            </div>
+
+                            <div id="131">
+                                <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
+                            </div>
                         </div>
 
 
@@ -205,20 +308,27 @@
 
                             {{-- Lower Desks--}}
                             <div class="b-chair m-3 flex flex-row items-end">
-                                <a class="modalTrigger" data-modal-id="133"><img
-                                        src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14"
-                                        alt="SVG Image"></a>
-                                <a class="modalTrigger" data-modal-id="134"><img
-                                        src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14"
-                                        alt="SVG Image"></a>
+                                    
+                                <div id="133">
+                                    <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
+                                </div>
+
+                                <div id="134">
+                                    <a><img src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
+                                </div>
+
                             </div>
+
                             <div class="b-chair flex -m-4 flex-row justify-start items-start">
-                                <a class="modalTrigger" data-modal-id="136"><img
-                                        src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14"
-                                        alt="SVG Image"></a>
-                                <a class="modalTrigger" data-modal-id="135"><img
-                                        src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14"
-                                        alt="SVG Image"></a>
+
+                                <div id="136">
+                                    <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
+                                </div>
+
+                                <div id="135">
+                                    <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
+                                </div>
+
                             </div>
                         </div>
                         
