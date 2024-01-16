@@ -7,7 +7,7 @@ use Illuminate\View\View;
 class HomeController extends Controller
 {
     public function show(): View {
-        return view('home.booking.calendar');
+        return view('booking.calendar');
     }
 
    

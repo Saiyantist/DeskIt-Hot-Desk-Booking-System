@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Http\Controllers\Auth;
+use App\Http\Controllers\BookingController;
+use Carbon\Carbon;
 
 use function PHPUnit\Framework\returnValue;
 
@@ -12,6 +14,7 @@ class Booking extends Component
 
     public $date;
     public $floor= "1";
+    // public $today;
 
     public $selected = false;
     
@@ -30,6 +33,8 @@ class Booking extends Component
     //     $this->floorSelected = true;
     // }
     
+
+
     
     /**DESK AVAILABILITY */
     public function refreshMap() 
@@ -48,8 +53,10 @@ class Booking extends Component
                 "selected" => $selected,
             ]);
         }
-
         
+        // dd('Ayaw ko nga.');
+
+        // return view('booking.desks');
     }
 
     public function book()

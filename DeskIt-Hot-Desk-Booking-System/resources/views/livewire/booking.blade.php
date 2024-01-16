@@ -6,13 +6,13 @@
         <div class="flex justify-center items-center flex-col m-3">
             <div class="first-in">
                 <h4>WELCOME TO THE DESKIT OFFICE</h4>
-                <h6>The office is specifically crafted to maximize the comfort and productivity of your workday.
-                </h6>
+                <h6>The office is specifically crafted to maximize the comfort and productivity of your workday.</h6>
             </div>
 
             {{-- Side Panel --}}
             <div class="m-3 text-center">
-            
+                
+                
                 {{-- Date Picker --}}
                 <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-4">
                     <x-calendar>
@@ -21,7 +21,8 @@
                     {{-- Selected Date:
                     {{$date}} --}}
                 </div>
-            
+ 
+
                 {{-- Floor Chooser --}}
                 <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-4" >
             
@@ -40,12 +41,15 @@
                 </div>
             
                 {{-- Refresh the Map --}}
-                {{-- Added a refreshMap function sa Booking.php--}}
+                {{-- Added a refreshMap function sa Booking.php     [jan 16]: disregard this comment muna, livewire kasi ito. --}}  
                 <div class="relative inline-block text-left">
                     <a wire:click="refreshMap" id="nextButton"
+                        href='{{route('showDesks')}}'  {{-- HERE'S THE NAVIGATION BIT, somehow lalagyan ko na lang ng Logic, pag di kinaya ok lang si kuys jehu naman kasi gagawa na nitong part na ito.--}}
                         class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-56 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline"
-                    >See Available Desks
+                        >See Available Desks
                     </a>
+
+                    {{-- <button onclick="storeBookingDesk()"> Ok </button> --}}
 
                     {{-- MODALS --}}
                     {{-- @if($selected) --}}
