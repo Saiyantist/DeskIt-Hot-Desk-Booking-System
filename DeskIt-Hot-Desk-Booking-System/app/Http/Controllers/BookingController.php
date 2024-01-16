@@ -3,20 +3,28 @@
 namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
-    public function book(): View {
-        return view('home.book');
+    public function show(): View {
+
+        /** Testing with Boss Jehu */
+        
+        // $today = Carbon::today();
+        // $sample = 'tae to';
+        // return view('booking.book', compact('today', 'sample'));
+
+        return view('booking.book');
     }
-    public function desks(): View {
-        return view('home.booking.desks');
+    public function showDesks(): View {
+        return view('booking.desks');
     }
     public function floor1(): View {
-        return view('home.booking.floor1');
+        return view('booking.floor1');
     }
     public function floor2(): View {
-        return view('home.booking.floor2');
+        return view('booking.floor2');
     }
 
     public function storeBookingDesk(){

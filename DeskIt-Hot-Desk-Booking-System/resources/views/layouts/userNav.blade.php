@@ -12,10 +12,10 @@
                             <a class="nav-link active" href="{{route('dashboard')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('home.book')}}">Desk Booking</a>
+                            <a class="nav-link" href="{{route('book')}}">Desk Booking</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('home.notif')}}">Notification</a>
+                            <a class="nav-link" href="{{route('notif')}}">Notification</a>
                         </li>
                     </ul>
                     <div class="compile">

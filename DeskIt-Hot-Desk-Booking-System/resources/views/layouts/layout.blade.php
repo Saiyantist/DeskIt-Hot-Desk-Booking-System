@@ -23,18 +23,24 @@
 </head>
 
 <body>
+
     @if (request()->routeIs('welcome') || request()->routeIs('login'))
-    @include('layouts.nav')
+        @include('layouts.nav')
     @else
      <!-- Show nothing -->
     @endif
+
+    
     {{-- page content --}}
     @yield('content')
+
+
     @if (request()->routeIs('welcome'))
-    @include('partials.footer')
+        @include('partials.footer')
     @else
      <!-- Show nothing -->
     @endif
+
 </body>
 
 </html>
