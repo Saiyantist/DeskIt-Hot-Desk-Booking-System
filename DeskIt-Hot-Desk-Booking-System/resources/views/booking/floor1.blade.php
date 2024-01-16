@@ -1,5 +1,7 @@
 @extends('layouts.layout')
 
+{{-- Hindi na gagamitin ito? --}}
+
 <x-app-layout>
   @section('content')
     <main>

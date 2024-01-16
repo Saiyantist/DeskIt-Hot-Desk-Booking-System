@@ -5,7 +5,7 @@
         
         <img src="../images/head-uHome.png" class="img-fluid">
         <h1>Welcome! Let's find the right workspace for you.</h1>
-        <a class="book" href="{{route('home.book')}}">Book a desk</a>
+        <a class="book" href="{{route('book')}}">Book a desk</a>
     </div>
     <section>
         <div class="myBook-container">
@@ -14,7 +14,8 @@
             </div>
 
             <div class="calendar-image">
-                @include('layouts.calendar')
+                @include('layouts.calendar') 
+                {{-- alisin  kapag nabaliw --}}
 
                 <?= '<div class="date-my">
                     <i class="fa-solid fa-less-than"></i>
@@ -24,6 +25,7 @@
                 ?>
 
                 <?= draw_calendar(12, 2023); ?>
+                {{-- alisin  kapag nabaliw --}}
                 
             </div>
         </div>

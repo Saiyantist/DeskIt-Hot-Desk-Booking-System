@@ -59,7 +59,7 @@
       
       // attempted to set wire:model date's value to value of input
       // document.addEventListener('livewire:initialized', function (){
-      // let component = @this;
+      // let component;
       // console.log(component.date)
       // component.set('date') = date;
       // });

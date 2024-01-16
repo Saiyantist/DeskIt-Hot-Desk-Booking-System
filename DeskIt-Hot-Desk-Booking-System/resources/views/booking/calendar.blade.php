@@ -8,7 +8,9 @@
                 
                 <div class="calendar-image">
                     <p class="fs-5 font-light mb-10">Kindly choose your preferred date from the available options to secure your desk booking and ensure a seamless and timely experience.</p>
-                    @include('layouts.calendar')
+                    {{-- @include('layouts.calendar') --}}
+                    {{-- ALISIN KAPAG NABALIW ANG CALENDAR --}}
+                    
 
                     {{-- Dynamic
                         Replace <h2> content with $CurrentMonth $CurrentYear
@@ -22,14 +24,16 @@
                     </div>';
                     ?>
 
-                    <?= draw_calendar(12, 2023); ?>
+                    {{-- <?= draw_calendar(12, 2023); ?> --}}
+                    {{-- ALISIN KAPAG NABALIW ANG CALENDAR --}}
+
 
                     {{-- Insert code, for getting booking_date from the Calendar UI  --}}
 
 
 
                     <div class="custom-div-a">
-                        <a class="custom-a fs-5 w-100" href="{{route('home.book')}}">Next</a>
+                        <a class="custom-a fs-5 w-100" href="{{route('book')}}">Next</a>
                     </div>
                 </div>
             </div>
