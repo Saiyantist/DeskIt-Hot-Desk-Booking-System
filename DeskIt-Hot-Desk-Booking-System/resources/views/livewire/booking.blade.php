@@ -1,77 +1,61 @@
 <div class="flex flex-col">
-    <div class="flex justify-end items-center mt-24 mr-5">
-        <a wire:click="refreshMap" id="nextButton" href='{{route('showDesks')}}' {{-- HERE'S THE NAVIGATION BIT,
-            somehow lalagyan ko na lang ng Logic, pag di kinaya ok lang si kuys jehu naman kasi gagawa na nitong part na
-            ito.--}}
-            class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-40 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline my-3">See
-            Available Desks
-        </a>
 
-    </div>
-    <div class="flex flex-row justify-end items-center mr-5">
+    {{-- Booking  Controllers --}}
+    <div class="flex justify-end items-center mt-24 mr-24">
 
         {{-- Date Picker --}}
         <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
             <x-calendar>
-
             </x-calendar>
-            {{-- Selected Date:
-            {{$date}} --}}
         </div>
 
 
         {{-- Floor Chooser --}}
         <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
-
             <x-floor>
             </x-floor>
-            {{-- <div x-show="open"
-                class="absolute right-0 z-10 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md w-64">
-                <div class="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-
-                    <div>
-                        @include('components.floor')
-                    </div>
-
-                </div>
-            </div> --}}
         </div>
-        <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
 
-            <button
-                class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-20 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline">Submit</button>
+        {{-- See Available --}}
+        <div class="mr-16">
+            {{-- Navigate to desks.blade.php --}}
+            <a wire:click="refreshMap" id="nextButton" href='{{route('showDesks')}}'
+                class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-40 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline my-3">See
+                Available Desks
+            </a>
         </div>
+
     </div>
-    <main class="flex flex-row justify-center">
-        <section class=" flex flex-col m-3 justify-center items-center">
-            <h6 class="font-bold text-center">Date: {{ $date }}</h6>
-            <div class="flex flex-row">
-                <p class="text-base font-semibold">Floor#</p>{{-- i removed {{$floor}}--}}
-                <p class="text-base font-semibold ml-2">Desk# </p>{{-- i removed {{$i}}--}}
-            </div>
-        </section>
 
+    <main class="flex flex-row justify-center">
+
+        {{-- Side Panel Section --}}
         <section>
             <div>
+                {{-- Side Panel Header --}}
                 <div class="first-in">
                     <p class=" text-base font-extrabold">WELCOME TO THE DESKIT OFFICE</p>
                     <p class=" text-sm font-normal">The office is specifically crafted to maximize the comfort and
                         productivity of your workday.
                     </p>
                 </div>
-                <div class="book text-center py-2">
-                    <p class="book-desk text-lg font-semibold">Book a Desk</p>
-                    <div class="">
-                        <h6 class="">Date: {{ $date }}</h6>
-                        <p class="text-lg font-semibold">Floor# {{$floor}}</p>
-                        <p class="text-lg font-semibold">Desk# </p>{{-- i removed {{i}}--}}
+
+                {{-- Side Panel Body --}}
+                <div class="book text-center">
+                    <p class="book-desk text-lg font-semibold py-2">Book a Desk</p>
+                    <div class="pb-2">
+                        <p class="text-lg font-semibold text-left px-4">Date: {{ $date }}</h6>
+                        <div class="flex flex-row justify-content-between px-4">
+                            <p class="text-lg font-semibold text-left">Floor# {{ $floor }}</p>
+                            <p class="text-lg font-semibold text-left mr-8">Desk# </p>{{-- i removed {{i}}--}}
+                        </div>
                     </div>
-                    <button class="justify-center items-center bg-yellowB rounded-xl w-20 p-1 m-2 text-white">Book</button>
+                    <button disabled class="justify-center items-center bg-gray rounded-xl w-28 h-10 p-1 mb-3 text-black">Book</button>
                 </div>
 
             </div>
-            {{-- Side Panel --}}
-            <div class="m-3 text-center">
+
+            <div class="invisible">
 
                 {{-- Refresh the Map --}}
                 {{-- Added a refreshMap function sa Booking.php [jan 16]: disregard this comment muna, livewire kasi
@@ -133,8 +117,8 @@
 
 
         {{-- Desk Map --}}
-        <section class="m-3">
-            <div class=" w-12/12 h-max bg-gray desk">
+        <section class="d-flex items-center justify-center m-3">
+            <div class=" w-12/12 h-100 bg-gray desk">
                 <div class="bg-gray desk m-4 flex flex-row relative justify-center">
 
                     <div class="absolute bottom-0 left-0">
@@ -167,9 +151,8 @@
                         </div>
                     </div>
 
-
                     {{-- MIDDLE --}}
-                    <div class="mx-2">
+                    <div class="flex flex-column justify-content-between mx-2">
 
                         {{-- First Row --}}
                         <div class="justify-center items-start">
@@ -282,7 +265,6 @@
                             </div>
                         </div>
 
-
                         {{-- Fourth Row --}}
                         <div class="justify-center items-start">
                             <div class="flex b-chair m-3">
@@ -321,40 +303,40 @@
                         </div>
                     </div>
 
-
                     {{-- RIGHT Column --}}
-                    <div class="ml-10 mr-3 mt-3">
+                    <div class="flex flex-column justify-content-between ml-12 mr-5 mt-3">
+
                         {{-- Upper Desks --}}
-                        <div class="b-chair m-3 flex flex-row items-end">
+                        <div>
+                            <div class="b-chair m-3 flex flex-row items-end">
 
-                            <div id="129">
-                                <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14"
-                                        alt="SVG Image"></a>
+                                <div id="129">
+                                    <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14"
+                                            alt="SVG Image"></a>
+                                </div>
+
+                                <div id="130">
+                                    <a><img src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14"
+                                            alt="SVG Image"></a>
+                                </div>
                             </div>
 
-                            <div id="130">
-                                <a><img src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14"
-                                        alt="SVG Image"></a>
+                            <div class="b-chair flex -m-4 flex-row justify-start items-start">
+
+                                <div id="132">
+                                    <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14"
+                                            alt="SVG Image"></a>
+                                </div>
+
+                                <div id="131">
+                                    <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14"
+                                            alt="SVG Image"></a>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="b-chair flex -m-4 flex-row justify-start items-start">
-
-                            <div id="132">
-                                <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14"
-                                        alt="SVG Image"></a>
-                            </div>
-
-                            <div id="131">
-                                <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14"
-                                        alt="SVG Image"></a>
-                            </div>
-                        </div>
-
-
-                        <div class="mt-5">
-
-                            {{-- Lower Desks--}}
+                        {{-- Lower Desks--}}
+                        <div class="my-12">
                             <div class="b-chair m-3 flex flex-row items-end">
 
                                 <div id="133">
@@ -383,10 +365,6 @@
 
                             </div>
                         </div>
-
-
-                        {{-- @if ($i < 1) <span class=" my-4"></span>
-                            @endif --}}
 
                     </div>
 
