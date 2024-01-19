@@ -73,10 +73,24 @@
                     <div class="mr-8">
                         <div class="flex items-start ">
                             <div class="b-chair m-3">
-
-                                <div id="101" class="flex w-14 my-1">
-                                    <a class="modalTrigger" data-modal-id='101'><img
-                                            src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"></a>
+                                
+                                <!-- REFERENCE!!!! -->
+                                <div>
+                                    <div id="101" class="flex w-14">
+                                        <a data-modal-id='101'>
+                                            <img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image">
+                                        </a>
+                                        <div class="absolute">
+                                            <p class="m-0 text-sm">{{ $desks[0]->desk_num }}</p>
+                                            @if($desks[0]->statuses_id == 2)
+                                                <p class="text-sm">Red</p>
+                                            @elseif($desks[0]->statuses_id == 1)
+                                                <p class="text-sm">Green</p>
+                                            @else
+                                                <p class="text-sm">Grey</p>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div id="102" class="flex w-14 my-1">

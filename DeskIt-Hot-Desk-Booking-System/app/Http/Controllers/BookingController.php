@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Desk;
 
 class BookingController extends Controller
 {
@@ -18,7 +19,11 @@ class BookingController extends Controller
         return view('booking.book');
     }
     public function showDesks(): View {
-        return view('booking.desks');
+
+        // GET ALL DESKS FROM THE DATE SELECTED
+        // $date = Date::first();
+        $desks = Desk::all();
+        return view('booking.desks', compact('desks'));
     }
     public function floor1(): View {
         return view('booking.floor1');

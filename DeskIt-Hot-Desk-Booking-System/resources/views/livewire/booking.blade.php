@@ -130,9 +130,15 @@
                         <div class="flex items-start ">
                             <div class="b-chair m-3">
 
-                                <div id="101" class="flex w-14 my-1">
-                                    <a class="modalTrigger" data-modal-id='101'><img
-                                            src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"></a>
+                                <div>
+                                    <div id="101" class="flex w-14 my-1">
+                                        <a data-modal-id='101'>
+                                            <img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image">
+                                        </a>
+                                        
+                                    </div>
+                                    <p>Desk 101</p>
+                                    <p>Available</p>
                                 </div>
 
                                 <div id="102" class="flex w-14 my-1">

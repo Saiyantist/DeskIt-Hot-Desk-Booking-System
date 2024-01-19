@@ -49,9 +49,7 @@ class Booking extends Component
 
             // dd($this->date,$this->floor, $selected);           // for testing purpose
 
-            return view('livewire.booking',[ // return something
-                "selected" => $selected,
-            ]);
+            return view('livewire.booking',compact('selected'));
         }
         
         // dd('Ayaw ko nga.');
