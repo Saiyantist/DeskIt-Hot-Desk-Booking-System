@@ -8,11 +8,14 @@
             <form method="POST" action="">
             @csrf
                 <div class="col-12" >
-                  <div class="input-group date">
+                  <div class="input-group date"
+                    wire:click='refreshMap'
+                    >
                     <input  {{--name="datepicker"--}}
                     type="date" class="form-control bg-warning text-light text-center"
                     {{-- id="datepicker" --}}
                     wire:model.live="date"
+                    
                     id="datefield"
                     min= {{ $min }}
                     max= {{ $max }}
@@ -36,6 +39,7 @@
             @csrf
                 <select class="form-select bg-warning text-light text-center floors"
                 wire:model.live="floor" 
+                wire:click='refreshMap'
                 >
                   <option value="1" selected >Floor 1</option>
                   <option value="2">Floor 2</option>
@@ -47,7 +51,7 @@
         <div class="mr-16">
             {{-- Navigate to desks.blade.php --}}
             <a wire:click="refreshMap" id="nextButton"
-                {{-- href='{{route('showDesks')}}' --}}
+                {{-- href='' --}}
                 class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-40 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline my-3">See
                 Available Desks
             </a>
@@ -76,10 +80,14 @@
                         <p class="text-lg font-semibold text-left px-4">Date: {{ $date }}</h6>
                         <div class="flex flex-row justify-content-between px-4">
                             <p class="text-lg font-semibold text-left">Floor# {{ $floor }}</p>
-                            <p class="text-lg font-semibold text-left mr-8">Desk# {{ $desks[0]->desk_num}}</p>{{-- i removed {{i}}--}}
+                            <p class="text-lg font-semibold text-left mr-8">Desk# {{ $selectedDesk }}</p>{{-- i removed {{i}}--}}
                         </div>
                     </div>
-                    <button disabled class="justify-center items-center bg-gray rounded-xl w-28 h-10 p-1 mb-3 text-black">Book</button>
+                    <button class="justify-center items-center bg-gray rounded-xl w-28 h-10 p-1 mb-3 text-black"
+                        wire:click='book'
+                        >
+                        Book
+                    </button>
                 </div>
 
             </div>
@@ -138,7 +146,7 @@
                         </div>
                 </div>
                 @endfor
-                <script src="{{ asset('js/modal.js') }}"></script>
+                {{-- <script src="{{ asset('js/modal.js') }}"></script> --}}
                 {{-- @endif --}}
             </div>
 
@@ -156,38 +164,91 @@
 
                     {{-- LEFT Column --}}
                     <div class="mr-8">
-                        <div class="flex items-start ">
+                        <div class="flex items-start">
                             <div class="b-chair m-3">
+                        
+                            {{-- LOGICS --}}
 
-                                {{-- Reference --}}
-                                <div id='101' class="flex w-14">
-                                    <a>
-                                        <img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image">
-                                    </a>
-                                    <div class="absolute">
-                                        <p class="m-0 text-sm">{{ $desks[0]->desk_num }}</p>
-                                        @if($desks[0]->statuses_id == 2)
-                                            <p class="text-sm">Red</p>
-                                        @elseif($desks[0]->statuses_id == 1)
-                                            <p class="text-sm">Green</p>
-                                        @else
-                                            <p class="text-sm">Grey</p>
-                                        @endif
+                            @if($floor == 1)
+
+                                {{-- Iterator --}}
+                                @for($i = 0; $i < 4; $i++)
+
+                                {{-- Desk --}}
+                                <div id={{ $desks[$i]->desk_num}} class="flex w-14" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
+
+                                    {{-- Image --}}
+                                    <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"/></a>
+                                
+                                    {{-- Label and Circle --}}
+                                    <div class="position-absolute"> 
+                                        <div class='ml-2 mt-3'>
+
+                                            {{-- Availability Circle --}}
+                                            @if($floor && $date)
+                                                @if($desks[$i]->status == 'not_available')
+                                                    <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                
+                                                    @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                        <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+
+                                                    @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                        <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                @endif
+                                                @else
+                                                    <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                            @endif
+
+                                            {{-- Dynamic Desk Number --}}
+                                            <p class="m-0 text-sm">{{ $desks[$i]->desk_num }}</p>
+
+                                        </div>
                                     </div>
-                                </div>
-    
-                                <div id="102" class="flex w-14 my-1">
-                                    <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"></a>
-                                </div>
 
-                                <div id="103" class="flex w-14 my-1">
-                                    <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"></a>
                                 </div>
+                                @endfor
+                                
+                            @elseif($floor == 2)
 
-                                <div id="104" class="flex w-14 my-1">
-                                    <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"></a>
+                                {{-- Iterator --}}
+                                @for($i = 36; $i <= 39; $i++)
+
+                                {{-- Desk --}}
+                                <div id={{ $desks[$i]->desk_num}} class="flex w-14" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
+
+                                    {{-- Image --}}
+                                    <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"/></a>
+                                
+                                    {{-- Label and Circle --}}
+                                    <div class="position-absolute"> 
+                                        <div class='ml-2 mt-3'>
+
+                                            {{-- Availability Circle --}}
+                                            @if($floor && $date)
+                                                @if($desks[$i]->status == 'not_available')
+                                                    <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                
+                                                    @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                        <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+
+                                                    @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                        <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                @endif
+                                                @else
+                                                    <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                            @endif
+
+                                            {{-- Dynamic Desk Number --}}
+                                            <p class="m-0 text-sm">{{ $desks[$i]->desk_num }}</p>
+
+                                        </div>
+                                    </div>
+
                                 </div>
+                                @endfor
 
+                            @endif
+                            
                             </div>
                         </div>
                     </div>
@@ -197,111 +258,304 @@
 
                         {{-- First Row --}}
                         <div class="justify-center items-start">
-                            <div class="flex b-chair m-3 mb-5">
+                            <div class="flex flex-row b-chair m-3 mb-5">
 
-                                <div id="105">
+                                {{-- LOGICS --}}
+
+                                @if($floor == 1)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 4; $i < 10; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+    
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
+    
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end '>
+    
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-2 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+    
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                                
+                                @elseif($floor == 2)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 40; $i < 46; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
+
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end '>
+
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-2 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                                @endif           
+
+                                {{-- <div id="106">
                                     <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
                                             class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="106">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="107">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="108">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="109">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="110">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class=" inline-flex h-14"></a>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
 
                         {{-- Second Row --}}
                         <div class="justify-center items-start">
-                            <div class="flex b-chair m-3">
+                            <div class="flex flex-row b-chair m-3">
 
-                                <div id="111">
+                                {{-- LOGICS --}}
+
+                                @if($floor == 1)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 10; $i < 16; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
+
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end mt-2.5'>
+
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-3 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                            
+                                @elseif($floor == 2)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 46; $i < 52; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
+
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end mt-2.5'>
+
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-3 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                                @endif
+
+                                {{-- <div id="111">
                                     <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
                                             class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="112">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="113">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="114">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="115">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="116">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class=" inline-flex h-14"></a>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
 
                         {{-- Third Row --}}
                         <div class="justify-center items-start">
-                            <div class="flex b-chair m-3 mb-5">
+                            <div class="flex flex-row b-chair m-3 mb-5">
 
-                                <div id="105">
+                                {{-- LOGICS --}}
+
+                                @if($floor == 1)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 16; $i < 22; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
+
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end '>
+
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-2 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                            
+                                @elseif($floor == 2)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 52; $i < 58; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
+
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end '>
+
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-2 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                                @endif
+
+                                {{-- <div id="105">
                                     <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
                                             class="h-14 mx-1 "></a>
-                                </div>
+                                </div> --}}
 
-                                <div id="106">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="107">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="108">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="109">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="110">
-                                    <a><img src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"
-                                            class=" inline-flex h-14"></a>
-                                </div>
 
                             </div>
                         </div>
@@ -310,39 +564,107 @@
                         <div class="justify-center items-start">
                             <div class="flex b-chair m-3">
 
-                                <div id="117">
+                                {{-- LOGICS --}}
+
+                                @if($floor == 1)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 22; $i < 28; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
+
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end mt-2.5'>
+
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-3 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                            
+                                @elseif($floor == 2)
+
+                                    {{-- Iterator --}}
+                                    @for($i = 58; $i < 64; $i++)
+
+                                    {{-- Desk --}}
+                                    <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+
+                                        {{-- Image --}}
+                                        <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
+
+                                        {{-- Label and Circle --}}
+                                        <div class="position-absolute w-16 "> 
+                                            <div class='flex flex-row justify-content-between align-items-end mt-2.5'>
+
+                                                {{-- Availability Circle --}}
+                                                <div class="h-10 mt-3 ml-4">
+                                                    @if($floor && $date)
+                                                        @if($desks[$i]->status == 'not_available')
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                                        
+                                                            @elseif(in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+        
+                                                            @elseif(!in_array($desks[$i]->id, $bookedDeskIDs))
+                                                                <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                                        @endif
+                                                        @else
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    @endif
+                                                </div>
+
+                                                {{-- Dynamic Desk Number --}}
+                                                <div class="">
+                                                    <p class="mb-2 mr-1 text-xs">{{ $desks[$i]->desk_num }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endfor 
+                                @endif
+
+                                {{-- <div id="117">
                                     <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
                                             class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="118">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="119">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="120">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="121">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class="h-14 mx-1 "></a>
-                                </div>
-
-                                <div id="122">
-                                    <a><img src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"
-                                            class=" inline-flex h-14"></a>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
                     </div>
+
+
+                    {{-- TO BE CONTINUED HERE --}}
+
 
                     {{-- RIGHT Column --}}
                     <div class="flex flex-column justify-content-between ml-12 mr-5 mt-3">

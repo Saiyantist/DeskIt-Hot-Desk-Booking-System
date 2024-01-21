@@ -10,6 +10,7 @@ class Desk extends Model
     use HasFactory;
 
     protected $fillable = [
+        "id",
         "desk_num",
         "status"
     ];
