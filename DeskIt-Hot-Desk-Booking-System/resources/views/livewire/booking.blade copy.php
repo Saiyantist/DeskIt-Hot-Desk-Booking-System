@@ -5,49 +5,21 @@
 
         {{-- Date Picker --}}
         <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
-            <form method="POST" action="">
-            @csrf
-                <div class="col-12" >
-                  <div class="input-group date">
-                    <input  {{--name="datepicker"--}}
-                    type="date" class="form-control bg-warning text-light text-center"
-                    {{-- id="datepicker" --}}
-                    wire:model.live="date"
-                    id="datefield"
-                    min= {{ $min }}
-                    max= {{ $max }}
-                    />
-
-                     
-                    {{-- <span class="input-group-append" >
-                      <span class="input-group-text bg-light d-block">
-                        <i class="fa fa-calendar"></i>
-                      </span>
-                    </span> --}}
-                  </div>
-                </div>
-            </form>
+            <x-calendar>
+            </x-calendar>
         </div>
 
 
         {{-- Floor Chooser --}}
         <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
-            <form method="POST" action="">
-            @csrf
-                <select class="form-select bg-warning text-light text-center floors"
-                wire:model.live="floor" 
-                >
-                  <option value="1" selected >Floor 1</option>
-                  <option value="2">Floor 2</option>
-                </select>
-            </form>
+            <x-floor>
+            </x-floor>
         </div>
 
         {{-- See Available --}}
         <div class="mr-16">
             {{-- Navigate to desks.blade.php --}}
-            <a wire:click="refreshMap" id="nextButton"
-                {{-- href='{{route('showDesks')}}' --}}
+            <a wire:click="refreshMap" id="nextButton" href='{{route('showDesks')}}'
                 class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-40 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline my-3">See
                 Available Desks
             </a>
@@ -55,7 +27,6 @@
 
     </div>
 
-    {{-- UI --}}
     <main class="flex flex-row justify-center">
 
         {{-- Side Panel Section --}}
@@ -76,7 +47,7 @@
                         <p class="text-lg font-semibold text-left px-4">Date: {{ $date }}</h6>
                         <div class="flex flex-row justify-content-between px-4">
                             <p class="text-lg font-semibold text-left">Floor# {{ $floor }}</p>
-                            <p class="text-lg font-semibold text-left mr-8">Desk# {{ $desks[0]->desk_num}}</p>{{-- i removed {{i}}--}}
+                            <p class="text-lg font-semibold text-left mr-8">Desk# </p>{{-- i removed {{i}}--}}
                         </div>
                     </div>
                     <button disabled class="justify-center items-center bg-gray rounded-xl w-28 h-10 p-1 mb-3 text-black">Book</button>
@@ -159,23 +130,10 @@
                         <div class="flex items-start ">
                             <div class="b-chair m-3">
 
-                                {{-- Reference --}}
-                                <div id='101' class="flex w-14">
-                                    <a>
-                                        <img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image">
-                                    </a>
-                                    <div class="absolute">
-                                        <p class="m-0 text-sm">{{ $desks[0]->desk_num }}</p>
-                                        @if($desks[0]->statuses_id == 2)
-                                            <p class="text-sm">Red</p>
-                                        @elseif($desks[0]->statuses_id == 1)
-                                            <p class="text-sm">Green</p>
-                                        @else
-                                            <p class="text-sm">Grey</p>
-                                        @endif
-                                    </div>
+                                <div id="101" class="flex w-14 my-1">
+                                    <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"></a>
                                 </div>
-    
+
                                 <div id="102" class="flex w-14 my-1">
                                     <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"></a>
                                 </div>
@@ -415,8 +373,10 @@
         </section>
 
         {{-- {{$floor}} --}}
-    </main>
-
+    </main> <!-- for some reason hindi na-u-update 'yung wire:model.lives, i.e. $floor, sa labas nitong </main> -->
+    {{--{{$floor}} --}}
+    <!-- try changing the floor, this one will remain.
+                                    this is a roadblock, TO OUR MODAL. -->
 
 
 
@@ -426,3 +386,193 @@
 
 
 </div>
+
+
+<!--    {{-- Desk Map ORIGINAL --}}  Organized 
+    <section class="d-flex items-center justify-center m-3">
+        <div class=" w-12/12 h-max bg-gray desk">
+            <div class="bg-gray desk m-4 flex flex-row relative justify-center">
+
+                <div class="absolute bottom-0 left-0">
+                    <img src="{{ asset('images/door.svg') }}" class="flex w-14 my-1" alt="SVG Image">
+                </div>
+
+                {{-- LEFT Column --}}
+                <div class="mr-8">
+                    <div class="flex items-start ">
+                        <div class="b-chair m-3">
+                            @for ($i = 0; $i < 4; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/left-chair.svg') }}" class="flex w-14 my-1"
+                                    alt="SVG Image"></a>
+                                @endfor
+                        </div>
+                    </div>
+                </div>
+
+                
+                {{-- MIDDLE --}}
+                <div class="mx-2">
+
+                    {{-- First Row --}}
+                    <div class="flex justify-center items-start">
+                        <div class="b-chair m-3 mb-5">
+                            @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/bottom-chair.svg') }}" class=" inline-flex h-14"
+                                    alt="SVG Image"></a>
+                                @endfor
+                        </div>
+                    </div>
+
+                    {{-- Second Row --}}
+                    <div class="flex justify-center items-center">
+                        <div class="b-chair m-3">
+                            @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/top-chair.svg') }}" class=" inline-flex h-14"
+                                    alt="SVG Image"></a>
+                                @endfor
+                        </div>
+                    </div>
+
+                    {{-- Third Row --}}
+                    <div class="flex justify-center items-center">
+                        <div class="b-chair mb-5">
+                            @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/bottom-chair.svg') }}" class=" inline-flex h-14"
+                                    alt="SVG Image"></a>
+                                @endfor
+                        </div>
+                    </div>
+
+                    {{-- Fourth Row --}}
+                    <div class="flex justify-center items-end">
+                        <div class="b-chair m-3">
+                            @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/top-chair.svg') }}" class=" inline-flex h-14"
+                                    alt="SVG Image"></a>
+                                @endfor
+                        </div>
+                    </div>
+                </div>
+                
+
+                {{-- RIGHT Column --}}
+                
+                <div class=" ml-20">
+
+                    {{-- Desk Cluster --}}
+                    @for ($i = 0; $i < 2; $i++) <div class="flex flex-col justify-center mt-2">
+
+                        <div class="b-chair m-3 flex flex-row items-end">
+                            <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14"
+                                    alt="SVG Image"></a>
+                            <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14"
+                                    alt="SVG Image"></a>
+                        </div>
+                        <div class="b-chair flex -m-4 flex-row justify-start items-start">
+                            <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14"
+                                    alt="SVG Image"></a>
+                            <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                    src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14"
+                                    alt="SVG Image"></a>
+                        </div>
+                        @if ($i < 1) <span class=" my-4"></span>
+                            @endif
+                    @endfor
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+-->
+
+<!--    {{-- Desk Map ORIGINAL --}}
+        <section class="d-flex items-center justify-center m-3">
+            <div class=" w-12/12 h-max bg-gray desk">
+                <div class="bg-gray desk m-4 flex flex-row relative justify-center">
+                    <div class="absolute bottom-0 left-0">
+                        <img src="{{ asset('images/door.svg') }}" class="flex w-14 my-1" alt="SVG Image">
+                    </div>
+                    <div class="mr-8">
+                        <div class="flex items-start ">
+                            <div class="b-chair m-3">
+                                @for ($i = 0; $i < 4; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/left-chair.svg') }}" class="flex w-14 my-1"
+                                        alt="SVG Image"></a>
+                                    @endfor
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="mx-2">
+                        <div class="flex justify-center items-start">
+                            <div class="b-chair m-3 mb-5">
+                                @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/bottom-chair.svg') }}" class=" inline-flex h-14"
+                                        alt="SVG Image"></a>
+                                    @endfor
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <div class="b-chair m-3">
+                                @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/top-chair.svg') }}" class=" inline-flex h-14"
+                                        alt="SVG Image"></a>
+                                    @endfor
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <div class="b-chair mb-5">
+                                @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/bottom-chair.svg') }}" class=" inline-flex h-14"
+                                        alt="SVG Image"></a>
+                                    @endfor
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-end">
+                            <div class="b-chair m-3">
+                                @for ($i = 0; $i < 6; $i++) <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/top-chair.svg') }}" class=" inline-flex h-14"
+                                        alt="SVG Image"></a>
+                                    @endfor
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" ml-20">
+                        @for ($i = 0; $i < 2; $i++) <div class="flex flex-col justify-center mt-2">
+                            <div class="b-chair m-3 flex flex-row items-end">
+                                <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14"
+                                        alt="SVG Image"></a>
+                                <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/top-cubic.svg') }}" class=" flex h-14"
+                                        alt="SVG Image"></a>
+                            </div>
+                            <div class="b-chair flex -m-4 flex-row justify-start items-start">
+                                <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14"
+                                        alt="SVG Image"></a>
+                                <a class="modalTrigger" data-modal-id="{{ $i }}"><img
+                                        src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14"
+                                        alt="SVG Image"></a>
+                            </div>
+                            @if ($i < 1) <span class=" my-4"></span>
+                                @endif
+                        @endfor
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+-->
+
+{{-- @if ($dateSelected && $floorSelected)
+<div class="relative inline-block text-left">
+    <a href="{{ route('home.booking.desks') }}" id="nextButton"
+        class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-56 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline">
+        See Available Desks
+    </a>
+</div>
+@endif --}}

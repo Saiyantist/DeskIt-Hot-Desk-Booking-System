@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Livewire\Component;
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\BookingController;
 use Carbon\Carbon;
+use App\Models\Desk;
 
 use function PHPUnit\Framework\returnValue;
 
@@ -17,6 +18,9 @@ class Booking extends Component
     // public $today;
 
     public $selected = false;
+
+    public $max;
+    public $min;
     
     // public $rules = [
     //     'date' => 'required',
@@ -41,15 +45,23 @@ class Booking extends Component
     {
         if($this->date && $this->floor){
             $this->selected = true;
-            $selected = $this->selected;
 
+            $selected = $this->selected;
+            // $selected = false;
+            $date = $this->date;
+            $floor = $this->floor;
+
+            
             /**  
              *  INSERT LOGIC to show DeskMap's availability. 
              */
 
-            // dd($this->date,$this->floor, $selected);           // for testing purpose
 
-            return view('livewire.booking',compact('selected'));
+
+
+            dd($this->date,$this->floor, $this->selected, $this->max);           // for testing purpose
+
+            return view('livewire.booking', compact('selected',));
         }
         
         // dd('Ayaw ko nga.');
@@ -89,9 +101,14 @@ class Booking extends Component
 
     public function render()
     {
-        return view('livewire.booking',[
-            // 'selected' => $hasSelected    // test para gumana 'yung @if() that contains modal code, but ayaw talaga. 
-        ]);
+        $desks = Desk::all();
 
+        $this->max = Carbon::today()->addDays(14)->toDateString();
+        $max = $this->max;
+
+        $this->min= Carbon::today()->toDateString();
+        $min = $this->min;
+
+        return view('livewire.booking', compact('desks', 'max', 'min'));
     }
 }
