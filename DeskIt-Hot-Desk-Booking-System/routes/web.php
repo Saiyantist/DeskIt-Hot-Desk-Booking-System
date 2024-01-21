@@ -21,7 +21,7 @@ use App\Http\Livewire\Booking;
 
 // Route::get('n', function () {
 //     if(auth()->user()){
-//         auth()->user()->assignRole('employee');
+//         auth()->user()->assignRole('admin');
 //     }
 //     return ('hello');
 // });
@@ -29,6 +29,9 @@ use App\Http\Livewire\Booking;
 
 /** LANDING Page */
 Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
+Route::get('/frequently-Asked-Questions', [WelcomeController::class, 'show1'])->name('faq');
+Route::get('/privacy-policy', [WelcomeController::class, 'show2'])->name('privacyPolicy');
+Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
 
 
 
@@ -44,6 +47,12 @@ Route::get('/dashboard', function () {
     }
     return view('home.dashboard');   /** USER  */ 
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
+    Route::get('/notification', [HomeController::class,'notif'])->name('notif');
+
+});
+
 
 
 /** PROFILE Routes (MyAccount) */

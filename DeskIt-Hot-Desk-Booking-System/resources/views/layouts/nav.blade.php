@@ -19,7 +19,7 @@
             </li>
           </ul>
           <div class="compile">
-            @if (request()->routeIs('welcome'))
+            @if (request()->routeIs('welcome') || request()->routeIs('faq') || request()->routeIs('privacyPolicy') || request()->routeIs('guides'))
             <a class="navbar-brand login" href="{{route('login')}}">LOGIN</a>
             @else
             <!-- Show nothing -->

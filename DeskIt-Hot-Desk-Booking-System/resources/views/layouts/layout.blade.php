@@ -19,6 +19,7 @@
     </script>
     <script src="https://kit.fontawesome.com/8d7ba59e72.js" crossorigin="anonymous"></script>
     
+    
     @livewireStyles
 </head>
 
@@ -42,5 +43,5 @@
     @endif
 
 </body>
-
+@livewireScripts
 </html>

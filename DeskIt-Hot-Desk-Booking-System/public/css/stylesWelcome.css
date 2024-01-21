@@ -180,3 +180,14 @@ footer div {
     
 
 }
+
+.mod {
+    border-top: 20px solid #FBB503;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.but {
+    text-align: end;
+
+}

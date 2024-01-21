@@ -14,7 +14,9 @@ module.exports = {
             yellowB:'#FBB503',
             gray:'#F5F5F5',
             block:'#000000',
-            grey: '#EDEDED'
+            grey: '#EDEDED',
+            pink: '#FCF8F8',
+            white: '#FFFFFF',
           },
         extend: {
             fontFamily: {
