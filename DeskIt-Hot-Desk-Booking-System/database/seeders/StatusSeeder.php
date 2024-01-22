@@ -12,9 +12,8 @@ class StatusSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('statuses')->insert([
             ['id' => 1, 'status' => 'available', 'status_date' => Carbon::now()],

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id(); 
             $table->date('booking_date');
-            $table->enum('status', ['approved', 'declined', 'canceled']);
+            $table->enum('status', ['accepted', 'canceled']);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('desk_id')->constrained();
             $table->timestamps();
