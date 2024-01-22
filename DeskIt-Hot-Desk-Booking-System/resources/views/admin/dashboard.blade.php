@@ -85,11 +85,12 @@
     <section class=" mt-44">
         <div class="flex justify-center">
             @livewire('admin-booking')
+            @livewireScripts
         </div>
     </section>
 
     <script src="{{ asset('js/myScript2.js') }}"></script>
-
+    
     @endsection
 
 </x-app-layout>
