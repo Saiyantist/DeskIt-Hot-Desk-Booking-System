@@ -13,11 +13,17 @@
 
             <!-- User's Name -->
            <div class=" mt-5 mx-3">
-                <h1 class="text-3xl font-bold">{{ Auth::user()->name }} <a href="{{route('profile.edit')}}" class=" text-base text-block text-center px-2"><i class="fa-regular fa-pen-to-square"></i></a></h1>
-                <p class=" text-lg font-normal">{{ Auth::user()->position }}</p>
+                <h1 class="text-3xl font-bold mt-4">{{ Auth::user()->name }} <a href="{{route('profile.edit')}}" class=" text-base text-block text-center px-2"><i class="fa-regular fa-pen-to-square"></i></a></h1>
+                <p class=" text-lg font-normal">
+                    @if(Auth::user()->roles->contains('name', 'user'))
+                    Employee
+                @elseif(Auth::user()->roles->contains('name', 'admin'))
+                    Administrator
+                @endif</p>
+                <p class="text-lg font-normal">{{ Auth::user()->email }}</p>
            </div>
     </div>
-    <div class="mt-3">
+    <div class=" mt-10">
         @livewire('table')
     </div>
     @endsection

@@ -37,7 +37,7 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('profile')" class="text-black">
+                                    <x-dropdown-link :href="route('profile-edit')" class="text-black">
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
 

@@ -111,6 +111,9 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/profile', function () {
         return view('admin.profile');
     })->name('profile');
+    Route::get('/admin/profile-edit', function () {
+        return view('admin.profileEdit');
+    })->name('profile-edit');
 });
 
 

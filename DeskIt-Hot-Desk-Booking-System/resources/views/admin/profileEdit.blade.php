@@ -10,10 +10,10 @@
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <!-- User Information -->
-                    <p>Name: {{ $user->name }}</p>
-                    <p>Email: {{ $user->email }}</p>
-                    <p>Gender: {{ $user->gender }}</p>
-                    <p>Birthday: {{ $user->birthday }}</p>
+                    <p>Name: {{ Auth::user()->name }}</p>
+                    <p>Email: {{ Auth::user()->email }}</p>
+                    <p>Gender: {{ Auth::user()->gender }}</p>
+                    <p>Birthday: {{ Auth::user()->birthday }}</p>
                 </div>
             </div>
 
