@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Carbon\Carbon;
 use Illuminate\View\View;
+
 
 class RegisteredUserController extends Controller
 {
@@ -42,6 +44,7 @@ class RegisteredUserController extends Controller
                 ->symbols()],
         ]);
 
+            
         $user = User::create([
             'name' => $request->name,
             'gender' => $request->gender,

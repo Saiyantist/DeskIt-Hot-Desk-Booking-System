@@ -1,4 +1,10 @@
 <x-guest-layout>
+    <script>
+        flatpickr(".datepicker", {
+            enableTime: false,
+            dateFormat: "Y-m-d",
+        });
+    </script>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -13,6 +19,7 @@
         <div class="mt-4">
             <x-input-label for="gender" :value="__('Gender')" />
             <select id="gender" name="gender" class="block mt-1 w-full">
+                <option value="" disabled selected>Select your gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
