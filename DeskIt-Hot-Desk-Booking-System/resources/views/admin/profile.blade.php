@@ -21,8 +21,8 @@
                 @endif</p>
             <p class="text-lg font-normal">{{ Auth::user()->email }}</p>
         </div>
-        <a href="{{ route('profile.edit') }}" class="text-block px-2 absolute right-40 text-2xl"><i
-                class="fa-regular fa-pen-to-square"></i></a>
+        <a href="{{ route('profile-edit') }}" class="text-block px-2 absolute right-40 text-2xl"><i
+                class="fa-solid fa-pen-to-square"></i></a>
     </div>
 
     <section class="mt-20">

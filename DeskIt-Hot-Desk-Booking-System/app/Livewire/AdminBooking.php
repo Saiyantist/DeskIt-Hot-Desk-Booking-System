@@ -47,6 +47,8 @@ class AdminBooking extends Component
         $index = $this->currentIndex;
 
         if (isset($this->data[$index]) && $this->data[$index]['Action'] !== 'canceled') {
+            
+            // Dummy pa lang ito, should cancel on the Bookings_table     -gelo
             $this->data[$index]['Action'] = 'canceled';
         }
 

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+// use App\Models\Bookings;
 use Illuminate\Support\Facades\Auth;
 
 class AdminProfile extends Component
@@ -43,9 +44,12 @@ class AdminProfile extends Component
     public function deleteUser()
     {
         if ($this->deleteUserId) {
+
+            // delete all bookings of the user
+
             User::destroy($this->deleteUserId);
             $this->closeModal();
-            $this->emit('refreshComponent');
+            $this->dispatch('refreshComponent');
 
         }
     }

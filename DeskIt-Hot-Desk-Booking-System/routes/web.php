@@ -94,9 +94,9 @@ Route::middleware('auth')->prefix('booking')->group(function () {
 /** ADMIN UI Routes */
 
 // Insecure way to ADMIN Dashboard - FOR DEVELOPMENT PURPOSES
-// Route::get('/admin/dashboard', function () {
-//     return view('admin.dashboard');
-// })->middleware(['auth', 'verified'])->name('admin.dashboard');
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/dashboard', function () {
