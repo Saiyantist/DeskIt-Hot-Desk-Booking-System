@@ -1,0 +1,243 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+}
+
+/* navbar */
+.navbar-custom {
+  background-color: #FCF8F8;
+}
+
+.navbar {
+  box-shadow: 0 4px 2px -3px gray;
+}
+
+.navbar .navbar-brand {
+  padding: 10px;
+}
+
+.navbar-brand img {
+  width: 210px;
+  height: 37px;
+  padding-left: 15%;
+}
+
+.navbar .nav-item {
+  padding-right: 15px;
+}
+
+.navbar-brand.login {
+  font-size: small;
+  background-color: #FBB503;
+  border-radius: 20px;
+  padding: 5px 20px 5px 20px;
+  color: white;
+}
+
+.compile {
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+}
+
+/* burger */
+.navbar .nav-menu {
+  display: flex;
+}
+
+.nav-menu .nav-item a {
+  display: inline-block;
+  padding: 1rem 1.4rem 1rem 1rem;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.nav-menu .nav-item a:hover {
+  font-weight: 500;
+}
+
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}
+
+/* Responsive */
+@media only screen and (max-width: 1000px) {
+  .nav-menu {
+    position: fixed;
+    z-index: -1;
+    right: -100%;
+    top: 0rem;
+    flex-direction: column;
+    /* This controls the width of the navbar container*/
+    width: 100%;
+    /* This controls the height of the navbar container */
+    height: 40%;
+    text-align: left;
+    transition: 0.3s;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    /* This controls the background color of the navbar container*/
+    background-color: #FCF8F8;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .nav-menu li:first-child {
+    margin-top: 4.5rem;
+    border-top: 1px solid #ccc;
+  }
+
+  .nav-item {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+.custom-a {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FBB503;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+}
+
+.bg {
+  padding: 2% 0 5% 0;
+  background-color: rgba(252, 223, 157, 0.5);
+  margin-top: 4%;
+
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content div {
+  padding: 2% 2% 1% 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  font-size: 30px;
+}
+
+.half {
+  margin-top: -4%;
+}
+
+.floor1 {
+  float: left;
+  width: 50%;
+
+}
+
+.floor2 {
+  float: right;
+  width: 50%;
+}
+
+.floor-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floor-content div {
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.floor {
+  background-color: rgba(251, 181, 3, 0.5);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+
+.bookings {
+  display: inline-flex;
+  margin-top: 3%;
+  position: relative;
+  margin-left: 10%;
+  
+}
+
+.bookings h5 {
+  display: inline;
+  background-color: #FBB503;
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  color: white;
+  border: 1px solid black;
+}
+
+.tables {
+  position: absolute;
+  width: 80%;
+  top: 70.5%;
+  left: 10%;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.text {
+  font-size: medium;
+  font-weight: 600;
+  
+}
+
+.text-data {
+  font-size: 12;
+  font-weight: bold;
+}
+
+.floor-bg {
+  
+  background-color: #FCF8F8;
+}
+
+.floor-content :last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

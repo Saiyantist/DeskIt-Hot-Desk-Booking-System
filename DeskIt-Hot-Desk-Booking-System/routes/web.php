@@ -98,6 +98,20 @@ Route::middleware('auth')->prefix('booking')->group(function () {
 //     return view('admin.dashboard');
 // })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
+Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('home');
+    Route::get('/admin/desk-map', function () {
+        return view('admin.deskMap');
+    })->name('map');
+    Route::get('/admin/booking-history', function () {
+        return view('admin.bookingHistory');
+    })->name('history');
+    Route::get('/admin/profile', function () {
+        return view('admin.profile');
+    })->name('profile');
+});
 
 
 require __DIR__.'/auth.php';
