@@ -18,11 +18,25 @@ main .info-container {
 main .first-in {
     padding: 20px;
     border: 1px solid #FBB503;
-    border-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
     border-top-width: 20px;
     width: 250px;
     
 }
+
+main .book {
+    border: 1px solid #FBB503;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 250px;
+    margin-top: 10px;
+}
+
+main .book-desk {
+    border-bottom: 1px solid #FBB503;
+}
+
 .image {
     display: flex;
     justify-content: center;

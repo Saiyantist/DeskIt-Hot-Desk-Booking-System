@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('desks', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['available', 'booked', 'notAvailable']);
-            // $table->foreignId('booking_id')->constrained();
+            $table->integer('desk_num');
+            $table->enum('status', ['in_use', 'not_available']);
+            // $table->foreignId('statuses_id')->constrained();
             $table->timestamps();
         });
     }
