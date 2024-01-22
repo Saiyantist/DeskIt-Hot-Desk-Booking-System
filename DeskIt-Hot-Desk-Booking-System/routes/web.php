@@ -21,7 +21,7 @@ use App\Livewire\Booking;
 
 // Route::get('n', function () {
 //     if(auth()->user()){
-//         auth()->user()->assignRole('employee');
+//         auth()->user()->assignRole('admin');
 //     }
 //     return ('hello');
 // });
@@ -29,6 +29,9 @@ use App\Livewire\Booking;
 
 /** LANDING Page */
 Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
+Route::get('/frequently-Asked-Questions', [WelcomeController::class, 'show1'])->name('faq');
+Route::get('/privacy-policy', [WelcomeController::class, 'show2'])->name('privacyPolicy');
+Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
 
 
 
@@ -44,6 +47,12 @@ Route::get('/dashboard', function () {
     }
     return view('home.dashboard');   /** USER  */ 
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
+    Route::get('/notification', [HomeController::class,'notif'])->name('notif');
+
+});
+
 
 
 /** PROFILE Routes (MyAccount) */
@@ -89,6 +98,23 @@ Route::middleware('auth')->prefix('booking')->group(function () {
 //     return view('admin.dashboard');
 // })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
+Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('home');
+    Route::get('/admin/desk-map', function () {
+        return view('admin.deskMap');
+    })->name('map');
+    Route::get('/admin/booking-history', function () {
+        return view('admin.bookingHistory');
+    })->name('history');
+    Route::get('/admin/profile', function () {
+        return view('admin.profile');
+    })->name('profile');
+    Route::get('/admin/profile-edit', function () {
+        return view('admin.profileEdit');
+    })->name('profile-edit');
+});
 
 
 require __DIR__.'/auth.php';

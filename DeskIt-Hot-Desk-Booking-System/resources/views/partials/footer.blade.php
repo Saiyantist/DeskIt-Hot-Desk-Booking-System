@@ -21,9 +21,9 @@
     </div>
     <div class="right-info">
         <div class="a">
-            <a class="navbar-brand aa" href="#">FAQs</a>
-            <a class="navbar-brand aa" href="#">Privacy Policy</a>
-            <a class="navbar-brand aa" href="#">Guides</a>
+            <a class="navbar-brand aa" href="{{route('faq')}}">FAQs</a>
+            <a class="navbar-brand aa" href="{{route('privacyPolicy')}}">Privacy Policy</a>
+            <a class="navbar-brand aa" href="{{route('guides')}}">Guides</a>
         </div>
 
         <div class="b">
