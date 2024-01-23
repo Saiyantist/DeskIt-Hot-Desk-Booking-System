@@ -3,12 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Http\Controllers\Auth;
-use App\Http\Controllers\BookingController;
-use App\Models\Booking as ModelsBooking;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
+use Illuminate\Validation\Rules\Can;
 
 use function PHPUnit\Framework\returnValue;
 
@@ -16,116 +15,162 @@ class Booking extends Component
 {
     public $date;
     public $floor= "1";
-    public $selectedDesk;
+    public $selectedDesk='-';
+    public $selectedDeskID;
+
     public $bookedDeskIDs = [];
+    public $userBooking = [];
+    public $canBook;
 
     public $max;
     public $min;
     
-    /**
-     * 
-     * DESK AVAILABILITY 
-     * 
-     * */
+    public $showModal = false;
+    public $showWarning = false;
+
+
 
     public function refreshMap() 
     {
+        $date = $this->date;
+        $floor = $this->floor;
+        $user = Auth::user()->id;
+        $desks = Desk::all(); 
+        $canBook = $this->canBook;
+        
 
-        // To run function
-        // Check if there is a date and floor selected
+        /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
+        $this->selectedDesk = '-';
+
+        /**
+         * Check IF there is a date and floor selected
+         * ELSE, return NOTHING
+         */
         if($this->date && $this->floor){
-            $date = $this->date;
-            $floor = $this->floor;
 
+        
             // Access all Bookings
             $tmpBookings = Bookings::all();
+
+            /** 
+             * Get the id, desk_id, and booking_date of all rows
+             *     in DB bookings_table
+             *     and store to an array.
+            */
+
+            // 1st array
             $bookings = [];
 
-            // Get the id, desk_id, and booking_date of all rows in DB bookings_table and store to an array.
             foreach ($tmpBookings as $booking){
                 array_push($bookings, [
                     'id' => $booking->id,
+                    'user_id' => $booking->user_id,
                     'desk_id' => $booking->desk_id,
                     'booking_date' => $booking->booking_date
                     ]
                 );
             }
 
-            // dd($bookings);
-            // dd($bookings[0]['booking_date']);
+            /**
+             * Find user_id that are same as the current user's
+             * if true,
+             *     store in an array.
+             */
+
+            /** 
+             * Find booking_dates that are same as the selected date,
+             * if true,
+             *    check the selected floor level,
+             *    then GET and STORE the desk_ids in an array.
+            */
 
 
+            // 2nd array
             $bookedDeskIDs = [];
+            
+            $canBook = true;
 
             // Access each row of $bookings.
             for ($booking = 0; $booking <= count($bookings) - 1 ; $booking++){
 
-                // Access its booking_date
+                // Access its user_id
+                $bookingUserID = $bookings[$booking]['user_id'];
                 $bookingDate = $bookings[$booking]['booking_date'];
 
-                // Check if chosen date matches this booking_date
                 if ($date == $bookingDate){
-
-                    // If floor is 1, get the desk_id and store it in an array.
+  
                     if($floor == 1){
                         if ($bookings[$booking]['desk_id'] <= 36){
                             array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
                         }
                     }
-                    // If floor is 2, get the desk_id and store it in an array.
-                    if($floor == 2){
+                    elseif($floor == 2){
                         if ($bookings[$booking]['desk_id'] >= 37){
                             array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
                         }
                     }
+
+                    if ($user != $bookingUserID){
+                        $canBook = true;
+                    }
+                    elseif ($user == $bookingUserID){
+                        // dd($bookings[$booking]['desk_id'] - 1);
+                        $deskNum = $bookings[$booking]['desk_id'] - 1;
+                        // dd($deskNum);
+                        array_push($this->userBooking, [
+                            'user_id' => $bookings[$booking]['user_id'],
+                            'desk_num' => $desks[$deskNum]['desk_num'],
+                            'booking_date' => $bookings[$booking]['booking_date'],
+                        ]);
+                        $canBook = false;
+                        break;
+                    }
+                    
                 }
             };
 
             $this->bookedDeskIDs = $bookedDeskIDs;
 
-
-
-            // dd($bookedDeskIDs);
-
-
-            // $desks = Desk::all();
-            // dd($desks);
-
-            // $deskz = [];
-
-            // for ($desk = 0; $desk <= count($desks) -1; $desk++){
-            //     array_push($deskz, $desks[$desk]['status']);
-            // };
-
-            // dd($deskz);
-
-
-
-            // foreach ($bookings as $booking){
-            //     $bookingDate = $bookings[$booking]['booking_date'];
-            //     if ($date == $bookingDate){
-            //         dd('gumana');
-            //     }
-            // };
-
-            // if (in_array($date, $bookingsBookedDates)){
-            //     dd('merong booked');
-            // }
-
-            // dd($this->date,$this->floor);           // for testing purpose
-
-            // return view('livewire.booking', compact('selected',));
-        }
-        
-        // dd('Ayaw ko nga.');
-
-        // return view('booking.desks');
+            
+            $this->canBook = $canBook;
+            
+            
+            // dd('User\'s Bookings today:', $this->userBooking, $canBook); 
+        }  
     }
-
 
     public function clickDesk($key)
     {
         $desks = Desk::all();
+
+        /** Can't click if there's NO DATE && FLOOR */
+        if($this->date && $this->floor){
+            
+            /** Check if the Desk Selected is 'in_use' */ 
+            if($desks[$key]->status == 'in_use')
+            {
+                /** Check if it is NOT BOOKED */
+                if(!in_array($desks[$key]->id, $this->bookedDeskIDs))
+                {
+                    /** Then finally, assign the $selectedDesk as the Desk Selected */ 
+                    $this->selectedDesk = $desks[$key]->desk_num;
+                    $this->selectedDeskID = $desks[$key]->id;
+                }
+    
+                elseif(in_array($desks[$key]->id, $this->bookedDeskIDs))
+                {
+                    dd('it\'s booked bruh');
+                }
+            }
+    
+            else
+            {
+                dd('it\'s like broken eh..');
+            }
+        }
+
+
+
 
 
         // if ($desks[$key]->statuses_id == '1'){
@@ -140,24 +185,65 @@ class Booking extends Component
         // }
     }
 
-    public function book()
+    public function validateBooking()
     {
-        /**  
-         *  INSERT Validation Logic, if desk is available for booking. 
-         */
+        $date = $this->date;
+        $floor = $this->floor;
+        $selectedDesk = $this->selectedDesk; 
+        $canBook = $this->canBook;
 
-        $status = "booked";
-
-        Booking::create([
-            "booking_date" => $this->date,    /** This whole block doesn't work yet.. */
-            "status" => $status,            
-            "user_id" => Auth::user(),
-            // "desk_id" => 101,
-        ]);
-
-        dd($status); 
+        if ($canBook && ($date && $floor && ($selectedDesk != '-')))
+        {
+            $this->showModal = true;
+        }
+        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-')))
+        {
+            $this->showWarning = true;
+        }
+        // dd($this->showModal);
     }
 
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->showWarning = false;
+    }
+
+    public function book()
+    {
+        $date = $this->date;
+        $floor = $this->floor;
+        $selectedDesk = $this->selectedDesk;
+        $selectedDeskID = $this->selectedDeskID;
+
+        $user = Auth::user()->id;
+
+        if ($date && $floor && ($selectedDesk != '-')){
+
+            Bookings::create([
+                "booking_date" => $date,
+                "status" => 'accepted',
+                "user_id" => $user,
+                "desk_id" => $selectedDeskID,
+            ]);
+            $this->selectedDesk = '-';
+            $this->showModal = false;
+            Booking::refreshMap();
+        }
+
+
+
+        // $status = "booked";
+
+        // Booking::create([
+        //     "booking_date" => $this->date,    /** This whole block doesn't work yet.. */
+        //     "status" => $status,            
+        //     "user_id" => Auth::user(),
+        //     // "desk_id" => 101,
+        // ]);
+
+        // dd($status); 
+    }
 
     public function render()
     {
@@ -168,6 +254,8 @@ class Booking extends Component
 
         $this->min= Carbon::today()->toDateString();
         $min = $this->min;
+
+
 
         return view('livewire.booking', compact('desks', 'max', 'min'));
     }
