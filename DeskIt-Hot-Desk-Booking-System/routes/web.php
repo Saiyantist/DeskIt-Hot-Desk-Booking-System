@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
 
 /** HOME Routes */
 Route::middleware('auth')->group(function () {
+    Route::get('/', HomeController::class)->name('home.dashboard');
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
 });
 
