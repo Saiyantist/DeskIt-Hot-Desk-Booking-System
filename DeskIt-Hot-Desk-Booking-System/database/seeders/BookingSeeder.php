@@ -36,21 +36,21 @@ class BookingSeeder extends Seeder
             ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 10, 'desk_id' => 36],
 
             // Floor 2
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 1, 'desk_id' => 37],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 3, 'desk_id' => 40],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 9, 'desk_id' => 44],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 4, 'desk_id' => 45],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 11, 'desk_id' => 48],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 1, 'desk_id' => 37],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 3, 'desk_id' => 40],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 9, 'desk_id' => 44],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 4, 'desk_id' => 45],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 11, 'desk_id' => 48],
 
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 5, 'desk_id' => 49],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 6, 'desk_id' => 51],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 13, 'desk_id' => 55],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 8, 'desk_id' => 65],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 2, 'desk_id' => 61],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 5, 'desk_id' => 49],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 6, 'desk_id' => 51],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 13, 'desk_id' => 55],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 8, 'desk_id' => 65],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 2, 'desk_id' => 61],
 
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 12, 'desk_id' => 69],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 7, 'desk_id' => 71],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 10, 'desk_id' => 72],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 12, 'desk_id' => 69],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 7, 'desk_id' => 71],
+            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 10, 'desk_id' => 72],
 
         ]);
     }
