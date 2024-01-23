@@ -19,12 +19,27 @@ use App\Livewire\Booking;
 |
 */
 
-// Route::get('n', function () {
-//     if(auth()->user()){
-//         auth()->user()->assignRole('admin');
-//     }
-//     return ('hello');
-// });
+Route::get('n', function () {
+    if(auth()->user()){
+        auth()->user()->assignRole('admin');
+    }
+    return ('assigned employee role');
+});
+
+Route::get('r', function () {
+    if(auth()->user()){
+        auth()->user()->removeRole('admin');
+        // auth()->user()->removeRole('employee');
+    }
+    return ('removed admin role');
+});
+
+Route::get('e', function () {
+    if(auth()->user()){
+        auth()->user()->assignRole('employee');
+    }
+    return ('assigned employee role');
+});
 
 
 /** LANDING Page */
