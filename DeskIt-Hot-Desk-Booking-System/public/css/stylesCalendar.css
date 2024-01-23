@@ -1,57 +1,4 @@
-/* calendar */
-table.calendar	{ 
-    border-left:1px solid #999; 
-}
 
-/* tr.calendar-row{  
-
-}  */
-
-td.calendar-day { 
-    min-height:80px; 
-    font-size:18px; 
-    position:relative; 
-} 
-
-td.calendar-day:hover	{ 
-    background:#eceff5; 
-}
-td.calendar-day-np	{ 
-    background:#eee; 
-    min-height:80px; } 
-
-* html div.calendar-day-np { 
-    height:80px; 
-}
-
-td.calendar-day-head { 
-    background: #FCDF9D; 
-    font-weight: 500; 
-    text-align: center; 
-    width: 120px; 
-    padding: 15px; 
-    border-bottom: 1px solid #999; 
-    border-top: 1px solid #999; 
-    border-right: 1px solid #999; 
-}
-div.day-number	{ 
-    /* background:#999;  */
-    padding: 5px; 
-    color: black; 
-    font-weight: 500; 
-    float:left; 
-    margin: -30px 0 0 5px; 
-    width: 20px; 
-    text-align: center; 
-}
-/* shared */
-td.calendar-day, td.calendar-day-np { 
-    width: 120px; 
-    padding: 5px; 
-    border-bottom: 1px solid #999; 
-    border-right: 1px solid #999; 
-    height: 80px;
-}
 
 .date-my {
     display: flex;
@@ -77,56 +24,6 @@ body i {
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-.calendar-image {
-    display: flex;
-    /* align-items: center; */
-    flex-direction: column;
-    background-color: #ECECEC;
-    padding: 5% 5% 3% 5%;
-    
-    border-bottom-left-radius: 2%;
-    border-bottom-right-radius: 2%;
-}
-
-@media (max-width: 600px) {
-    tr.calendar-row{  
-        font-size: 1px;
-        margin: 0;
-        padding: 0;
-        width: 0;
-        height: 0;
-    } 
-    td.calendar-day {
-        font-size: 1px;
-        margin: 0;
-        padding: 0;
-        width: 0;
-        height: 0;
-    }
-    td.calendar-day-head {
-        font-size: 1px;
-        margin: 0;
-        padding: 0;
-        width: 0;
-        height: 0;
-    }
-    div.day-number	{
-        font-size: 1px;
-        margin: 0;
-        padding: 0;
-        width: 0;
-        height: 0;
-     }
-     div.calendar-day-np { 
-        font-size: 1px;
-        margin: 0;
-        padding: 0;
-        width: 0;
-        height: 0;
-     }
-
 }
 
 .custom-border {

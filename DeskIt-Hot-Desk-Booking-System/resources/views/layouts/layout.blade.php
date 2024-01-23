@@ -43,7 +43,7 @@
     @else
      <!-- Show nothing -->
     @endif
-
+    @stack('scripts')
 </body>
 @livewireScripts
 </html>
