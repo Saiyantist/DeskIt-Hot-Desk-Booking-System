@@ -2,7 +2,7 @@
 
 <x-app-layout>
     @section('content')
-    <div class="bg h-64 relative z-0">
+    <div class="bg h-56 relative z-0">
     </div>
     <!-- Profile Information -->
     <div class="container flex flex-row  items-center justify-start absolute top-24">
@@ -12,7 +12,8 @@
 
         <!-- User's Name -->
         <div class="flex row m-3 justify-center align-center">
-            <h1 class="text-3xl font-bold">{{ Auth::user()->name }}</h1>
+            <h1 class="text-3xl font-bold">{{ Auth::user()->name }}  <a href="{{ route('profile-edit') }}" class="text-block px-2 text-2xl"><i
+                class="fa-solid fa-pen-to-square"></i></a></h1>
             <p class="text-lg font-normal">
                 @if(Auth::user()->roles->contains('name', 'user'))
                 Employee
@@ -21,8 +22,7 @@
                 @endif</p>
             <p class="text-lg font-normal">{{ Auth::user()->email }}</p>
         </div>
-        <a href="{{ route('profile-edit') }}" class="text-block px-2 absolute right-40 text-2xl"><i
-                class="fa-solid fa-pen-to-square"></i></a>
+       
     </div>
 
     <section class="mt-20">
