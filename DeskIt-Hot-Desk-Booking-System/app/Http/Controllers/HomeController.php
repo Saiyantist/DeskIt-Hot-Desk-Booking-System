@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Appointment;
+use App\Models\Bookings;
 
 class HomeController extends Controller
 {
@@ -16,20 +16,20 @@ class HomeController extends Controller
         return view('home.notif');
     }
 
-    public function __invoke()
-    {
+    public function getUserBookings($userId) {
+        $userBookings = Bookings::where('user_id', $userId)->get(['booking_date', 'status', 'desk_id']);
+
         $events = [];
- 
-        $appointments = Appointment::with(['client', 'employee'])->get();
- 
-        foreach ($appointments as $appointment) {
+        foreach ($userBookings as $booking) {
+            $bookingDate = $booking->booking_date;
+
             $events[] = [
-                'title' => $appointment->client->name . ' ('.$appointment->employee->name.')',
-                'start' => $appointment->start_time,
-                'end' => $appointment->finish_time,
+                'title' => 'Status: ' . $booking->status . ' Desk#: ' . $booking->desk_id,
+                'start' => $bookingDate,
+                'end' => $bookingDate,
             ];
         }
- 
-        return view('home.dashboard', compact('events'));
+
+        return response()->json($events);
     }
 }

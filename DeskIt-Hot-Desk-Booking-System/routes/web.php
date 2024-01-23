@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
 /** HOME Routes */
 Route::middleware('auth')->group(function () {
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
+    Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
 });
 
 
