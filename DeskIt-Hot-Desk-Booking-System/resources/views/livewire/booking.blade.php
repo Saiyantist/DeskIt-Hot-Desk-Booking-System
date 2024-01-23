@@ -1,153 +1,151 @@
-<div class="flex flex-col">
+<div class="flex flex-col container mt-24">
 
-    {{-- Booking  Controllers --}}
-    <div class="flex justify-end items-center mt-24 mr-24">
-
-        {{-- Date Picker --}}
-        <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
-            <form method="POST" action="">
-            @csrf
-                <div class="col-12" >
-                  <div class="input-group date"
-                    {{-- wire:click='refreshMap' --}}
-                    >
-                    <input id="datepicker"
-                    type="date" class="form-control bg-warning text-light text-center"
-                    wire:model.live="date"
-                    min= {{ $min }}
-                    max= {{ $max }}
-                    />
-
-                  </div>
-                </div>
-            </form>
-        </div>
-
+    @if ($showModal)
+    <div id="ConfirmationModal" class="flex flex-column justify-start bg-yellowB rounded-4 absolute h-48 w-72">
         
-
-
-        {{-- Floor Chooser --}}
-        <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
-            <form method="POST" action="">
-            @csrf
-                <select class="form-select bg-warning text-light text-center floors"
-                wire:model.live="floor" 
-                wire:click='refreshMap'
-                >
-                  <option value="1" selected>Floor 1</option>
-                  <option value="2">Floor 2</option>
-                </select>
-            </form>
+        <div class='self-end my-1 mr-4 '>
+            <button class="font-bold" wire:click="closeModal">X</button>
         </div>
 
-        {{-- See Available --}}
-        <div class="mr-16">
-            {{-- Navigate to desks.blade.php --}}
-            <a wire:click="refreshMap" id="nextButton"
-                {{-- href='' --}}
-                class="inline-flex items-center justify-center py-2 text-sm font-medium text-white bg-yellowB border border-gray-300 rounded-full w-40 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 no-underline my-3">See
-                Available Desks
-            </a>
+        <div class='flex flex-column bg-white py-4 px-2.5'>
+            <div class='flex justify-center'>
+                <p class=" text-lg text-center">Are you sure you want to book?</p>
+            </div>
+    
+            <div class="flex justify-center">
+                <button class="bg-yellowB px-6 py-2 rounded-4 mt-3 text-white" wire:click="book">Book</button>
+            </div>
         </div>
-
+        
     </div>
+    @endif
+
+    @if ($showWarning)
+    <div id="ConfirmationModal" class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72">
+        
+        <div class='self-end my-1 mr-4 '>
+            <button class="font-bold" wire:click="closeModal">X</button>
+        </div>
+
+        <div class='flex flex-column bg-white py-4 px-2.5'>
+            <div class='flex justify-center'>
+                <p class=" text-lg text-center">You cannot book 2 DESKS on the SAME DAY!</p>
+            </div>
+            
+            <div class="flex flex-column  justify-center">
+                <p class=" text-base text-center">Desk: {{$userBooking[count($userBooking) - 1]['desk_num']}}</p>
+                <p class=" text-base text-center">Booking: {{$userBooking[count($userBooking) - 1]['booking_date']}}</p>
+                {{-- <p class=" text-base text-center">Desk: </p>
+                <p class=" text-base text-center">Booking: </p> --}}
+            </div>
+        </div>
+        
+    </div>
+    @endif
 
     {{-- UI --}}
-    <main class="flex flex-row justify-center">
+    <main class="flex flex-row justify-evenly align-items-center">
 
         {{-- Side Panel Section --}}
-        <section>
-            <div>
+        <section class="side-panel-container self-start" style="height:35.8rem;">
+
                 {{-- Side Panel Header --}}
-                <div class="first-in">
-                    <p class=" text-base font-extrabold">WELCOME TO THE DESKIT OFFICE</p>
+                <div class="header bg-gray">
+                    <p class=" text-lg font-extrabold">WELCOME TO THE DESKIT OFFICE</p>
                     <p class=" text-sm font-normal">The office is specifically crafted to maximize the comfort and
                         productivity of your workday.
                     </p>
                 </div>
 
                 {{-- Side Panel Body --}}
-                <div class="book text-center">
-                    <p class="book-desk text-lg font-semibold py-2">Book a Desk</p>
-                    <div class="pb-2">
-                        <p class="text-lg font-semibold text-left px-4">Date: {{ $date }}</h6>
-                        <div class="flex flex-row justify-content-between px-4">
-                            <p class="text-lg font-semibold text-left">Floor# {{ $floor }}</p>
-                            <p class="text-lg font-semibold text-left mr-8">Desk# {{ $selectedDesk }}</p>{{-- i removed {{i}}--}}
+                <div class="body text-center bg-yellowA">
+                    <p class="book-desk text-lg font-semibold py-2 bg-yellowB text-white ">Book a Desk</p>
+                    <div class="px-10">
+
+                        {{-- Date --}}
+                        <div class="flex flex-row">
+                            <p class="ml-0 text-lg text-left">Date:</h6>
+                            <p class="text-lg text-center bg-white w-100 ml-2">{{ $date }}</h6>
                         </div>
+
+                        {{-- Floor --}}
+                        <div class="flex flex-row justify-content-between ">
+                            <div>
+                                <p class="ml-0 text-lg text-left">Floor lvl:</h6>
+                            </div>
+                            <div>
+                                <p class="text-lg text-center bg-white w-10">{{ $floor }}</h6>
+                            </div>
+                        </div>
+
+                        {{-- Desk --}}
+                        <div class="flex flex-row justify-content-between ">
+                            <div>
+                                <p class="ml-0 text-lg text-left">Desk:</h6>
+                            </div>
+                            <div>
+                                <p class="text-lg text-center bg-white w-10"> {{ $selectedDesk }}</h6>
+                            </div>
+                        </div>
+
                     </div>
+
+                    {{-- Booking Button --}}
                     <button class="justify-center items-center bg-gray rounded-xl w-28 h-10 p-1 mb-3 text-black"
-                        wire:click='book'
-                        >
+                        wire:click='validateBooking'
+                        wire:submit>
                         Book
                     </button>
+
+
                 </div>
-
-            </div>
-
-            <div class="invisible">
-
-                {{-- Refresh the Map --}}
-                {{-- Added a refreshMap function sa Booking.php [jan 16]: disregard this comment muna, livewire kasi
-                ito. --}}
-                <div class="relative inline-block text-left">
-
-                    {{-- <button onclick="storeBookingDesk()"> Ok </button> --}}
-
-                    {{-- MODALS --}}
-                    {{-- @if($selected) --}}
-                    @for ($i = 101; $i <= 136; $i++) <div class="modal-wrapper" data-modal-id="{{ $i }}">
-
-
-                        {{-- Modal 2 --}}
-                        <div class="second-modal fixed inset-0 hidden">
-                            <div
-                                class="flex modals modal-contents absolute bg-grey p-8 rounded-lg w-72 justify-center items-center flex-col">
-                                <span class="close absolute -top-6 right-2 text-white cursor-pointer">X</span>
-                                <p class="text-lg font-semibold mb-4 text-center">Are you sure you want to book a
-                                    desk?</p>
-                                <div class="flex flex-row">
-                                    <button class="custom-a flex items-center justify-center open-third-modal"
-                                        wire:click="book">
-                                        Yes
-                                    </button> {{-- Include logic here, dapat masave sa db once click --}}
-                                    <button class="custom-a flex items-center justify-center close">
-                                        No
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Modal 3 --}}
-                        <div class="third-modal fixed inset-0 hidden">
-                            <div
-                                class="flex modals modal-contents absolute bg-grey p-8 rounded-lg w-72 justify-center items-center flex-col">
-                                <span class="close absolute -top-6 right-2 text-white cursor-pointer">X</span>
-                                <p class="text-lg font-semibold absolute top-2 left-3">Booking <span
-                                        class="text-yellowB">placed</span></p>
-                                <div class="bg-white m-3 p-3 w-40 text-center">
-                                    <p class="text-lg font-semibold">Booking#</p>
-                                    <p class="text-lg font-semibold">Floor# {{ $floor }}</p>
-                                    <p class="text-lg font-semibold">Desk# {{ $i }}</p>{{-- Include automated
-                                    floor#-desk# here --}}
-                                    <h6 class="">Date: {{ $date }}</h6> {{-- Include automated date here --}}
-                                </div>
-                                <a href='{{route('dashboard')}}'
-                                    class="flex items-center justify-center w-40 bg-yellowB text-white rounded-lg no-underline py-1">Back
-                                    to Home</a>
-                            </div>
-                        </div>
-                </div>
-                @endfor
-                {{-- <script src="{{ asset('js/modal.js') }}"></script> --}}
-                {{-- @endif --}}
-            </div>
 
         </section>
 
+        {{-- Main Content --}}
+        <section class="d-flex flex-col items-center justify-center p-4 pt-0 bg-yellowA rounded-2 ">
 
-        {{-- Desk Map --}}
-        <section class="d-flex items-center justify-center m-3">
+            {{-- Booking  Controllers --}}
+            <div class="flex flex-row py-3 self-start  ">
+
+                {{-- Date Picker --}}
+                <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
+                    <form method="POST" action="">
+                    @csrf
+                        <div class="col-12" >
+                        <div class="input-group date"
+                            {{-- wire:click='refreshMap' --}}
+                            >
+                            <input id="datepicker"
+                            type="date" class="form-control bg-warning text-light text-center"
+                            wire:model.live="date"
+                            wire:change='refreshMap'
+                            min= {{ $min }}
+                            max= {{ $max }}
+                            />
+
+                        </div>
+                        </div>
+                    </form>
+                </div>
+
+                {{-- Floor Chooser --}}
+                <div x-data="{ open: false }" @click.away="open = false" class="text-center">
+                    <form method="POST" action="">
+                    @csrf
+                        <select class="form-select bg-warning text-light text-center floors"
+                        wire:model.live="floor" 
+                        wire:change='refreshMap'
+                        >
+                        <option value="1" selected>Floor 1</option>
+                        <option value="2">Floor 2</option>
+                        </select>
+                    </form>
+                </div>
+
+            </div>
+
+            {{-- Desk Map --}}
             <div class=" w-12/12 h-100 bg-gray desk">
                 <div class="bg-gray desk m-4 flex flex-row relative justify-center">
 
@@ -168,14 +166,14 @@
                                 @for($i = 0; $i < 4; $i++)
 
                                 {{-- Desk --}}
-                                <div id={{ $desks[$i]->desk_num}} class="flex w-14" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
+                                <div id={{ $desks[$i]->desk_num}} class="flex w-16" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
 
                                     {{-- Image --}}
-                                    <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"/></a>
+                                    <a><img class="" src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"/></a>
                                 
                                     {{-- Label and Circle --}}
                                     <div class="position-absolute"> 
-                                        <div class='ml-2 mt-3'>
+                                        <div class='ml-3 mt-4'>
 
                                             {{-- Availability Circle --}}
                                             @if($floor && $date)
@@ -193,7 +191,7 @@
                                             @endif
 
                                             {{-- Dynamic Desk Number --}}
-                                            <p class="m-0 text-sm">{{ $desks[$i]->desk_num }}</p>
+                                            <p class="m-0 mt-1 text-left text-sm">{{ $desks[$i]->desk_num }}</p>
 
                                         </div>
                                     </div>
@@ -207,14 +205,14 @@
                                 @for($i = 36; $i <= 39; $i++)
 
                                 {{-- Desk --}}
-                                <div id={{ $desks[$i]->desk_num}} class="flex w-14" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
+                                <div id={{ $desks[$i]->desk_num}} class="flex w-16" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
 
                                     {{-- Image --}}
                                     <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"/></a>
                                 
                                     {{-- Label and Circle --}}
                                     <div class="position-absolute"> 
-                                        <div class='ml-2 mt-3'>
+                                        <div class='ml-3 mt-4'>
 
                                             {{-- Availability Circle --}}
                                             @if($floor && $date)
@@ -232,7 +230,7 @@
                                             @endif
 
                                             {{-- Dynamic Desk Number --}}
-                                            <p class="m-0 text-sm">{{ $desks[$i]->desk_num }}</p>
+                                            <p class="m-0 mt-1 text-left text-sm">{{ $desks[$i]->desk_num }}</p>
 
                                         </div>
                                     </div>
@@ -1322,5 +1320,6 @@
         </section>
 
     </main>
+
 
 </div>
