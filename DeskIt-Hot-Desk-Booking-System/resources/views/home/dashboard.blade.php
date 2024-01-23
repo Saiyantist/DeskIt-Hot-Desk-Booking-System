@@ -56,7 +56,7 @@
                     start: startDate,
                     end: endDate
             },
-                events: @json($events),
+                events: @json('events'),
             });
             calendar.render();
         });

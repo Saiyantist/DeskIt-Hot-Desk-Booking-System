@@ -38,6 +38,8 @@ Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
 /** AUTHENTICATION to Dashboard
  *  - Verifying if user hasRole(user or admin)  */
 Route::get('/dashboard', function () {
+    
+    
     $user = Auth::user();
 
     $hasAllowedRole = $user->hasAnyRole('admin');
@@ -48,10 +50,10 @@ Route::get('/dashboard', function () {
     return view('home.dashboard');   /** USER  */ 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
-    Route::get('/notification', [HomeController::class,'notif'])->name('notif');
+// Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
+//     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
 
-});
+// });
 
 
 
@@ -66,7 +68,6 @@ Route::middleware('auth')->group(function () {
 
 /** HOME Routes */
 Route::middleware('auth')->group(function () {
-    Route::get('/', HomeController::class)->name('home.dashboard');
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
 });
 
