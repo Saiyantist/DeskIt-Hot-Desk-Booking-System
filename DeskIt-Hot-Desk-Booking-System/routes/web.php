@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
@@ -19,19 +19,11 @@ use App\Livewire\Booking;
 |
 */
 
-Route::get('n', function () {
+Route::get('a', function () {
     if(auth()->user()){
         auth()->user()->assignRole('admin');
     }
-    return ('assigned employee role');
-});
-
-Route::get('r', function () {
-    if(auth()->user()){
-        auth()->user()->removeRole('admin');
-        // auth()->user()->removeRole('employee');
-    }
-    return ('removed admin role');
+    return ('assigned admin role');
 });
 
 Route::get('e', function () {
@@ -41,9 +33,18 @@ Route::get('e', function () {
     return ('assigned employee role');
 });
 
+Route::get('r', function () {
+    if(auth()->user()){
+        auth()->user()->removeRole('admin');
+        auth()->user()->removeRole('employee');
+    }
+    return ('removed admin/employee role');
+});
+
+
 
 /** LANDING Page */
-Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
+Route::get('/welcome', [WelcomeController::class, 'show'])->name('welcome');
 Route::get('/frequently-Asked-Questions', [WelcomeController::class, 'show1'])->name('faq');
 Route::get('/privacy-policy', [WelcomeController::class, 'show2'])->name('privacyPolicy');
 Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
@@ -53,29 +54,28 @@ Route::get('/waiting', [WelcomeController::class, 'show4'])->name('waiting');
 
 /** AUTHENTICATION to Dashboard
  *  - Verifying if user hasRole(user or admin)  */
+
+// Route::get('/', [AuthenticatedSessionController::class, 'store'])->middleware(['auth', 'verified'])->name('dashboard');
+
+
 Route::get('/dashboard', function () {
     $user = Auth::user();
+  
+    /** ADMIN */   
+    if ($user->hasRole('admin')) {return view('admin.dashboard'); } 
 
-    // Check if the user has any allowed role
-    $hasAllowedRole = $user->hasAnyRole('admin', 'employee');
-
-    if ($hasAllowedRole) {
-        if ($user->hasRole('admin')) {
-            return view('admin.dashboard');
-        } elseif ($user->hasRole('employee')) {
-            return view('home.dashboard');
-        }
-    }
-
-    // Check if the user has no role
-    if (!$user->hasAnyRole('admin', 'employee')) {
-        return redirect()->route('waiting');
-    }
-
+    /** EMPLOYEE */
+    if ($user->hasRole('employee')) {return view('home.dashboard'); }   
+  
+    /** NO ROLE */
+    elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); }
+  
     // Default fallback (this should not happen under normal circumstances)
-    return abort(403, 'Unauthorized');
+    else {return abort(403, 'Unauthorized'); }
+  
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/', function () {   $user = Auth::user(); if ($user->hasRole('admin')) {return view('admin.dashboard'); } if ($user->hasRole('employee')) {return view('home.dashboard'); } elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); } else {return abort(403, 'Unauthorized'); }  })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
 //     Route::get('/notification', [HomeController::class,'notif'])->name('notif');

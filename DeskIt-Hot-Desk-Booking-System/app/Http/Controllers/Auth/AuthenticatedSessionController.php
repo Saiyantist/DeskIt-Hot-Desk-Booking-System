@@ -29,23 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         $request->user()->sendEmailVerificationNotification();
         
-        $user = Auth::user();
-
-        $hasAllowedRole = $user->hasAnyRole('admin', 'employee');
-
-        if ($hasAllowedRole) {
-            if ($user->hasRole('admin')) {
-                return redirect()->route('admin.dashboard'); 
-            } elseif ($user->hasRole('employee')) {
-                return redirect()->route('home.dashboard');
-            }
-        }
-
-        if (!$user->hasAnyRole('admin', 'employee')) {
-            return redirect()->route('waiting');
-        }
-
-        return abort(403, 'Unauthorized');
+        return redirect()->route('dashboard'); 
     }
 
     /**

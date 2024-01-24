@@ -40,7 +40,7 @@ main .book-desk {
     border-bottom: 1px solid #FBB503;
 }
 
-#ConfirmationModal {
+#Modal {
     top: 300px;
     left: 640px;
     /* top: 65%;
