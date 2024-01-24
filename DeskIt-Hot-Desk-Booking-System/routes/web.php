@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Booking;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,29 @@ Route::get('e', function () {
         auth()->user()->assignRole('employee');
     }
     return ('assigned employee role');
+});
+
+Route::get('empAll', function () {
+
+    $users = User::all();
+    
+    foreach ($users as $user){
+        $user->assignRole('employee');
+    }
+
+    return ('assigned employee role to all users.');
+});
+
+Route::get('rAll', function () {
+
+    $users = User::all();
+    
+    foreach ($users as $user){
+        $user->removeRole('employee');
+    }
+    auth()->user()->assignRole('admin');
+
+    return ('removed employee role to all users except current user.');
 });
 
 Route::get('r', function () {
