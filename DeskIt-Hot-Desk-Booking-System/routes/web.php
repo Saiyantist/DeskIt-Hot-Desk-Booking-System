@@ -75,7 +75,7 @@ Route::get('/dashboard', function () {
   
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', function () {   $user = Auth::user(); if ($user->hasRole('admin')) {return view('admin.dashboard'); } if ($user->hasRole('employee')) {return view('home.dashboard'); } elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); } else {return abort(403, 'Unauthorized'); }  })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {   $user = Auth::user(); if ($user->hasRole('admin')) {return view('admin.dashboard'); } if ($user->hasRole('employee')) {return view('home.dashboard'); } elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); } else {return abort(403, 'Unauthorized'); }  })->middleware(['auth', 'verified'])->name('home1');
 
 // Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
 //     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
