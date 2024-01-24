@@ -119,13 +119,23 @@
 
     <!-- Modal -->
     @if ($showModal)
-    <div class=" mod absolute bottom-1/3 left-1/3 bg-white h-48 w-96 shadow-md ">
-        <button wire:click="closeModal" class=" float-right">X</button>
-        <p class=" text-lg pt-4 text-center">Are you sure you want to cancel this booking?</p>
-        <div class="flex justify-around px-3 pt-1">
-            <button wire:click="handleAction">YES</button>
-            <button wire:click="closeModal">NO</button>
+        <div class="mod absolute bottom-1/3 left-1/3 bg-white h-48 w-96 shadow-md z-10">
+            <button wire:click="closeModal" class="float-right">X</button>
+            <p class="text-lg pt-4 text-center">
+                Are you sure you want to cancel this booking?
+            </p>
+            <div class="flex justify-around px-3 pt-1">
+                <button wire:click="handleAction">YES</button>
+                <button wire:click="closeModal">NO</button>
+            </div>
         </div>
-    </div>
     @endif
+
+    @livewireScripts
+    <script>
+        // Automatically refresh the Livewire component when a browser event is received
+        Livewire.on('refreshComponent', function () {
+            Livewire.emit('refresh');
+        });
+    </script>
 </div>

@@ -84,7 +84,10 @@ class AdminBooking extends Component
         }
     }
 
-
+    public function refreshLivewire()
+    {
+        $this->emit('refreshLivewire');
+    }
 
     public function openModal($index)
     {
@@ -94,13 +97,27 @@ class AdminBooking extends Component
 
     public function handleAction()
     {
-        // Use $this->currentIndex to perform the action on the specific data item
+        // Use $this->currentIndex to get the index of the specific data item
         $index = $this->currentIndex;
 
         if (isset($this->data[$index]) && $this->data[$index]['Action'] !== 'canceled') {
-            
-            // Dummy pa lang ito, should cancel on the Bookings_table     -gelo
+            // Get the booking ID from the data
+            $bookingId = $this->data[$index]['Id'];
+
+            // Retrieve the booking record from the database
+            $booking = Bookings::find($bookingId);
+
+            // Check if the booking record exists
+            if ($booking) {
+                // Update the booking status to 'canceled'
+                $booking->update(['status' => 'canceled']);
+            }
+
+            // Update the data array to reflect the 'canceled' action
             $this->data[$index]['Action'] = 'canceled';
+
+            // Dispatch a browser event to trigger the refresh in the Livewire component
+            $this->dispatch('refreshComponent');
         }
 
         $this->closeModal();  // Close the modal after handling the action
