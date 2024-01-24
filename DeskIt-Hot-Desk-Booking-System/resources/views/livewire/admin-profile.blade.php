@@ -118,7 +118,7 @@
 
             {{-- Inactive/Pending Users --}}
             @elseif($activeSection ===3)
-            <table class="w-50 p-10 justify-center items-center text-center  bg-gray z-10">
+            <table class="w-50 p-10 justify-center items-center text-center  bg-gray">
                 <thead>
                     <tr>
                         <th class=" px-12 py-2 justify-center items-center bg-grey">ID</th>
@@ -151,30 +151,69 @@
             @endif
 
             @if ($showModal)
-            <div class=" mod absolute bottom-1/3 left-1/3 bg-white h-48 w-96 shadow-md z-10">
-                <button wire:click="closeModal" class=" float-right">X</button>
-                <p class=" text-lg pt-4 text-center">Are you sure you want to delete this user?</p>
-                <div class="flex justify-around px-3 pt-1">
-                    <button wire:click="deleteUser">YES</button>
-                    <button wire:click="closeModal">NO</button>
+            <div class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72"
+                style="top: 300px; left: 640px; z-index: 1;">
+
+                <div class='self-end my-1 mr-4 '>
+                    <button wire:click="closeModal" class=" float-right">X</button>
+                </div>
+        
+                <div class='flex flex-column bg-white rounded-bottom-4 py-4 px-2.5'>
+                    <div class='flex justify-center'>
+                        <p class=" text-lg pt-4 text-center">Are you sure you want to delete this user?</p>
+                    </div>
+            
+                    <div class="flex justify-center">
+                        <button class="bg-danger px-6 py-2 rounded-4 mt-3 text-white"
+                            wire:click="deleteUser">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
+
             @elseif ($showModal2)
-            <div class=" mod absolute bottom-1/3 left-1/3 bg-white h-48 w-96 shadow-md z-20">
-                <button wire:click="closeModal2" class=" float-right">X</button>
-                <p class=" text-lg pt-8 text-center">Are you sure you want to accept this user?</p>
-                <div class="flex justify-around px-3 pt-1">
-                    <button wire:click="acceptUser">YES</button>
-                    <button wire:click="closeModal2">NO</button>
+
+            <div class="flex flex-column justify-start bg-green rounded-4 absolute h-48 w-72"
+                style="top: 300px; left: 640px; z-index: 1;">
+
+                <div class='self-end my-1 mr-4 '>
+                    <button wire:click="closeModal2" class=" float-right">X</button>
+                </div>
+        
+                <div class='flex flex-column bg-white rounded-bottom-4 py-4 px-2.5'>
+                    <div class='flex justify-center'>
+                        <p class=" text-lg pt-8 text-center">Are you sure you want to accept this user?</p>
+                    </div>
+            
+                    <div class="flex justify-center">
+                        <button class="bg-green px-6 py-2 rounded-4 mt-3 text-white"
+                            wire:click="acceptUser">
+                            Accept
+                        </button>
+                    </div>
                 </div>
             </div>
 
             @elseif ($showDeact)
-            <div class=" mod absolute bottom-1/3 left-1/3 bg-white h-48 w-96 shadow-md z-20">
-                <button wire:click="closeDeactModal" class=" float-right">X</button>
-                <p class=" text-lg pt-8 text-center">Are you sure you want to deactivate this user?</p>
-                <div class="flex justify-around px-3 pt-1">
-                    <button wire:click="deactUser">Deactivate</button>
+            <div class="flex flex-column justify-start bg-dark-subtle rounded-4 absolute h-48 w-72"
+                style="top: 300px; left: 640px; z-index: 1;">
+
+                <div class='self-end my-1 mr-4 '>
+                    <button wire:click="closeDeactModal" class=" float-right">X</button>
+                </div>
+        
+                <div class='flex flex-column bg-white rounded-bottom-4 py-4 px-2.5'>
+                    <div class='flex justify-center'>
+                        <p class=" text-lg pt-8 text-center">Are you sure you want to deactivate this user?</p>
+                    </div>
+            
+                    <div class="flex justify-center">
+                        <button class="bg-dark-subtle px-6 py-2 rounded-4 mt-3 text-white"
+                            wire:click="deactUser">
+                            Deactivate
+                        </button>
+                    </div>
                 </div>
             </div>
             @endif
