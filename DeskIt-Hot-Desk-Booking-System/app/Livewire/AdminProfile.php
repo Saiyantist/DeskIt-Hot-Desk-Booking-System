@@ -7,6 +7,8 @@ use App\Models\User;
 // use App\Models\Bookings;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isNull;
+
 class AdminProfile extends Component
 {   
     public $users;
@@ -14,9 +16,14 @@ class AdminProfile extends Component
     public $users3;
     public $showModal = false;
     public $showModal2 = false;
+    public $showDeact = false;
     public $deleteUserId;
     public $acceptUserId;
+    public $deactUserId;
+
     protected $listeners = ['refreshComponent' => '$refresh'];
+
+    public $position;
 
     public $activeSection = 1;
     public function mount()
@@ -33,6 +40,52 @@ class AdminProfile extends Component
             // ->where('id', '!=', Auth::id()) // Exclude the current authenticated user
             ->get();
        
+    }
+
+    public function changePosition($userId)
+    {
+        $userPosition = User::find($userId);
+
+        if (!$this->position){
+            $userPosition->update(['position' => 'Employee']);
+        }
+        else {
+            $userPosition->update(['position' => $this->position]);
+
+        }
+
+        $this->redirect(request()->header('Referer'));
+    }
+
+
+    public function deactModal($userId)
+    {
+        $this->showDeact = true;
+        $this->deactUserId = $userId;
+    }
+
+    public function closeDeactModal()
+    {
+        $this->showDeact = false;
+        $this->deactUserId = null;
+    }
+
+    public function deactUser()
+    {
+
+        if ($this->deactUserId) {
+            $user = User::find($this->deactUserId);
+            
+            if($user->hasAnyRole('admin', 'employee')){
+                $user->removeRole('employee');
+            }
+            
+            $this->closeDeactModal();
+            $this->dispatch('refreshComponent');
+
+            $this->redirect(request()->header('Referer'));
+        }
+
     }
 
     public function openModal($userId)
@@ -71,6 +124,7 @@ class AdminProfile extends Component
         $this->showModal2 = false;
         $this->acceptUserId = null;
     }
+
     public function acceptUser()
     {
         if ($this->acceptUserId) {

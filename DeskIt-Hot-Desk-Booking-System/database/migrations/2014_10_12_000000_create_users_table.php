@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('gender', ['male', 'female']);
             $table->date('birthday')->nullable();
+            $table->enum('position', ['Employee', 'Front-end Dev', 'Back-end Dev', 'UI/UX Designer', 'System Analyst', 'Solutions Architect', 'Project Mnager', 'Full Stack Developer'])->default('Employee');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
