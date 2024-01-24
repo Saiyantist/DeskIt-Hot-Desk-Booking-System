@@ -22,7 +22,7 @@
                 <img src="/images/phone.png" alt="">
             </div>
             <div class="w-full sm:max-w-md mt-20 flex flex-col sm:justify-center items-center">
-                <h1 style="font-size: 25pt; font-weight: 500; text-align: center; border: 2px solid #FBB503; border-top:20px solid #FBB503; border-radius: 10px; padding:10px; ">Welcome! book a desk conveniently</h1>
+                <h1 style="font-size: 22pt; font-weight: 500; text-align: center; border: 2px solid #f8de9c; border-top:20px solid #f8de9c; border-radius: 10px; padding:10px; ">Welcome! book a desk conveniently</h1>
                 <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-yellowA dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                     {{ $slot }}
                 </div>
