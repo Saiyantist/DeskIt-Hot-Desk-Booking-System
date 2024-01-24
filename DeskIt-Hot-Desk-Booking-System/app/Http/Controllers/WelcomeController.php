@@ -21,5 +21,9 @@ class WelcomeController extends Controller
     public function show3(): View {
         return view('guides');
     }
+
+    public function show4(){
+        return view('waiting');
+    }
 }
 

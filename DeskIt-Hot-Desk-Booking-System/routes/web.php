@@ -48,6 +48,7 @@ Route::get('/welcome', [WelcomeController::class, 'show'])->name('welcome');
 Route::get('/frequently-Asked-Questions', [WelcomeController::class, 'show1'])->name('faq');
 Route::get('/privacy-policy', [WelcomeController::class, 'show2'])->name('privacyPolicy');
 Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
+Route::get('/waiting', [WelcomeController::class, 'show4'])->name('waiting');
 
 
 
@@ -59,18 +60,22 @@ Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
-
+  
     /** ADMIN */   
     if ($user->hasRole('admin')) {return view('admin.dashboard'); } 
 
     /** EMPLOYEE */
-    if ($user->hasRole('employee')) {return view('home.dashboard'); }       
-
+    if ($user->hasRole('employee')) {return view('home.dashboard'); }   
+  
     /** NO ROLE */
-    return view('home.dashboard');   /** USER  */ 
+    elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); }
+  
+    // Default fallback (this should not happen under normal circumstances)
+    else {return abort(403, 'Unauthorized'); }
+  
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', function () { $user = Auth::user(); if ($user->hasRole('admin')) {return view('admin.dashboard'); } elseif ($user->hasRole('employee')) {return view('home.dashboard'); } return view('home.dashboard');})->middleware(['auth', 'verified'])->name('home1');
+Route::get('/', function () {   $user = Auth::user(); if ($user->hasRole('admin')) {return view('admin.dashboard'); } if ($user->hasRole('employee')) {return view('home.dashboard'); } elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); } else {return abort(403, 'Unauthorized'); }  })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
 //     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
@@ -89,7 +94,7 @@ Route::middleware('auth')->group(function () {
 
 
 /** HOME Routes */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:employee', 'verified'])->group(function () {
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
 });
@@ -97,7 +102,7 @@ Route::middleware('auth')->group(function () {
 
 
 /** BOOKING Routes */
-Route::middleware('auth')->prefix('booking')->group(function () {
+Route::middleware(['auth', 'role:employee|admin', 'verified'])->prefix('booking')->group(function () {
     
     /** The 2 pages of the Booking Flow */
     Route::get('/', [BookingController::class,'show'])->name('book');
