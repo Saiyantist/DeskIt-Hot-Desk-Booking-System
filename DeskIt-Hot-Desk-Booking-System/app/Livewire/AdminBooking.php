@@ -10,14 +10,18 @@ use Carbon\Carbon;
 
 class AdminBooking extends Component
 {
-    public $date;
+
+
     public $availableDeskCount;
+
     public $bookedCount;
     public $notAvailableCount;
+
     public $floor1Count;
     public $floor1AvailableDeskCount;
     public $floor1BookedCount;
     public $floor1NotAvailableCount;
+
     public $floor2Count;
     public $floor2AvailableDeskCount;
     public $floor2BookedCount;
@@ -28,24 +32,53 @@ class AdminBooking extends Component
     public $data = [];
     public $showModal = false;
     public $currentIndex;
+
+
+
+
+
+
+
+
+
+    public $date;
+    public $min;
+    public $max;
+
+
+
+
+
+
     
     public function mount()
     {   
-         $deskRange = range(1, 35);
-         $deskRange2 = range(36, 72);
+         $deskRange = range(1, 36);
+         $deskRange2 = range(36, 71);
 
-        $this->availableDeskCount = Desk::count();
+        $this->availableDeskCount = Desk::where('status', 'in_use')->count();
         $this->notAvailableCount = Desk::where('status', 'not_available')->count();
         $this->bookedCount = Bookings::where('status', 'accepted')->count();
+
+
+        // Use forEach for scalablity -> prio:verylow
         $this->floor1Count =  Desk::whereIn('id', $deskRange)->count();
         $this->floor2Count = Desk::whereIn('id', $deskRange2)->count();
-        $this->floor1AvailableDeskCount = Desk::whereIn('id', $deskRange)
-        ->whereNotIn('status', ['not_available', 'in_use'])
-        ->count();
 
-        $this->floor2AvailableDeskCount = Desk::whereIn('id', $deskRange)
-        ->whereNotIn('status', ['not_available', 'in_use'])
-        ->count();
+
+
+        // Floor 1 Desks that are AVAILABLE for booking
+        $this->floor1AvailableDeskCount = Desk::whereIn('id', $deskRange)->where('status', 'in_use')->count();
+
+        // Floor 2 Desks that are NOT AVAILABLE for booking
+        $this->floor1NotAvailableCount = Desk::whereIn('id', $deskRange)->where('status', 'not_available')->count();
+
+        // Floor 1 Desks that are AVAILABLE for booking
+        $this->floor2AvailableDeskCount = Desk::whereIn('id', $deskRange)->where('status', 'in_use')->count();
+
+        // Floor 2 Desks that are NOT AVAILABLE for booking
+        $this->floor2NotAvailableCount = Desk::whereIn('id', $deskRange2)->where('status', 'not_available')->count();
+
 
         $this->floor1BookedCount = Bookings::whereIn('desk_id', $deskRange)
         ->where('status', 'accepted')
@@ -54,12 +87,7 @@ class AdminBooking extends Component
         $this->floor2BookedCount = Bookings::whereIn('desk_id', $deskRange2)
         ->where('status', 'accepted')
         ->count();
-        $this->floor1NotAvailableCount = Desk::whereIn('id', $deskRange)
-        ->where('status', 'not_available')
-        ->count();
-        $this->floor2NotAvailableCount = Desk::whereIn('id', $deskRange2)
-        ->where('status', 'not_available')
-        ->count();
+        
 
         $this->data = [];
 
@@ -83,7 +111,6 @@ class AdminBooking extends Component
             ];
         }
     }
-
 
 
     public function openModal($index)
