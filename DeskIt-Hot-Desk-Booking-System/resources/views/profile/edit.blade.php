@@ -1,39 +1,43 @@
 <x-app-layout>
     <div class="flex items-center justify-center flex-col">
         <!-- Cover Photo -->
-       
-            <div class="py-12 mt-24">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                       
-                        <div class="max-w-xl">
-                            <!-- User Information -->
-                            <p>Name: {{ $user->name }}</p>
-                        </div>
-                        <div class="max-w-xl">
-                            <!-- User Information -->
-                            <p>Email: {{ $user->email }}</p>
-                        </div>
-                        <div class="max-w-xl">
-                            <!-- User Information -->
-                            <p>Gender: {{ $user->gender }}</p>
-                        </div>
-                        <div class="max-w-xl">
-                            <!-- User Information -->
-                            <p>Birthday: {{ $user->birthday }}</p>
-                        </div>
 
+        <div class="py-12 mt-16 w-1/2 text-lg">
+               
+                <div class="p-4 bg-white sm:rounded-lg border mb-10">
+                    <p class=" font-semibold ml-2 text-center my-2">PROFILE INFORMATION</p>
+                    <div class="max-w-xl py-2">
+                        <!-- User Information -->
+                        <p class=" font-semibold ml-2">Name</p>
+                        <div class="border  p-2 rounded-lg"> {{ $user->name }}</div>
                     </div>
-
-                    <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        <div class="max-w-xl">
-                            @include('profile.partials.update-password-form')
-                        </div>
+                    <div class="max-w-xl py-2">
+                        <!-- User Information -->
+                        <p class=" font-semibold ml-2">Email</p>
+                        <div class="border p-2 rounded-lg"> {{ $user->email }}</div>
                     </div>
-
+                    <div class="max-w-xl py-2">
+                        <!-- User Information -->
+                        <p class=" font-semibold ml-2">Gender</p>
+                        <div class="border p-2 rounded-lg"> {{ $user->gender }}</div>
+                    </div>
+                    <div class="max-w-xl py-2">
+                        <!-- User Information -->
+                        <p class=" font-semibold ml-2">Birthday</p>
+                        <div class="border p-2 rounded-lg"> {{ $user->birthday }}</div>
+                    </div>
                 </div>
-            </div>
+                <div class="p-4 sm:p-8 bg-white sm:rounded-lg border">
+                    <div class="max-w-xl">
+                        @include('profile.partials.update-password-form')
+                    </div>
+                </div>
 
            
+
         </div>
+    </div>
+
+
+    </div>
 </x-app-layout>
