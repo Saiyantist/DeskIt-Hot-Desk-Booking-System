@@ -30,11 +30,9 @@
             {{-- Heading and Form - RIGHT --}}
             <div class="w-full sm:max-w-md sm:rounded-lg  shadow-md overflow-hidden ">
                 
-                {{ $slot }}
-                
+                {{ $slot }} 
             </div>
-            
-           
+               
         </div>
     </body>
 </html>
