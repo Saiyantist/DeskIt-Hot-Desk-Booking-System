@@ -27,7 +27,7 @@ class BookingSeeder extends Seeder
 
             ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 5, 'desk_id' => 14],
             ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 6, 'desk_id' => 16],
-            ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 13, 'desk_id' => 21],
+            // ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 13, 'desk_id' => 21],
             ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 8, 'desk_id' => 27],
             ['booking_date' => '2024-01-24', 'status' => 'accepted', 'user_id' => 2, 'desk_id' => 28],
 
@@ -44,7 +44,7 @@ class BookingSeeder extends Seeder
 
             ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 5, 'desk_id' => 49],
             ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 6, 'desk_id' => 51],
-            ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 13, 'desk_id' => 55],
+            // ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 13, 'desk_id' => 55],
             ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 8, 'desk_id' => 65],
             ['booking_date' => '2024-01-25', 'status' => 'accepted', 'user_id' => 2, 'desk_id' => 61],
 
