@@ -51,9 +51,9 @@ class AdminProfile extends Component
     {
         if ($this->deleteUserId) {
 
-            // delete all bookings of the user
-
+            // User::statement('SET FOREIGN_KEY_CHECKS=0;');
             User::destroy($this->deleteUserId);
+            // User::statement('SET FOREIGN_KEY_CHECKS=1;');
             $this->closeModal();
             $this->dispatch('refreshComponent');
 
@@ -80,6 +80,7 @@ class AdminProfile extends Component
             $this->closeModal2();
             $this->dispatch('refreshComponent');
 
+            $this->redirect(request()->header('Referer'));
         }
     }
 

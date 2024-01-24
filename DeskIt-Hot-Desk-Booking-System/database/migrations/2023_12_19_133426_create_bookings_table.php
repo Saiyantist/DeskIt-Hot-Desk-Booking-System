@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('booking_date');
             $table->enum('status', ['accepted', 'canceled']);
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('desk_id')->constrained();
+            $table->foreignId('desk_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
