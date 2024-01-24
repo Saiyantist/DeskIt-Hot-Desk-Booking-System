@@ -14,9 +14,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('book')}}">Desk Booking</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{route('notif')}}">Notification</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="compile">
                         <!-- Settings Dropdown -->

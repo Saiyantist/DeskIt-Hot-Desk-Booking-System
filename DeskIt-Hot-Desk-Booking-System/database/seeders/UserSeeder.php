@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(['name' => 'Pablo Buan', 'email' => 'pebz@admin.com', 'password' => Hash::make('password'), 'gender' => 'male', 'birthday' => Carbon::today()]);
+        // DB::table('users')->insert(['name' => 'Pablo Buan', 'email' => 'pebz@admin.com', 'password' => Hash::make('password'), 'gender' => 'male', 'birthday' => Carbon::today()]);
         DB::table('users')->insert(['name' => 'Angelo Pogi', 'email' => 'angelo@admin.com', 'password' => Hash::make('password'), 'gender' => 'male', 'birthday' => Carbon::today()]);
         DB::table('users')->insert(['name' => 'Steffanie Egloso', 'email' => 'steffanie@admin.com', 'password' => Hash::make('password'), 'gender' => 'female', 'birthday' => Carbon::today()]);
         DB::table('users')->insert(['name' => 'Denise Chavez', 'email' => 'denise@admin.com', 'password' => Hash::make('password'), 'gender' => 'female', 'birthday' => Carbon::today()]);
