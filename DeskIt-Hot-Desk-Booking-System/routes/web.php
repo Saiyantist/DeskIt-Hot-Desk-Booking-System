@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
@@ -44,7 +44,7 @@ Route::get('r', function () {
 
 
 /** LANDING Page */
-Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
+Route::get('/welcome', [WelcomeController::class, 'show'])->name('welcome');
 Route::get('/frequently-Asked-Questions', [WelcomeController::class, 'show1'])->name('faq');
 Route::get('/privacy-policy', [WelcomeController::class, 'show2'])->name('privacyPolicy');
 Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
@@ -53,18 +53,24 @@ Route::get('/guides', [WelcomeController::class, 'show3'])->name('guides');
 
 /** AUTHENTICATION to Dashboard
  *  - Verifying if user hasRole(user or admin)  */
+
+// Route::get('/', [AuthenticatedSessionController::class, 'store'])->middleware(['auth', 'verified'])->name('dashboard');
+
+
 Route::get('/dashboard', function () {
-    
-    
     $user = Auth::user();
 
-    $hasAllowedRole = $user->hasAnyRole('admin');
+    /** ADMIN */   
+    if ($user->hasRole('admin')) {return view('admin.dashboard'); } 
 
-    if ($hasAllowedRole) {
-        if ($user->hasRole('admin')) {return view('admin.dashboard');  }   /** ADMIN */                 
-    }
+    /** EMPLOYEE */
+    if ($user->hasRole('employee')) {return view('home.dashboard'); }       
+
+    /** NO ROLE */
     return view('home.dashboard');   /** USER  */ 
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/', function () { $user = Auth::user(); if ($user->hasRole('admin')) {return view('admin.dashboard'); } elseif ($user->hasRole('employee')) {return view('home.dashboard'); } return view('home.dashboard');})->middleware(['auth', 'verified'])->name('home1');
 
 // Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
 //     Route::get('/notification', [HomeController::class,'notif'])->name('notif');

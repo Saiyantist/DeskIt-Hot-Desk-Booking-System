@@ -29,13 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         $request->user()->sendEmailVerificationNotification();
         
-        $user = Auth::user();
-
-        if ($user->hasRole('admin')) {
-            return redirect()->route('admin.dashboard'); 
-        } else {
-            return redirect()->route('dashboard'); 
-        }
+        return redirect()->route('dashboard'); 
     }
 
     /**

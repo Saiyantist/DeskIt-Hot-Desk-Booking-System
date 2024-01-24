@@ -14,8 +14,10 @@ use function PHPUnit\Framework\returnValue;
 class Booking extends Component
 {
     public $date;
-    public $floor= "1";
-    public $selectedDesk='-';
+    public $floor = "1";
+    public $selectedDesk ='-';
+    public $bookedDesk = '-';
+
     public $selectedDeskID;
 
     public $bookedDeskIDs = [];
@@ -25,8 +27,11 @@ class Booking extends Component
     public $max;
     public $min;
     
-    public $showModal = false;
+    public $showConfirmation = false;
+    public $showNotification = false;
     public $showWarning = false;
+    public $showWarning2 = false;
+    
 
 
 
@@ -41,6 +46,7 @@ class Booking extends Component
 
         /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
         $this->selectedDesk = '-';
+        $this->bookedDesk ='-';
 
         /**
          * Check IF there is a date and floor selected
@@ -159,7 +165,9 @@ class Booking extends Component
     
                 elseif(in_array($desks[$key]->id, $this->bookedDeskIDs))
                 {
-                    dd('it\'s booked bruh');
+                    // dd('it\'s booked bruh');
+                    $this->bookedDesk = $desks[$key]->desk_num;
+                    $this->showWarning2 = true;
                 }
             }
     
@@ -194,19 +202,28 @@ class Booking extends Component
 
         if ($canBook && ($date && $floor && ($selectedDesk != '-')))
         {
-            $this->showModal = true;
+            $this->showConfirmation = true;
         }
         elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-')))
         {
             $this->showWarning = true;
         }
-        // dd($this->showModal);
+        // dd($this->showConfirmation);
     }
 
     public function closeModal()
     {
-        $this->showModal = false;
+        $this->showConfirmation = false;  
+        $this->showNotification = false;  
         $this->showWarning = false;
+        $this->showWarning2 = false;
+    }
+
+    public function goHome()
+    {
+        $this->showNotification = false;
+
+        $this->redirect('/');
     }
 
     public function book()
@@ -227,7 +244,8 @@ class Booking extends Component
                 "desk_id" => $selectedDeskID,
             ]);
             $this->selectedDesk = '-';
-            $this->showModal = false;
+            $this->bookedDesk = '-';
+            $this->showNotification = true;
             Booking::refreshMap();
         }
 
