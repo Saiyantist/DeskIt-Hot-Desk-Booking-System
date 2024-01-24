@@ -173,7 +173,7 @@ class Booking extends Component
     
             else
             {
-                dd('it\'s like broken eh..');
+                // dd('it\'s like broken eh..');
             }
         }
 

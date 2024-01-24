@@ -137,7 +137,7 @@
                     </div>
 
                     {{-- Booking Button --}}
-                    <button class="justify-center items-center bg-gray rounded-xl w-28 h-10 p-1 mb-3 text-black"
+                    <button class="justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mb-3 text-lg font-bold text-white"
                         wire:click='validateBooking'
                         wire:submit>
                         Book
