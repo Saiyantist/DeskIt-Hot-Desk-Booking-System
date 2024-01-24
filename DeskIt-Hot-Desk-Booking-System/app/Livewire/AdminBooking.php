@@ -42,15 +42,19 @@ class AdminBooking extends Component
         $this->floor1AvailableDeskCount = Desk::whereIn('id', $deskRange)
         ->whereNotIn('status', ['not_available', 'in_use'])
         ->count();
-        // $this->floor2AvailableDeskCount =;
+
+        $this->floor2AvailableDeskCount = Desk::whereIn('id', $deskRange)
+        ->whereNotIn('status', ['not_available', 'in_use'])
+        ->count();
+
         $this->floor1BookedCount = Bookings::whereIn('desk_id', $deskRange)
         ->where('status', 'accepted')
         ->count();
+
         $this->floor2BookedCount = Bookings::whereIn('desk_id', $deskRange2)
         ->where('status', 'accepted')
         ->count();
-        $this->floor1NotAvailableCount = 
-        $this->floor2BookedCount = Desk::whereIn('id', $deskRange)
+        $this->floor1NotAvailableCount = Desk::whereIn('id', $deskRange)
         ->where('status', 'not_available')
         ->count();
         $this->floor2NotAvailableCount = Desk::whereIn('id', $deskRange2)
