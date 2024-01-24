@@ -1,32 +1,121 @@
 <div class=" rounded-lg">
+    <section class="section2">
+        <div class="bg">
+            <div class="content">
+                <div class="mx-5">
+                    <h2>Dashboard</h2>
+                    <div>
+                        <section class="container">
+                            <form method="POST" action="">
+                                @csrf
+                                <div class="col-12">
+                                    <div>
+                                        <input type="date"
+                                            class="form-control bg-warning text-light text-center"
+                                            id="datepicker"
+                                            wire:model="date"
+                                            min="{{ now()->toDateString() }}" {{-- Set minimum date to current date --}}
+                                            max="{{ now()->addDays(14)->toDateString() }}" {{-- Set maximum date to 14 days from now --}}
+                                        />
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </div>
 
-    <h2 class=" inline justify-start text-xl px-4 pt-2 pb-2 bg-yellowB text-white rounded-t-lg z-0">Bookings</h2>
+                <div>
+                    <p class="text">AVAILABLE DESK</p>
+                    <p class="text-data">{{ $availableDeskCount }}</p>
+                </div>
+                <div>
+                    <p class="text">BOOKED</p>
+                    <p class="text-data">{{ $bookedCount }}</p>
+                </div>
+                <div>
+                    <p class="text">NOT AVAILABLE</p>
+                    <p class="text-data">{{ $notAvailableCount }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="half">
+            <div class="floor1">
+                <div class="floor-content">
+                    <div class="floor">
+                        <p class="text">FLOOR 1</p>
+                        <p class="text-data">{{ $floor1Count }}</p>
+                    </div>
+                    <div class="floor-bg">
+                        <p class="text">AVAILABLE DESK</p>
+                        <p class="text-data">{{ $floor1AvailableDeskCount }}</p>
+                    </div>
+                    <div class="floor-bg">
+                        <p class="text">BOOKED</p>
+                        <p class="text-data">{{ $floor1BookedCount }}</p>
+                    </div>
+                    <div class="floor-bg">
+                        <p class="text">NOT AVAILABLE</p>
+                        <p class="text-data">{{ $floor1NotAvailableCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="floor2">
+                <div class="floor-content">
+                    <div class="floor">
+                        <p class="text">FLOOR 2</p>
+                        <p class="text-data">{{ $floor2Count }}</p>
+                    </div>
+                    <div class="floor-bg">
+                        <p class="text">AVAILABLE DESK</p>
+                        <p class="text-data">{{ $floor2AvailableDeskCount }}</p>
+                    </div>
+                    <div class="floor-bg">
+                        <p class="text">BOOKED</p>
+                        <p class="text-data">{{ $floor2BookedCount }}</p>
+                    </div>
+                    <div class="floor-bg">
+                        <p class="text">NOT AVAILABLE</p>
+                        <p class="text-data">{{ $floor2NotAvailableCount }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <table class=" p-10 justify-center items-center text-center relative bg-gray z-10">
-        <thead>
-            <tr>
-                @foreach($data[0] as $key => $value)
-                <th class=" px-12 py-2 justify-center items-center bg-grey">{{ strtoupper($key) }}</th>
-                @endforeach
-            </tr>
-        </thead>
+    <section class=" mt-44">
+        <div class="flex justify-center">
+           <div>
+            <h2 class=" inline justify-start text-xl px-4 pt-2 pb-2 bg-yellowB text-white rounded-t-lg z-0">Bookings
+            </h2>
 
-        <tbody>
-            @foreach($data as $index => $row)
-            <tr>
-                @foreach($row as $key => $value)
+            <table class=" p-10 justify-center items-center text-center relative bg-gray z-10">
+                <thead>
+                    <tr>
+                        @foreach($data[0] as $key => $value)
+                        <th class=" px-12 py-2 justify-center items-center bg-grey">{{ strtoupper($key) }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
 
-                <td class="p-2"
-                 @if ($key==='Action') wire:click="openModal({{ $index }})"
-                  @endif>
-                  {!! $value !!}
-                </td>
+                <tbody>
+                    @foreach($data as $index => $row)
+                    <tr>
+                        @foreach($row as $key => $value)
 
-                @endforeach
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                        <td class="p-2" @if ($key==='Action' ) wire:click="openModal({{ $index }})" @endif>
+                            {!! $value !!}
+                        </td>
+
+                        @endforeach
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+           </div>
+
+        </div>
+    </section>
+
 
     <!-- Modal -->
     @if ($showModal)
