@@ -18,22 +18,15 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next, $role)
     {
-        if (Auth::user()->hasRole('admin')) {
-            if ($request->is('dashboard' || 'superadmin.dashboard')) {
+        if (Auth::user()->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {
+            if ($request->is('dashboard')) {
                 return redirect()->route('admin.dashboard');
             }
             return $next($request);
         }
-
-        if (Auth::user()->hasRole('superadmin')) {
-            if ($request->is('dashboard' || 'admin.dashboard')) {
-                return redirect()->route('superadmin.dashboard');
-            }
-            return $next($request);
-        }
-
+        
         if (Auth::user()->hasRole('employee')) {
-            if ($request->is('admin.dashboard' || 'superadmin.dashboard')) {
+            if ($request->is('admin.dashboard')) {
                 return redirect()->route('dashboard');
             }
             return $next($request);

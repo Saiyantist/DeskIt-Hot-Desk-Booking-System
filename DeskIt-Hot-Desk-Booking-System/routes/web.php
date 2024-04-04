@@ -27,6 +27,20 @@ Route::get('a', function () {
     return ('assigned admin role');
 });
 
+Route::get('sa', function () {
+    if(auth()->user()){
+        auth()->user()->assignRole('superadmin');
+    }
+    return ('assigned superadmin role');
+});
+
+Route::get('om', function () {
+    if(auth()->user()){
+        auth()->user()->assignRole('officemanager');
+    }
+    return ('assigned officemanager role');
+});
+
 Route::get('e', function () {
     if(auth()->user()){
         auth()->user()->assignRole('employee');
@@ -85,14 +99,14 @@ Route::get('/waiting', [WelcomeController::class, 'show4'])->name('waiting');
 Route::get('/dashboard', function () {
     $user = Auth::user();
   
-    /** ADMIN */   
-    if ($user->hasRole('admin')) {return view('admin.dashboard'); } 
+    /** ADMINS */   
+    if ($user->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {return view('admin.dashboard'); } 
 
     /** EMPLOYEE */
     if ($user->hasRole('employee')) {return view('home.dashboard'); }   
   
     /** NO ROLE */
-    elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); }
+    elseif (!$user->hasAnyRole(['superadmin', 'admin', 'officemanager', 'employee'])) {return redirect()->route('waiting'); }
   
     // Default fallback (this should not happen under normal circumstances)
     else {return abort(403, 'Unauthorized'); }
