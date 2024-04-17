@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Livewire\Booking;
 use App\Models\User;
 
@@ -19,6 +20,12 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/dbconn', function () {
+    if (DB::connection()->getPdo()){
+        return "successfully Connected to DB: " . DB::connection()->getDatabaseName();
+    };
+});
 
 Route::get('a', function () {
     if(auth()->user()){
