@@ -164,27 +164,27 @@
             Livewire.emit('refresh');
         });
         $(document).ready(function() {
-        $('#bookingsTable').DataTable();
-    });
-    </script>
-</div>
-
-<!-- @push('scripts')
-    <script>
-        document.addEventListener('livewire:load', function () {
             $('#bookingsTable').DataTable({
-                "paging": true, // Enable pagination
-                "lengthChange": false, // Disable number of records per page dropdown
-                "searching": true, // Enable search field
-                "ordering": true, // Enable sorting
-                "info": true, // Show information about the table
-                "autoWidth": false, // Disable auto width calculation
-                "responsive": true, // Enable responsive design
-                "columnDefs": [ // Define column specific settings
-                    { "orderable": false, "targets": 5 } // Example: Disable sorting for 6th column
-                ]
+                lengthChange: false,
+                searching: true,
+                initComplete: function () {
+                    // Add dropdown filter for Status column
+                    this.api().columns(4).every(function () {
+                        var column = this;
+                        var select = $('<select><option value="">Status</option><option value="accepted">Accepted</option><option value="canceled">Canceled</option></select>')
+                            .appendTo($(column.header()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+
+                        // Add select styling
+                        select.select2({ width: '100%', theme: 'bootstrap' });
+                    });
+                }
+                
             });
         });
     </script>
-@endpush
- -->
+</div>
+
