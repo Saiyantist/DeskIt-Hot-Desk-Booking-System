@@ -170,6 +170,9 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('home');
+    Route::get('/admin/desk-book', function () {
+        return view('admin.bookBehalf');
+    })->name('book-behalf');
     Route::get('/admin/desk-map', function () {
         return view('admin.deskMap');
     })->name('map');
@@ -182,6 +185,9 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/profile-edit', function () {
         return view('admin.profileEdit');
     })->name('profile-edit');
+    Route::get('/admin/support', function () {
+        return view('admin.support');
+    })->name('support');
 });
 
 
