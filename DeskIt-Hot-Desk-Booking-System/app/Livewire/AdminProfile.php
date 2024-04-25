@@ -24,21 +24,28 @@ class AdminProfile extends Component
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     public $position;
+    public $role;
 
     public $activeSection = 1;
     public function mount()
     {   
             $this->users3 = User::whereDoesntHave('roles', function ($query) {
                 $query->where('name', 'admin')
-                ->orWhere('name', 'employee');
+                ->orWhere('name', 'employee')
+                ->orWhere('name', 'superadmin')
+                ->orWhere('name', 'officemanager');
             })->get();
 
             $this->users2 = User::role('employee')
             ->get();
 
-            $this->users = User::role('admin')
+            $this->users = User::whereHas('roles', function($q){
+                $q->where('name', 'admin')
+                ->orWhere('name', 'superadmin')
+                ->orWhere('name', 'officemanager');
+            })->get();
             // ->where('id', '!=', Auth::id()) // Exclude the current authenticated user
-            ->get();
+            
        
     }
 
@@ -55,6 +62,18 @@ class AdminProfile extends Component
         }
 
         $this->redirect(request()->header('Referer'));
+    }
+
+    public function changeRole($userId)
+    {
+        $user = User::find($userId);
+
+        $this->role;
+        $user->roles()->detach();
+        $user->assignRole($this->role);
+       
+        $this->redirect(request()->header('Referer'));
+
     }
 
 

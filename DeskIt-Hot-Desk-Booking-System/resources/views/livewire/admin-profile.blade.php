@@ -10,7 +10,7 @@
             <div class="mx-2">
                 <h2 wire:click="setActiveSection(2)"
                     class="inline justify-center text-xl px-4 pt-2 pb-2 bg-yellowB text-white rounded-t-lg cursor-pointer">
-                    Admins</h2>
+                    Administrators</h2>
             </div>
             <div class="mx-2">
                 <h2 wire:click="setActiveSection(3)"
@@ -64,7 +64,7 @@
                                 <option value="UI/UX Designer">UI/UX Designer</option>
                                 <option value="System Analyst">System Analyst</option>
                                 <option value="Solutions Architect">Solutions Architect</option>
-                                <option value="Project Mnager">Project Mnager</option>
+                                <option value="Project Manager">Project Manager</option>
                                 <option value="Full Stack Developer">Full Stack Developer</option>
                                 </select>
 
@@ -80,7 +80,7 @@
                     @endforeach
                 </table>
 
-            {{-- Admins --}}
+            {{-- Admins and Office Managers --}}
             @elseif($activeSection ===2)
             <table class="w-50  p-10 justify-center items-center text-center  bg-gray z-10">
                 <thead>
@@ -88,6 +88,7 @@
                         <th class=" px-12 py-2 justify-center items-center bg-grey">ID</th>
                         <th class=" px-12 py-2 justify-center items-center bg-grey">Name</th>
                         <th class=" px-12 py-2 justify-center items-center bg-grey">Email</th>
+                        <th class=" px-12 py-2 justify-center items-center bg-grey">Role</th>
                     </tr>
                 </thead>
 
@@ -104,13 +105,44 @@
                         <td class="p-2">{{ $user->id }}</td>
                         <td class="p-2">{{ $user->name }}</td>
                         <td class="p-2">{{ $user->email }}</td>
-                        <td class="p-2">
-                            <a wire:click="openModal({{ $user->id }})"
-                                style="cursor: pointer; display: flex; justify-content: center;">
-                                <img src="{{ asset('images/delete.svg') }}" class="h-4 w-4">
-                            </a>
-                        </td>
                         @endif
+
+                        <td class="p-2 flex flex-row">
+                            <select class=" form-select bg-white text-black text-center floors"
+                            wire:model.lazy="role" 
+                            >
+
+                            @if(Auth::user()->hasRole('superadmin'))
+
+                            @if($user->hasRole('admin'))
+                            
+                                <option value={{$user->roles()->first()->name}} selected>Admin</option>
+                                <option value="employee">Employee</option>
+                                <option value="officemanager">Office Manager</option>
+                                <option value="superadmin" disabaled>Super Admin</option>
+                                </select>
+    
+                            @elseif($user->hasRole('officemanager'))
+
+                                <option value={{$user->roles()->first()->name}} selected>Office Manager</option>
+                                <option value="employee">Employee</option>
+                                <option value="admin">Admin</option>
+                                <option value="superadmin">Super Admin</option>
+                                </select>
+    
+                            @elseif($user->hasRole('superadmin'))
+                                <option value={{$user->roles()->first()->name}} selected>Super Admin</option>
+                                </select>
+                            @endif
+                            @endif
+                                
+                            <button class="justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mx-3 my-2 text-white font-bold"
+                            wire:click='changeRole({{ $user->id }})'
+                            wire:submit>
+                            Save
+                            </button>
+                        </td>
+                        
                     </tr>
                 </tbody>
                 @endforeach
