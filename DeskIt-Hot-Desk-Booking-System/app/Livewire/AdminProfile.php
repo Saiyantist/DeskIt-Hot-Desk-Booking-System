@@ -34,18 +34,21 @@ class AdminProfile extends Component
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     public $position;
+    public $role;
 
     public $activeSection = 1;
     public function mount()
     {   
             $this->users3 = User::whereDoesntHave('roles', function ($query) {
                 $query->where('name', 'admin')
+                ->orWhere('name', 'employee')
                 ->orWhere('name', 'officemanager')
-                ->orWhere('name', 'employee');
+                ->orWhere('name', 'superadmin');
             })->get();
 
             $this->users2 = User::role('employee')
             ->get();
+
 
             $this->users = User::role('admin')
             ->where('id', '!=', Auth::id()) // to exclude the current authenticated user
@@ -54,6 +57,12 @@ class AdminProfile extends Component
             $this->users4 = User::role('officemanager')
             ->where('id', '!=', Auth::id()) 
             ->get();
+      
+//             $this->users = User::whereHas('roles', function($q){
+//               $q->where('name', 'admin')
+//               ->orWhere('name', 'superadmin')
+//               ->orWhere('name', 'officemanager');
+//             })->get();
        
     }
 
@@ -72,7 +81,18 @@ class AdminProfile extends Component
 
         $this->redirect(request()->header('Referer'));
     }
-// ------------------------------
+
+    public function changeRole($userId)
+    {
+        $user = User::find($userId);
+
+        $this->role;
+        $user->roles()->detach();
+        $user->assignRole($this->role);
+       
+        $this->redirect(request()->header('Referer'));
+    }
+
     public function deactUser()
     {
 

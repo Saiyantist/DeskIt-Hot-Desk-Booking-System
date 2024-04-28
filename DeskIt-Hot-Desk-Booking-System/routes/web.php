@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Livewire\Booking;
 use App\Models\User;
 
@@ -20,8 +21,15 @@ use App\Models\User;
 |
 */
 
+Route::get('/dbconn', function () {
+    if (DB::connection()->getPdo()){
+        return "successfully Connected to DB: " . DB::connection()->getDatabaseName();
+    };
+});
+
 Route::get('a', function () {
     if(auth()->user()){
+        auth()->user()->roles()->detach();
         auth()->user()->assignRole('admin');
     }
     return ('assigned admin role');
@@ -29,6 +37,7 @@ Route::get('a', function () {
 
 Route::get('sa', function () {
     if(auth()->user()){
+        auth()->user()->roles()->detach();
         auth()->user()->assignRole('superadmin');
     }
     return ('assigned superadmin role');
@@ -36,6 +45,7 @@ Route::get('sa', function () {
 
 Route::get('om', function () {
     if(auth()->user()){
+        auth()->user()->roles()->detach();
         auth()->user()->assignRole('officemanager');
     }
     return ('assigned officemanager role');
@@ -43,45 +53,40 @@ Route::get('om', function () {
 
 Route::get('e', function () {
     if(auth()->user()){
+        auth()->user()->roles()->detach();
         auth()->user()->assignRole('employee');
     }
     return ('assigned employee role');
 });
 
 Route::get('empAll', function () {
-
-    $users = User::all();
-    
+    $users = User::all();  
     foreach ($users as $user){
+        $user->roles()->detach();
         $user->assignRole('employee');
     }
-
     return ('assigned employee role to all users.');
 });
 
 Route::get('rAll', function () {
-
     $users = User::all();
-    
     foreach ($users as $user){
+        $user->roles()->detach();
         $user->removeRole('employee');
     }
     auth()->user()->assignRole('admin');
-
     return ('removed employee role to all users except current user.');
 });
 
 Route::get('r', function () {
-    if(auth()->user()){
-        auth()->user()->removeRole('admin');
-        auth()->user()->removeRole('employee');
-    }
-    return ('removed admin/employee role');
+    auth()->user()->roles()->detach();
+    return ('detached all roles');
 });
 
 
 
 /** LANDING Page */
+Route::get('/', function (){ return redirect('/welcome');});
 Route::get('/welcome', [WelcomeController::class, 'show'])->name('welcome');
 Route::get('/frequently-Asked-Questions', [WelcomeController::class, 'show1'])->name('faq');
 Route::get('/privacy-policy', [WelcomeController::class, 'show2'])->name('privacyPolicy');
@@ -90,10 +95,10 @@ Route::get('/waiting', [WelcomeController::class, 'show4'])->name('waiting');
 
 
 
-/** AUTHENTICATION to Dashboard
- *  - Verifying if user hasRole(user or admin)  */
-
-// Route::get('/', [AuthenticatedSessionController::class, 'store'])->middleware(['auth', 'verified'])->name('dashboard');
+/** 
+ * AUTHENTICATION to Dashboard
+ *  - Verifying if user hasRole(user or admin)
+ */
 
 
 Route::get('/dashboard', function () {
@@ -113,7 +118,6 @@ Route::get('/dashboard', function () {
   
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', function () {   $user = Auth::user(); if ($user->hasRole('admin')) {return view('admin.dashboard'); } if ($user->hasRole('employee')) {return view('home.dashboard'); } elseif (!$user->hasAnyRole('admin', 'employee')) {return redirect()->route('waiting'); } else {return abort(403, 'Unauthorized'); }  })->middleware(['auth', 'verified'])->name('home1');
 
 // Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
 //     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
@@ -122,7 +126,9 @@ Route::get('/', function () {   $user = Auth::user(); if ($user->hasRole('admin'
 
 
 
-/** PROFILE Routes (MyAccount) */
+/**
+ * PROFILE Routes (MyAccount)
+ */
 Route::middleware('auth')->group(function () {
     Route::get('/my-profile', [ProfileController::class, 'show'])->name('profile.profile');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -131,22 +137,24 @@ Route::middleware('auth')->group(function () {
 });
 
 
-/** HOME Routes */
+/**
+ * HOME Routes
+ */
 Route::middleware(['auth', 'role:employee', 'verified'])->group(function () {
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
 });
 
 
-
-/** BOOKING Routes */
+/**
+ * BOOKING Routes
+ */
 Route::middleware(['auth', 'role:employee|admin', 'verified'])->prefix('booking')->group(function () {
     
     /** The 2 pages of the Booking Flow */
     Route::get('/', [BookingController::class,'show'])->name('book');
     Route::get('/desks', [BookingController::class,'showDesks'])->name('showDesks');
     
-
     // Hindi muna need sa ngayon, pero dito lang muna
     Route::get('/calendar', [HomeController::class,'show'])->name('calendar');
     Route::get('/floor1', [BookingController::class,'floor1'])->name('booking.floor1');
@@ -165,6 +173,7 @@ Route::middleware(['auth', 'role:employee|admin', 'verified'])->prefix('booking'
 // Route::get('/admin/dashboard', function () {
 //     return view('admin.dashboard');
 // })->middleware(['auth', 'verified'])->name('admin.dashboard');
+
 
 Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/dashboard', function () {

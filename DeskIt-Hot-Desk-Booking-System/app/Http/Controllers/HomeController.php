@@ -18,8 +18,9 @@ class HomeController extends Controller
     }
 
     public function getUserBookings($userId) {
-        $userBookings = Bookings::where('user_id', $userId)->get(['booking_date', 'status', 'desk_id']);
-        // $desk = Desk::all()->get(['desk_num']);
+        $userBookings = Bookings::where('user_id', $userId)
+            ->where('status', '!=', 'canceled') // Exclude canceled bookings
+            ->get(['booking_date', 'status', 'desk_id']);
 
 
         $events = [];

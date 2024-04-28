@@ -3,24 +3,23 @@
         <div class="bg">
             <div class="content flex flex-row mx-20">
                 {{-- Title and Date Picker --}}
-                <div class="w-25 mx-5 ">
+                <div class="w-25 mx-5">
                     <h2>Dashboard</h2>
                     <div>
                         <section class="container">
                             <form method="POST" action="">
-                            @csrf
-                            <div class="col-12">
-                            <div>
-                                <input type="date"
-                                    class="form-control bg-warning text-light text-center"
-                                    id="datepicker"
-                                    wire:model="date"
-                                    min="{{ $min }}" {{-- Set minimum date to current date --}}
-                                    max="{{ $max }}" {{-- Set maximum date to 14 days from now --}}
-                                    {{-- baka need kasi sa loob ng controller-livewire itong $min $max --}}
-                                />
-                            </div>
-                            </div>
+                                @csrf
+                                <div class="col-12">
+                                    <div>
+                                        <input type="date"
+                                            class="form-control bg-warning text-light text-center"
+                                            id="datepicker"
+                                            wire:model="date"
+                                            min="{{ $min }}"
+                                            max="{{ $max }}"
+                                        />
+                                    </div>
+                                </div>
                             </form>
                         </section>
                     </div>
@@ -98,45 +97,49 @@
             </div>
         </div>
     </section>
+    
 
-    <section class=" mt-44">
+    <section class="mt-44">
         <div class="flex justify-center">
-           <div>
-            <h2 class=" inline justify-start text-xl px-4 pt-2 pb-2 bg-yellowB text-white rounded-t-lg z-0">Bookings
-            </h2>
-
-            <table class=" p-10 justify-center items-center text-center relative bg-gray z-10">
-                <thead>
-                    <tr>
-                        @foreach($data[0] as $key => $value)
-                        <th class=" px-12 py-2 justify-center items-center bg-grey">{{ strtoupper($key) }}</th>
-                        @endforeach
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach($data as $index => $row)
-                    <tr>
-                        @foreach($row as $key => $value)
-
-                        <td class="p-2" @if ($key==='Action' ) wire:click="openModal({{ $index }})" @endif>
-                            {!! $value !!}
-                        </td>
-
-                        @endforeach
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-           </div>
-
+            <div>
+                <h2 class="inline justify-start text-xl px-4 pt-2 pb-2 bg-yellowB text-white rounded-t-lg z-0">Bookings</h2>
+                <!-- DataTables Table -->
+                <div wire:ignore>
+                    <table id="bookingsTable" class="table">
+                        <thead>
+                            <tr>
+                                <th class="w-1/6">ID</th>
+                                <th class="w-1/6">Name</th>
+                                <th class="w-1/6">Date</th>
+                                <th class="w-1/6">Desk ID</th>
+                                <th class="w-1/6">Status</th>
+                                <th class="w-1/6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($bookingsData as $booking)
+                            <tr>
+                                <td>{{ $booking['Id'] }}</td>
+                                <td>{{ $booking['Name'] }}</td>
+                                <td>{{ $booking['Date'] }}</td>
+                                <td>{{ $booking['Desk ID'] }}</td>
+                                <td>{{ $booking['Status'] }}</td>
+                                <td>
+                                    @if ($booking['Status'] != 'canceled')
+                                    <button onclick="openModal({{ $loop->index }})">Cancel</button>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
-
-
     <!-- Modal -->
     @if ($showModal)
-        <div class="mod absolute bottom-1/3 left-1/3 bg-white h-48 w-96 shadow-md z-10">
+        <div class="mod absolute bottom-1/3 left-1/3 bg-white h-48 w-96 shadow-md z-0">
             <button wire:click="closeModal" class="float-right">X</button>
             <p class="text-lg pt-4 text-center">
                 Are you sure you want to cancel this booking?
@@ -147,12 +150,41 @@
             </div>
         </div>
     @endif
-
     @livewireScripts
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script>
         // Automatically refresh the Livewire component when a browser event is received
         Livewire.on('refreshComponent', function () {
             Livewire.emit('refresh');
         });
+        $(document).ready(function() {
+            $('#bookingsTable').DataTable({
+                lengthChange: false,
+                searching: true,
+                initComplete: function () {
+                    // Add dropdown filter for Status column
+                    this.api().columns(4).every(function () {
+                        var column = this;
+                        var select = $('<select><option value="">Status</option><option value="accepted">Accepted</option><option value="canceled">Canceled</option></select>')
+                            .appendTo($(column.header()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+
+                        // Add select styling
+                        select.select2({ width: '100%', theme: 'bootstrap' });
+                    });
+                }
+                
+            });
+        });
     </script>
 </div>
+
