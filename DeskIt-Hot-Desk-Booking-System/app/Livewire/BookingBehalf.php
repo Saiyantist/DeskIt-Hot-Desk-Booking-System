@@ -7,35 +7,35 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
+use App\Models\User;
 use Illuminate\Validation\Rules\Can;
 
 use function PHPUnit\Framework\returnValue;
 
-class AdminDeskmap extends Component
+class BookingBehalf extends Component
 {
     public $availableDeskCount;
 
     public $bookedCount;
     public $notAvailableCount;
+    public $selectedUserID;
+
+    public $date;
     public $floor = "1";
     public $selectedDesk ='-';
     public $bookedDesk = '-';
-    public $deskDisabled;
 
     public $selectedDeskID;
 
     public $bookedDeskIDs = [];
     public $userBooking = [];
-    // public $canBook;
+    public $canBook;
 
     public $max;
     public $min;
     
     public $showConfirmation = false;
     public $showNotification = false;
-    public $showEnableModal = false;
-    public $showEnabledNotification = false;
-
     public $showWarning = false;
     public $showWarning2 = false;
     
@@ -45,24 +45,25 @@ class AdminDeskmap extends Component
         $this->notAvailableCount = Desk::where('status', 'not_available')->count();
         $this->bookedCount = Bookings::where('status', 'accepted')->count();
     }
-
     public function refreshMap() 
     {
+        $date = $this->date;
         $floor = $this->floor;
-        $user = Auth::user()->id;
+        $user = $this->selectedUserID;
         $desks = Desk::all(); 
-        // $canBook = $this->canBook;
+        $canBook = $this->canBook;
         
 
         /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
         $this->selectedDesk = '-';
-        // $this->bookedDesk ='-';
+        $this->bookedDesk ='-';
+        $this->selectedUser = '-';
 
         /**
          * Check IF there is a date and floor selected
          * ELSE, return NOTHING
          */
-        if($this->floor){
+        if($this->date && $this->floor){
 
         
             // Access all Bookings
@@ -93,57 +94,65 @@ class AdminDeskmap extends Component
              *     store in an array.
              */
 
-
+            /** 
+             * Find booking_dates that are same as the selected date,
+             * if true,
+             *    check the selected floor level,
+             *    then GET and STORE the desk_ids in an array.
+            */
 
 
             // 2nd array
             $bookedDeskIDs = [];
-            // $canBook = true;
+            
+            $canBook = true;
 
             // Access each row of $bookings.
-            // for ($booking = 0; $booking <= count($bookings) - 1 ; $booking++){
+            for ($booking = 0; $booking <= count($bookings) - 1 ; $booking++){
 
-            //     // Access its user_id
-            //     $bookingUserID = $bookings[$booking]['user_id'];
-            //     $bookingDate = $bookings[$booking]['booking_date'];
+                // Access its user_id
+                $bookingUserID = $bookings[$booking]['user_id'];
+                $bookingDate = $bookings[$booking]['booking_date'];
 
-            //     if ($date == $bookingDate){
+                if ($date == $bookingDate){
   
-            //         if($floor == 1){
-            //             if ($bookings[$booking]['desk_id'] <= 36){
-            //                 array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
-            //             }
-            //         }
-            //         elseif($floor == 2){
-            //             if ($bookings[$booking]['desk_id'] >= 37){
-            //                 array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
-            //             }
-            //         }
+                    if($floor == 1){
+                        if ($bookings[$booking]['desk_id'] <= 36){
+                            array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
+                        }
+                    }
+                    elseif($floor == 2){
+                        if ($bookings[$booking]['desk_id'] >= 37){
+                            array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
+                        }
+                    }
 
-            //         if ($user != $bookingUserID){
-            //             $canBook = true;
-            //         }
-            //         elseif ($user == $bookingUserID){
-            //             // dd($bookings[$booking]['desk_id'] - 1);
-            //             $deskNum = $bookings[$booking]['desk_id'] - 1;
-            //             // dd($deskNum);
-            //             array_push($this->userBooking, [
-            //                 'user_id' => $bookings[$booking]['user_id'],
-            //                 'desk_num' => $desks[$deskNum]['desk_num'],
-            //                 'booking_date' => $bookings[$booking]['booking_date'],
-            //             ]);
-            //             $canBook = false;
-            //             break;
-            //         }
+                    if ($user != $bookingUserID){
+                        $canBook = true;
+                    }
+                    elseif ($user == $bookingUserID){
+                        // dd($bookings[$booking]['desk_id'] - 1);
+                        $deskNum = $bookings[$booking]['desk_id'] - 1;
+                        // dd($deskNum);
+                        array_push($this->userBooking, [
+                            'user_id' => $bookings[$booking]['user_id'],
+                            'desk_num' => $desks[$deskNum]['desk_num'],
+                            'booking_date' => $bookings[$booking]['booking_date'],
+                        ]);
+                        $canBook = false;
+                        break;
+                    }
                     
-            //     }
-            // };
+                }
+            };
 
             $this->bookedDeskIDs = $bookedDeskIDs;
 
             
-            // $this->canBook = $canBook;
+            $this->canBook = $canBook;
             
+            
+            // dd('User\'s Bookings today:', $this->userBooking, $canBook); 
         }  
     }
 
@@ -151,27 +160,31 @@ class AdminDeskmap extends Component
     {
         $desks = Desk::all();
 
-        /** Can't click if there's NO FLOOR */
-        if($this->floor){
+        /** Can't click if there's NO DATE && FLOOR */
+        if($this->date && $this->floor){
             
             /** Check if the Desk Selected is 'in_use' */ 
             if($desks[$key]->status == 'in_use')
             {
-                /** Assign the $selectedDesk as the Desk Selected */ 
-                $this->selectedDesk = $desks[$key]->desk_num;
-                $this->selectedDeskID = $desks[$key]->id;
-                $this->deskDisabled = false;
+                /** Check if it is NOT BOOKED */
+                if(!in_array($desks[$key]->id, $this->bookedDeskIDs))
+                {
+                    /** Then finally, assign the $selectedDesk as the Desk Selected */ 
+                    $this->selectedDesk = $desks[$key]->desk_num;
+                    $this->selectedDeskID = $desks[$key]->id;
+                }
+    
+                elseif(in_array($desks[$key]->id, $this->bookedDeskIDs))
+                {
+                    // dd('it\'s booked bruh');
+                    $this->bookedDesk = $desks[$key]->desk_num;
+                    $this->showWarning2 = true;
+                }
             }
-
-            // Desk already DISABLED
+    
             else
             {
-                $this->deskDisabled = true;
-                // $this->showDisabledModal = true;
-                $this->selectedDeskID = $desks[$key]->id;
-                $this->selectedDesk = $desks[$key]->desk_num;
-
-                // dd('it\'s already disabled !!! ');
+                // dd('it\'s like broken eh..');
             }
         }
 
@@ -191,23 +204,23 @@ class AdminDeskmap extends Component
         // }
     }
 
-    public function setDeskAvailabilityConfirmation()
+    public function validateBooking()
     {
+        $date = $this->date;
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk; 
-        $deskDisabled = $this->deskDisabled;
+        $user = $this->selectedUserID;
 
-        if (!$deskDisabled && ($floor && ($selectedDesk != '-')))
+        $canBook = $this->canBook;
+
+        if ($canBook && ($date && $floor && ($selectedDesk != '-') && $user))
         {
             $this->showConfirmation = true;
         }
-
-        elseif ($deskDisabled)
+        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-')  && $user))
         {
-            $this->showEnableModal = true;
+            $this->showWarning = true;
         }
-
-
         // dd($this->showConfirmation);
     }
 
@@ -215,8 +228,8 @@ class AdminDeskmap extends Component
     {
         $this->showConfirmation = false;  
         $this->showNotification = false;  
-        $this->showEnableModal = false;  
-        $this->showEnabledNotification = false;
+        $this->showWarning = false;
+        $this->showWarning2 = false;
     }
 
     public function goHome()
@@ -226,44 +239,28 @@ class AdminDeskmap extends Component
         $this->redirect('/');
     }
 
-    public function setDeskAvailability()
+    public function book()
     {
+        $date = $this->date;
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk;
         $selectedDeskID = $this->selectedDeskID;
-        $deskDisabled = $this->deskDisabled;
-        
-        
-        if (!$deskDisabled && ($floor && ($selectedDesk != '-'))){
 
-            // dd($selectedDeskID, 'tara disable');
-            
-            Desk::where('id', $selectedDeskID)->update(['status' => 'not_available',]);
-            Bookings::where('desk_id', $selectedDeskID)->update([
-                'status' => 'canceled',
+        $user = $this->selectedUserID;
+
+        if ($date && $floor && ($selectedDesk != '-')) {
+
+            Bookings::create([
+                "booking_date" => $date,
+                "status" => 'accepted',
+                "user_id" => $user,
+                "desk_id" => $selectedDeskID,
             ]);
-            
+
             $this->selectedDesk = '-';
-            
-            $this->showConfirmation = false;
+            $this->bookedDesk = '-';
             $this->showNotification = true;
-            AdminDeskmap::refreshMap();
-        }
-
-        // elseif ($deskDisabled && ($floor && ($selectedDesk != '-'))){
-        elseif ($deskDisabled) {
-
-            // dd($selectedDeskID, 'tara enable');
-
-            Desk::where('id', $selectedDeskID)->update(['status' => 'in_use',]);
-            Bookings::where('desk_id', $selectedDeskID)->update([
-                'status' => 'accepted',
-            ]);
-
-            $this->selectedDesk = '-';
-            $this->showEnableModal = false;
-            $this->showEnabledNotification = true;
-            AdminDeskmap::refreshMap();
+            $this->refreshMap(); 
         }
 
 
@@ -282,6 +279,7 @@ class AdminDeskmap extends Component
 
     public function render()
     {
+        $usersWithRoles = User::with('roles')->get();
         $desks = Desk::all();
 
         $this->max = Carbon::today()->addDays(14)->toDateString();
@@ -292,6 +290,6 @@ class AdminDeskmap extends Component
 
 
 
-        return view('livewire.admin-deskmap', compact('desks', 'max', 'min'));
+        return view('livewire.booking-behalf', compact('desks', 'max', 'min', 'usersWithRoles'));
     }
 }

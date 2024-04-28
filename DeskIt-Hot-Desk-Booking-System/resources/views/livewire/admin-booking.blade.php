@@ -1,4 +1,4 @@
-<div class="rounded-lg">
+<div class=" rounded-lg mt-16 ml-16">
     <section class="section2">
         <div class="bg">
             <div class="content flex flex-row mx-20">

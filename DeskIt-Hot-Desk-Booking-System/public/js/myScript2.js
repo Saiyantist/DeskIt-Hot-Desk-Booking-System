@@ -1,7 +1,6 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const currentLocation = window.location.href;
-    const navLinks = document.querySelectorAll('#btn .nav-link');
+    const navLinks = document.querySelectorAll('.sidebar-link');
     
     navLinks.forEach(function (link) {
         link.classList.remove('active'); // Remove 'active' class from all links
@@ -11,4 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-    
+
+function toggleSidebar() {
+    var sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('expand');
+}
