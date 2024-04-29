@@ -3,9 +3,9 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+// use App\Models\Bookings;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Features\SupportFormObjects\Form;
 
 use function PHPUnit\Framework\isNull;
@@ -33,6 +33,7 @@ class AdminProfile extends Component
     public $deleteUserId;
     public $acceptUserId;
     public $deactUserId;
+    public $selectedTab;
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
@@ -265,32 +266,28 @@ class AdminProfile extends Component
 
     public function openEditProfile($userId)  
     {
-        $this->editUserId = User::find($userId);
         $this->showEditProfile = true;
+        $this->editUserId = User::find($userId);
+
     }
 
-    public function closeEditProfile()
+        public function closeEditProfile()
     {
-        $this->editUserId = null;
         $this->showEditProfile = false;
+        $this->editUserId = null;
     }
 
-    public function profileEditSave()
+    public function editProfileSave()
     {
-        $user = User::find($this->editUserId)->first();
-
+        $user = $this->editUserId;
         if($this->editName){
-            $user->update(['name' => $this->editName]);
-
-            // dd('Gumana');
-            // $user = User::find($this->editUserId);
-            // $user->update(['name' => $this->editName ,]);
+            $user->update(['name' => $this->editName ,]);
+            $this->editName = null;
         }
 
         if($this->editEmail){
-            $user->update(['email' => $this->editEmail]);
-            // $user = User::find($this->editUserId);
-            // $user->update(['email' => $this->editEmail ,]);
+            $user->update(['email' => $this->editEmail ,]);
+            $this->editEmail = null;
         }
 
         $this->redirect(request()->header('Referer'));

@@ -167,15 +167,15 @@
                 @csrf
                 @method('patch')
                 <label for="name"> Name:</label>
-                <input type="text" value='{{ $editName }}' placeholder={{$editUserId->name}} class=" rounded-lg w-80 m-2"
+                <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}" class=" rounded-lg text-center w-80 m-2"
                 wire:model.lazy='editName'/>
                 <br>
                 <label for="email"> Email:</label>
-                <input type="email" name="email" value='{{ $editEmail }}' placeholder={{$editUserId->email}} class=" rounded-lg text-center w-80 m-2"
+                <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}" class=" rounded-lg text-center w-80 m-2"
                 wire:model.lazy='editEmail'/>
                 <br>
                 <div class="flex justify-center items-center">
-                    <button wire:click='profileEditSave' wire:submit class=" bg-white px-4 py-1 my-4 rounded-xl">Save</button>
+                    <button wire:submit wire:click='editProfileSave' class=" bg-white px-4 py-1 my-4 rounded-xl">Save</button>
                 </div>
     
             </form>
