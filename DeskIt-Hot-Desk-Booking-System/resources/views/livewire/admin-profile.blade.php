@@ -1,8 +1,9 @@
 <div class="rounded-lg">
     
     <div class="flex justify-center items-center row">
-        <div class="flex justify-center items-center bg-lpink pt-2">
 
+        {{-- TAB CHOOSER/PICKER --}}
+        <div class="flex justify-center items-center bg-lpink pt-2">
 
             <div class="mx-4">
                 <h2 wire:click="setActiveSection(1)" class="justify-center text-xl rounded-t-lg cursor-pointer">
@@ -24,9 +25,8 @@
             </div>
         </div>
 
-
-        <div class="flex justify-center items-center mt-4 ">
-
+        {{-- TABLES --}}
+        <div class="flex justify-center items-center mt-2">
 
             {{-- Admins --}}
             @if($activeSection ===1)
@@ -39,6 +39,9 @@
                         <th class=" px-12 py-2 justify-center items-center bg-grey">ID</th>
                         <th class=" px-12 py-2 justify-center items-center bg-grey">Name</th>
                         <th class=" px-12 py-2 justify-center items-center bg-grey">Email</th>
+                        <th class=" px-12 py-2 justify-center items-center bg-grey">Gender</th>
+                        <th class=" px-12 py-2 justify-center items-center bg-grey">Birthday</th>
+                        <th class=" px-12 py-2 justify-center items-center bg-grey">Role</th>
                         <th class=" px-12 py-2 justify-center items-center bg-grey">Action</th>
                     </tr>
                 </thead>
@@ -46,51 +49,14 @@
                 @foreach($users as $user)
                 <tbody>
                     <tr>
-                        @if(Auth::user()->id === $user->id)
-                        {{-- Content for the authenticated user --}}
+    
                         <td class="p-2">{{ $user->id }}</td>
                         <td class="p-2">{{ $user->name }}</td>
                         <td class="p-2">{{ $user->email }}</td>
-                        @else
-                        {{-- Content for other users --}}
-                        <td class="p-2">{{ $user->id }}</td>
-                        <td class="p-2">{{ $user->name }}</td>
-                        <td class="p-2">{{ $user->email }}</td>
+                        <td class="p-2">{{ $user->gender }}</td>
+                        <td class="p-2">{{ $user->birthday }}</td>
 
-                        <td class="p-2">
-                            <div x-data="{ isOpen: false }">
-                                <a @click="isOpen = true"
-                                   style="cursor: pointer; display: flex; justify-content: center;">
-                                    <img src="{{ asset('images/dots.svg') }}" class="h-4 w-4 relative">
-                                </a>
-                                <div x-show="isOpen" @click.away="isOpen = false" class="showDots flex absolute h-44 w-64 right-8 z-50" >
-
-                                    <div class='flex row bg-dark-subtle rounded-4 p-3 items-center justify-center'>
-                                        
-                                        <div wire:click="showModalAddAsUser({{ $user->id }})" class='flex cursor-pointer'>
-                                            <img src="{{ asset('images/user.svg') }}" class="h-5 w-5">
-                                            <p class=" text-base pl-2"> Add as a User</p>
-                                        </div>
-                                        <div class='flex cursor-pointer' wire:click="showModalAddAsOM({{ $user->id }})">
-                                            <img src="{{ asset('images/omanager.svg') }}" class="h-5 w-5">
-                                            <p class=" text-base pl-2"> Add as an Office Manager</p>
-                                        </div>
-                                        <div class='flex cursor-pointer' wire:click="openModal({{ $user->id }})">
-                                            <img src="{{ asset('images/thin-delete.svg') }}" class="h-5 w-5">
-                                            <p class=" text-base pl-2"> Delete Admin</p>
-                                        </div>
-                    
-                                        <div  wire:click="openEditProfile({{ $user->id }})" class='flex cursor-pointer'>
-                                            <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
-                                            <p class=" text-base pl-2 "> Edit Details</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </td>
-                        @endif
-
+                        {{-- Change Role--}}
                         <td class="p-2 flex flex-row">
                             <select class=" form-select bg-white text-black text-center floors"
                             wire:model.lazy="role" 
@@ -103,7 +69,6 @@
                                 <option value={{$user->roles()->first()->name}} selected>Admin</option>
                                 <option value="employee">Employee</option>
                                 <option value="officemanager">Office Manager</option>
-                                <option value="superadmin" disabaled>Super Admin</option>
                                 </select>
     
                             @elseif($user->hasRole('officemanager'))
@@ -111,7 +76,6 @@
                                 <option value={{$user->roles()->first()->name}} selected>Office Manager</option>
                                 <option value="employee">Employee</option>
                                 <option value="admin">Admin</option>
-                                <option value="superadmin">Super Admin</option>
                                 </select>
     
                             @elseif($user->hasRole('superadmin'))
@@ -126,13 +90,133 @@
                             Save
                             </button>
                         </td>
+
+                        {{-- Action --}}
+                        <td class="p-2">
+                            <div x-data="{ isOpen: false }">
+                                <a @click="isOpen = true"
+                                   style="cursor: pointer; display: flex; justify-content: center;">
+                                    <img src="{{ asset('images/dots.svg') }}" class="h-4 w-4 relative">
+                                </a>
+                                
+                                <div x-show="isOpen" @click.away="isOpen = false" class="showDots flex absolute h-44 w-64 right-8 z-50" >
+
+                                    <div class='flex row bg-dark-subtle rounded-4 p-3 items-center justify-center'>
+                                        
+                                        <div wire:click="showModalAddAsUser({{ $user->id }})" class='flex cursor-pointer'>
+                                            <img src="{{ asset('images/user.svg') }}" class="h-5 w-5">
+                                            <p class=" text-base pl-2"> Add as a User</p>
+                                        </div>
+                                        <div class='flex cursor-pointer' wire:click="showModalAddAsOM({{ $user->id }})">
+                                            <img src="{{ asset('images/omanager.svg') }}" class="h-5 w-5">
+                                            <p class=" text-base pl-2"> Add as an Office Manager</p>
+                                        </div>
+
+                                        <div class='flex cursor-pointer' wire:click="deactModal({{ $user->id }})">
+                                            <img src="{{ asset('images/thin-delete.svg') }}" class="h-5 w-5">
+                                            <p class=" text-base pl-2"> Deact Admin</p>
+                                        </div>
+
+                                        {{-- EditModal --}}
+                                        <x-modal name="edit-modal" title="Edit User">
+                                            <x-slot:body>
+                                                <div class='flex justify-center rounded-3 bg-gray-200 w-[90%] h-[85%] p-2'>
+                                                    @if($editUserId)
+                                                    <form method="post" action="{{route('profile.update')}}">
+                                                        @csrf
+                                                        @method('patch')
+                                                        {{-- Row 1 --}}
+                                                        <div class="flex flex-row justify-content-evenly">
+
+                                                            {{-- Name --}}
+                                                            <div class="flex flex-column">
+                                                                <label class="self-start ml-3" for="name"> Name:</label>
+                                                                <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}"
+                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
+                                                                    wire:model.lazy='editName'/>
+                                                            </div>
+    
+                                                            {{-- Email --}}
+                                                            <div class="flex flex-column ">
+                                                                <label class="self-start ml-3" for="email"> Email:</label>
+                                                                <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}"
+                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1 "
+                                                                    wire:model.lazy='editEmail'/>
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- Row 2 --}}
+                                                        <div class="flex flex-row justify-content-evenly mt-3">
+                                                            
+                                                            {{-- Gender --}}
+                                                            <div class="flex flex-column">
+                                                                <label class="self-start ml-3" for="name"> Gender:</label>
+                                                                <select class="border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
+                                                                wire:model.lazy="editGender">
+
+                                                                    @if($editUserId->gender === 'male')
+                                                                    <option value='' selected>male</option>
+                                                                    <option value="female">female</option>
+                                                                    
+                                                                    @elseif($editUserId->gender === 'female')
+                                                                    <option value='' selected>female</option>
+                                                                    <option value="male">male</option>
+                                                                
+                                                                    @endif
+                                                                </select>
+                                                            </div>
+                                                            
+    
+                                                            {{-- Birthday --}}
+                                                            <div class="flex flex-column ">
+                                                                <label class="self-start ml-3" for="email"> Email:</label>
+                                                                <input type="date" name="birthday" value='' placeholder="{{ $editUserId->birthday }}"
+                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
+                                                                    wire:model.lazy='editBirthday'/>
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+                                                        <div class="flex justify-center items-center">
+                                                            <button x-on:click="show = false" wire:submit wire:click='editProfileSave' class="bg-yellowB rounded-xl px-4 py-2 text-lg text-white">Save</button>
+                                                        </div>
+
+                                                    </form>
+                                                    @endif
+                                                </div>
+                                            </x-slot:body>
+                                        </x-modal>
+
+                                        {{-- Open Modal Button--}}
+                                        <div class='flex cursor-pointer'>
+                                            <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
+                                            <button x-data x-on:click="$dispatch('open-modal', {name: 'edit-modal'})" 
+                                                    class="pl-2"
+                                                    wire:click="openEditProfile({{ $user->id }})"
+                                                    >Edit User</button>
+                                        </div>
+
+                    
+
+                                        {{-- <div wire:click="openEditProfile({{ $user->id }})" class='flex cursor-pointer'>
+                                            <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
+                                            <p class=" text-base pl-2 "> Edit Details</p>
+                                        </div> --}}
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </td>
                         
+                        
+
                     </tr>
                 </tbody>
                 @endforeach
             </table>
 
-            {{-- office manager - still dont havae role, temporarily use #activeSection===2 --}}
+            {{-- Office manager --}}
             @elseif($activeSection=== 4)
             <table class="w-75 p-10 text-center bg-gray ">
                 <thead>
@@ -189,7 +273,7 @@
                 @endforeach
             </table>
 
-            {{-- employees/users --}}
+            {{-- Employees/users --}}
             @elseif($activeSection=== 2)
             <table class="w-75 p-10 text-center bg-gray ">
                 <thead>
@@ -231,10 +315,90 @@
                                             <img src="{{ asset('images/thin-delete.svg') }}" class="h-5 w-5">
                                             <p class=" text-base pl-2"> Delete User</p>
                                         </div>
-                                        <div  wire:click="openEditProfile({{ $user2->id }})" class='flex cursor-pointer'>
+
+                                        {{-- EditModal --}}
+                                        <x-modal name="edit-modal" title="Edit User">
+                                            <x-slot:body>
+                                                <div class='flex justify-center rounded-3 bg-gray-200 w-[90%] h-[85%] p-2'>
+                                                    @if($editUserId)
+                                                    <form method="post" action="{{route('profile.update')}}">
+                                                        @csrf
+                                                        @method('patch')
+                                                        {{-- Row 1 --}}
+                                                        <div class="flex flex-row justify-content-evenly">
+
+                                                            {{-- Name --}}
+                                                            <div class="flex flex-column">
+                                                                <label class="self-start ml-3" for="name"> Name:</label>
+                                                                <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}"
+                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
+                                                                    wire:model.lazy='editName'/>
+                                                            </div>
+    
+                                                            {{-- Email --}}
+                                                            <div class="flex flex-column ">
+                                                                <label class="self-start ml-3" for="email"> Email:</label>
+                                                                <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}"
+                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1 "
+                                                                    wire:model.lazy='editEmail'/>
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- Row 2 --}}
+                                                        <div class="flex flex-row justify-content-evenly mt-3">
+                                                            
+                                                            {{-- Gender --}}
+                                                            <div class="flex flex-column">
+                                                                <label class="self-start ml-3" for="name"> Gender:</label>
+                                                                <select class="border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
+                                                                wire:model.lazy="editGender">
+
+                                                                    @if($editUserId->gender === 'male')
+                                                                    <option value='' selected>male</option>
+                                                                    <option value="female">female</option>
+                                                                    
+                                                                    @elseif($editUserId->gender === 'female')
+                                                                    <option value='' selected>female</option>
+                                                                    <option value="male">male</option>
+                                                                
+                                                                    @endif
+                                                                </select>
+                                                            </div>
+                                                            
+    
+                                                            {{-- Birthday --}}
+                                                            <div class="flex flex-column ">
+                                                                <label class="self-start ml-3" for="email"> Email:</label>
+                                                                <input type="date" name="birthday" value='' placeholder="{{ $editUserId->birthday }}"
+                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
+                                                                    wire:model.lazy='editBirthday'/>
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+                                                        <div class="flex justify-center items-center">
+                                                            <button x-on:click="show = false" wire:submit wire:click='editProfileSave' class="bg-yellowB rounded-xl px-4 py-2 text-lg text-white">Save</button>
+                                                        </div>
+
+                                                    </form>
+                                                    @endif
+                                                </div>
+                                            </x-slot:body>
+                                        </x-modal>
+
+                                        {{-- Open Modal Button--}}
+                                        <div class='flex cursor-pointer'>
+                                            <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
+                                            <button x-data x-on:click="$dispatch('open-modal', {name: 'edit-modal'})" 
+                                                    class="pl-2"
+                                                    wire:click="openEditProfile({{ $user2->id }})"
+                                                    >Edit User</button>
+                                        </div>
+
+                                        {{-- <div wire:click="openEditProfile({{ $user2->id }})" class='flex cursor-pointer'>
                                             <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
                                             <p class=" text-base pl-2 "> Edit Details</p>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                 </div>
@@ -286,8 +450,6 @@
             @endif
 
             @include("admin.modals.manageUser")
-
-
 
             @livewireScripts
             <script>

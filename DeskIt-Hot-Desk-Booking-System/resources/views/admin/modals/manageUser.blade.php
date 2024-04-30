@@ -160,9 +160,11 @@
             <p class=" text-lg text-center mt-2">Edit Details</p>
         </div>
     
+        {{-- Form part --}}
         <div class='flex bg-gray rounded-bottom-4 m-2 px-3 w-max'>
     
             {{-- not saving when save button is click. It might be due to route --}}
+            {{-- Fixed na. - gelo --}}
             <form method="post" action="{{route('profile.update')}}">
                 @csrf
                 @method('patch')
