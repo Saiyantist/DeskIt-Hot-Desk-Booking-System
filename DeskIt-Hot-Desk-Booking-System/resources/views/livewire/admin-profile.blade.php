@@ -1,35 +1,58 @@
 <div class="rounded-lg">
+
+    <div class="flex justify-center items-center mt-2 ">
     
-    <div class="flex justify-center items-center row">
-
         {{-- TAB CHOOSER/PICKER --}}
-        <div class="flex justify-center items-center bg-lpink pt-2">
+        <div class="flex flex-col justify-center items-center mt-4 bg-white ml-16" style="width: 80%; border:1px solid rgba(128, 128, 128, 0.2);">
+            <div class="self-start w-full p-2" style=" border-bottom: 1px solid rgba(128, 128, 128, 0.5);">
+                <div class="flex ">
+                    <div class="px-2 mt-2">
+                        <h2 wire:click="setActiveSection(1)"
+                            class="justify-center text-xl rounded-t-lg cursor-pointer {{ $activeSection == 1 ? 'active-section' : '' }}">
+                            Account Settings</h2>
+                    </div>
 
-            <div class="mx-4">
-                <h2 wire:click="setActiveSection(1)" class="justify-center text-xl rounded-t-lg cursor-pointer">
-                    ADMINS</h2>
-            </div>
+                    <div class="px-4  mt-2">
+                        <h2 wire:click="setActiveSection(2)"
+                            class="justify-center text-xl rounded-t-lg cursor-pointer {{ $activeSection == 2 ? 'active-section' : '' }}">
+                            Manage Users</h2>
+                    </div>
+                    
+                    <div class="px-4  mt-2">
+                        <h2 wire:click="setActiveSection(3)"
+                            class="justify-center text-xl rounded-t-lg cursor-pointer {{ $activeSection == 3 ? 'active-section' : '' }}">
+                            ADMINS</h2>
+                    </div>
+                    
+                    <div class="px-4  mt-2">
+                        <h2 wire:click="setActiveSection(4)"
+                            class="justify-center text-xl rounded-t-lg cursor-pointer {{ $activeSection == 4 ? 'active-section' : '' }}">
+                            OFFICE MANAGERS</h2>
+                    </div>
+                    
+                    <div class="px-4  mt-2">
+                        <h2 wire:click="setActiveSection(5)"
+                            class="justify-center text-xl rounded-t-lg cursor-pointer {{ $activeSection == 5 ? 'active-section' : '' }}">
+                            USERS</h2>
+                    </div>
+                    
+                    <div class="px-4  mt-2">
+                        <h2 wire:click="setActiveSection(6)"
+                            class="justify-center text-xl rounded-t-lg cursor-pointer {{ $activeSection == 6 ? 'active-section' : '' }}">
+                            INACTIVE/PENDING USERS</h2>
+                    </div>
+                    
+                </div>
 
-            <div class="mx-4">
-                <h2 wire:click="setActiveSection(4)" class="justify-center text-xl rounded-t-lg cursor-pointer">
-                    OFFICE MANAGERS</h2>
-            </div>
-
-            <div class="mx-4">
-                <h2 wire:click="setActiveSection(2)" class="justify-center text-xl rounded-t-lg cursor-pointer">
-                    USERS</h2>
-            </div>
-            <div class="mx-4">
-                <h2 wire:click="setActiveSection(3)" class=" justify-center text-xl  rounded-t-lg cursor-pointer">
-                    INACTIVE/PENDING USERS</h2>
-            </div>
+            </div> 
         </div>
+
 
         {{-- TABLES --}}
         <div class="flex justify-center items-center mt-2">
 
             {{-- Admins --}}
-            @if($activeSection ===1)
+            @if($activeSection === 3)
             <table class="w-75 p-10 justify-center items-center text-center bg-gray">
                 <thead>
                     <tr>
@@ -49,7 +72,6 @@
                 @foreach($users as $user)
                 <tbody>
                     <tr>
-    
                         <td class="p-2">{{ $user->id }}</td>
                         <td class="p-2">{{ $user->name }}</td>
                         <td class="p-2">{{ $user->email }}</td>
@@ -274,7 +296,7 @@
             </table>
 
             {{-- Employees/users --}}
-            @elseif($activeSection=== 2)
+            @elseif($activeSection=== 5)
             <table class="w-75 p-10 text-center bg-gray ">
                 <thead>
                     <tr>
@@ -412,7 +434,7 @@
 
 
             {{-- Inactive/Pending Users --}}
-            @elseif($activeSection ===3)
+            @elseif($activeSection === 6)
             <table class="w-75 p-10 justify-center items-center text-center  bg-gray ">
                 <thead>
                     <tr>
@@ -448,21 +470,14 @@
                 @endforeach
             </table>
             @endif
-
-            @include("admin.modals.manageUser")
-
-            @livewireScripts
-            <script>
-            //    document.addEventListener('click', function(event) {
-            //         // Check if the clicked element is outside of the modal
-            //         if (!event.target.closest('.showDots')) {
-            //             Livewire.emit('closeDots');
-            //         }
-            //     });
-                // Automatically refresh the Livewire component every 1 second
-                Livewire.emit('refresh');
-            </script>
         </div>
     </div>
+    
+    @include("admin.modals.manageUser")
 
+    @livewireScripts
+    <script>
+        // Automatically refresh the Livewire component every 1 second
+                Livewire.emit('refresh');
+    </script>
 </div>

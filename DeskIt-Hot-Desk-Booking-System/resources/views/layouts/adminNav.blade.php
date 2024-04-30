@@ -45,7 +45,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="sidebar-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }} ">
                         <img src="{{ asset('images/home.svg') }}" class="py-3 default-image" alt="Default SVG Image">
                         <img src="{{ asset('images/ahome.svg') }}" class="py-3 alternative-image"
                             alt="Alternative SVG Image">
