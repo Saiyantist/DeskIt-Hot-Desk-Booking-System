@@ -152,27 +152,32 @@
 
 @if ($showEditProfile)
 <div x-data="{ isOpen: true }" x-cloak @click.away="isOpen = false">
-    <div class=" flex flex-column justify-start bg-gray rounded-4 absolute" style="top: 40vh; z-index: 1;">
+    <div class=" flex flex-column justify-start bg-gray rounded-4 absolute"
+    style="top: 300px; left: 640px; z-index: 1;">
 
         <div class=' justify-center my-1 mr-4'>
             <button wire:click="closeEditProfile" class=" self-end float-right">X</button>
             <p class=" text-lg text-center mt-2">Edit Details</p>
         </div>
     
+        {{-- Form part --}}
         <div class='flex bg-gray rounded-bottom-4 m-2 px-3 w-max'>
     
             {{-- not saving when save button is click. It might be due to route --}}
+            {{-- Fixed na. - gelo --}}
             <form method="post" action="{{route('profile.update')}}">
                 @csrf
                 @method('patch')
                 <label for="name"> Name:</label>
-                <input type="text" name="name" value="{{ $user->name }}" class=" rounded-lg text-center w-80 m-2" />
+                <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}" class=" rounded-lg text-center w-80 m-2"
+                wire:model.lazy='editName'/>
                 <br>
                 <label for="email"> Email:</label>
-                <input type="email" name="email" value="{{ $user->email }}" class=" rounded-lg text-center w-80 m-2" />
+                <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}" class=" rounded-lg text-center w-80 m-2"
+                wire:model.lazy='editEmail'/>
                 <br>
                 <div class="flex justify-center items-center">
-                    <button type="submit" class=" bg-white px-4 py-1 my-4 rounded-xl">Save</button>
+                    <button wire:submit wire:click='editProfileSave' class=" bg-white px-4 py-1 my-4 rounded-xl">Save</button>
                 </div>
     
             </form>

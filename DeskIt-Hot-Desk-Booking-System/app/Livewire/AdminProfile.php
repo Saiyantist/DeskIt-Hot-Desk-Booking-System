@@ -27,9 +27,15 @@ class AdminProfile extends Component
     public $showModal2 = false;
     public $showModalAddUser = false;
     public $showDeact = false;
+    public $editUserId;
+    public $editName;
+    public $editEmail;
+    public $editGender;
+    public $editBirthday;
     public $deleteUserId;
     public $acceptUserId;
     public $deactUserId;
+    public $selectedTab;
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
@@ -100,7 +106,7 @@ class AdminProfile extends Component
             $user = User::find($this->deactUserId);
             
             if($user->hasAnyRole('admin', 'employee', 'officemanager')){
-                $user->removeRole('employee');
+                $user->roles()->detach();
             }
             
             $this->closeDeactModal();
@@ -260,14 +266,53 @@ class AdminProfile extends Component
     }
 
 
-    public function openEditProfile()  
+    public function openEditProfile($userId)  
     {
-        $this->showEditProfile = true;
+        // $this->showEditProfile = true;
+        $this->editUserId = User::find($userId);
+
     }
 
         public function closeEditProfile()
     {
         $this->showEditProfile = false;
+        $this->editUserId = null;
+    }
+
+    public function editProfileSave()
+    {
+        $user = $this->editUserId;
+        if($this->editName){
+            $user->update(['name' => $this->editName ,]);
+            $this->editName = null;
+        }
+
+        if($this->editEmail){
+            $user->update(['email' => $this->editEmail ,]);
+            $this->editEmail = null;
+        }
+
+        if($this->editGender){
+            $user->update(['gender' => $this->editGender,]);
+            $this->editGender = null;
+        }
+
+        if($this->editBirthday){
+            $user->update(['birthday' => $this->editBirthday,]);
+            $this->editBirthday = null;
+        }
+
+        $this->editUserId = null;
+        
+        $this->redirect(request()->header('Referer'));
+    }
+
+    public function resetEditData() {
+        $this->editUserId = null;
+        $this->editName = null;
+        $this->editEmail = null;
+        $this->editGender = null;
+        $this->editBirthday = null;
     }
 
 

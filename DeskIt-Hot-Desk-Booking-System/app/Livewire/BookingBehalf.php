@@ -236,7 +236,7 @@ class BookingBehalf extends Component
     {
         $this->showNotification = false;
 
-        $this->redirect('/');
+        $this->redirect('/dashboard');
     }
 
     public function book()

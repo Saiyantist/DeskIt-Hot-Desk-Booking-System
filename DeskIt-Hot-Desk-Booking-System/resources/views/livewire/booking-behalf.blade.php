@@ -1,6 +1,6 @@
 <div class="flex flex-col container mt-16 ">
 
-    @include("admin.modals.updatedBooking")
+    @include("admin.modals.updatedBookbehalf")
     {{-- UI --}}
     <main class="flex flex-row justify-evenly align-items-center mt-10 ml-16">
 
