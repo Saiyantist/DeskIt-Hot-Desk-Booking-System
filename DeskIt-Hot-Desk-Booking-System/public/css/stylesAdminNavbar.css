@@ -249,6 +249,6 @@ p {
 .active-section {
   text-decoration: underline;
   text-decoration-color: #FBB503;
-  text-underline-offset: 1.1em;
+  text-underline-offset: 0.8em;
   
 }
