@@ -21,6 +21,11 @@
     </script>
     <script src="https://kit.fontawesome.com/8d7ba59e72.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{{ asset('path/to/mary-ui/css/mary-ui.css') }}">
+    <script src="{{ asset('path/to/mary-ui/js/mary-ui.js') }}"></script>
+
+
     
 
 

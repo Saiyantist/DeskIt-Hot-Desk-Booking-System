@@ -3,9 +3,13 @@
   margin: 0;
   border: 0;
 }
+
+body {
+  background-color: #FCF8F8 !important;
+}
 /* navbar */
 .navbar-custom {
-  background-color: #FCF8F8;
+  background-color: white;
 }
 
 .navbar {
@@ -135,8 +139,9 @@
 
 .bg {
   padding: 2% 0 5% 0;
-  background-color: rgba(252, 223, 157, 0.5);
-  margin-top: 4%;
+  background-color: white;
+  margin-top: 2%;
+  width: 90%;
 
 }
 
@@ -239,4 +244,11 @@ p {
 .floor-content :last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.active-section {
+  text-decoration: underline;
+  text-decoration-color: #FBB503;
+  text-underline-offset: 1.1em;
+  
 }

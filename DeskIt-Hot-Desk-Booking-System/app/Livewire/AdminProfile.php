@@ -12,6 +12,7 @@ use function PHPUnit\Framework\isNull;
 
 class AdminProfile extends Component
 {   
+    
     public $addAsAdminId;
     public $addAsOMId;
     public $addAsUserId;

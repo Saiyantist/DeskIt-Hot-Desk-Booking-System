@@ -4,7 +4,7 @@
     @section('content')
     @livewire('admin-booking')
     @livewireScripts
-   
+    
 
     <script src="{{ asset('js/myScript2.js') }}"></script>
     
