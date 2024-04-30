@@ -285,7 +285,7 @@
             </table>
             @endif
 
-            @include("admin.modals.updatedUsermanage")
+            @include("admin.modals.manageUser")
 
 
 
