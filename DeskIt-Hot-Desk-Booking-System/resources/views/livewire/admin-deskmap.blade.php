@@ -1,6 +1,6 @@
 <div class="flex flex-col container mt-16">
 
-    @include("admin.modals.modals_adminDeskmap.updatedDeskmap")
+    @include("admin.modals.updatedDeskmap")
     {{-- UI --}}
     <main class="flex flex-row justify-evenly align-items-center m-10 ml-24 ">
 

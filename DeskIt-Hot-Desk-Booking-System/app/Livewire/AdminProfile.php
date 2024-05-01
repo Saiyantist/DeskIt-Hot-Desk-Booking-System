@@ -43,6 +43,7 @@ class AdminProfile extends Component
     public $role;
 
     public $activeSection = 1;
+    public $activeAccountSet = 1;
     public function mount()
     {   
             $this->users3 = User::whereDoesntHave('roles', function ($query) {
@@ -327,6 +328,12 @@ class AdminProfile extends Component
     {
         
         $this->activeSection = $section;
+        
+    }
+    public function setActiveAS($accountSet)
+    {
+        
+        $this->activeAccountSet = $accountSet;
         
     }
 }
