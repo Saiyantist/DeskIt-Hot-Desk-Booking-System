@@ -20,6 +20,7 @@ module.exports = {
             white: '#FFFFFF',
             lpink:'rgba(252, 223, 157, 0.5)',
             darkgray:'#A9A9A9',
+            blue: '#0070FF'
           },
         extend: {
             fontFamily: {
