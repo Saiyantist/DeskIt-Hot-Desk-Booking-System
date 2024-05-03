@@ -12,6 +12,8 @@ module.exports = {
         colors: {
             yellowA:'#f8de9c',
             yellowB:'#FBB503',
+            yellowLight: '#fff6cf',
+            yellowBdarker: '#dfa100',
             green:'#00CC2D',
             gray:'#F5F5F5',
             block:'#000000',

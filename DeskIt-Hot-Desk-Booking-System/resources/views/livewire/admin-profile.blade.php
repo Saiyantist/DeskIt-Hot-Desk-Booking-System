@@ -45,7 +45,7 @@
 
                 </div>
 
-                @if($activeSection ===1)
+                @if($activeSection === 1)
                 <div class="flex flex-row m-4 ">
                     <div class="flex flex-col">
                         <div class="flex self-center rounded-xl pt-2 px-2 w-60 {{ $activeAccountSet == 1 ? 'active-accountSet' : '' }}"
@@ -117,19 +117,74 @@
                                 
                                 @if(Auth::user()->hasRole('superadmin'))
 
-                                <td class="p-2 flex justify-content-center">
+                                <td class="p-2 flex justify-content-around">
 
-                                    {{-- Change into Employee --}}
-                                    <div wire:click="showModalAddAsUser({{ $user->id }})" class='border-solid border-yellowB border-2 flex flex-row-reverse cursor-pointer p-2 px-2 rounded-lg mr-3'>
+                                    {{-- Make Employee Open --}}
+                                    <button class=' bg-yellowLight px-3 rounded-2xl py-1 flex items-center cursor-pointer'
+                                            wire:click="saveEmpId({{ $user->id }})"
+                                            x-data x-on:click="$dispatch('open-modal', {name: 'makeEmp-modal'})">
+                                        <img src="{{ asset('images/employee_new.svg') }}" class="h-6">
+                                        <span class="text-yellowBdarker text-sm font-medium pl-2">Employee</span>
+                                    </button>
+
+                                    {{-- Make OM Open --}}
+                                    <button class=' bg-yellowLight px-3 rounded-2xl py-1 flex items-center cursor-pointer'
+                                            wire:click="saveOMId({{ $user->id }})"
+                                            x-data x-on:click="$dispatch('open-modal', {name: 'makeOM-modal'})">
+                                        <img src="{{ asset('images/omanager_new.svg') }}" class="h-6">
+                                        <span class="text-yellowBdarker text-sm font-medium pl-2">Office Manager</span>
+                                    </button>
+
+
+                                    {{-- Make Emp Modal --}}
+                                    <x-modal name="makeEmp-modal" title="Change to Employee">
+                                        <x-slot:body>
+                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                                                @if($makeEmpId)
+                                                <div class='flex justify-center'>
+                                                    <p class="text-lg text-center">Are you sure you want to make {{$makeEmpId->name}} into an EMPLOYEE?</p>
+                                                </div>
+                                        
+                                                <div class="flex justify-center mt-3">
+                                                    <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                                                            wire:click="makeEmp">
+                                                        Make Employee
+                                                    </button>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </x-slot:body>
+                                    </x-modal>
+
+                                    {{-- Make OM Modal --}}
+                                    <x-modal name="makeOM-modal" title="Change to Office Manager">
+                                        <x-slot:body>
+                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                                                @if($makeOMId)
+                                                <div class='flex justify-center'>
+                                                    <p class="text-lg text-center">Are you sure you want to make {{$makeOMId->name}} into an OFFICE MANAGER?</p>
+                                                </div>
+                                        
+                                                <div class="flex justify-center mt-3">
+                                                    <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                                                            wire:click="makeOM">
+                                                        Make O.M.
+                                                    </button>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </x-slot:body>
+                                    </x-modal>
+
+                                    {{-- <div wire:click="showModalAddAsUser({{ $user->id }})" class='border-solid border-yellowB border-2 flex flex-row-reverse cursor-pointer p-2 px-2 rounded-lg mr-3'>
                                         <span class="text-yellowB text-sm font-thin pl-2">Employee</span>
                                         <img src="{{ asset('images/employee.svg') }}" class="h-5 w-5">
-                                    </div>
+                                    </div> --}}
 
-                                    {{-- Change into Office Manager --}}
-                                    <div wire:click="showModalAddAsOM({{ $user->id }})" class='border-solid border-yellowB border-2 flex flex-row-reverse cursor-pointer p-2 px-2 rounded-lg ml-3'>
+                                    {{-- <div wire:click="showModalAddAsOM({{ $user->id }})" class='border-solid border-yellowB border-2 flex flex-row-reverse cursor-pointer p-2 px-2 rounded-lg ml-3'>
                                         <span class="text-yellowB text-sm font-thin pl-2">Office Manager</span>
-                                        <img src="{{ asset('images/omanagerNEW.svg') }}" class="h-5 w-5">
-                                    </div>
+                                        <img src="{{ asset('images/omanager_new.svg') }}" class="h-6">
+                                    </div> --}}
 
                                 </td>
 
@@ -139,36 +194,35 @@
                                 <td class="p-2">
 
                                     {{-- Buttons --}}
-                                    <div class="flex justify-content-evenly">
+                                    <div class="flex justify-content-around">
 
                                         {{-- Edit Modal Open--}}
-                                        <button class='border-solid border-darkBlue border-2 bg-blue px-[10px] py-2 rounded-lg flex cursor-pointer'
+                                        <button class=' bg-blue-100 px-3 rounded-2xl py-1 flex items-center cursor-pointer'
                                                 wire:click="saveEditId({{ $user->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'edit-modal'})">
-                                            <img src="{{ asset('images/edits.svg') }}" class=" h-5 w-5">
-                                            <span class="text-sky-800 text-sm font-thin pl-2">Edit</span>
+                                            <img src="{{ asset('images/edit.svg') }}" class="h-6">
+                                            <span class="text-blue-800 text-sm font-thin pl-2">Edit</span>
                                         </button>
     
-
                                         {{-- Deact Modal Open--}}
                                         <button x-data x-on:click="$dispatch('open-modal', {name: 'deact-modal'})" 
                                                 wire:click="saveDeactId({{ $user->id }})"
-                                                class="border-solid border-darkgray border-2 bg-slate-300 px-[10px] py-2 rounded-lg flex cursor-pointer"
+                                                class="bg-slate-200 ml-1 px-3 rounded-2xl flex items-center cursor-pointer"
                                                 >
-                                            <img src="{{ asset('images/deactivate.svg') }}" class="h-5 w-5">
-                                            <span class="text-darkergray text-sm font-thin pl-2">Deactivate</span>
+                                            <img src="{{ asset('images/deactivate.svg') }}" class="h-6">
+                                            <span class="text-slate-600 text-sm font-thin pl-2">Deactivate</span>
                                         </button>
 
                                         {{-- Delete Modal Open--}}
-                                        <button class='border-solid border-darkRed border-2 bg-red px-[10px] py-2 rounded-lg flex cursor-pointer'
+                                        <button class='bg-red-200 ml-1 px-2 rounded-xl flex items-center cursor-pointer'
                                                 wire:click="saveDeleteId({{ $user->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'delete-modal'})">
-                                            <img src="{{ asset('images/delete.svg') }}" class="h-5 w-5">
+                                            <img src="{{ asset('images/delete.svg') }}" class="h-6">
                                         </button>
           
                                     </div>
 
-                                    {{-- EditModal --}}
+                                    {{-- Edit Modal --}}
                                     <x-modal name="edit-modal" title="Edit User">
                                         <x-slot:body>
                                             <div class='flex justify-center rounded-3 w-[100%] h-[100%]'>
@@ -233,7 +287,7 @@
                                                     <div class="flex justify-center items-center mt-3">
                                                         <button x-on:click="show = false"
                                                                 wire:submit wire:click='editProfileSave'
-                                                                class="bg-blue rounded-xl px-4 py-2 font-semibold text-2xl text-white"
+                                                                class="border-solid border-blue-400 border-1 bg-blue-300 rounded-xl px-4 py-2 font-medium text-xl text-blue-50"
                                                                 >Save
                                                         </button>
                                                     </div>
@@ -254,7 +308,7 @@
                                                 </div>
                                         
                                                 <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-darkergray border-2 px-4 py-2 rounded-4 font-semibold text-lg text-darkergray"
+                                                    <button class="flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
                                                             wire:click="deactUser">
                                                         Deactivate
                                                     </button>
@@ -274,7 +328,7 @@
                                                 </div>
                                         
                                                 <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-darkRed border-2 px-4 py-2 rounded-4 font-semibold text-lg text-darkRed"
+                                                    <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
                                                             wire:click="deleteUser">
                                                         Delete
                                                     </button>
