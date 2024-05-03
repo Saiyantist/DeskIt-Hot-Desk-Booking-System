@@ -16,6 +16,7 @@ module.exports = {
             gray:'#F5F5F5',
             block:'#000000',
             grey: '#EDEDED',
+            medgrey: 'rgb(209 213 219);',
             pink: '#FCF8F8',
             white: '#FFFFFF',
             lpink:'rgba(252, 223, 157, 0.5)',
