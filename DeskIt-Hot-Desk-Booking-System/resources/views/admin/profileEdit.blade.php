@@ -10,76 +10,115 @@
         </div>
     </div>
 
-    <div class="flex">
-        <div class=" max-w-xl w-60 mx-4">
-            <h2 class="text-lg ml-2">Full Name</h2>
-            @if ($editMode)
-            <input wire:model="name" type="text" name="name" placeholder="Name" class="border p-2 rounded-lg ">
-            @else
-            <div class="border p-2 rounded-lg cursor-pointer" wire:click="toggleEditMode">
-                {{ Auth::user()->name }}
+    <form method="post" action="{{route('profile.update')}}">
+        @csrf
+        @method('patch')
+        <div class="flex">
+            <div class=" max-w-xl w-48 mx-4">
+                <h2 class="text-lg ml-2">Full Name</h2>
+                @if ($editMode)
+                <input wire:model.live="name" type="text" name="name" value="{{ Auth::user()->name }}"
+                    class="border p-2 rounded-lg">
+                @else
+                <div class="border p-2 rounded-lg" wire:click="toggleEditMode">
+                    {{ Auth::user()->name }}
+                </div>
+                @endif
             </div>
-            @endif
-        </div>
-        <div class=" max-w-xl w-60 mx-4">
-            <h2 class="text-lg ml-2">Email</h2>
-            @if ($editMode)
-            <input wire:model="email" type="email" name="email" placeholder="Email" class="border p-2 rounded-lg">
-            @else
-            <div class="border p-2 rounded-lg cursor-pointer" wire:click="toggleEditMode">
-                {{ Auth::user()->email }}
+            <div class=" max-w-xl w-fit mx-4">
+                <h2 class="text-lg ml-2">Email</h2>
+                @if ($editMode)
+                <input wire:model.live="email" type="email" name="email" value="{{ Auth::user()->email }}"
+                    class="border p-2 rounded-lg w-64">
+                @else
+                <div class="border p-2 rounded-lg" wire:click="toggleEditMode">
+                    {{ Auth::user()->email }}
+                </div>
+                @endif
             </div>
-            @endif
-        </div>
-        <div class=" max-w-xl w-60 mx-4">
-            <h2 class="text-lg ml-2">Phone</h2>
-            @if ($editMode)
-            <input wire:model="phone" type="telephone" name="phone" placeholder="Phone" class="border p-2 rounded-lg">
-            @else
-            <div class="border p-2 rounded-lg cursor-pointer" wire:click="toggleEditMode">
-                {{ Auth::user()->phone }}
+            <div class=" max-w-xl w-48 mx-4">
+                <h2 class="text-lg ml-2">Phone</h2>
+                @if ($editMode)
+                <input wire:model.live="phone" type="telephone" name="phone" value="{{ Auth::user()->phone }}"
+                    class="border p-2 rounded-lg">
+                @else
+                <div class="border p-2 rounded-lg" wire:click="toggleEditMode">
+                    {{ Auth::user()->phone }}
+                </div>
+                @endif
             </div>
-            @endif
         </div>
-    </div>
 
-    <div class="flex">
-        <div class=" max-w-xl w-60 mx-4">
-            <h2 class="text-lg ml-2">Gender</h2>
-            @if ($editMode)
-            <input wire:model="gender" type="text" name="gender" placeholder="Gender" class="border p-2 rounded-lg">
-            @else
-            <div class="border p-2 rounded-lg cursor-pointer" wire:click="toggleEditMode">
-                {{ Auth::user()->gender }}
+        <div class="flex mt-4">
+            <div class=" max-w-xl w-48 mx-4">
+                <h2 class="text-lg ml-2">Gender</h2>
+                @if ($editMode)
+                <select class="border p-2 rounded-lg w-44" name="gender" wire:model.live="gender">
+
+                    @if(Auth::user()->gender === 'male')
+                    <option value='' selected>male</option>
+                    <option value="female">female</option>
+
+                    @elseif(Auth::user()->gender === 'female')
+                    <option value='' selected>female</option>
+                    <option value="male">male</option>
+
+                    @endif
+                </select>
+                @else
+                <div class="border p-2 rounded-lg" wire:click="toggleEditMode">
+                    {{ Auth::user()->gender }}
+                </div>
+                @endif
             </div>
-            @endif
-        </div>
-        <div class=" max-w-xl w-60 mx-4">
-            <h2 class="text-lg ml-2">Birthday</h2>
-            @if ($editMode)
-            <input wire:model="birthday" type="date" name="birthday" placeholder="Birthday"
-                class="border p-2 rounded-lg">
-            @else
-            <div class="border p-2 rounded-lg cursor-pointer" wire:click="toggleEditMode">
-                {{ Auth::user()->birthday }}
+            <div class=" max-w-xl w-48 mx-4">
+                <h2 class="text-lg ml-2">Birthday</h2>
+                @if ($editMode)
+                <input wire:model.live="birthday" type="date" name="birthday" value="{{ Auth::user()->birthday }}"
+                    class="border p-2 rounded-lg">
+                @else
+                <div class="border p-2 rounded-lg" wire:click="toggleEditMode">
+                    {{ Auth::user()->birthday }}
+                </div>
+                @endif
             </div>
-            @endif
-        </div>
-        <div class=" max-w-xl w-60 mx-4">
-            <h2 class="text-lg ml-2">Position</h2>
-            @if ($editMode)
-            <input wire:model="position" type="text" name="position" placeholder="Position"
-                class="border p-2 rounded-lg">
-            @else
-            <div class="border p-2 rounded-lg cursor-pointer" wire:click="toggleEditMode">
-                {{ Auth::user()->position }}
+            <div class=" max-w-xl w-48 mx-4">
+                <h2 class="text-lg ml-2">Position</h2>
+                @if ($editMode)
+                <input wire:model.live="position" type="text" name="position" value="{{ Auth::user()->position }}"
+                    class="border p-2 rounded-lg">
+                {{-- <select class="border p-2 rounded-lg" wire:model="role"
+                    wire:change="changeRole({{ Auth::user()->id }})">
+
+                    @if(Auth::user()->hasRole('superadmin'))
+                    <option value="admin" selected>Super Admin</option>
+                    @elseif(Auth::user()->hasRole('admin'))
+                    <option value="admin" selected>Admin</option>
+                    <option value="employee">Employee</option>
+                    <option value="officemanager">Office Manager</option>
+
+                    @elseif(Auth::user()->hasRole('officemanager'))
+                    <option value="officemanager" selected>Office Manager</option>
+                    <option value="employee">Employee</option>
+                    <option value="admin">Admin</option>
+
+                    @endif
+
+                </select> --}}
+                @else
+                <div class="border p-2 rounded-lg" wire:click="toggleEditMode">
+                    {{ Auth::user()->position }}
+                </div>
+                @endif
             </div>
-            @endif
         </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 mt-4  d-flex justify-content-end">
-        {{-- <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">{{ __('Back') }}</button> --}}
-        <button type="submit" class="btn btn-outline-warning text-dark ">{{ __('Save') }}</button>
-    </div>
+        @if($editMode == true)
+        <div class="flex justify-content-end mt-1">
+            <button type="submit" wire:submit wire:click='editProfileSave' class="btn btn-outline-warning text-dark ">{{
+                __('Save') }}</button>
+        </div>
+        @endif
+    </form>
+
 
 </div>
