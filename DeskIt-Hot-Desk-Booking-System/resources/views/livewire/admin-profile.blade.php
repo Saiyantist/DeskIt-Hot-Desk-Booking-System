@@ -34,7 +34,7 @@
                     <div class="px-4  mt-2">
                         <h2 wire:click="setActiveSection(5)"
                             class="justify-center text-xl rounded-t-lg cursor-pointer {{ $activeSection == 5 ? 'active-section' : '' }}">
-                            USERS</h2>
+                            EMPLOYEES</h2>
                     </div>
 
                     <div class="px-4  mt-2">
@@ -104,7 +104,7 @@
                         </thead>
 
                         @foreach($users as $user)
-                        <tbody class="border border-1 border-zinc-800">
+                        <tbody class="border-solid border-medgrey border-1">
                             <tr>
                                 
                                 <td class="p-2">{{ $user->id }}</td>
@@ -119,16 +119,16 @@
 
                                 <td class="p-2 flex justify-content-center">
 
-                                    {{-- Change into User --}}
-                                    <div wire:click="showModalAddAsUser({{ $user->id }})" class='border-solid border-1 bg-grey flex flex-row-reverse cursor-pointer p-2 px-3 rounded-lg mr-3'>
-                                        <span class="text-sm font-thin pl-2">User</span>
-                                        <img src="{{ asset('images/user.svg') }}" class="h-5 w-5">
+                                    {{-- Change into Employee --}}
+                                    <div wire:click="showModalAddAsUser({{ $user->id }})" class='border-solid border-yellowB border-2 flex flex-row-reverse cursor-pointer p-2 px-2 rounded-lg mr-3'>
+                                        <span class="text-yellowB text-sm font-thin pl-2">Employee</span>
+                                        <img src="{{ asset('images/employee.svg') }}" class="h-5 w-5">
                                     </div>
 
                                     {{-- Change into Office Manager --}}
-                                    <div wire:click="showModalAddAsOM({{ $user->id }})" class='border-solid border-1 bg-grey flex flex-row-reverse cursor-pointer p-2 px-3 rounded-lg ml-3'>
-                                        <span class="text-sm font-thin pl-2">Office Manager</span>
-                                        <img src="{{ asset('images/omanager.svg') }}" class="h-5 w-5">
+                                    <div wire:click="showModalAddAsOM({{ $user->id }})" class='border-solid border-yellowB border-2 flex flex-row-reverse cursor-pointer p-2 px-2 rounded-lg ml-3'>
+                                        <span class="text-yellowB text-sm font-thin pl-2">Office Manager</span>
+                                        <img src="{{ asset('images/omanagerNEW.svg') }}" class="h-5 w-5">
                                     </div>
 
                                 </td>
@@ -142,24 +142,28 @@
                                     <div class="flex justify-content-evenly">
 
                                         {{-- Edit Modal Open--}}
-                                        <button class='border-solid border-darkBlue border-2 bg-blue px-[10px] py-2 rounded-lg flex items-center cursor-pointer'
+                                        <button class='border-solid border-darkBlue border-2 bg-blue px-[10px] py-2 rounded-lg flex cursor-pointer'
                                                 wire:click="saveEditId({{ $user->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'edit-modal'})">
-                                            <img src="{{ asset('images/edit.svg') }}" class=" h-5 w-5">
+                                            <img src="{{ asset('images/edits.svg') }}" class=" h-5 w-5">
+                                            <span class="text-sky-800 text-sm font-thin pl-2">Edit</span>
                                         </button>
     
+
                                         {{-- Deact Modal Open--}}
                                         <button x-data x-on:click="$dispatch('open-modal', {name: 'deact-modal'})" 
                                                 wire:click="saveDeactId({{ $user->id }})"
-                                                class="border-solid border-darkgray border-2 bg-grey px-[10px] py-2 rounded-lg flex cursor-pointer text-sm text-darkergray"
-                                                >Deactivate
+                                                class="border-solid border-darkgray border-2 bg-slate-300 px-[10px] py-2 rounded-lg flex cursor-pointer"
+                                                >
+                                            <img src="{{ asset('images/deactivate.svg') }}" class="h-5 w-5">
+                                            <span class="text-darkergray text-sm font-thin pl-2">Deactivate</span>
                                         </button>
 
                                         {{-- Delete Modal Open--}}
                                         <button class='border-solid border-darkRed border-2 bg-red px-[10px] py-2 rounded-lg flex cursor-pointer'
                                                 wire:click="saveDeleteId({{ $user->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'delete-modal'})">
-                                            <img src="{{ asset('images/thin-delete.svg') }}" class="h-5 w-5">
+                                            <img src="{{ asset('images/delete.svg') }}" class="h-5 w-5">
                                         </button>
           
                                     </div>
@@ -311,95 +315,15 @@
                                                     <p class=" text-base pl-2"> Deact Admin</p>
                                                 </div>
                                                 
-                                                {{-- EditModal --}}
-                                                <x-modal name="edit-modal" title="Edit User">
-                                                    <x-slot:body>
-                                                        <div
-                                                            class='flex justify-center rounded-3 bg-gray-200 w-[90%] h-[85%] p-2'>
-                                                            @if($editUserId)
-                                                            <form method="post" action="{{route('profile.update')}}">
-                                                                @csrf
-                                                                @method('patch')
-                                                                {{-- Row 1 --}}
-                                                                <div class="flex flex-row justify-content-evenly">
-
-                                                                    {{-- Name --}}
-                                                                    <div class="flex flex-column">
-                                                                        <label class="self-start ml-3" for="name">
-                                                                            Name:</label>
-                                                                        <input type="text" name="name" value=''
-                                                                            placeholder="{{ $editUserId->name }}"
-                                                                            class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                            wire:model.lazy='editName' />
-                                                                    </div>
-
-                                                                    {{-- Email --}}
-                                                                    <div class="flex flex-column ">
-                                                                        <label class="self-start ml-3" for="email">
-                                                                            Email:</label>
-                                                                        <input type="email" name="email" value=''
-                                                                            placeholder="{{ $editUserId->email }}"
-                                                                            class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1 "
-                                                                            wire:model.lazy='editEmail' />
-                                                                    </div>
-                                                                </div>
-
-                                                                {{-- Row 2 --}}
-                                                                <div class="flex flex-row justify-content-evenly mt-3">
-
-                                                                    {{-- Gender --}}
-                                                                    <div class="flex flex-column">
-                                                                        <label class="self-start ml-3" for="name">
-                                                                            Gender:</label>
-                                                                        <select
-                                                                            class="border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
-                                                                            wire:model.lazy="editGender">
-
-                                                                            @if($editUserId->gender === 'male')
-                                                                            <option value='' selected>male</option>
-                                                                            <option value="female">female</option>
-
-                                                                            @elseif($editUserId->gender === 'female')
-                                                                            <option value='' selected>female</option>
-                                                                            <option value="male">male</option>
-
-                                                                            @endif
-                                                                        </select>
-                                                                    </div>
-
-
-                                                                    {{-- Birthday --}}
-                                                                    <div class="flex flex-column ">
-                                                                        <label class="self-start ml-3" for="email">
-                                                                            Email:</label>
-                                                                        <input type="date" name="birthday" value=''
-                                                                            placeholder="{{ $editUserId->birthday }}"
-                                                                            class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                            wire:model.lazy='editBirthday' />
-                                                                    </div>
-                                                                </div>
-
-                                                                <br>
-                                                                <div class="flex justify-center items-center">
-                                                                    <button x-on:click="show = false" wire:submit
-                                                                        wire:click='editProfileSave'
-                                                                        class="bg-yellowB rounded-xl px-4 py-2 text-lg text-white">Save</button>
-                                                                </div>
-
-                                                            </form>
-                                                            @endif
-                                                        </div>
-                                                    </x-slot:body>
-                                                </x-modal>
 
                                                 {{-- Open Modal Button--}}
-                                                <div class='flex cursor-pointer'>
+                                                {{-- <div class='flex cursor-pointer'>
                                                     <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
                                                     <button x-data
                                                         x-on:click="$dispatch('open-modal', {name: 'edit-modal'})"
                                                         class="pl-2" wire:click="openEditProfile({{ $user->id }})">Edit
                                                         User</button>
-                                                </div>
+                                                </div> --}}
 
 
 
@@ -408,11 +332,7 @@
                                                     <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
                                                     <p class=" text-base pl-2 "> Edit Details</p>
                                                 </div> --}}
-
-                                            </div>
-
-                                        </div>
-                                    </div> --}}
+ 
                                 </td>
 
 

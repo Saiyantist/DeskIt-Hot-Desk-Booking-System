@@ -4,7 +4,7 @@
     x-show = "show"
     x-on:open-modal.window = "show = ($event.detail.name === name)"
     x-on:close-modal.window = "show = false"
-    x.on:keydown.escape.window = "show = false"
+    x-on:keydown.escape.window = "show = false"
     style="display: none;"
     x-transition.delay.350ms
 
@@ -38,7 +38,7 @@
 
     {{-- Deact Modal --}}
     @elseif($name === 'deact-modal')
-    <div class="fixed inset-0 border-solid border-darkergray border-2 bg-darkgray rounded-4 m-auto w-1/4 max-h-[250px]">
+    <div class="fixed inset-0 border-solid border-darkergray border-2 bg-slate-300 rounded-4 m-auto w-1/4 max-h-[250px]">
 
             @if(isset($title))
             <div class="flex justify-between m-3 mb-2 ">
