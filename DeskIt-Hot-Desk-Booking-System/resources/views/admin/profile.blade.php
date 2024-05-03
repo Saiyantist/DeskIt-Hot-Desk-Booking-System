@@ -27,7 +27,6 @@
         </div>
 
     </div>
-    @include("admin.modals.updateProfile")
     <section class="mt-1">
         @livewire('admin-profile')
     </section>

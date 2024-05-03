@@ -32,6 +32,8 @@ class AdminProfile extends Component
     public $editEmail;
     public $editGender;
     public $editBirthday;
+    public $editPhone;
+    public $editPosition;
     public $deleteUserId;
     public $acceptUserId;
     public $deactUserId;
@@ -43,8 +45,11 @@ class AdminProfile extends Component
     public $role;
 
     public $activeSection = 1;
+    public $activeAccountSet = 1;
+    public $editMode = false;
+
     public function mount()
-    {   
+    {       
             $this->users3 = User::whereDoesntHave('roles', function ($query) {
                 $query->where('name', 'admin')
                 ->orWhere('name', 'employee')
@@ -301,6 +306,15 @@ class AdminProfile extends Component
             $user->update(['birthday' => $this->editBirthday,]);
             $this->editBirthday = null;
         }
+        if($this->editPhone){
+            $user->update(['phone' => $this->editPhone,]);
+            $this->editPhone = null;
+        }
+        if($this->editPosition){
+            $user->update(['Position' => $this->editPosition,]);
+            $this->editPosition = null;
+        }
+
 
         $this->editUserId = null;
         
@@ -315,10 +329,13 @@ class AdminProfile extends Component
         $this->editBirthday = null;
     }
 
+    public function toggleEditMode()
+    {
+        $this->editMode = !$this->editMode;
+    }
 
     public function render()
     {
-        
         // Check if $reloadComponent is true and reset it to false
         return view('livewire.admin-profile');
     }
@@ -327,6 +344,12 @@ class AdminProfile extends Component
     {
         
         $this->activeSection = $section;
+        
+    }
+    public function setActiveAS($accountSet)
+    {
+        
+        $this->activeAccountSet = $accountSet;
         
     }
 }
