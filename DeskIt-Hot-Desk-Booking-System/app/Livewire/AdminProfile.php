@@ -37,16 +37,17 @@ class AdminProfile extends Component
     public $deleteUserId;
     public $acceptUserId;
     public $deactUserId;
-    public $selectedTab;
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     public $position;
     public $role;
 
+
     public $activeSection = 1;
     public $activeAccountSet = 1;
     public $editMode = false;
+
 
     public function mount()
     {       
@@ -97,35 +98,36 @@ class AdminProfile extends Component
     {
         $user = User::find($userId);
 
-        $this->role;
         $user->roles()->detach();
         $user->assignRole($this->role);
        
         $this->redirect(request()->header('Referer'));
     }
 
+
+    /**
+     *  DEACTIVATE USER
+     */
     public function deactUser()
     {
-
         if ($this->deactUserId) {
             $user = User::find($this->deactUserId);
             
-            if($user->hasAnyRole('admin', 'employee', 'officemanager')){
-                $user->roles()->detach();
-            }
+
+            $user->first()->roles()->detach();
+
             
             $this->closeDeactModal();
             $this->dispatch('refreshComponent');
 
             $this->redirect(request()->header('Referer'));
         }
-
     }
 
-    public function deactModal($userId)
+    public function saveDeactId($userId)
     {
-        $this->showDeact = true;
-        $this->deactUserId = $userId;
+        // $this->showDeact = true;
+        $this->deactUserId = User::find($userId);
     }
 
     public function closeDeactModal()
@@ -134,17 +136,46 @@ class AdminProfile extends Component
         $this->deactUserId = null;
     }
 
-    public function openModal($userId)  
+
+
+    /**
+     *  DELETE USER
+     */
+    public function saveDeleteId($userId)  
     {
-        $this->showModal = true;
-        $this->deleteUserId = $userId;
+        // $this->showModal = true;
+        $this->deleteUserId = User::find($userId);
     }
 
-    public function closeModal()
+    // public function closeModal()
+    // {
+    //     $this->showModal = false;
+    //     $this->deleteUserId = null;
+    // }
+
+    public function deleteUser()
     {
-        $this->showModal = false;
-        $this->deleteUserId = null;
+        if ($this->deleteUserId) {
+            // dd($this->deleteUserId);
+
+            // User::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+            User::destroy($this->deleteUserId->id);
+
+            // User::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+            // $this->closeModal();
+            $this->dispatch('refreshComponent');
+            $this->redirect(request()->header('Referer'));
+        }
+
+        
     }
+
+
+    /**
+     *  ACCEPT USER
+     */
 
     public function openModal2($userId)
     {
@@ -156,17 +187,6 @@ class AdminProfile extends Component
     {
         $this->showModal2 = false;
         $this->acceptUserId = null;
-    }
-
-    public function openModalAdd()
-    {
-        $this->showModalAddUser = true;
-        // $this->addUser = $userId;
-    }
-
-    public function closeModalAdd()
-    {
-        $this->showModalAddUser = false;
     }
 
     //accept user from pending/inactive tab
@@ -182,6 +202,21 @@ class AdminProfile extends Component
             $this->redirect(request()->header('Referer'));
         }
     }
+
+
+
+
+    public function openModalAdd()
+    {
+        $this->showModalAddUser = true;
+        // $this->addUser = $userId;
+    }
+
+    public function closeModalAdd()
+    {
+        $this->showModalAddUser = false;
+    }
+
 
     // change access role to user
     public function addAsUser() {
@@ -257,21 +292,12 @@ class AdminProfile extends Component
         $this->addAsAdminId = null;
     }
 
-    public function deleteUser()
-    {
-        if ($this->deleteUserId) {
 
-            // User::statement('SET FOREIGN_KEY_CHECKS=0;');
-            User::destroy($this->deleteUserId);
-            // User::statement('SET FOREIGN_KEY_CHECKS=1;');
-            $this->closeModal();
-            $this->dispatch('refreshComponent');
+    /**
+     *  EDIT USER
+     */
 
-        }
-    }
-
-
-    public function openEditProfile($userId)  
+    public function saveEditId($userId)  
     {
         // $this->showEditProfile = true;
         $this->editUserId = User::find($userId);
@@ -322,11 +348,16 @@ class AdminProfile extends Component
     }
 
     public function resetEditData() {
-        $this->editUserId = null;
-        $this->editName = null;
-        $this->editEmail = null;
-        $this->editGender = null;
-        $this->editBirthday = null;
+        $this->reset(
+            'editUserId',
+            'editName',
+            'editEmail',
+            'editGender',
+            'editBirthday',
+            'deleteUserId',
+            'acceptUserId',
+            'deactUserId'
+        );
     }
 
     public function toggleEditMode()

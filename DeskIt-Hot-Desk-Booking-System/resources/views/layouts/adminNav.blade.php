@@ -45,7 +45,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }} ">
+                    <a wire:navigate class="sidebar-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }} ">
                         <img src="{{ asset('images/home.svg') }}" class="py-3 default-image" alt="Default SVG Image">
                         <img src="{{ asset('images/ahome.svg') }}" class="py-3 alternative-image"
                             alt="Alternative SVG Image">
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('map') ? 'active' : '' }}" href="{{ route('map') }}">
+                    <a wire:navigate class="sidebar-link {{ request()->is('map') ? 'active' : '' }}" href="{{ route('map') }}">
                         <img src="{{ asset('images/deskmap.svg') }}" class="py-3 default-image" alt="Default SVG Image">
                         <img src="{{ asset('images/adeskmap.svg') }}" class="py-3 alternative-image"
                             alt="Alternative SVG Image">
@@ -62,7 +62,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('book-behalf') ? 'active' : '' }}"
+                    <a wire:navigate class="sidebar-link {{ request()->is('book-behalf') ? 'active' : '' }}"
                         href="{{ route('book-behalf') }}">
                         <img src="{{ asset('images/onbehalf.svg') }}" class="py-3 default-image"
                             alt="Default SVG Image">
@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('support') ? 'active' : '' }}"
+                    <a wire:navigate class="sidebar-link {{ request()->is('support') ? 'active' : '' }}"
                         href="{{ route('support') }}">
                         <img src="{{ asset('images/help.svg') }}" class="py-3 default-image" alt="Default SVG Image">
                         <img src="{{ asset('images/ahelp.svg') }}" class="py-3 alternative-image"

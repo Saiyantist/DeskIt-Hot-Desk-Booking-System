@@ -64,7 +64,7 @@
                                 <option value="UI/UX Designer">UI/UX Designer</option>
                                 <option value="System Analyst">System Analyst</option>
                                 <option value="Solutions Architect">Solutions Architect</option>
-                                <option value="Project Mnager">Project Mnager</option>
+                                <option value="Project Mnager">Project Manager</option>
                                 <option value="Full Stack Developer">Full Stack Developer</option>
                                 </select>
 
@@ -73,6 +73,37 @@
                                 wire:submit>
                                 Save
                                 </button>
+
+                                {{-- Change Role na old --}}
+                            
+                                {{-- <td class="p-2 flex flex-row">
+                                    <select class=" form-select bg-white text-black text-center floors"
+                                    wire:model.lazy="role" 
+                                    >
+                                    <option value="{{$user->roles->first()->name}}" selected>Admin</option>
+                                    <option value="employee">Employee</option>
+                                    <option value="officemanager">Office Manager</option>
+                                    </select>
+
+                                        @elseif($user->hasRole('officemanager'))
+        
+                                            <option value="officemanager" selected>Office Manager</option>
+                                            <option value="employee">Employee</option>
+                                            <option value="admin">Admin</option>
+                                            </select>
+                
+                                        @elseif($user->hasRole('superadmin'))
+                                            <option value="admin" selected>Super Admin</option>
+                                            </select>
+
+                                        @endif  
+                                        
+                                    <button class="justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mx-3 my-2 text-white font-bold"
+                                    wire:click='changeRole({{ $user->id }})'
+                                    wire:submit>
+                                    Save
+                                    </button>
+                                </td> --}}
                                 
                             </td>
                         </tr>

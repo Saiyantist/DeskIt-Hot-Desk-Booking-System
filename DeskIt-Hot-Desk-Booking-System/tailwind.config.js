@@ -19,8 +19,16 @@ module.exports = {
             pink: '#FCF8F8',
             white: '#FFFFFF',
             lpink:'rgba(252, 223, 157, 0.5)',
-            darkgray:'#A9A9A9',
-            blue: '#0070FF'
+
+            // darkgray:'#A9A9A9',
+            darkgray: 'rgb(156 163 175);',
+            darkergray: 'rgb(75 85 99);',
+            blue: 'rgb(125 211 252);',
+            // blue: '#0070FF',
+            darkBlue: 'rgb(2 132 199);',
+            red: 'rgb(252 165 165);',
+            darkRed: 'rgb(220 38 38);',
+
           },
         extend: {
             fontFamily: {
