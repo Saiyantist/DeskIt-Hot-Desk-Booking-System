@@ -1,6 +1,6 @@
 @props(['name', 'title', ])
 <div
-    x-data = "{ show : false , name : '{{ $name}}'}"
+    x-data = "{ show : false , name : '{{ $name }}'}"
     x-show = "show"
     x-on:open-modal.window = "show = ($event.detail.name === name)"
     x-on:close-modal.window = "show = false"
@@ -11,7 +11,7 @@
     class="fixed z-50 inset-0 bg-white-500">
 
     
-    <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 bg-gray opacity-60"
+    <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px]"
         wire:click='resetEditData'></div>
 
     {{-- Modal Dynamic Sizes according to modal type --}}
@@ -36,25 +36,45 @@
                 {{ $body }}
             </div>
 
+    {{-- Accept Modal --}}
+    @elseif($name === 'activate-modal')
+        <div class="fixed inset-0 border-solid border-green-500 border-1 bg-green-300 rounded-4 m-auto w-1/4 max-h-[250px]">
+
+                @if(isset($title))
+                <div class="flex justify-between m-3 mb-2 ">
+                    <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                    <span class=" font-medium text-xl text-green-50">{{ $title }}</span>
+                    <button class="mr-6 font-bold text-white text-2xl"
+                            x-on:click="$dispatch('close-modal')"
+                            wire:click='resetEditData'
+                            >x
+                    </button>
+                </div>
+                @endif
+                <hr class="bg-darkergray m-0 p-0">
+                <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                    {{ $body }}
+                </div>
+    
     {{-- Deact Modal --}}
     @elseif($name === 'deact-modal')
-    <div class="fixed inset-0 border-solid border-slate-500 border-1 bg-slate-300 rounded-4 m-auto w-1/4 max-h-[250px]">
+        <div class="fixed inset-0 border-solid border-slate-500 border-1 bg-slate-300 rounded-4 m-auto w-1/4 max-h-[250px]">
 
-            @if(isset($title))
-            <div class="flex justify-between m-3 mb-2 ">
-                <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
-                <span class=" font-medium text-xl text-white">{{ $title }}</span>
-                <button class="mr-6 font-bold text-white text-2xl"
-                        x-on:click="$dispatch('close-modal')"
-                        wire:click='resetEditData'
-                        >x
-                </button>
-            </div>
-            @endif
-            <hr class="bg-darkergray m-0 p-0">
-            <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
-                {{ $body }}
-            </div>
+                @if(isset($title))
+                <div class="flex justify-between m-3 mb-2 ">
+                    <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                    <span class=" font-medium text-xl text-white">{{ $title }}</span>
+                    <button class="mr-6 font-bold text-white text-2xl"
+                            x-on:click="$dispatch('close-modal')"
+                            wire:click='resetEditData'
+                            >x
+                    </button>
+                </div>
+                @endif
+                <hr class="bg-darkergray m-0 p-0">
+                <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                    {{ $body }}
+                </div>
 
     {{-- Delete Modal --}}
     @elseif($name === 'delete-modal')
@@ -75,12 +95,8 @@
             <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
-
-    @elseif($name === 'makeAdmin-modal')
-            
-    {{-- @elseif($name === 'makeOM-modal') --}}
-
-    @elseif($name === 'makeEmp-modal' || $name === 'makeOM-modal')
+    {{-- Make Emp/OM/Admin MODALS --}}
+    @elseif($name === 'makeEmp-modal' || $name == 'makeOM-modal' || $name == 'makeAdmin-modal')
         <div class="fixed inset-0 border-solid border-yellowBdarker border-1 bg-yellowLight rounded-4 m-auto w-1/4 max-h-[250px]">
 
             @if(isset($title))
@@ -101,8 +117,6 @@
 
     @endif
         
-
-
     </div>
 
 
