@@ -45,7 +45,7 @@ class AdminProfile extends Component
 
 
     public $activeSection = 1;
-    public $activeAccountSet = 1;
+    public $activeSecondaryTabAS = 1;
     public $editMode = false;
 
 
@@ -361,8 +361,8 @@ class AdminProfile extends Component
     }
 
     public function toggleEditMode()
-    {
-        $this->editMode = !$this->editMode;
+    {   
+        $this->editMode = true;
     }
 
     public function render()
@@ -379,8 +379,7 @@ class AdminProfile extends Component
     }
     public function setActiveAS($accountSet)
     {
-        
-        $this->activeAccountSet = $accountSet;
+        $this->activeSecondaryTabAS = $accountSet;
         
     }
 }
