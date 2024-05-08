@@ -3,7 +3,7 @@
     <div class="left-info">
         <div>
             <div class="a">
-                <img src="../images/logo.png" class="img-fluid">
+                <img src="../images/deskit_logo.png" class="object-contain" alt="logo" >
             </div>
 
             <div class="a">
