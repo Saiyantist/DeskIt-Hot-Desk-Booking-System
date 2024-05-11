@@ -26,8 +26,6 @@
                 </div>
 
                 {{-- Account Settings SECONDARY TABS --}}
-                </div>
-
                 @if($activeSection ===1)
                 <div class="flex flex-row">
                     <div class="flex flex-col m-10">
