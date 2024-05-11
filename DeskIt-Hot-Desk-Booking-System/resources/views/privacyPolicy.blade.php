@@ -1,13 +1,23 @@
 
 @livewireStyles 
     
-@include('layouts.nav')
-<main>
+@if(auth()->check())
+        @include('partials.headNav')
+        @include('layouts.adminNav') 
+        <main class="-mt-10">
+            <section class="m-10">
+                    @livewire('support-page', ['sectionNumber' => 2])
+            </section>
+        </main>
     
-    <section>
-        @livewire('support-page', ['sectionNumber' => 2])
+    {{-- when NOT logged in --}}
+    @else
+        @include('layouts.nav') {{-- Include nav2 when not logged in --}}
+        <main>
+            <section class="mb-20">
+                @livewire('support-page', ['sectionNumber' => 2])
+            </section>
+        </main>
 
-    </section>
-
-</main>
+    @endif
 @livewireScripts

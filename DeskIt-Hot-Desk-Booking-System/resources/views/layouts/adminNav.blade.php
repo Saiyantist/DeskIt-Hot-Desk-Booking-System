@@ -38,7 +38,7 @@
             </div>
         </div>
     </nav>
-    <div class="wrapper min-h-screen">
+    <div class="wrapper h-full z-50">
         <aside id="sidebar">
             <div class="toggle-btn" onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>
@@ -49,7 +49,7 @@
                         <img src="{{ asset('images/home.svg') }}" class="py-3 default-image" alt="Default SVG Image">
                         <img src="{{ asset('images/ahome.svg') }}" class="py-3 alternative-image"
                             alt="Alternative SVG Image">
-                        <span>Dashboard</span>
+                        <span class="text-yellowB">Dashboard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -57,7 +57,7 @@
                         <img src="{{ asset('images/deskmap.svg') }}" class="py-3 default-image" alt="Default SVG Image">
                         <img src="{{ asset('images/adeskmap.svg') }}" class="py-3 alternative-image"
                             alt="Alternative SVG Image">
-                        <span>Desk Map</span>
+                        <span class="text-yellowB">Desk Map</span>
                     </a>
                 </li>
 
@@ -68,7 +68,7 @@
                             alt="Default SVG Image">
                         <img src="{{ asset('images/aonbehalf.svg') }}" class="py-3 alternative-image"
                             alt="Alternative SVG Image">
-                        <span>Book on Behalf</span>
+                        <span class="text-yellowB">Book on Behalf</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -77,19 +77,21 @@
                         <img src="{{ asset('images/help.svg') }}" class="py-3 default-image" alt="Default SVG Image">
                         <img src="{{ asset('images/ahelp.svg') }}" class="py-3 alternative-image"
                             alt="Alternative SVG Image">
-                        <span> Help Desk</span>
+                        <span class="text-yellowB"> Help Desk</span>
                     </a>
                 </li>
+                <li class="sidebar-item absolute bottom-20">
+                    <a href="{{ route('logout') }}" class="sidebar-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <img src="{{ asset('images/logout.svg') }}" class="py-3 default-image" alt="Logout Image">
+                        <span class="text-yellowB">Logout</span>
+                    </a>
+                    
+                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                        @csrf
+                    </form>                    
+                </li>
+                
             </ul>
-            
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <x-primary-button :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class=" sidebar-link border-0 mb-4">
-                    <img src="{{asset('images/logout.svg')}}" alt="SVG Image">
-                    <span class=" text-yellowB">Logout</span>
-                </x-primary-button>
-            </form>
         </aside>
     </div>
 </section>

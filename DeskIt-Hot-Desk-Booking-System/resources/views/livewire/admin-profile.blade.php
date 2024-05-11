@@ -1,7 +1,7 @@
 <div class="rounded-lg">
 
     <div class="flex justify-center items-center mt-2 ">
-
+    
         <div class="flex flex-row justify-center items-center mt-4 bg-white ml-16"
             style="width: 80%; border:1px solid rgba(128, 128, 128, 0.2);">
             <div class="self-start w-full p-2">
@@ -26,36 +26,36 @@
                 </div>
 
                 {{-- Account Settings SECONDARY TABS --}}
-                @if($activeSection === 1)
-                    <div class="flex flex-row m-4 ">
-                        <div class="flex flex-col">
-                            <div class="flex self-center rounded-xl pt-2 px-2 w-60 {{ $activeAccountSet == 1 ? 'active-accountSet' : '' }}"
-                                style="border:1px solid rgba(128, 128, 128, 0.9);">
-                                <h2 wire:click="setActiveAS(1)" class=" text-lg cursor-pointer ">
-                                    Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                </div>
 
-
-                            </div>
-                            <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60  {{ $activeAccountSet == 2 ? 'active-accountSet' : '' }}"
-                                style="border:1px solid rgba(128, 128, 128, 0.9);">
-                                <h2 wire:click="setActiveAS(2)" class=" text-lg cursor-pointer">
-                                    Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
-
-
-                            </div>
+                @if($activeSection ===1)
+                <div class="flex flex-row">
+                    <div class="flex flex-col m-10">
+                        <div class="flex self-center rounded-xl pt-2 px-2 w-60 {{ $activeSecondaryTabAS == 1 ? 'active-secondaryTabAS' : '' }}"
+                            style="border:1px solid rgba(128, 128, 128, 0.9);">
+                            <h2 wire:click="setActiveAS(1)" class="text-lg cursor-pointer ">
+                                Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
                         </div>
-                        <div class="">
-                            @if($activeAccountSet == 1)
-                            <div class="ml-10">
-                                @include('admin.profileEdit')
-                            </div>
-                            @elseif($activeAccountSet == 2)
-                            <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
-                                <div class="max-w-xl ">
-                                    @include('profile.partials.update-password-form')
-                                </div>
-                            </div>
 
+                        <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60  {{ $activeSecondaryTabAS == 2 ? 'active-secondaryTabAS' : '' }}"
+                            style="border:1px solid rgba(128, 128, 128, 0.9);">
+                            <h2 wire:click="setActiveAS(2)" class=" text-lg cursor-pointer">
+                                Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                        </div>
+                    </div>
+
+                    <div>
+                        @if($activeSecondaryTabAS === 1)
+                        <div>
+                            @include('admin.profileEdit')
+                        </div>
+                        
+                        @elseif($activeSecondaryTabAS === 2)
+                        <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
+                            <div class="max-w-xl ">
+                                @include('profile.partials.update-password-form')
+                            </div>
+                            
                             @endif
                         </div>
                     </div>
