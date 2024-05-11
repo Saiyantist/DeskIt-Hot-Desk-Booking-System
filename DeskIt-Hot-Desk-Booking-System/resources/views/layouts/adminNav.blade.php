@@ -1,12 +1,15 @@
 <section id="navigation">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-custom">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('dashboard')}}"><img src="/images/logo.png" alt="logo"></a>
-            <div class="justify-content-lg-end d-flex flex-row  px-2" id="collapsibleNavbar">
-
+    <nav class="navbar fixed-top navbar-expand-lg navbar-custom flex">
+        <div class="w-full flex justify-between">
+            <a class="navbar-brand" href="{{ route('dashboard')}}"><img src="{{ asset('images/deskit_logo.png') }}" class="object-contain" alt="logo"></a>
+            <div class="justify-content-lg-end d-flex flex-row px-2">
+                {{--
                 <ul class="navbar-nav nav-menu mb-lg-0 px-3" id=btn>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{route('home')}}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('book-behalf')}}">Booking</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('map')}}">Desk Map</a>
@@ -14,32 +17,84 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('profile')}}">Users Management</a>
                     </li>
-                </ul>
+                </ul> --}}
                 <div class="compile">
                     <!-- Settings Dropdown -->
                     <div class="hidden sm:flex sm:items-center sm:mr-6 justify-end">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <a wire:navigate href="{{route('profile')}}"
+                            class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full  dark:text-gray-400 bg-yellowA dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150 text-block no-underline"
+                            style="border:1px solid #FBB503">
+                            <div class="py-1"> <i class="fa-regular fa-user mr-1"></i> {{ Auth::user()->name }}</div>
+                        </a>
 
-                            <x-primary-button :href="route('logout')" onclick="event.preventDefault();
-                                                        this.closest('form').submit();" class="text-black"
-                                class=" bg-yellowB no-underline">
-                                {{ __('Log Out') }}
-                            </x-primary-button>
-                        </form>
+
 
 
 
                     </div>
 
-                    <div class="hamburger">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </div>
+
                 </div>
             </div>
         </div>
     </nav>
+    <div class="wrapper h-full z-50">
+        <aside id="sidebar">
+            <div class="toggle-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a wire:navigate class="sidebar-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }} ">
+                        <img src="{{ asset('images/home.svg') }}" class="py-3 default-image" alt="Default SVG Image">
+                        <img src="{{ asset('images/ahome.svg') }}" class="py-3 alternative-image"
+                            alt="Alternative SVG Image">
+                        <span class="text-yellowB">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a wire:navigate class="sidebar-link {{ request()->is('map') ? 'active' : '' }}" href="{{ route('map') }}">
+                        <img src="{{ asset('images/deskmap.svg') }}" class="py-3 default-image" alt="Default SVG Image">
+                        <img src="{{ asset('images/adeskmap.svg') }}" class="py-3 alternative-image"
+                            alt="Alternative SVG Image">
+                        <span class="text-yellowB">Desk Map</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a wire:navigate class="sidebar-link {{ request()->is('book-behalf') ? 'active' : '' }}"
+                        href="{{ route('book-behalf') }}">
+                        <img src="{{ asset('images/onbehalf.svg') }}" class="py-3 default-image"
+                            alt="Default SVG Image">
+                        <img src="{{ asset('images/aonbehalf.svg') }}" class="py-3 alternative-image"
+                            alt="Alternative SVG Image">
+                        <span class="text-yellowB">Book on Behalf</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a wire:navigate class="sidebar-link {{ request()->is('support') ? 'active' : '' }}"
+                        href="{{ route('support') }}">
+                        <img src="{{ asset('images/help.svg') }}" class="py-3 default-image" alt="Default SVG Image">
+                        <img src="{{ asset('images/ahelp.svg') }}" class="py-3 alternative-image"
+                            alt="Alternative SVG Image">
+                        <span class="text-yellowB"> Help Desk</span>
+                    </a>
+                </li>
+                <li class="sidebar-item absolute bottom-20">
+                    <a href="{{ route('logout') }}" class="sidebar-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <img src="{{ asset('images/logout.svg') }}" class="py-3 default-image" alt="Logout Image">
+                        <span class="text-yellowB">Logout</span>
+                    </a>
+                    
+                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                        @csrf
+                    </form>                    
+                </li>
+                
+            </ul>
+        </aside>
+    </div>
 </section>
-<script src="{{ asset('js/myScript2.js') }}"></script>
+
+<script src="{{ asset('js/myScript2.js') }}">
+</script>

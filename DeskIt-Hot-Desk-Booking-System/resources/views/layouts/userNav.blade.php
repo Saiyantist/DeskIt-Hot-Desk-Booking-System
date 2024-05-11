@@ -4,7 +4,7 @@
     <section id="navigation">
         <nav class="navbar fixed-top navbar-expand-lg navbar-custom">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ route('dashboard')}}"><img src="/images/logo.png" alt="logo"></a>
+                <a class="navbar-brand" href="{{ route('dashboard')}}"><img src="{{ asset('images/deskit_logo.png') }}" class="object-contain" alt="logo"></a>
                 <div class="justify-content-lg-end d-flex flex-row  px-2" id="collapsibleNavbar">
 
                     <ul class="navbar-nav nav-menu mb-lg-0 px-3" id=btn>

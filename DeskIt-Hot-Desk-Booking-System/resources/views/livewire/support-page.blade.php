@@ -2,7 +2,7 @@
 
     <main class="mt-28 mx-20 text-lg">
 
-        <div class="m-3">
+        <div class="pt-10">
             @if($sectionNumber === 1)
             <h1 class="font-bold">FREQUENTLY ASKED QUESTIONS</h1>
             <div>

@@ -1,31 +1,47 @@
 @extends('layouts.adminlayout')
 
 <x-app-layout>
+
     @section('content')
-    <div class="bg h-56 relative z-0">
-    </div>
-    <!-- Profile Information -->
-    <div class="container flex flex-row  items-center justify-start absolute top-24">
-        <!-- Profile Picture -->
-        <img class="w-40 h-40 rounded-full border border-gray-500 ml-20" src="/images/anonymous.jpg"
-            alt="Profile Picture">
+    <div class="flex justify-center items-center mt-16 ml-16">
+        <div class="bg-white mt-10 w-11/12 h-56 flex justify-start items-center drop-shadow-lg">
 
-        <!-- User's Name -->
-        <div class="flex row m-3 justify-center align-center">
-            <h1 class="text-3xl font-bold">{{ Auth::user()->name }}  <a href="{{ route('profile-edit') }}" class="text-block px-2 text-2xl"><i
-                class="fa-solid fa-pen-to-square"></i></a></h1>
-            <p class="text-lg font-normal">
-                @if(Auth::user()->roles->contains('name', 'user'))
-                Employee
-                @elseif(Auth::user()->roles->contains('name', 'admin'))
-                Administrator
-                @endif</p>
-            <p class="text-lg font-normal">{{ Auth::user()->email }}</p>
+             <div class="flex">
+                <!-- Profile Picture -->
+                <img class="w-40 h-40 rounded-full border border-gray-500 ml-10" src="/images/anonymous.jpg"
+                     alt="Profile Picture">
+                <div class="flex self-end -ml-10 mr-5">
+                    <a wire:navigate href="#"><img src="{{ asset('images/cam.svg') }}"></a>
+                </div>
+             </div>
+
+            <div class="m-3 pb-4 flex flex-col self-end">
+                
+               <!-- User's Name -->
+                <h1 class="text-3xl font-bold">{{ Auth::user()->name }}</h1>
+
+                 <!-- User's Role -->
+                <div>
+                    @if(Auth::user()->roles->contains('name', 'employee'))
+                    <div class="flex">
+                        <img src="{{ asset('images/employee-profile.svg') }}">
+                        <div class="ml-2 text-lg font-normal">Employee</div>
+                    </div>
+
+                    @elseif(Auth::user()->roles->whereNotIn('name', 'employee')->isNotEmpty())
+                    <div class="flex">
+                        <img src="{{ asset('images/administrator.svg') }}" >
+                        <div class="ml-2 text-lg font-normal">Administrator</div>
+                    </div>
+
+                    @endif
+                </div>
+            </div>
+
         </div>
-       
     </div>
 
-    <section class="mt-20">
+    <section class="mt-1">
         @livewire('admin-profile')
     </section>
     @endsection

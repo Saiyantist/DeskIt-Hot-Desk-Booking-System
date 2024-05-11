@@ -1,77 +1,123 @@
-@props([
-    'name',
-    'show' => false,
-    'maxWidth' => '2xl'
-])
-
-@php
-$maxWidth = [
-    'sm' => 'sm:max-w-sm',
-    'md' => 'sm:max-w-md',
-    'lg' => 'sm:max-w-lg',
-    'xl' => 'sm:max-w-xl',
-    '2xl' => 'sm:max-w-2xl',
-][$maxWidth];
-@endphp
-
+@props(['name', 'title', ])
 <div
-    x-data="{
-        show: @js($show),
-        focusables() {
-            // All focusable element types...
-            let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
-            return [...$el.querySelectorAll(selector)]
-                // All non-disabled elements...
-                .filter(el => ! el.hasAttribute('disabled'))
-        },
-        firstFocusable() { return this.focusables()[0] },
-        lastFocusable() { return this.focusables().slice(-1)[0] },
-        nextFocusable() { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() },
-        prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },
-        nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
-        prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
-    }"
-    x-init="$watch('show', value => {
-        if (value) {
-            document.body.classList.add('overflow-y-hidden');
-            {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
-        } else {
-            document.body.classList.remove('overflow-y-hidden');
-        }
-    })"
-    x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
-    x-on:close.stop="show = false"
-    x-on:keydown.escape.window="show = false"
-    x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
-    x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
-    x-show="show"
-    class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
-    style="display: {{ $show ? 'block' : 'none' }};"
->
-    <div
-        x-show="show"
-        class="fixed inset-0 transform transition-all"
-        x-on:click="show = false"
-        x-transition:enter="ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-    >
-        <div class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
+    x-data = "{ show : false , name : '{{ $name }}'}"
+    x-show = "show"
+    x-on:open-modal.window = "show = ($event.detail.name === name)"
+    x-on:close-modal.window = "show = false"
+    x-on:keydown.escape.window = "show = false"
+    style="display: none;"
+    x-transition.delay.350ms
+
+    class="fixed z-50 inset-0 bg-white-500">
+
+    
+    <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px]"
+        wire:click='resetEditData'></div>
+
+    {{-- Modal Dynamic Sizes according to modal type --}}
+
+    {{-- EditModal --}}
+    @if($name === 'edit-modal')
+        <div class="fixed inset-0 border-solid border-blue-800 border-1 bg-blue-300 rounded-4 m-auto w-7/12 max-h-[400px]">
+
+            @if(isset($title))
+            <div class="flex justify-between m-3 mb-2 ">
+                <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                <span class=" font-semibold text-2xl text-blue-50">{{ $title }}</span>
+                <button class="mr-6 font-bold text-white text-2xl"
+                        x-on:click="$dispatch('close-modal')"
+                        wire:click='resetEditData'
+                        >x
+                </button>
+            </div>
+            @endif
+            <hr class="bg-darkBlue m-0 p-0">
+            <div class="flex h-[85.7%] items-center justify-center bg-white rounded-bottom-4 p-0">
+                {{ $body }}
+            </div>
+
+    {{-- Accept Modal --}}
+    @elseif($name === 'activate-modal')
+        <div class="fixed inset-0 border-solid border-green-500 border-1 bg-green-300 rounded-4 m-auto w-1/4 max-h-[250px]">
+
+                @if(isset($title))
+                <div class="flex justify-between m-3 mb-2 ">
+                    <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                    <span class=" font-medium text-xl text-green-50">{{ $title }}</span>
+                    <button class="mr-6 font-bold text-white text-2xl"
+                            x-on:click="$dispatch('close-modal')"
+                            wire:click='resetEditData'
+                            >x
+                    </button>
+                </div>
+                @endif
+                <hr class="bg-darkergray m-0 p-0">
+                <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                    {{ $body }}
+                </div>
+    
+    {{-- Deact Modal --}}
+    @elseif($name === 'deact-modal')
+        <div class="fixed inset-0 border-solid border-slate-500 border-1 bg-slate-300 rounded-4 m-auto w-1/4 max-h-[250px]">
+
+                @if(isset($title))
+                <div class="flex justify-between m-3 mb-2 ">
+                    <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                    <span class=" font-medium text-xl text-white">{{ $title }}</span>
+                    <button class="mr-6 font-bold text-white text-2xl"
+                            x-on:click="$dispatch('close-modal')"
+                            wire:click='resetEditData'
+                            >x
+                    </button>
+                </div>
+                @endif
+                <hr class="bg-darkergray m-0 p-0">
+                <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                    {{ $body }}
+                </div>
+
+    {{-- Delete Modal --}}
+    @elseif($name === 'delete-modal')
+        <div class="fixed inset-0 border-solid border-red-800 border-1 bg-red-300 rounded-4 m-auto w-1/4 max-h-[250px]">
+
+            @if(isset($title))
+            <div class="flex justify-between m-3 mb-2 ">
+                <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                <span class=" font-medium text-xl text-red-50">{{ $title }}</span>
+                <button class="mr-6 font-bold text-white text-2xl"
+                        x-on:click="$dispatch('close-modal')"
+                        wire:click='resetEditData'
+                        >x
+                </button>
+            </div>
+            @endif
+            <hr class="bg-darkRed m-0 p-0">
+            <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                {{ $body }}
+            </div>
+    {{-- Make Emp/OM/Admin MODALS --}}
+    @elseif($name === 'makeEmp-modal' || $name == 'makeOM-modal' || $name == 'makeAdmin-modal')
+        <div class="fixed inset-0 border-solid border-yellowBdarker border-1 bg-yellowLight rounded-4 m-auto w-1/4 max-h-[250px]">
+
+            @if(isset($title))
+            <div class="flex justify-between m-3 mb-2 ">
+                <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                <span class=" font-medium text-xl text-yellowBdarker">{{ $title }}</span>
+                <button class="mr-6 font-light text-yellowBdarker text-2xl"
+                        x-on:click="$dispatch('close-modal')"
+                        wire:click='resetEditData'
+                        >x
+                </button>
+            </div>
+            @endif
+            <hr class="bg-darkRed m-0 p-0">
+            <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                {{ $body }}
+            </div>
+
+    @endif
+        
     </div>
 
-    <div
-        x-show="show"
-        class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
-        x-transition:enter="ease-out duration-300"
-        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-        x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-    >
-        {{ $slot }}
-    </div>
+
 </div>

@@ -1,44 +1,126 @@
-@extends('layouts.adminlayout')
-<x-app-layout>
-    <div class="flex items-center justify-center flex-col">
-        <!-- Cover Photo -->
+<div class=" bg-white">
+    <div class=" h-fit" style="border-left:1px solid rgba(128, 128, 128, 0.2);">
+        <div class="flex justify-between">
 
-        <div class="py-12 mt-16 w-1/2 text-lg">
-               
-                <div class="p-4 bg-white sm:rounded-lg border mb-10">
-                    <p class=" font-semibold ml-2 text-center my-2">PROFILE INFORMATION</p>
-                    <div class="max-w-xl py-2">
-                        <!-- User Information -->
-                        <p class="text-lg font-semibold ml-2">Name</p>
-                        <div class="border  p-2 rounded-lg"> {{ Auth::user()->name }}</div>
-                    </div>
-                    <div class="max-w-xl py-2">
-                        <!-- User Information -->
-                        <p class="text-lg font-semibold ml-2">Email</p>
-                        <div class="border p-2 rounded-lg"> {{ Auth::user()->email }}</div>
-                    </div>
-                    <div class="max-w-xl py-2">
-                        <!-- User Information -->
-                        <p class="text-lg font-semibold ml-2">Gender</p>
-                        <div class="border p-2 rounded-lg"> {{ Auth::user()->gender }}</div>
-                    </div>
-                    <div class="max-w-xl py-2">
-                        <!-- User Information -->
-                        <p class="text-lg font-semibold ml-2">Birthday</p>
-                        <div class="border p-2 rounded-lg"> {{ Auth::user()->birthday }}</div>
-                    </div>
-                </div>
-                <div class="p-4 sm:p-8 bg-white sm:rounded-lg border">
-                    <div class="max-w-xl">
-                        @include('profile.partials.update-password-form')
-                    </div>
-                </div>
+            <div class="m-10">
+                <h2 class="font-extrabold text-2xl">Personal Information</h2>
+            </div>
 
-           
-
+            {{-- Edit Details --}}
+            <div class="flex m-10">
+                <div class="cursor-pointer text-white h-fit w-32 text-center" wire:click="toggleEditMode">
+                    
+                    @if($editMode)
+                    <h2 wire:submit wire:click="editProfileSave" class=" bg-yellowB p-2 text-base rounded-md">
+                        <i class="fa-regular fa-floppy-disk px-1"></i>
+                        Save
+                    </h2>
+                    @else
+                        <h2 class="bg-blue p-2 text-base rounded-md">
+                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                            Edit Details
+                        </h2>
+                    @endif
+                    </div>
+            </div>
         </div>
-    </div>
 
+        <div class="ml-24 pb-10">
+            <form method="post" action="{{route('profile.update')}}">
+                @csrf
+                @method('patch')
+    
+                {{-- first row --}}
+                <div class="flex">
+                    {{-- User Full Name --}}
+                    <div class=" max-w-xl w-fit mx-4">
+                        <h2 class="text-lg ml-2">Full Name</h2>
+    
+                        @if ($editMode)
+                        <input class="border p-2 rounded-lg w-80" 
+                            wire:model.live="name" type="text" name="name"
+                            value="{{ Auth::user()->name }}">
+    
+                        @else
+                        <div class="border p-2 rounded-lg w-80" 
+                            wire:click="toggleEditMode">
+                            {{ Auth::user()->name }}
+                        </div>
+    
+                        @endif
+                    </div>
+    
+                    {{-- User Email --}}
+                    <div class=" max-w-xl w-fit mx-4">
+                        <h2 class="text-lg ml-2">Email</h2>
+    
+                        @if ($editMode)
+                        <input class="border p-2 rounded-lg w-80" 
+                            wire:model.live="email" type="email"
+                            name="email" value="{{ Auth::user()->email }}">
+    
+                        @else
+                        <div class="border p-2 rounded-lg w-80" 
+                            wire:click="toggleEditMode">
+                            {{ Auth::user()->email }}
+                        </div>
+    
+                        @endif
+                    </div>
+    
+                </div>
+    
+                {{-- second row --}}
+                <div class="flex mt-4">
+                    {{-- User Gender --}}
+                    <div class=" max-w-xl w-fit mx-4">
+                        <h2 class="text-lg ml-2">Gender</h2>
+    
+                        @if ($editMode)
+                        <select class="border p-2 rounded-lg w-80" name="gender" 
+                            wire:model.live="gender">
+    
+                            @if(Auth::user()->gender === 'male')
+                            <option value='' selected>male</option>
+                            <option value="female">female</option>
+    
+                            @elseif(Auth::user()->gender === 'female')
+                            <option value='' selected>female</option>
+                            <option value="male">male</option>
+    
+                            @endif
+                        </select>
+    
+                        @else
+                        <div class="border p-2 rounded-lg w-80" 
+                            wire:click="toggleEditMode">
+                            {{ Auth::user()->gender }}
+                        </div>
+    
+                        @endif
+                    </div>
+    
+                    {{-- User Birthday--}}
+                    <div class=" max-w-xl w-fit mx-4">
+                        <h2 class="text-lg ml-2">Birthday</h2>
+    
+                        @if ($editMode)
+                        <input class="border p-2 rounded-lg w-80" 
+                            wire:model.live="birthday" type="date"
+                            name="birthday" value="{{ Auth::user()->birthday }}">
+    
+                        @else
+                        <div class="border p-2 rounded-lg w-80" 
+                            wire:click="toggleEditMode">
+                            {{ Auth::user()->birthday }}
+                        </div>
+    
+                        @endif
+                    </div>
+                </div>
+    
+            </form>
+        </div>
 
     </div>
-</x-app-layout>
+</div>

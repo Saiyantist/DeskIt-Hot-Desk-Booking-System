@@ -13,6 +13,10 @@ use function PHPUnit\Framework\returnValue;
 
 class AdminDeskmap extends Component
 {
+    public $availableDeskCount;
+
+    public $bookedCount;
+    public $notAvailableCount;
     public $floor = "1";
     public $selectedDesk ='-';
     public $bookedDesk = '-';
@@ -36,7 +40,11 @@ class AdminDeskmap extends Component
     public $showWarning2 = false;
     
 
-
+    public function mount() {
+        $this->availableDeskCount = Desk::where('status', 'in_use')->count();
+        $this->notAvailableCount = Desk::where('status', 'not_available')->count();
+        $this->bookedCount = Bookings::where('status', 'accepted')->count();
+    }
 
     public function refreshMap() 
     {
