@@ -13,6 +13,11 @@ use function PHPUnit\Framework\isNull;
 class AdminProfile extends Component
 {   
 /**
+ *  Authenticated User for Livewire
+ */
+    public $user;
+
+/**
  *  Containers for the list of user-type from the Databasea.
  */
     public $users;
@@ -62,6 +67,8 @@ class AdminProfile extends Component
 
     public function mount()
     {       
+            $this->user = Auth::user()->id;
+
             $this->users3 = User::whereDoesntHave('roles', function ($query) {
                 $query->where('name', 'admin')
                 ->orWhere('name', 'employee')
@@ -208,9 +215,9 @@ class AdminProfile extends Component
             $user->update(['Position' => $this->editPosition,]);
         }
 
-
+        $this->reset('editMode');
+        $this->dispatch('refreshComponent');
         $this->resetEditData();
-        // $this->redirect(request()->header('Referer'));
     }
 
     /**
@@ -297,7 +304,11 @@ class AdminProfile extends Component
 
     public function toggleEditMode()
     {   
-        $this->editMode = true;
+        $this->editMode = !$this->editMode;
+        // dd($this->editMode);
+        $edit = Auth::user()->id;
+        $this->editUserId = User::find($edit);
+        // dd($this->editUserId);
     }
 
     public function render()
