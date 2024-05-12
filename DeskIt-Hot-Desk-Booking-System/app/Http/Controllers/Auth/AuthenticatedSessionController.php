@@ -27,7 +27,16 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-        $request->user()->sendEmailVerificationNotification();
+
+        // Checks if authenticating user is not NEW.
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        // Requires NEW users to verify their email.
+        else {
+            $request->user()->sendEmailVerificationNotification();
+        }
         
         return redirect()->route('dashboard'); 
     }
@@ -37,19 +46,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $user = Auth::user();
+        // $user = Auth::user();
+        // if ($user) {
+        //     $user->email_verified_at = null;
+        //     $user->save();
+        // }
 
-        if ($user) {
-            $user->email_verified_at = null;
-            $user->save();
-        }
+        // Removed this because this will make any user at logout seem like a NEW user again.
 
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }
