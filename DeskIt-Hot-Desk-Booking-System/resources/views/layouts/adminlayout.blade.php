@@ -32,14 +32,8 @@
 </head>
 
 <body>
-
-    @include('layouts.adminNav')
-   
     {{-- page content --}}
     @yield('content')
-
-
-
 </body>
     @livewireScripts
 </html>
