@@ -17,7 +17,17 @@
     </head>
     <body class="font-sans antialiased">
         <div class="bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+
+            {{-- Show corresponding TOP NAVIGATION --}}
+            @if(auth()->check())
+                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('officemanager'))
+                    @include('layouts.adminNav')
+                @elseif(Auth::user()->hasRole('employee'))
+                    @include('layouts.userNav')
+                @endif
+            @else
+                @include('layouts.navigation')
+            @endif
 
             <!-- Page Heading -->
             @if (isset($header))
