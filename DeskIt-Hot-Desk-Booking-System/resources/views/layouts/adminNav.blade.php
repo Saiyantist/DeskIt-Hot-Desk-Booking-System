@@ -1,19 +1,18 @@
 <section id="navigation">
     <nav class="navbar fixed-top navbar-expand-lg navbar-custom flex">
         <div class="w-full flex justify-between">
+
+            {{-- Brand Logo --}}
             <a class="navbar-brand" href="{{ route('dashboard')}}"><img src="{{ asset('images/deskit_logo.png') }}" class="object-contain" alt="logo"></a>
 
-
+            <!-- Display Current User -->
             <div class="justify-content-lg-end d-flex flex-row px-2">
-                <div class="compile">
-                    <!-- Display Current User -->
-                    <div class="hidden sm:flex sm:items-center sm:mr-6 justify-end">
-                        <a wire:navigate href="{{route('profile')}}"
-                            class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full  dark:text-gray-400 bg-yellowA dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150 text-block no-underline"
-                            style="border:1px solid #FBB503">
-                            <div class="py-1"> <i class="fa-regular fa-user mr-1"></i> {{ Auth::user()->name }}</div>
-                        </a>
-                    </div>
+                <div class="hidden sm:flex sm:items-center sm:mr-6 justify-end">
+                    <a wire:navigate href="{{route('profile')}}"
+                        class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full bg-yellowA hover:text-yellowBdarker dark:hover:text-yellowBdarker focus:outline-none transition ease-in-out duration-150 text-block no-underline"
+                        style="border:1px solid #FBB503">
+                        <div class="py-1"> <i class="fa-regular fa-user mr-1"></i> {{ Auth::user()->name }}</div>
+                    </a>
                 </div>
             </div>
         </div>
