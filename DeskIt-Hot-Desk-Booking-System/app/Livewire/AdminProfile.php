@@ -67,6 +67,12 @@ class AdminProfile extends Component
 
     public $editMode = false;
 
+    // profile edit
+    public $name;
+    public $email;
+    public $gender;
+    public $birthday;
+
 
     public function mount()
     {       
@@ -94,6 +100,12 @@ class AdminProfile extends Component
 //               ->orWhere('name', 'superadmin')
 //               ->orWhere('name', 'officemanager');
 //             })->get();
+                
+            $this->name = Auth::user()->name;
+            $this->email = Auth::user()->email;
+            $this->gender = Auth::user()->gender;
+            $this->birthday = Auth::user()->birthday;
+
        
     }
 
@@ -275,10 +287,7 @@ class AdminProfile extends Component
             $this->dispatch('refreshComponent');
             // $this->redirect(request()->header('Referer'));
         }
-
-        
     }
-
 
     /**
      *  ACCEPT USER
@@ -301,22 +310,6 @@ class AdminProfile extends Component
         // $this->showModal2 = true;
         $this->activateUserId = User::find($userId);
     }
-
-
-
-
-    // public function openModalAdd()
-    // {
-    //     $this->showModalAddUser = true;
-    //     // $this->addUser = $userId;
-    // }
-
-    // public function closeModalAdd()
-    // {
-    //     $this->showModalAddUser = false;
-    // }
-
-
     
     public function resetEditData() {
         $this->reset(
@@ -341,9 +334,31 @@ class AdminProfile extends Component
         $this->editMode = true;
     }
 
+    //save profile
+    public function editProfile()
+{
+    $user = Auth::user();
+
+    if ($user) {
+        // Update user's name and email
+        $user->name = $this->name;
+        $user->email = $this->email;
+        $user->gender = $this->gender;
+        $user->birthday = $this->birthday;
+        $user->save();
+
+    }
+
+    $this->editMode = false;
+    
+    $this->redirect(request()->header('Referer'));
+    
+    
+}
+
+
     public function render()
     {
-        // Check if $reloadComponent is true and reset it to false
         return view('livewire.admin-profile');
     }
     
@@ -357,7 +372,7 @@ class AdminProfile extends Component
         }
         
         if($section === 1){
-            $this->reset('activeAccountSet', 'activeSection');
+            $this->reset('activeSecondaryTabAS', 'activeSection');
         }
     }
     public function setActiveAS($accountSet)

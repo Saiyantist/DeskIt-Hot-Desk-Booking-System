@@ -1,35 +1,31 @@
-<div class=" bg-white">
-    <div class=" h-fit" style="border-left:1px solid rgba(128, 128, 128, 0.2);">
+<div class=" bg-white " style="width: 80%;">
+    <div class=" h-fit relative" style="border-left:1px solid rgba(128, 128, 128, 0.2);">
         <div class="flex justify-between">
 
             <div class="m-10">
                 <h2 class="font-extrabold text-2xl">Personal Information</h2>
             </div>
 
-            {{-- Edit Details --}}
-            <div class="flex m-10">
-                <div class="cursor-pointer text-white h-fit w-32 text-center" wire:click="toggleEditMode">
-                    
+        </div>
+
+        <div class="mx-10 pb-10">
+            <form wire:submit.prevent="editProfile">
+                @csrf
+                @method('patch')
+                
+                {{-- buttons --}}
+                <div class=" absolute left-full top-10 cursor-pointer text-white h-fit text-center" wire:click="toggleEditMode">
                     @if($editMode)
-                    <h2 wire:submit wire:click="editProfileSave" class=" bg-yellowB p-2 text-base rounded-md">
-                        <i class="fa-regular fa-floppy-disk px-1"></i>
-                        Save
-                    </h2>
+                        <button type="submit" class="btn btn-warning text-white w-32">{{
+                        __('Save') }}</button>
                     @else
-                        <h2 class="bg-blue p-2 text-base rounded-md">
+                        <h2 class="bg-blue p-2 text-base rounded-md w-32">
                             <i class="fa-solid fa-pen-to-square px-1"></i>
                             Edit Details
                         </h2>
                     @endif
-                    </div>
-            </div>
-        </div>
+                </div>
 
-        <div class="ml-24 pb-10">
-            <form method="post" action="{{route('profile.update')}}">
-                @csrf
-                @method('patch')
-    
                 {{-- first row --}}
                 <div class="flex">
                     {{-- User Full Name --}}
@@ -38,8 +34,11 @@
     
                         @if ($editMode)
                         <input class="border p-2 rounded-lg w-80" 
-                            wire:model.live="name" type="text" name="name"
-                            value="{{ Auth::user()->name }}">
+                            wire:model.live="name" 
+                            type="text" 
+                            name="name"
+                            @click.away="$wire.set('editMode', false)">
+                            
     
                         @else
                         <div class="border p-2 rounded-lg w-80" 
@@ -56,8 +55,7 @@
     
                         @if ($editMode)
                         <input class="border p-2 rounded-lg w-80" 
-                            wire:model.live="email" type="email"
-                            name="email" value="{{ Auth::user()->email }}">
+                            wire:model.live="email" type="email">
     
                         @else
                         <div class="border p-2 rounded-lg w-80" 
@@ -107,7 +105,7 @@
                         @if ($editMode)
                         <input class="border p-2 rounded-lg w-80" 
                             wire:model.live="birthday" type="date"
-                            name="birthday" value="{{ Auth::user()->birthday }}">
+                            name="birthday">
     
                         @else
                         <div class="border p-2 rounded-lg w-80" 
@@ -118,7 +116,6 @@
                         @endif
                     </div>
                 </div>
-    
             </form>
         </div>
 
