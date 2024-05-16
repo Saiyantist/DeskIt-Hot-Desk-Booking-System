@@ -7,19 +7,19 @@ $currentRoute = Route::currentRouteName();
 <section id="navigation">
     <nav class="navbar fixed-top navbar-expand-lg navbar-custom flex">
         <div class="w-full flex justify-between">
-
-            {{-- logo --}}
+        
+            {{-- Brand Logo --}}
             <div class="navbar-brand" > 
                 <img src="{{ asset('images/deskit_logo.png') }}"
                 class="object-contain" alt="logo">
             </div>
 
-            {{-- profile --}}
+            {{-- Profile --}}
             <div class="justify-content-lg-end d-flex flex-row px-2">
                 <div class="compile mr-10">
 
                     <a wire:navigate href="{{route('profile')}}"
-                        class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full dark:text-gray-400 bg-yellowA dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150 text-block no-underline"
+                        class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full bg-yellowA hover:text-yellowBdarker dark:hover:text-yellowBdarker focus:outline-none transition ease-in-out duration-150 text-block no-underline"
                         style="border: 1px solid #FBB503">
                         <div class="py-1"> <i class="fa-regular fa-user mr-1"></i> {{ Auth::user()->name }}</div>
                     </a>

@@ -27,7 +27,8 @@
 
                 {{-- Account Settings SECONDARY TABS --}}
 
-                @if($activeSection ===1)
+                @if($activeSection === 1)
+                
                 <div class="flex flex-row">
                     <div class="flex flex-col m-10">
                         <div class="flex self-center rounded-xl pt-2 px-2 w-60 {{ $activeSecondaryTabAS == 1 ? 'active-secondaryTabAS' : '' }}"
@@ -60,7 +61,7 @@
                     </div>
 
                 {{-- Manage Users SECONDARY Taabs --}}
-                @elseif($activeSection == 2)
+                @elseif($activeSection === 2)
                 
                     <div class="flex flex-row mt-2">
 
@@ -103,7 +104,7 @@
                 <div class="flex justify-center items-center mt-3 p-3 text-sm">
     
                     {{-- Admins --}}
-                    @if($activeSecondaryTabMU == 'admins')
+                    @if($activeSecondaryTabMU === 'admins')
                     <table class="w-full justify-center items-center text-center bg-gray">
                         <thead >
                             <tr class="border-1 border-black bg-grey">
@@ -426,7 +427,7 @@
                     </table>
 
                     {{-- Office manager --}}
-                    @elseif($activeSecondaryTabMU  == 'oms')
+                    @elseif($activeSecondaryTabMU  === 'oms')
                     <table class="w-full justify-center items-center text-center bg-gray">
                         <thead>
                             <tr class="border-1 border-black bg-grey">
@@ -684,7 +685,7 @@
                     </table>
 
                     {{-- Employees--}}
-                    @elseif($activeSecondaryTabMU == 'emps')
+                    @elseif($activeSecondaryTabMU === 'emps')
                     <table class="w-full justify-center items-center text-center bg-gray">
                         <thead >
                             <tr class="border-1 border-black bg-grey">
@@ -950,7 +951,7 @@
 
 
                     {{-- Inactive/Pending Users --}}
-                    @elseif($activeSecondaryTabMU  == 'pendings')
+                    @elseif($activeSecondaryTabMU  === 'pendings')
                     <table class="w-3/4 justify-center items-center text-center bg-gray">
                         <thead>
                             <tr class="border-1 border-black bg-grey">
