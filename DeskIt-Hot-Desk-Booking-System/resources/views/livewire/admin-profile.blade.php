@@ -2,8 +2,8 @@
 
     <div class="flex justify-center items-center mt-2">
     
-        <div class="flex flex-row justify-center items-center mt-4 bg-white ml-16 mb-10"
-            style=" border:1px solid rgba(128, 128, 128, 0.2);">
+        <div class="flex flex-row justify-center items-center mt-4 bg-white ml-16 mb-10 w-[80%]"
+            style="border:1px solid rgba(128, 128, 128, 0.2);">
             <div class="self-start w-full p-2">
 
                 {{-- Primary TABS --}}

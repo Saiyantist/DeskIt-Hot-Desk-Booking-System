@@ -65,8 +65,6 @@ class AdminProfile extends Component
     public $activeSecondaryTabAS = 1;
     public $activeSecondaryTabMU;
 
-    public $editMode = false;
-
     // profile edit
     public $name;
     public $email;
@@ -348,28 +346,5 @@ class AdminProfile extends Component
     {
         return view('livewire.admin-profile');
     }
-  
-  public function setActiveSection($section)
-    {
-        
-        $this->activeSection = $section;
 
-        if($section === 2){
-            $this->activeSecondaryTabMU = 'admins';
-        }
-        
-        if($section === 1){
-            $this->reset('activeSecondaryTabAS', 'activeSection');
-        }
-    }
-    public function setActiveAS($accountSet)
-    {
-        $this->activeSecondaryTabAS = $accountSet;
-        
-    }
-    public function setActiveMU($secondaryTab)
-    {
-        $this->activeSecondaryTabMU = $secondaryTab;
-        $this->resetEditData();
-    }
 }
