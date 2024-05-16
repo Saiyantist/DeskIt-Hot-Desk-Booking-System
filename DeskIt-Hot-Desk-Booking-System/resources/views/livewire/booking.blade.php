@@ -117,6 +117,38 @@
                     </form>
                 </div>
 
+                {{-- Start Time Picker --}}
+                <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
+                    <form method="POST" action="">
+                    @csrf
+                        <div class="col-12">
+                            <div class="input-group time">
+                                <input id="timepicker"
+                                type="time" class="form-control bg-warning text-light text-center"
+                                wire:model.live="time"
+                                wire:change='refreshMap'
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                {{-- End Time Picker --}}
+                <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
+                    <form method="POST" action="">
+                    @csrf
+                        <div class="col-12">
+                            <div class="input-group time">
+                                <input id="endtimepicker"
+                                type="time" class="form-control bg-warning text-light text-center"
+                                wire:model.live="endtime"
+                                wire:change='refreshMap'
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
                 {{-- Floor Chooser --}}
                 <div x-data="{ open: false }" @click.away="open = false" class="text-center">
                     <form method="POST" action="">
