@@ -6,84 +6,68 @@
     <main class="flex flex-row justify-evenly align-items-center">
 
         {{-- Side Panel Section --}}
-        <section class="side-panel-container self-start" style="height:35.8rem;">
-
-                {{-- Side Panel Header --}}
-                <div class="header bg-gray">
-                    <p class=" text-lg font-extrabold">WELCOME TO THE DESKIT OFFICE</p>
-                    <p class=" text-sm font-normal">The office is specifically crafted to maximize the comfort and
-                        productivity of your workday.
-                    </p>
-                    <table class="mt-3">
-                        <thead>
-                            <tr>
-                                <th class="text-sm">LEGENDS:</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="flex justify-center mt-1">
-                                    <img style="width: 1rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
-                                </td>
-                                <td class="text-start">Available</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="flex justify-center mt-1">
-                                    <img style="width: 1rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
-                                </td>
-                                <td class="text-start">Booked</td>
-                            </tr>
-                            <tr>
-                                <td class="flex justify-center mt-1"> 
-                                    <img style="width: 1rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
-                                </td>
-                                <td class="text-start">Not Available</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                
-                </div>
-
+        <section class="side-panel-container self-start">
+        
                 {{-- Side Panel Body --}}
-                <div class="body text-center bg-yellowA">
-                    <p class="book-desk text-lg font-semibold py-2 bg-yellowB text-white ">Book a Desk</p>
-                    <div class="px-10">
+                <div class="body text-center ">
+                    <p class="book-desk text-2xl py-4 bg-yellowB h-20 text-center text-white ">Book a Desk</p>
+                    <div class="px-3">
 
-                        {{-- Date --}}
-                        <div class="flex flex-row">
-                            <p class="ml-0 text-lg text-left">Date:</h6>
-                            <p class="text-lg text-center bg-white w-100 ml-2">{{ $date }}</h6>
+                      
+
+                    {{-- Floor# --}}
+                    <div class="flex items-center mb-2">
+                     <p class="mt-3 text-sm mr-2">Floor#:</p>
+                    <select class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1">
+                      <option disabled selected> Choose Floor</option>
+                      <option value="1">Floor 1</option>
+                      <option value="2">Floor 2</option>
+                      </select>
+                  </div>
+    
+                     {{-- Date --}}
+                         <div class="flex items-center">
+                             <p class="mt-3 text-sm mr-5">Date:</p>
+                           
+                            <input id="datepicker"
+                            type="date" class="form-control mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            wire:model.live="date"
+                            wire:change='refreshMap'
+                            min= {{ $min }}
+                            max= {{ $max }}
+                            />
+
+                            </div>
+                         
+                         {{-- Time --}}
+                         <div class="flex items-center">
+                            <p class="mt-4 text-sm">Time</p>
                         </div>
 
-                        {{-- Floor --}}
-                        <div class="flex flex-row justify-content-between ">
-                            <div>
-                                <p class="ml-0 text-lg text-left">Floor lvl:</h6>
-                            </div>
-                            <div>
-                                <p class="text-lg text-center bg-white w-10">{{ $floor }}</h6>
-                            </div>
+                        {{-- start --}}
+                        <div class="flex items-center">
+                            <p class="mt-3 text-sm mr-4">Start:</p>
+                            <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
                         </div>
 
-                        {{-- Desk --}}
-                        <div class="flex flex-row justify-content-between ">
-                            <div>
-                                <p class="ml-0 text-lg text-left">Desk:</h6>
-                            </div>
-                            <div>
-                                <p class="text-lg text-center bg-white w-10"> {{ $selectedDesk }}</h6>
-                            </div>
+                         {{-- end --}}
+                         <div class="flex items-center">
+                            <p class="mt-3 text-sm mr-6">End:</p>
+                            <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
                         </div>
 
-                    </div>
+                         {{-- Desk# --}}
+                         <div class="flex items-center">
+                            <p class="mt-3 text-sm mr-3">Desk#</p>
+                            <input type="text" placeholder="Choose Desk" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
+                        </div>
 
                     {{-- Booking Button --}}
-                    <button class="justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mb-3 text-lg font-bold text-white"
-                        wire:click='validateBooking'
-                        wire:submit>
-                        Book
-                    </button>
+                    <button class="justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-4 mt-12 text-lg"
+                    wire:click='validateBooking'
+                    wire:submit>
+                    Book
+                </button>
 
 
                 </div>
@@ -121,7 +105,7 @@
                 <div x-data="{ open: false }" @click.away="open = false" class="text-center">
                     <form method="POST" action="">
                     @csrf
-                        <select class="form-select bg-warning text-light text-center floors"
+                        <select class="form-select bg-warning text-black text-center floors"
                         wire:model.live="floor" 
                         wire:change='refreshMap'
                         >
