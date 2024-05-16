@@ -10,7 +10,8 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <link rel="stylesheet" href="/css/stylesAdminSidebar.css">
+        <link rel="stylesheet" href="/css/stylesAdminSidebar.css">
         <!-- Scripts -->
         <script src="https://cdn.tailwindcss.com"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -25,8 +26,7 @@
                 @elseif(Auth::user()->hasRole('employee'))
                     @include('layouts.userNav')
                 @endif
-            @else
-                @include('layouts.navigation')
+            
             @endif
 
             <!-- Page Heading -->

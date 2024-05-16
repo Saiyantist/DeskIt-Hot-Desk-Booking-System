@@ -143,6 +143,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:employee', 'verified'])->group(function () {
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
+    Route::get('/user/profile', function () {
+        return view('home.profile');
+    })->name('userProfile');
 });
 
 
