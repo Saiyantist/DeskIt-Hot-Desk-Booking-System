@@ -1,12 +1,12 @@
-<div class="flex flex-col container mt-24">
+<div class="flex flex-col container mt-16">
 
     @include("admin.modals.updatedBooking")
 
     {{-- UI --}}
-    <main class="flex flex-row justify-evenly align-items-center">
+    <main class="flex flex-row justify-evenly align-items-center p-8">
 
         {{-- Side Panel Section --}}
-        <section class="side-panel-container self-start" style="height:35.8rem;">
+        <section class="side-panel-container self-start">
 
                 {{-- Side Panel Header --}}
                 <div class="header bg-gray">
@@ -79,7 +79,7 @@
                     </div>
 
                     {{-- Booking Button --}}
-                    <button class="justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mb-3 text-lg font-bold text-white"
+                    <button class="book justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mb-3 text-lg font-bold text-white"
                         wire:click='validateBooking'
                         wire:submit>
                         Book
@@ -91,21 +91,21 @@
         </section>
 
         {{-- Main Content --}}
-        <section class="d-flex flex-col items-center justify-center p-4 pt-0 bg-yellowA rounded-2 ">
+        <section class="d-flex flex-col items-center justify-center p-4 pt-0 bg-yellowA rounded-2 relative">
 
             {{-- Booking  Controllers --}}
-            <div class="flex flex-row py-3 self-start  ">
+            <div class="flex flex-row py-3 self-start">
 
                 {{-- Date Picker --}}
-                <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
+                <div x-data="{ open: false }" @click.away="open = false" class="date text-center mr-4">
                     <form method="POST" action="">
                     @csrf
-                        <div class="col-12" >
+                        <div class="col-12">
                         <div class="input-group date"
                             {{-- wire:click='refreshMap' --}}
                             >
                             <input id="datepicker"
-                            type="date" class="form-control bg-warning text-light text-center"
+                            type="date" class="form-control bg-warning text-center text-black uppercase"
                             wire:model.live="date"
                             wire:change='refreshMap'
                             min= {{ $min }}
@@ -118,10 +118,10 @@
                 </div>
 
                 {{-- Floor Chooser --}}
-                <div x-data="{ open: false }" @click.away="open = false" class="text-center">
+                <div x-data="{ open: false }" @click.away="open = false" class="floor text-center">
                     <form method="POST" action="">
                     @csrf
-                        <select class="form-select bg-warning text-light text-center floors"
+                        <select class="form-select bg-warning text-center text-black floors"
                         wire:model.live="floor" 
                         wire:change='refreshMap'
                         >
@@ -131,6 +131,13 @@
                     </form>
                 </div>
 
+                {{-- onboarding guide --}}
+                <div class="absolute right-5">
+                    <a class="helpIcon cursor-pointer">
+                        <img src="{{ asset('images/help.svg') }}" class="w-8 h-8">
+                        <script>startIntro();</script>
+                    </a>
+                </div>
             </div>
 
             {{-- Desk Map --}}
@@ -1308,6 +1315,7 @@
         </section>
 
     </main>
-
-
+    
+    <script src="{{ asset('js/myScript3.js') }}">
+    </script>
 </div>

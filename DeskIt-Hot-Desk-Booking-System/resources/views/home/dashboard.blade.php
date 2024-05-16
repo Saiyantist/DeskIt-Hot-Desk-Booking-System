@@ -1,10 +1,10 @@
 @extends('layouts.layout')
 <x-app-layout>
     @section('content')
-    <div class="head-uHome">
+    <div class="head-uHome mt-16">
         <img src="../images/head-uHome.png" class="img-fluid">
         <h1>Welcome! Let's find the right workspace for you.</h1>
-        <a class="book" href="{{ route('book') }}">Book a desk</a>
+        <a class="book" wire:navigate href="{{ route('book') }}">Book a desk</a>
     </div>
     <section>
         <div class="ml-44 mt-16">
@@ -58,8 +58,10 @@
                 }
             });
             calendar.render();
+
         });
     </script>
+    
     @endpush
     @endsection
 </x-app-layout>
