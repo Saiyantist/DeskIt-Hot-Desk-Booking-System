@@ -2,7 +2,7 @@
 
     @include("admin.modals.updatedBooking")
     {{-- UI --}}
-    <main class="flex flex-row justify-evenly align-items-center mt-10 ml-16">
+    <main class="flex flex-row justify-evenly align-items-center my-10 ml-16">
 
         {{-- Side Panel Section --}}
         <section class="side-panel-container ">
@@ -10,12 +10,12 @@
             {{-- Side Panel Header --}}
             <div class="header bg-gray text-center">
                 
-                <h5 class="mb-3 font-semibold "> BOOK BEHALF</h5>
+                <h5 class="mb-3 font-semibold "> BOOK ON BEHALF</h5>
                 <table class="justify-center items-center text-center">
                     <thead>
                         <tr>
                             <th class=" text-sm px-2"> SUMMARY REPORT </th>
-                            <th class=" text-sm px-2"> TOTAL  </th>
+                            <th class=" text-sm px-2"> TOTAL </th>
                         </tr>
                     </thead>
                     <tbody class="mt-2">
@@ -100,7 +100,7 @@
                         <div class="flex">
                             <p class="ml-0 text-lg text-left">Book for:</h6>
                                 {{-- User Chooser --}}
-                                    <select wire:model="selectedUserID" wire:change='refreshMap' id="user" name="user" class="mt-1  wpl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" style="width: 5.7rem">
+                                    <select wire:model="selectedUserID" wire:change='refreshMap' id="user" name="user" class="mt-1  wpl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md p-1" style="width: 5.7rem">
                                         <option value="">Select a User</option>
                                         @foreach($usersWithRoles as $user)
                                             @foreach($user->roles as $role)
@@ -138,7 +138,7 @@
                         <div class="col-12">
                             <div class="input-group date" {{-- wire:click='refreshMap' --}}>
                                 <input id="datepicker" type="date"
-                                    class="form-control bg-warning text-light text-center" wire:model.live="date"
+                                    class="form-control bg-warning text-center text-black uppercase" wire:model.live="date"
                                     wire:change='refreshMap' min={{ $min }} max={{ $max }} />
 
                             </div>
@@ -150,7 +150,7 @@
                 <div x-data="{ open: false }" @click.away="open = false" class="text-center">
                     <form method="POST" action="">
                         @csrf
-                        <select class="form-select bg-warning text-light text-center floors" wire:model.live="floor"
+                        <select class="form-select bg-warning text-dark text-center floors" wire:model.live="floor"
                             wire:change='refreshMap'>
                             <option value="1" selected>Floor 1</option>
                             <option value="2">Floor 2</option>

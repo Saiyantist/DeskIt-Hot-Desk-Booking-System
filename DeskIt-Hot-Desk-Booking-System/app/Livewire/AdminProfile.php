@@ -65,6 +65,14 @@ class AdminProfile extends Component
     public $activeSecondaryTabAS = 1;
     public $activeSecondaryTabMU;
 
+    public $editMode = false;
+
+    // profile edit
+    public $name;
+    public $email;
+    public $gender;
+    public $birthday;
+
     public function mount()
     {       
             $this->user = Auth::user()->id;
@@ -85,7 +93,12 @@ class AdminProfile extends Component
             
             $this->users4 = User::role('officemanager')
             ->where('id', '!=', Auth::id()) 
-            ->get(); 
+            ->get();
+     
+            $this->name = Auth::user()->name;
+            $this->email = Auth::user()->email;
+            $this->gender = Auth::user()->gender;
+            $this->birthday = Auth::user()->birthday;
     }
 
 // ================== TAB SWITCH ==================
@@ -258,10 +271,7 @@ class AdminProfile extends Component
             $this->dispatch('refreshComponent');
             // $this->redirect(request()->header('Referer'));
         }
-
-        
     }
-
 
     /**
      *  ACCEPT USER
@@ -311,10 +321,55 @@ class AdminProfile extends Component
         // dd($this->editUserId);
     }
 
+    //save profile
+    public function editProfile()
+{
+    $user = Auth::user();
+
+    if ($user) {
+        // Update user's name and email
+        $user->name = $this->name;
+        $user->email = $this->email;
+        $user->gender = $this->gender;
+        $user->birthday = $this->birthday;
+        $user->save();
+
+    }
+
+    $this->editMode = false;
+    
+    $this->redirect(request()->header('Referer'));
+    
+    
+}
+
+
     public function render()
     {
-        // Check if $reloadComponent is true and reset it to false
         return view('livewire.admin-profile');
     }
-    
+  
+  public function setActiveSection($section)
+    {
+        
+        $this->activeSection = $section;
+
+        if($section === 2){
+            $this->activeSecondaryTabMU = 'admins';
+        }
+        
+        if($section === 1){
+            $this->reset('activeSecondaryTabAS', 'activeSection');
+        }
+    }
+    public function setActiveAS($accountSet)
+    {
+        $this->activeSecondaryTabAS = $accountSet;
+        
+    }
+    public function setActiveMU($secondaryTab)
+    {
+        $this->activeSecondaryTabMU = $secondaryTab;
+        $this->resetEditData();
+    }
 }
