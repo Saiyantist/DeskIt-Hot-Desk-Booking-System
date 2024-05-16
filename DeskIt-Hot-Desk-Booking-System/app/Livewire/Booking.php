@@ -14,6 +14,8 @@ use function PHPUnit\Framework\returnValue;
 class Booking extends Component
 {
     public $date;
+    public $time;
+    public $endtime;
     public $floor = "1";
     public $selectedDesk ='-';
     public $bookedDesk = '-';
@@ -72,7 +74,9 @@ class Booking extends Component
                     'id' => $booking->id,
                     'user_id' => $booking->user_id,
                     'desk_id' => $booking->desk_id,
-                    'booking_date' => $booking->booking_date
+                    'booking_date' => $booking->booking_date,
+                    'booking_time' => $booking->booking_time,
+                    'booking_endtime' => $booking->booking_endtime,
                     ]
                 );
             }
@@ -149,8 +153,8 @@ class Booking extends Component
     {
         $desks = Desk::all();
 
-        /** Can't click if there's NO DATE && FLOOR */
-        if($this->date && $this->floor){
+        /** Can't click if there's NO DATE && FLOOR && TIME */
+        if($this->date && $this->floor && $this->time && $this->endtime){
             
             /** Check if the Desk Selected is 'in_use' */ 
             if($desks[$key]->status == 'in_use')
@@ -199,12 +203,14 @@ class Booking extends Component
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk; 
         $canBook = $this->canBook;
+        $time = $this->time;
+        $endtime = $this->endtime;
 
-        if ($canBook && ($date && $floor && ($selectedDesk != '-')))
+        if ($canBook && ($date && $floor && ($selectedDesk != '-') && $time && $endtime))
         {
             $this->showConfirmation = true;
         }
-        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-')))
+        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time && $endtime))
         {
             $this->showWarning = true;
         }
@@ -222,23 +228,26 @@ class Booking extends Component
     public function goHome()
     {
         $this->showNotification = false;
-
         $this->redirect('/');
     }
 
     public function book()
     {
         $date = $this->date;
+        $time = $this->time;
+        $endtime = $this->endtime;
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk;
         $selectedDeskID = $this->selectedDeskID;
 
         $user = Auth::user()->id;
 
-        if ($date && $floor && ($selectedDesk != '-')){
+        if ($date && $floor && ($selectedDesk != '-') && $time && $endtime){
 
             Bookings::create([
                 "booking_date" => $date,
+                "booking_time" => $time,
+                "booking_endtime" => $endtime,
                 "status" => 'accepted',
                 "user_id" => $user,
                 "desk_id" => $selectedDeskID,
