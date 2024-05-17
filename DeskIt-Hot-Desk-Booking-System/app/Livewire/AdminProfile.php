@@ -61,9 +61,11 @@ class AdminProfile extends Component
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     // Tab Switchers
-    public $activeSection = 1;
+    // public $activeSection = 1;
+    public $activeSection = 2;
     public $activeSecondaryTabAS = 1;
-    public $activeSecondaryTabMU;
+    // public $activeSecondaryTabMU;
+    public $activeSecondaryTabMU = 'admins';
 
     // profile edit
     public $name;

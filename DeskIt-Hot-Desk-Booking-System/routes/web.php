@@ -140,11 +140,12 @@ Route::middleware('auth')->group(function () {
 /**
  * HOME Routes
  */
-Route::middleware(['auth', 'role:employee', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
     Route::get('/user/profile', function () {
-        return view('home.profile');
+        return view('profile.profile');
+        // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
 });
 

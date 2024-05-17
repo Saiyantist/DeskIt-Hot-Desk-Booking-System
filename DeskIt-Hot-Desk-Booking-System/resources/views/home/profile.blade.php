@@ -41,5 +41,10 @@
 
     <section class="mt-1">
         @livewire('admin-profile')
+        {{--
+            Next is a livewire version for the 'user-profile',
+            only then we can use this profile.blade.php, 
+            we'd use @if here to show the appropriate @livewire component
+        --}}
     </section>
 </x-app-layout>

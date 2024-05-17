@@ -2,7 +2,7 @@
 
     <div class="flex justify-center items-center mt-2">
     
-        <div class="flex flex-row justify-center items-center mt-4 bg-white ml-16 mb-10 w-[80%] rounded-xl"
+        <div class="flex flex-row justify-center items-center mt-4 bg-white ml-16 mb-10 w-[80%] rounded-xl shadow-md"
             style="border:1px solid rgba(128, 128, 128, 0.2);">
             <div class="self-start w-full">
 
@@ -278,7 +278,7 @@
                                                         {{-- Gender --}}
                                                         <div class="flex flex-column">
                                                             <label class="self-start ml-3" for="name"> Gender:</label>
-                                                            <select class="border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
+                                                            <select class="p-2.5 border-2 border-black border bg-white text-black text-left rounded-lg w-80 m-2 mt-1"
                                                             wire:model.live="editGender">
 
                                                                 @if($editUserId->gender === 'male')
@@ -361,56 +361,6 @@
                                             </div>
                                         </x-slot:body>
                                     </x-modal>
-
-
-                                    {{-- Ellipsis Icon --}}
-                                    {{-- <div x-data="{ isOpen: false }">
-                                        <a @click="isOpen = true"
-                                            style="cursor: pointer; display: flex; justify-content: center;">
-                                            <img src="{{ asset('images/dots.svg') }}" class="h-4 w-4 relative">
-                                        </a>
-
-                                        <div x-show="isOpen" @click.away="isOpen = false"
-                                            class="showDots flex absolute h-44 w-64 right-8 z-50">
-
-                                            <div
-                                                class='flex row bg-dark-subtle rounded-4 p-3 items-center justify-center'>
-
-                                                <div wire:click="showModalAddAsUser({{ $user->id }})"
-                                                    class='flex cursor-pointer'>
-                                                    <img src="{{ asset('images/user.svg') }}" class="h-5 w-5">
-                                                    <p class=" text-base pl-2"> Add as a User</p>
-                                                </div>
-                                                <div class='flex cursor-pointer'
-                                                    wire:click="showModalAddAsOM({{ $user->id }})">
-                                                    <img src="{{ asset('images/omanager.svg') }}" class="h-5 w-5">
-                                                    <p class=" text-base pl-2"> Add as an Office Manager</p>
-                                                </div>
-
-                                                <div class='flex cursor-pointer'
-                                                    wire:click="deactModal({{ $user->id }})">
-                                                    <img src="{{ asset('images/thin-delete.svg') }}" class="h-5 w-5">
-                                                    <p class=" text-base pl-2"> Deact Admin</p>
-                                                </div>
-                                                
-
-                                                {{-- Open Modal Button--}}
-                                                {{-- <div class='flex cursor-pointer'>
-                                                    <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
-                                                    <button x-data
-                                                        x-on:click="$dispatch('open-modal', {name: 'edit-modal'})"
-                                                        class="pl-2" wire:click="openEditProfile({{ $user->id }})">Edit
-                                                        User</button>
-                                                </div> --}}
-
-
-
-                                                {{-- <div wire:click="openEditProfile({{ $user->id }})"
-                                                    class='flex cursor-pointer'>
-                                                    <img src="{{ asset('images/edit.svg') }}" class="h-5 w-5">
-                                                    <p class=" text-base pl-2 "> Edit Details</p>
-                                                </div> --}}
- 
                                 </td>
                                 @endif
 
@@ -586,7 +536,7 @@
                                                         {{-- Gender --}}
                                                         <div class="flex flex-column">
                                                             <label class="self-start ml-3" for="name"> Gender:</label>
-                                                            <select class="border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
+                                                            <select class="p-2.5 border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
                                                             wire:model.live="editGender">
 
                                                                 @if($editUserId->gender === 'male')
@@ -851,7 +801,7 @@
                                                             {{-- Gender --}}
                                                             <div class="flex flex-column">
                                                                 <label class="self-start ml-3" for="name"> Gender:</label>
-                                                                <select class="border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
+                                                                <select class="p-2.5 border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
                                                                 wire:model.live="editGender">
 
                                                                     @if($editUserId->gender === 'male')
