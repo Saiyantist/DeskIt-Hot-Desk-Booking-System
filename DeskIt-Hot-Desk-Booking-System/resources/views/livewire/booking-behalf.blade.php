@@ -5,43 +5,43 @@
     <main class="flex flex-row justify-evenly align-items-center mt-10 ml-16">
 
         {{-- Side Panel Section --}}
-        <section class="side-panel-container">
+        <section class="side-panel-container pr-10">
 
               {{-- Side Panel Body --}}
-              <div class="body text-center ">
-                <p class="book-desk text-2xl py-4 bg-yellowB h-20 text-center text-white ">Book a Desk</p>
+              <div class="body text-center">
+                <p class="book-desk text-2xl py-3 bg-yellowB text-center text-white ">Book a Desk</p>
                 <div class="px-3">
 
                 {{-- Floor# --}}
-                <div class="flex items-center mb-2">
-                 <p class="mt-3 text-sm mr-2">Floor#:</p>
-                  <p class=" text-centerbg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 h-9">{{ $floor }}</h6>
+                <div class="flex items-center">
+                 <p class="mt-2 text-sm mr-2">Floor#:</p>
+                  <p class=" text-center bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 h-9">{{ $floor }}</h6>
               </div>
 
                  {{-- Date --}}
                      <div class="flex items-center">
-                         <p class="mt-3 text-sm mr-5">Date:</p>
-                        <p class="form-control mt-1 bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full sm:text-sm focus:ring-1 h-9">{{ $date }}</h6>
+                         <p class="text-sm mr-5">Date:</p>
+                        <p class="form-control bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full sm:text-sm focus:ring-1 h-9">{{ $date }}</h6>
                         </div>
 
                     {{-- start --}}
-                    <p class="text-sm flex justify-start mt-4">Time:</p>
+                    <p class="text-sm flex justify-start">Time:</p>
                     <div class="flex items-center">
-                        <p class="mt-3 text-sm mr-4">Start:</p>
-                        <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
+                        <p class="text-sm mr-4">Start:</p>
+                        <input type="text" placeholder="Set Time" class="mb-2 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
                     </div>
 
                      {{-- end --}}
                      <div class="flex items-center">
                         <p class="mt-3 text-sm mr-6">End:</p>
-                        <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
+                        <input type="text" placeholder="Set Time" class="mb-2 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
                     </div>
 
                   
                       {{-- Desk# --}}
                       <div class="flex items-center">
                         <p class="mt-3 text-sm mr-3">Desk#:</p>
-                        <p class="mt-2 text-sm h-9 bg-white border shadow-sm rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" > {{ $selectedDesk }}</h6>
+                        <p class="mb-2 text-sm h-10 bg-white border shadow-sm rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" > {{ $selectedDesk }}</h6>
                     </div>
 
                     
@@ -68,7 +68,7 @@
                 </div>
 
                 {{-- Booking Button --}}
-                <button class="justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-4 text-lg"
+                <button class="justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-4 text-lg mt-4"
                 wire:click='validateBooking'
                 wire:submit>
                 Book
