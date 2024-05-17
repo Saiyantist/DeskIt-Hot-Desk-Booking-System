@@ -6,80 +6,61 @@
     <main class="flex flex-row justify-evenly align-items-center p-8">
 
         {{-- Side Panel Section --}}
-        <section class="side-panel-container self-start">
-
-                {{-- Side Panel Header --}}
-                <div class="header bg-gray">
-                    <p class=" text-lg font-extrabold">WELCOME TO THE DESKIT OFFICE</p>
-                    <p class=" text-sm font-normal">The office is specifically crafted to maximize the comfort and
-                        productivity of your workday.
-                    </p>
-                    <table class="mt-3">
-                        <thead>
-                            <tr>
-                                <th class="text-sm">LEGENDS:</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="flex justify-center mt-1">
-                                    <img style="width: 1rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
-                                </td>
-                                <td class="text-start">Available</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="flex justify-center mt-1">
-                                    <img style="width: 1rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
-                                </td>
-                                <td class="text-start">Booked</td>
-                            </tr>
-                            <tr>
-                                <td class="flex justify-center mt-1"> 
-                                    <img style="width: 1rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
-                                </td>
-                                <td class="text-start">Not Available</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                
-                </div>
+        <section class="side-panel-container self-center">
 
                 {{-- Side Panel Body --}}
-                <div class="body text-center bg-yellowA">
-                    <p class="book-desk text-lg font-semibold py-2 bg-yellowB text-white ">Book a Desk</p>
-                    <div class="px-10">
+                <div class="body text-center">
+                    <p class="book-desk text-2xl py-4 bg-yellowB text-center text-white ">Book a Desk</p>
+                    <div class="px-3">
+
+                         {{-- Floor --}}
+                         <div class="flex flex-row justify-content-between my-2">
+                            <div>
+                                <p class="text-lg text-left">Floor#:</h6>
+                            </div>
+                            <div>
+                                <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-32 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $floor }}</h6>
+                            </div>
+                        </div>
 
                         {{-- Date --}}
-                        <div class="flex flex-row">
-                            <p class="ml-0 text-lg text-left">Date:</h6>
-                            <p class="text-lg text-center bg-white w-100 ml-2">{{ $date }}</h6>
+                        <div class="flex flex-row justify-content-between mb-2">
+                            <p class="text-lg text-left">Date:</h6>
+                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-32 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $date }}</h6>
                         </div>
 
-                        {{-- Floor --}}
-                        <div class="flex flex-row justify-content-between ">
-                            <div>
-                                <p class="ml-0 text-lg text-left">Floor lvl:</h6>
-                            </div>
-                            <div>
-                                <p class="text-lg text-center bg-white w-10">{{ $floor }}</h6>
-                            </div>
+                        {{-- Time --}}
+                        <div class="flex items-center">
+                            <p class="m-0 text-lg">Time:</p>
                         </div>
+
+                        {{-- Start time --}}
+                        <div class="flex flex-row justify-content-between">
+                            <p class="ml-2 text-lg text-left">Start:</h6>
+                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-32 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $time }}</h6>
+                        </div>
+
+                        {{-- End time --}}
+                        <div class="flex flex-row justify-content-between mb-2">
+                            <p class="ml-2 text-lg text-left">End:</h6>
+                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-32 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $endtime }}</h6>
+                        </div>
+
 
                         {{-- Desk --}}
                         <div class="flex flex-row justify-content-between ">
                             <div>
-                                <p class="ml-0 text-lg text-left">Desk:</h6>
+                                <p class="text-lg text-left">Desk#:</h6>
                             </div>
                             <div>
-                                <p class="text-lg text-center bg-white w-10"> {{ $selectedDesk }}</h6>
+                                <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-32 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
                             </div>
                         </div>
 
                     </div>
 
                     {{-- Booking Button --}}
-                    <button class="book justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mb-3 text-lg font-bold text-white"
+                    <button class="book justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-6 mt-3 text-lg"
                         wire:click='validateBooking'
                         wire:submit>
                         Book
@@ -95,6 +76,20 @@
 
             {{-- Booking  Controllers --}}
             <div class="flex flex-row py-3 self-start">
+                
+                {{-- Floor Chooser --}}
+                <div x-data="{ open: false }" @click.away="open = false" class="floor text-center mr-4">
+                    <form method="POST" action="">
+                    @csrf
+                        <select class="form-select bg-warning text-center text-black floors"
+                        wire:model.live="floor" 
+                        wire:change='refreshMap'
+                        >
+                        <option value="1" selected>Floor 1</option>
+                        <option value="2">Floor 2</option>
+                        </select>
+                    </form>
+                </div>
 
                 {{-- Date Picker --}}
                 <div x-data="{ open: false }" @click.away="open = false" class="date text-center mr-4">
@@ -117,14 +112,14 @@
                     </form>
                 </div>
 
-                {{-- Start Time Picker --}}
-                <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
+                 {{-- Start Time Picker --}}
+                 <div x-data="{ open: false }" @click.away="open = false" class="stime text-center mr-4">
                     <form method="POST" action="">
                     @csrf
                         <div class="col-12">
                             <div class="input-group time">
                                 <input id="timepicker"
-                                type="time" class="form-control bg-warning text-light text-center"
+                                type="time" class="form-control bg-warning text-center text-black uppercase"
                                 wire:model.live="time"
                                 wire:change='refreshMap'
                                 />
@@ -134,32 +129,18 @@
                 </div>
 
                 {{-- End Time Picker --}}
-                <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
+                <div x-data="{ open: false }" @click.away="open = false" class="etime text-center mr-4">
                     <form method="POST" action="">
                     @csrf
                         <div class="col-12">
                             <div class="input-group time">
                                 <input id="endtimepicker"
-                                type="time" class="form-control bg-warning text-light text-center"
+                                type="time" class="form-control bg-warning text-center text-black uppercase"
                                 wire:model.live="endtime"
                                 wire:change='refreshMap'
                                 />
                             </div>
                         </div>
-                    </form>
-                </div>
-
-                {{-- Floor Chooser --}}
-                <div x-data="{ open: false }" @click.away="open = false" class="floor text-center">
-                    <form method="POST" action="">
-                    @csrf
-                        <select class="form-select bg-warning text-center text-black floors"
-                        wire:model.live="floor" 
-                        wire:change='refreshMap'
-                        >
-                        <option value="1" selected>Floor 1</option>
-                        <option value="2">Floor 2</option>
-                        </select>
                     </form>
                 </div>
 
@@ -203,7 +184,7 @@
                                         <div class='ml-3 mt-4'>
 
                                             {{-- Availability Circle --}}
-                                            @if($floor && $date)
+                                            @if($floor && $date && $time && $endtime)
                                                 @if($desks[$i]->status == 'not_available')
                                                     <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                 
@@ -242,7 +223,7 @@
                                         <div class='ml-3 mt-4'>
 
                                             {{-- Availability Circle --}}
-                                            @if($floor && $date)
+                                            @if($floor && $date && $time && $endtime)
                                                 @if($desks[$i]->status == 'not_available')
                                                     <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                 
@@ -297,7 +278,7 @@
     
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-2 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -340,7 +321,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-2 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -398,7 +379,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-3 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -441,7 +422,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-3 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -499,7 +480,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-2 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -542,7 +523,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-2 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -601,7 +582,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-3 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -644,7 +625,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="h-10 mt-3 ml-5">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[$i]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -704,7 +685,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[28]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -741,7 +722,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[29]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -780,7 +761,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[64]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -817,7 +798,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[65]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -864,7 +845,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[31]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -902,7 +883,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[30]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -942,7 +923,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[67]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -980,7 +961,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[66]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1032,7 +1013,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[32]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1069,7 +1050,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[33]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1108,7 +1089,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[68]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1145,7 +1126,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[69]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1192,7 +1173,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[35]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1230,7 +1211,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[34]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1270,7 +1251,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="flex ml-5 mb-1">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[71]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
@@ -1308,7 +1289,7 @@
 
                                                 {{-- Availability Circle --}}
                                                 <div class="">
-                                                    @if($floor && $date)
+                                                    @if($floor && $date && $time && $endtime)
                                                         @if($desks[70]->status == 'not_available')
                                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
                                                         
