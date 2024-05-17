@@ -5,120 +5,73 @@
     <main class="flex flex-row justify-evenly align-items-center mt-10 ml-16">
 
         {{-- Side Panel Section --}}
-        <section class="side-panel-container ">
+        <section class="side-panel-container">
 
-            {{-- Side Panel Header --}}
-            <div class="header bg-gray text-center">
-                
-                <h5 class="mb-3 font-semibold "> BOOK BEHALF</h5>
-                <table class="justify-center items-center text-center">
-                    <thead>
-                        <tr>
-                            <th class=" text-sm px-2"> SUMMARY REPORT </th>
-                            <th class=" text-sm px-2"> TOTAL  </th>
-                        </tr>
-                    </thead>
-                    <tbody class="mt-2">
-                        <tr>
-                            <td>BOOKINGS </td>
-                            <td> {{ $bookedCount }} </td>
-                        </tr>
-                        <tr>
-                            <td>AVAILABLE DESK</td>
-                            <td>{{ $availableDeskCount }}</td>
-                        </tr>
-                        <tr>
-                            <td>NOT AVAILABLE</td>
-                            <td>{{ $notAvailableCount }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="mt-3">
-                    <thead>
-                        <tr>
-                            <th class="text-sm">LEGENDS:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="flex justify-center mt-1">
-                                <img style="width: 1rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
-                            </td>
-                            <td class="text-start">Available</td>
-                            
-                        </tr>
-                        <tr>
-                            <td class="flex justify-center mt-1">
-                                <img style="width: 1rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
-                            </td>
-                            <td class="text-start">Booked</td>
-                        </tr>
-                        <tr>
-                            <td class="flex justify-center mt-1"> 
-                                <img style="width: 1rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
-                            </td>
-                            <td class="text-start">Not Available</td>
-                        </tr>
-                    </tbody>
-                </table>
-            
-            </div>
+              {{-- Side Panel Body --}}
+              <div class="body text-center ">
+                <p class="book-desk text-2xl py-4 bg-yellowB h-20 text-center text-white ">Book a Desk</p>
+                <div class="px-3">
 
-            {{-- Side Panel Body --}}
-            <div class="body text-center bg-yellowA">
-                <p class="book-desk text-lg font-semibold py-2 bg-yellowB text-white ">Book a Desk</p>
-                <div class="px-10">
+                {{-- Floor# --}}
+                <div class="flex items-center mb-2">
+                 <p class="mt-3 text-sm mr-2">Floor#:</p>
+                  <p class=" text-centerbg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 h-9">{{ $floor }}</h6>
+              </div>
 
-                    {{-- Date --}}
-                    <div class="flex flex-row">
-                        <p class="ml-0 text-lg text-left">Date:</h6>
-                        <p class="text-lg text-center bg-white w-100 ml-2">{{ $date }}</h6>
+                 {{-- Date --}}
+                     <div class="flex items-center">
+                         <p class="mt-3 text-sm mr-5">Date:</p>
+                        <p class="form-control mt-1 bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full sm:text-sm focus:ring-1 h-9">{{ $date }}</h6>
+                        </div>
+
+                    {{-- start --}}
+                    <p class="text-sm flex justify-start mt-4">Time:</p>
+                    <div class="flex items-center">
+                        <p class="mt-3 text-sm mr-4">Start:</p>
+                        <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
                     </div>
 
-                    {{-- Floor --}}
-                    <div class="flex flex-row justify-content-between ">
-                        <div>
-                            <p class="ml-0 text-lg text-left">Floor lvl:</h6>
-                        </div>
-                        <div>
-                            <p class="text-lg text-center bg-white w-10">{{ $floor }}</h6>
-                        </div>
+                     {{-- end --}}
+                     <div class="flex items-center">
+                        <p class="mt-3 text-sm mr-6">End:</p>
+                        <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
                     </div>
 
-                    {{-- Desk --}}
-                    <div class="flex flex-row justify-content-between ">
-                        <div>
-                            <p class="ml-0 text-lg text-left">Desk:</h6>
-                        </div>
-                        <div>
-                            <p class="text-lg text-center bg-white w-10"> {{ $selectedDesk }}</h6>
-                        </div>
+                     {{-- Desk# --}}
+                     <div class="flex items-center">
+                        <p class="mt-3 text-sm mr-3">Desk#:</p>
+                        <p class="mt-2 text-sm h-9 bg-white border shadow-sm rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" > {{ $selectedDesk }}</h6>
                     </div>
 
-                    {{-- Behalf Booking --}}
-                    <div class="flex flex-row justify-content-between ">
-                        <div class="flex">
-                            <p class="ml-0 text-lg text-left">Book for:</h6>
-                                {{-- User Chooser --}}
-                                    <select wire:model="selectedUserID" wire:change='refreshMap' id="user" name="user" class="mt-1  wpl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" style="width: 5.7rem">
-                                        <option value="">Select a User</option>
-                                        @foreach($usersWithRoles as $user)
-                                            @foreach($user->roles as $role)
-                                                <option value="{{ $user->id }}">{{ $user->name }} ({{ $role->name }})</option>
-                                            @endforeach
-                                        @endforeach
-                                    </select>
+                    
+                          {{-- Create Booking for: --}}
+                          <div>
+                        
+                            <p class="text-xs flex justify-start mt-2">Book for:</p>
+                             {{-- User Chooser --}}
+                             <select wire:model="selectedUserID" wire:change='refreshMap' id="user" name="user" class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-xl py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm mb-3" >
+                                <option value="" >Select a User</option>
+                                @foreach($usersWithRoles as $user)
+                                    @foreach($user->roles as $role)
+                                        <option value="{{ $user->id }}">{{ $user->name }} ({{ $role->name }})</option>
+                                    @endforeach
+                                @endforeach
+                            </select>
+
+                                
                         </div>
-                    </div>
+                              
+
+                     
 
                 </div>
 
                 {{-- Booking Button --}}
-                <button
-                    class="justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mb-3 text-lg font-bold text-white"
-                    wire:click='validateBooking' wire:submit>
-                    Book
-                </button>
+                <button class="justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-4 text-lg"
+                wire:click='validateBooking'
+                wire:submit>
+                Book
+            </button>
 
 
             </div>

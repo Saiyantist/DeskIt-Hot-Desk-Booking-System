@@ -13,38 +13,20 @@
                     <p class="book-desk text-2xl py-4 bg-yellowB h-20 text-center text-white ">Book a Desk</p>
                     <div class="px-3">
 
-                      
-
                     {{-- Floor# --}}
                     <div class="flex items-center mb-2">
                      <p class="mt-3 text-sm mr-2">Floor#:</p>
-                    <select class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1">
-                      <option disabled selected> Choose Floor</option>
-                      <option value="1">Floor 1</option>
-                      <option value="2">Floor 2</option>
-                      </select>
+                      <p class=" text-centerbg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 h-9">{{ $floor }}</h6>
                   </div>
     
                      {{-- Date --}}
                          <div class="flex items-center">
                              <p class="mt-3 text-sm mr-5">Date:</p>
-                           
-                            <input id="datepicker"
-                            type="date" class="form-control mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                            wire:model.live="date"
-                            wire:change='refreshMap'
-                            min= {{ $min }}
-                            max= {{ $max }}
-                            />
-
+                            <p class="form-control mt-1 bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full sm:text-sm focus:ring-1 h-9">{{ $date }}</h6>
                             </div>
-                         
-                         {{-- Time --}}
-                         <div class="flex items-center">
-                            <p class="mt-4 text-sm">Time</p>
-                        </div>
 
                         {{-- start --}}
+                        <p class="text-sm flex justify-start mt-4">Time:</p>
                         <div class="flex items-center">
                             <p class="mt-3 text-sm mr-4">Start:</p>
                             <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
@@ -58,9 +40,10 @@
 
                          {{-- Desk# --}}
                          <div class="flex items-center">
-                            <p class="mt-3 text-sm mr-3">Desk#</p>
-                            <input type="text" placeholder="Choose Desk" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
+                            <p class="mt-3 text-sm mr-3">Desk#:</p>
+                            <p class="mt-2 text-sm h-9 bg-white border shadow-sm rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" > {{ $selectedDesk }}</h6>
                         </div>
+
 
                     {{-- Booking Button --}}
                     <button class="justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-4 mt-12 text-lg"
@@ -80,7 +63,22 @@
             {{-- Booking  Controllers --}}
             <div class="flex flex-row py-3 self-start  ">
 
+
+                   {{-- Floor Chooser --}}
+                <div x-data="{ open: false }" @click.away="open = false" class="text-center">
+                    <form method="POST" action="">
+                    @csrf
+                        <select class="form-select bg-warning text-black text-center floors"
+                        wire:model.live="floor" 
+                        wire:change='refreshMap'
+                        >
+                        <option value="1" selected>Floor 1</option>
+                        <option value="2">Floor 2</option>
+                        </select>
+                    </form>
+                </div>
                 {{-- Date Picker --}}
+            
                 <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
                     <form method="POST" action="">
                     @csrf
@@ -101,19 +99,31 @@
                     </form>
                 </div>
 
-                {{-- Floor Chooser --}}
-                <div x-data="{ open: false }" @click.away="open = false" class="text-center">
+                  {{-- Date Picker --}}
+            
+                  <div x-data="{ open: false }" @click.away="open = false" class="text-center mr-4">
                     <form method="POST" action="">
                     @csrf
-                        <select class="form-select bg-warning text-black text-center floors"
-                        wire:model.live="floor" 
-                        wire:change='refreshMap'
-                        >
-                        <option value="1" selected>Floor 1</option>
-                        <option value="2">Floor 2</option>
-                        </select>
+                        <div class="col-12" >
+                        <div class="input-group date"
+                            {{-- wire:click='refreshMap' --}}
+                            >
+                            <input id="timepicker"
+                            type="date" class="form-control bg-warning text-light text-center"
+                            wire:model.live="date"
+                            wire:change='refreshMap'
+                            min= {{ $min }}
+                            max= {{ $max }}
+                            />
+
+                        </div>
+                        </div>
                     </form>
                 </div>
+
+             
+
+
 
             </div>
 
