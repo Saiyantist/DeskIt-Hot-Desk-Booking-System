@@ -104,7 +104,7 @@
                 <div class="flex justify-center items-center mt-3 p-3 text-sm">
     
                     {{-- Admins --}}
-                    @if($activeSecondaryTabMU === 'admins')
+                    @if($activeSecondaryTabMU == 'admins')
                     <table class="w-full justify-center items-center text-center bg-gray">
                         <thead >
                             <tr class="border-1 border-black bg-grey">

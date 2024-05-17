@@ -107,11 +107,16 @@ class AdminProfile extends Component
         $this->activeSection = $section;
 
         if($section === 2){
-            $this->activeSecondaryTabMU = 'admins';
+            if(auth()->user()->hasRole(['superadmin', 'admin'])){
+                $this->activeSecondaryTabMU = 'admins';
+            }
+            else {
+                $this->activeSecondaryTabMU = 'emps';
+            }
         }
         
         if($section === 1){
-            $this->reset('activeSecondaryTabAS', 'activeSection');
+            $this->reset('activeSecondaryTabAS');
         }
     }
     public function setActiveAS($accountSet)
