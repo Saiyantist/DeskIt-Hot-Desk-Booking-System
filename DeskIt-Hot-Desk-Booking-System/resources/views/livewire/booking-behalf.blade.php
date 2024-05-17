@@ -37,8 +37,9 @@
                         <input type="text" placeholder="Set Time" class="mt-1 text-sm bg-white border shadow-sm  border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"/>
                     </div>
 
-                     {{-- Desk# --}}
-                     <div class="flex items-center">
+                  
+                      {{-- Desk# --}}
+                      <div class="flex items-center">
                         <p class="mt-3 text-sm mr-3">Desk#:</p>
                         <p class="mt-2 text-sm h-9 bg-white border shadow-sm rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" > {{ $selectedDesk }}</h6>
                     </div>
