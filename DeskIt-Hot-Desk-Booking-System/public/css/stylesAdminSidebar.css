@@ -140,10 +140,13 @@ a.sidebar-link:hover{
     display: none;
 }
 
-/* Show the alternative image when the link is active */
 .sidebar-link.active .default-image {
     display: none;
 }
 .sidebar-link.active .alternative-image {
     display: inline-block;
+}
+
+.hidden {
+    display: none;
 }

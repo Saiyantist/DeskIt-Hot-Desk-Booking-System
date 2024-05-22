@@ -282,6 +282,8 @@ class Booking extends Component
         $this->min= Carbon::today()->toDateString();
         $min = $this->min;
 
+        
+
 
 
         return view('livewire.booking', compact('desks', 'max', 'min'));

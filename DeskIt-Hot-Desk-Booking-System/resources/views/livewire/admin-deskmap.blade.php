@@ -126,7 +126,7 @@
                 <div x-data="{ open: false }" @click.away="open = false" class="text-center">
                     <form method="POST" action="">
                     @csrf
-                        <select class="form-select bg-warning text-light text-center floors"
+                        <select class="form-select bg-warning text-dark text-center floors"
                         wire:model.live="floor" 
                         wire:change='refreshMap'
                         >

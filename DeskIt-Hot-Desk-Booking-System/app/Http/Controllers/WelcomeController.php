@@ -6,8 +6,18 @@ use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {
-    public function show(): View {
-        return view('welcome');
+    public function show(Request $request){
+        if($request->user() == null)
+            return view('welcome');
+
+        if ($request->user()->hasAnyRole(['superadmin', 'admin', 'officemanager', 'employee']))
+        {
+            return redirect()->route('dashboard');
+        }
+        else {
+            return view('welcome');
+        }
+        abort(403, 'Unauthorized');
     }
 
     public function show1(): View {
