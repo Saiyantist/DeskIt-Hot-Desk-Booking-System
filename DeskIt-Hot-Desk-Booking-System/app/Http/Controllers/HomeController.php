@@ -26,12 +26,12 @@ class HomeController extends Controller
         $events = [];
         foreach ($userBookings as $booking) {
             $bookingDate = $booking->booking_date;
-            // $deskID = $booking->desk_id;
-
+            $deskID = $booking->desk_id;
+            $bookingStatus = $booking->status;
             // $desk = $desk[$deskID]->desk_num;
 
             $events[] = [
-                'title' => ' Desk#: ' . $booking->desk_id,
+                'title' => ' Desk ' . $deskID,
                 'start' => $bookingDate,
                 'end' => $bookingDate,
             ];
