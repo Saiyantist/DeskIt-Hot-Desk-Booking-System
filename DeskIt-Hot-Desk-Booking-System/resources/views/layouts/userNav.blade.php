@@ -112,6 +112,8 @@ $currentRoute = Route::currentRouteName();
                         </a>
                     </li>
 
+                    
+
                     {{-- logout --}}
                     <li class="sidebar-item absolute bottom-20">
                         <div x-cloak x-data="{ showLogoutModal: false }">

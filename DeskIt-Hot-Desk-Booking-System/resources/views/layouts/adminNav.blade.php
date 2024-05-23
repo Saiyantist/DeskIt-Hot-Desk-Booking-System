@@ -70,7 +70,7 @@ $currentRoute = Route::currentRouteName();
                     </a>
                 </li>
 
-                {{-- book on behalf --}}
+                {{-- Support --}}
                 <li class="sidebar-item">
                     <a wire:navigate href="{{ route('support') }}" 
                         class="hidden sidebar-link {{ $currentRoute === 'support' ? 'active' : '' }}">
@@ -93,7 +93,7 @@ $currentRoute = Route::currentRouteName();
                             
                             <!-- Modal -->
                             <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75"
-                                x-show="showLogoutModal">
+                                x-show="showLogoutModal" x-cloak>
 
                                 <div class="flex flex-col justify-center items-center bg-white p-8 rounded-xl shadow-lg"
                                 style="border-top: 10px solid rgb(255, 237, 193); border-bottom: 10px solid rgb(255, 237, 193);">

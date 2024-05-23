@@ -150,3 +150,7 @@ a.sidebar-link:hover{
 .hidden {
     display: none;
 }
+
+[x-cloak] {
+    display: none !important;
+}
