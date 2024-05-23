@@ -119,7 +119,7 @@
                     end: endDate
                 },
                 
-                events: " <img src={{ asset('images/location.svg') }}> {{ route('user.bookings', auth()->id()) }}",
+                events: "{{ route('user.bookings', auth()->id()) }}",
                 eventClick: function (info) {
                     // Handle event click if needed
                 }
