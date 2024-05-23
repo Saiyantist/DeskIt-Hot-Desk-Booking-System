@@ -21,7 +21,7 @@
                         <h6 class="flex"><img src="{{ asset('images/clock.svg') }}"class="pr-2">insert time here</h6>
                     </div>  
                 </div>
-                <div class="w-3/4 h-[650px] ">
+                <div class="w-3/4 h-[93vh] ">
                     <div id="calendar"></div>
                 </div>
                 
