@@ -16,10 +16,27 @@ class Bookings extends Model
         "booking_time",
         "booking_endtime",
         "status",
-        
         "user_id",
         "desk_id",
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($Bookings) {
+            $autoAccept = config('bookings.auto_accept');
+
+            if ($autoAccept) {
+                $Bookings->status = 'accepted';
+            }
+
+            else if (!$autoAccept){
+                $Bookings->status = 'canceled';
+            }
+        });
+        
+    }
 
     public function user()
     {

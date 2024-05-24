@@ -9,9 +9,12 @@ use App\Models\Users;
 use App\Models\Desk;
 use Carbon\Carbon;
 use DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
-
-class AdminBooking extends Component
+class AdminDashboard extends Component
 {
 
     use WithPagination;
@@ -39,6 +42,8 @@ class AdminBooking extends Component
     public $min;
     public $max;
 
+    public $autoAccept;
+
     public function mount()
     {   
         $deskRange = range(1, 36);
@@ -60,6 +65,62 @@ class AdminBooking extends Component
         $this->floor2BookedCount = Bookings::whereIn('desk_id', $deskRange2)->where('status', 'accepted')->count();
 
         $this->fetchBookings();
+
+        // $this->autoAccept = Config::get('bookings.auto_accept'); 
+        
+        // $this->autoAccept = session()->get('autoAccept'); 
+        // dump('config', config('bookings.auto_accept'));
+        // dump($this->autoAccept);
+        // dump(Config::get('bookings.auto_accept'));
+        
+        $this->autoAccept = Config::get('bookings.auto_accept');
+    }
+
+    public function toggleAutoAccept()
+    {
+        // Toggle the autoAccept property
+        $this->autoAccept = !$this->autoAccept; 
+
+        $this->updateAutoAccept();
+        // dump($this->autoAccept);
+        // Artisan::call('config:cache');s
+        $this->dispatch('refreshPage');
+        // $this->refesh();
+        // dump($this->autoAccept);
+    }   
+
+    public function updateAutoAccept()
+    {
+        // dump(config('bookings.auto_accept'));
+        // $newValue = $this->autoAccept;
+        // session()->put('autoAccept', !$newValue);
+    
+        // dump($this->autoAccept); 
+
+        // Config::set('bookings.auto_accept', !$newValue);
+        // $this->autoAccept = !$newValue;
+        // dump(config('bookings.auto_accept'));
+
+
+        // Update the configuration value
+        $config = Config::get('bookings');
+        $config['auto_accept'] = $this->autoAccept;
+        $configString = '<?php return ' . var_export($config, true) . ';';
+        file_put_contents(config_path('bookings.php'), $configString);
+
+        // $this->autoAccept = $newValue;
+
+        // dump($config);
+        // dump($this->autoAccept);
+        // dump($configString);
+
+        // dump(Config::get('bookings.auto_accept'));
+        // dump($this->autoAccept);
+
+        // $this->autoAccept = Config::get('bookings.auto_accept');
+        // $this->mount();
+        
+        // dump($this->autoAccept);
     }
 
     public function fetchBookings()
@@ -82,7 +143,6 @@ class AdminBooking extends Component
             ];
         }
     }
-
 
     public function handleAction()
     {
@@ -119,6 +179,6 @@ class AdminBooking extends Component
         $this->max = Carbon::today()->addDays(14)->toDateString();
         $this->min = Carbon::today()->toDateString();
 
-        return view('livewire.admin-booking');
+        return view('livewire.admin-dashboard');
     }
 }
