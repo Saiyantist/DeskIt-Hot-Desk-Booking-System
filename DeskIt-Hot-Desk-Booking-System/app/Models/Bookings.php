@@ -32,7 +32,7 @@ class Bookings extends Model
             }
 
             else if (!$autoAccept){
-                $Bookings->status = 'canceled';
+                $Bookings->status = 'pending';
             }
         });
         
