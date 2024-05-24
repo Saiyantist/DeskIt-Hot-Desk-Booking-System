@@ -103,8 +103,8 @@
 
 
                 <div class="p-3 bg-gray-100">
-                    {{-- Toggle Aauto Accept --}}
-                    <div class="mt-1 mb-4 bg-yellowLight w-fit p-3 px-4 rounded-lg">
+                    {{-- Toggle Auto Accept --}}
+                    <div class="mt-1 mb-4 bg-yellowLight w-fit p-3 px-4 rounded-xl border-1 border-solid border-gray-200 shadow-md">
                         @if ( Config::get('bookings.auto_accept') )
                         <span class="text-lg font-semibold">Auto-accept: ON</span>
                         <button class="justify-center items-center bg-yellowB text-white hover:bg-slate-200 hover:text-red font-bold rounded-xl h-10 p-1 px-3 text-md ml-4"
@@ -119,17 +119,16 @@
                                 wire:click='toggleAutoAccept'
                                 wire:submit>Turn ON
                         </button>
-                        
                         @endif
-                        {{-- <span>{{ config('bookings.auto_accept') ? 'Auto-accept: ON' : 'Auto-accept: OFF' }}</span>
-                        <button class="justify-center items-center bg-yellowB hover:bg-amber-500 text-white font-bold rounded-xl h-10 p-1 px-3 text-md"
-                                wire:model.change="autoAccept"
-                                wire:click='toggleAutoAccept'
-                                wire:submit>
-                            {{ config('bookings.auto_accept') ? 'Turn Off' : 'Turn On' }}
-                        </button> --}}
                     </div>
-    
+                    
+                    {{-- <div>
+                        <span class='cursor-pointer'
+                            wire:click='$refresh'
+                            >Refresh Table
+                        </span>
+                    </div> --}}
+
                     <!-- DataTables Table -->
                     <div class="bg-white p-3 r"
                         wire:ignore>

@@ -27,14 +27,16 @@
                 @if($activeSection === 1)    
                 <div class="flex flex-row">
                     <div class="flex flex-col m-10">
-                        <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
-                            style="border:1px solid rgba(128, 128, 128, 0.9);">
+                        <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
+                            {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                            >
                             <h2 wire:click="setActiveAS(1)" class="text-lg">
                                 Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
                         </div>
 
-                        <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
-                            style="border:1px solid rgba(128, 128, 128, 0.9);">
+                        <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
+                            {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                            >
                             <h2 wire:click="setActiveAS(2)" class=" text-lg">
                                 Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
                         </div>
