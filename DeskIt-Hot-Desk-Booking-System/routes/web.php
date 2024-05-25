@@ -147,6 +147,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('profile.profile');
         // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
+    Route::get('/user/booking-history', function () {
+        return view('home.bookingHistory');
+    })->name('booking-history');
 });
 
 
