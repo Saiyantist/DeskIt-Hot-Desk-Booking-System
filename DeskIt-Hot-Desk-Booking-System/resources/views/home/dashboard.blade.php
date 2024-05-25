@@ -33,7 +33,7 @@
         <div class=" ml-24 p-2 flex flex-col bg-white rounded-lg w-[90%] drop-shadow-lg"> 
             <div class="flex justify-between p-2">
                 <h6>Upcoming Bookings</h6>
-                <h6>Bookings <i class="fa-solid fa-arrow-right"></i></h6>
+                <a class="no-underline text-block" wire:navigate href="{{ route('booking-history') }}">Bookings <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <table class=" text-center">
                 <thead class="bg-gray">
