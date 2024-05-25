@@ -112,7 +112,16 @@ $currentRoute = Route::currentRouteName();
                         </a>
                     </li>
 
-                    
+                    {{-- Support --}}
+                    <li class="sidebar-item">
+                        <a wire:navigate href="{{ route('userSupport') }}" 
+                            class="hidden sidebar-link {{ $currentRoute === 'userSupport' ? 'active' : '' }}">
+                            <img src="{{ asset('images/help.svg') }}" class="py-3 default-image" alt="Default SVG Image">
+                            <img src="{{ asset('images/ahelp.svg') }}" class="py-3 alternative-image"
+                                alt="Alternative SVG Image">
+                            <span class="text-yellowB"> Help Desk</span>
+                        </a>
+                    </li>
 
                     {{-- logout --}}
                     <li class="sidebar-item absolute bottom-20">
