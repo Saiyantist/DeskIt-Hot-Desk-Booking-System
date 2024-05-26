@@ -150,6 +150,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/support', function () {
         return view('support.support');
     })->name('userSupport');
+    Route::get('/user/booking-history', function () {
+        return view('home.bookingHistory');
+    })->name('booking-history');
+    Route::get('/dashboard', [HomeController::class, 'show1'])->name('home.dashboard');
 });
 
 
