@@ -4,7 +4,7 @@
     <section class="bg-pink">
         <div class="mt-16" >
             <h2 class="pl-32 pt-16">Good Morning,
-                <span class=" text-yellowB"> {{auth::user()->name}}</span>
+                <span class=" text-yellowB"> {{Auth::user()->name}}</span>
             </h2>
             <h6 class="pl-32 font-light text-lg">Let's do the best today!</h6>
         </div>
@@ -19,15 +19,15 @@
                         @if($todaysBooking)
                             <h6 class="flex">
                                 <img src="{{ asset('images/calendar.svg') }}" class="pr-2">
-                                {{ $todaysBooking->booking_date->format('M d, Y') }} 
+                                {{ $todaysBooking->booking_date }} 
                             </h6>
                             <h6 class="flex">
                                 <img src="{{ asset('images/location.svg') }}" class="pr-2">
-                                Floor {{ $todaysBooking->desk->floor }} - Desk {{ $todaysBooking->desk->desk_num }} 
+                                Floor {{ $todaysBooking->floor }} - Desk {{ $todaysBooking->desk->desk_num }} 
                             </h6>
                             <h6 class="flex">
                                 <img src="{{ asset('images/clock.svg') }}" class="pr-2">
-                                {{ $todaysBooking->booking_date->format('h:i A') }} 
+                                {{ $todaysBooking->booking_date }} 
                             </h6>
                         @else
                             <p>No booking for today</p> 
@@ -48,7 +48,7 @@
                 <h6>Upcoming Bookings</h6>
                 <a class="no-underline text-block" wire:navigate href="{{ route('booking-history') }}">Bookings <i class="fa-solid fa-arrow-right"></i></a>
             </div>
-            <table class=" text-center">
+            <table class="text-center">
                 <thead class="bg-gray">
                     <tr>
                         <th class="w-1/12">ID</th>
@@ -57,19 +57,20 @@
                         <th class="w-1/12">Floor #</th>
                         <th class="w-1/12">Desk #</th>
                         <th class="w-1/12">Date</th>
-                        <th class="w-1/12">Booked By</th>
+                        <!-- <th class="w-1/12">Booked By</th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($bookingsData as $booking)
+                    @foreach($upcomingBookings as $booking)
                     <tr>
-                        <td>{{ $booking['Id'] }}</td>
-                        <td>{{ $booking['Name'] }}</td>
-                        <td>{{ $booking['Date'] }}</td>
-                        <td>{{ $booking['Desk ID'] }}</td>
-                        <td>{{ $booking['Status'] }}</td>
+                        <td>{{ $booking->id }}</td>
+                        <td>{{ $booking->user->name }}</td>
+                        <td>{{ $booking->user->email }}</td>
+                        <td>{{ $booking->floor }}</td>
+                        <td>{{ $booking->desk->desk_num }}</td>
+                        <td>{{ $booking->booking_date }}</td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
 
