@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use App\Models\Bookings;
 use App\Models\Desk;
 use App\Models\User;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -18,26 +19,47 @@ class HomeController extends Controller
         return view('home.notif');
     }
 
-    public function show1(): View {
-        $userId = auth()->id();
-        $today = Carbon::today()->toDateString();
-        
-        $todaysBooking = Bookings::with('desk')
-            ->where('user_id', $userId)
-            ->where('booking_date', $today)
-            ->first();
+    public function dashboard(): View {
+        $user = auth()->user();
+    
+        if ($user->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->hasRole('employee')) {
+            $userId = $user->id;
+            $today = Carbon::today()->toDateString();
             
-        $upcomingBookings = Bookings::with('desk')
-            ->where('user_id', $userId)
-            ->where('booking_date', '>', $today)
-            ->orderBy('booking_date', 'asc')
-            ->get();
-
-        return view('dashboard', compact('todaysBooking', 'upcomingBookings'));
+            $todaysBooking = Bookings::with('desk')
+                ->where('user_id', $userId)
+                ->where('booking_date', $today)
+                ->first();
+                
+            $upcomingBookings = Bookings::with('desk')
+                ->where('user_id', $userId)
+                ->where('booking_date', '>', $today)
+                ->orderBy('booking_date', 'asc')
+                ->get();
+    
+            if ($todaysBooking) {
+                $deskId = $todaysBooking->desk_id;
+                $floor = $deskId <= 36 ? 1 : 2;
+                $todaysBooking->floor = $floor;
+            }
+                
+    
+            foreach ($upcomingBookings as $booking) {
+                $deskId = $booking->desk_id;
+                $floor = $deskId <= 36 ? 1 : 2;
+                $booking->floor = $floor;
+            }
+    
+            return view('home.dashboard', compact('todaysBooking', 'upcomingBookings'));
+        } else {
+            abort(403, 'Unauthorized');
+        }
     }
     public function getUserBookings($userId) {
         $userBookings = Bookings::where('user_id', $userId)
-            ->where('status', '!=', 'canceled') // Exclude canceled bookings
+            ->where('status', '!=', 'canceled') 
             ->get(['booking_date', 'status', 'desk_id']);
 
         $events = [];

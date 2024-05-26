@@ -150,7 +150,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/booking-history', function () {
         return view('home.bookingHistory');
     })->name('booking-history');
-    Route::get('/dashboard', [HomeController::class, 'show1'])->name('home.dashboard');
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 });
 
 
