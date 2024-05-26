@@ -14,11 +14,24 @@
         <div class="ml-24 mt-4">
             <div class="myBook-container flex flex-row justify-evenly">
                 <div>
-                    <h6 class=" font-semibold">TODAY'S BOOKING</h6>
-                    <div class=" bg-white p-3 rounded-lg drop-shadow-lg mt-3">
-                        <h6 class="flex"><img src="{{ asset('images/calendar.svg') }}" class="pr-2"> insert date here</h6>
-                        <h6 class="flex"><img src="{{ asset('images/location.svg') }}"class="pr-2">insert floor & desk here</h6>
-                        <h6 class="flex"><img src="{{ asset('images/clock.svg') }}"class="pr-2">insert time here</h6>
+                    <h6 class="font-semibold">TODAY'S BOOKING</h6>
+                    <div class="bg-white p-3 rounded-lg drop-shadow-lg mt-3">
+                        @if($todaysBooking)
+                            <h6 class="flex">
+                                <img src="{{ asset('images/calendar.svg') }}" class="pr-2">
+                                {{ $todaysBooking->booking_date->format('M d, Y') }} 
+                            </h6>
+                            <h6 class="flex">
+                                <img src="{{ asset('images/location.svg') }}" class="pr-2">
+                                Floor {{ $todaysBooking->desk->floor }} - Desk {{ $todaysBooking->desk->desk_num }} 
+                            </h6>
+                            <h6 class="flex">
+                                <img src="{{ asset('images/clock.svg') }}" class="pr-2">
+                                {{ $todaysBooking->booking_date->format('h:i A') }} 
+                            </h6>
+                        @else
+                            <p>No booking for today</p> 
+                        @endif
                     </div>  
                 </div>
                 <div class="w-3/4 h-[93vh] ">
