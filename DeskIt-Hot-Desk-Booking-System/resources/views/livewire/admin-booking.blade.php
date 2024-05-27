@@ -5,7 +5,7 @@
                 {{-- Title and Date Picker --}}
                 <div class="w-25 mx-5">
                     <h2>Dashboard</h2>
-                    <div>
+                    <!-- <div>
                         <section class="container">
                             <form method="POST" action="">
                                 @csrf
@@ -22,7 +22,7 @@
                                 </div>
                             </form>
                         </section>
-                    </div>
+                    </div> -->
                 </div>
 
                 {{-- Main Statistics --}}
@@ -104,36 +104,7 @@
             <div>
                 <h2 class="inline justify-start text-xl px-4 pt-2 pb-2 bg-yellowB text-white rounded-t-lg z-0">Bookings</h2>
                 <!-- DataTables Table -->
-                <div wire:ignore>
-                    <table id="bookingsTable" class="table">
-                        <thead>
-                            <tr>
-                                <th class="w-1/6">ID</th>
-                                <th class="w-1/6">Name</th>
-                                <th class="w-1/6">Date</th>
-                                <th class="w-1/6">Desk ID</th>
-                                <th class="w-1/6">Status</th>
-                                <th class="w-1/6">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($bookingsData as $booking)
-                            <tr>
-                                <td>{{ $booking['Id'] }}</td>
-                                <td>{{ $booking['Name'] }}</td>
-                                <td>{{ $booking['Date'] }}</td>
-                                <td>{{ $booking['Desk ID'] }}</td>
-                                <td>{{ $booking['Status'] }}</td>
-                                <td>
-                                    @if ($booking['Status'] != 'canceled')
-                                    <button onclick="openModal({{ $loop->index }})">Cancel</button>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                <livewire:admin-table-booking/>
             </div>
         </div>
     </section>
@@ -151,40 +122,43 @@
         </div>
     @endif
     @livewireScripts
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  
+    @powerGridSripts
+    <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 
     <script>
         // Automatically refresh the Livewire component when a browser event is received
         Livewire.on('refreshComponent', function () {
             Livewire.emit('refresh');
         });
-        $(document).ready(function() {
-            $('#bookingsTable').DataTable({
-                lengthChange: false,
-                searching: true,
-                initComplete: function () {
-                    // Add dropdown filter for Status column
-                    this.api().columns(4).every(function () {
-                        var column = this;
-                        var select = $('<select><option value="">Status</option><option value="accepted">Accepted</option><option value="canceled">Canceled</option></select>')
-                            .appendTo($(column.header()).empty())
-                            .on('change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                                column.search(val ? '^' + val + '$' : '', true, false).draw();
-                            });
+        // $(document).ready(function() {
+        //     $('#bookingsTable').DataTable({
+        //         lengthChange: false,
+        //         searching: true,
+        //         initComplete: function () {
+        //             // Add dropdown filter for Status column
+        //             this.api().columns(4).every(function () {
+        //                 var column = this;
+        //                 var select = $('<select><option value="">Status</option><option value="accepted">Accepted</option><option value="canceled">Canceled</option></select>')
+        //                     .appendTo($(column.header()).empty())
+        //                     .on('change', function () {
+        //                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
+        //                         column.search(val ? '^' + val + '$' : '', true, false).draw();
+        //                     });
 
-                        // Add select styling
-                        select.select2({ width: '100%', theme: 'bootstrap' });
-                    });
-                }
+        //                 // Add select styling
+        //                 select.select2({ width: '100%', theme: 'bootstrap' });
+        //             });
+        //         }
                 
-            });
-        });
+        //     });
+        // });
     </script>
 </div>
 

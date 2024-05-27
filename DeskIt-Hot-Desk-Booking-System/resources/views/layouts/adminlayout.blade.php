@@ -23,12 +23,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <!-- DataTables CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    
+    <link href="{{ asset('vendor/powergrid/powergrid.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     @livewireStyles
+    @powerGridStyles
 </head>
 
 <body>
