@@ -144,7 +144,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
     Route::get('/user/profile', function () {
-        return view('profile.profile');
+        return view('admin.profile');
         // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
     Route::get('/user/booking-history', function () {
