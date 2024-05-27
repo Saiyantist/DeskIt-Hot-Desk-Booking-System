@@ -103,7 +103,7 @@
         <div class="flex justify-center">
             <div>
                 <h2 class="inline justify-start text-xl px-4 pt-2 pb-2 bg-yellowB text-white rounded-t-lg z-0">Bookings</h2>
-                <!-- DataTables Table -->
+                <!-- Power Grid -->
                 <livewire:admin-table-booking/>
             </div>
         </div>
