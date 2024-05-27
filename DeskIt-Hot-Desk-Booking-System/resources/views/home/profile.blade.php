@@ -1,8 +1,6 @@
-@extends('layouts.adminlayout')
 
 <x-app-layout>
 
-    @section('content')
     <div class="flex justify-center items-center mt-16 ml-16">
         <div class="bg-white mt-10 w-11/12 h-56 flex justify-start items-center drop-shadow-lg">
 
@@ -43,6 +41,10 @@
 
     <section class="mt-1">
         @livewire('admin-profile')
+        {{--
+            Next is a livewire version for the 'user-profile',
+            only then we can use this profile.blade.php, 
+            we'd use @if here to show the appropriate @livewire component
+        --}}
     </section>
-    @endsection
 </x-app-layout>

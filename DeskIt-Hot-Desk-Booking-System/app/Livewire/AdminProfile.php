@@ -12,11 +12,14 @@ use function PHPUnit\Framework\isNull;
 
 class AdminProfile extends Component
 {   
+/**
+ *  Authenticated User for Livewire
+ */
+    public $user;
 
-
-    /**
-     *  Containers for the list of user-type from the Databasea.
-     */
+/**
+ *  Containers for the list of user-type from the Databasea.
+ */
     public $users;
     public $users2;
     public $users3;
@@ -27,9 +30,9 @@ class AdminProfile extends Component
     public $showDeact = false;
 
 
-    /**
-     * Wire model containers used for data manipulation.
-     */
+/**
+ * Wire model containers used for data manipulation.
+ */
 
     // Change User Role
     public $makeAdminId;
@@ -44,6 +47,7 @@ class AdminProfile extends Component
     public $editBirthday;
     public $editPhone;
     public $editPosition;
+    public $editMode = false;
 
     // Deactivate User
     public $deactUserId;
@@ -56,22 +60,21 @@ class AdminProfile extends Component
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    public $position;
-    public $role;
-
-
+    // Tab Switchers
     public $activeSection = 1;
-    // public $activeSection = 2;
-
+    public $activeSecondaryTabAS = 1;
     public $activeSecondaryTabMU;
-    // public $activeSecondaryTabMU = 'emps';
 
-    public $activeAccountSet = 1;
-    public $editMode = false;
-
+    // profile edit
+    public $name;
+    public $email;
+    public $gender;
+    public $birthday;
 
     public function mount()
     {       
+            $this->user = Auth::user()->id;
+
             $this->users3 = User::whereDoesntHave('roles', function ($query) {
                 $query->where('name', 'admin')
                 ->orWhere('name', 'employee')
@@ -82,7 +85,6 @@ class AdminProfile extends Component
             $this->users2 = User::role('employee')
             ->get();
 
-
             $this->users = User::role('admin')
             ->where('id', '!=', Auth::id()) // to exclude the current authenticated user
             ->get();
@@ -90,42 +92,46 @@ class AdminProfile extends Component
             $this->users4 = User::role('officemanager')
             ->where('id', '!=', Auth::id()) 
             ->get();
-      
-//             $this->users = User::whereHas('roles', function($q){
-//               $q->where('name', 'admin')
-//               ->orWhere('name', 'superadmin')
-//               ->orWhere('name', 'officemanager');
-//             })->get();
-       
+     
+            $this->name = Auth::user()->name;
+            $this->email = Auth::user()->email;
+            $this->gender = Auth::user()->gender;
+            $this->birthday = Auth::user()->birthday;
     }
 
-// -------------------------- not used
-    public function changePosition($userId)
+// ================== TAB SWITCH ==================
+
+    public function setActiveSection($section)
     {
-        $userPosition = User::find($userId);
+        
+        $this->activeSection = $section;
 
-        if (!$this->position){
-            $userPosition->update(['position' => 'Employee']);
+        if($section === 2){
+            if(auth()->user()->hasRole(['superadmin', 'admin'])){
+                $this->activeSecondaryTabMU = 'admins';
+            }
+            else {
+                $this->activeSecondaryTabMU = 'emps';
+            }
         }
-        else {
-            $userPosition->update(['position' => $this->position]);
-
+        
+        if($section === 1){
+            $this->reset('activeSecondaryTabAS');
         }
-
-        $this->redirect(request()->header('Referer'));
     }
-
-    public function changeRole($userId)
+    public function setActiveAS($accountSet)
     {
-        $user = User::find($userId);
-
-        $user->roles()->detach();
-        $user->assignRole($this->role);
-       
-        $this->redirect(request()->header('Referer'));
+        $this->activeSecondaryTabAS = $accountSet;
+        
+    }
+    public function setActiveMU($secondaryTab)
+    {
+        $this->activeSecondaryTabMU = $secondaryTab;
+        $this->resetEditData();
     }
 
-    // ================== Role CHANGING ==================
+
+// ================== ROLE CHANGE ==================
 
     /**
      *  MAKE EMPLOYEE
@@ -184,7 +190,6 @@ class AdminProfile extends Component
             // $this->redirect(request()->header('Referer'));
         }
     }
-
     public function saveAdminId($userId)
     {
         $this->activeSection = 2;
@@ -192,7 +197,7 @@ class AdminProfile extends Component
         // dd(User::find($this->makeAdminId)->first()->name);
     }
 
-    // ================== USER MANAGE ==================
+// ================== USER MANAGEMENT ==================
 
     /**
      *  EDIT USER
@@ -201,7 +206,6 @@ class AdminProfile extends Component
     {
         $this->editUserId = User::find($userId);
     }
-
     public function editProfileSave()
     {
         $user = $this->editUserId;
@@ -227,9 +231,9 @@ class AdminProfile extends Component
             $user->update(['Position' => $this->editPosition,]);
         }
 
-
+        $this->reset('editMode');
+        $this->dispatch('refreshComponent');
         $this->resetEditData();
-        // $this->redirect(request()->header('Referer'));
     }
 
     /**
@@ -246,10 +250,8 @@ class AdminProfile extends Component
             // $this->redirect(request()->header('Referer'));
         }
     }
-
     public function saveDeactId($userId)
     {
-        // $this->showDeact = true;
         $this->deactUserId = User::find($userId);
     }
 
@@ -260,27 +262,19 @@ class AdminProfile extends Component
     {
         $this->deleteUserId = User::find($userId);
     }
-
     public function deleteUser()
     {
         if ($this->deleteUserId) {
             // dd($this->deleteUserId);
 
-            // User::statement('SET FOREIGN_KEY_CHECKS=0;');
-
             User::destroy($this->deleteUserId->id);
-
-            // User::statement('SET FOREIGN_KEY_CHECKS=1;');
 
             // $this->closeModal();
             $this->resetEditData();
             $this->dispatch('refreshComponent');
             // $this->redirect(request()->header('Referer'));
         }
-
-        
     }
-
 
     /**
      *  ACCEPT USER
@@ -297,28 +291,11 @@ class AdminProfile extends Component
             // $this->redirect(request()->header('Referer'));
         }
     }
-    
     public function saveActivateId($userId)
     {
         // $this->showModal2 = true;
         $this->activateUserId = User::find($userId);
     }
-
-
-
-
-    // public function openModalAdd()
-    // {
-    //     $this->showModalAddUser = true;
-    //     // $this->addUser = $userId;
-    // }
-
-    // public function closeModalAdd()
-    // {
-    //     $this->showModalAddUser = false;
-    // }
-
-
     
     public function resetEditData() {
         $this->reset(
@@ -339,42 +316,40 @@ class AdminProfile extends Component
     }
 
     public function toggleEditMode()
-    {
+    {   
         $this->editMode = !$this->editMode;
         // dd($this->editMode);
+        $edit = Auth::user()->id;
+        $this->editUserId = User::find($edit);
+        // dd($this->editUserId);
     }
+
+    //save profile
+    public function editProfile()
+{
+    $user = Auth::user();
+
+    if ($user) {
+        // Update user's name and email
+        $user->name = $this->name;
+        $user->email = $this->email;
+        $user->gender = $this->gender;
+        $user->birthday = $this->birthday;
+        $user->save();
+
+    }
+
+    $this->editMode = false;
+    
+    $this->redirect(request()->header('Referer'));
+    
+    
+}
+
 
     public function render()
     {
-        // Check if $reloadComponent is true and reset it to false
         return view('livewire.admin-profile');
     }
-    
-    public function setActiveSection($section)
-    {
-        
-        $this->activeSection = $section;
 
-        if($section === 2){
-            $this->activeSecondaryTabMU = 'admins';
-        }
-        
-        if($section === 1){
-            $this->reset('activeAccountSet', 'activeSection');
-        }
-    }
-    public function setActiveAS($accountSet)
-    {
-        
-        $this->activeAccountSet = $accountSet;
-        
-    }
-
-    public function setActiveMU($secondaryTab)
-    {
-        // $this->activeSection = 2;
-        $this->activeSecondaryTabMU = $secondaryTab;
-        $this->resetEditData();
-        // dd($this->activeSection);
-    }
 }
