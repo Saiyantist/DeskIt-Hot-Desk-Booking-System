@@ -15,11 +15,15 @@
                         <h2 class="justify-center text-xl">Account Settings</h2>
                     </div>
 
+                    @if(Auth::user()->roles->whereNotIn('name', 'employee')->isNotEmpty())
                     {{-- Manage Users --}}
                     <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSection == 2 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
                         wire:click="setActiveSection(2)">
                         <h2 class="justify-center text-xl">Manage Users</h2>
                     </div>
+                    @else
+                    {{-- show nothing --}}
+                    @endif
 
                 </div>
 
