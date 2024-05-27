@@ -132,7 +132,7 @@
                     <!-- DataTables Table -->
                     <div class="bg-white p-3 r"
                         wire:ignore>
-                        <table id="bookingsTable" class="table">
+                        <table id="bookingsTable" class="table text-center">
                             <thead>
                                 <tr>
                                     <th class="w-1/6">ID</th>
@@ -151,9 +151,12 @@
                                     <td>{{ $booking['Date'] }}</td>
                                     <td>{{ $booking['Desk ID'] }}</td>
                                     <td>{{ $booking['Status'] }}</td>
-                                    <td>
-                                        @if ($booking['Status'] != 'canceled')
-                                        <button onclick="openModal({{ $loop->index }})">Cancel</button>
+                                    <td class="flex justify-evenly">
+                                        @if (Config::get('bookings.auto_accept'))
+                                        <button class="btn btn-danger"  onclick="openModal({{ $loop->index }})">Decline</button>
+                                        @else
+                                            <button class="btn btn-success" onclick="openModal({{ $loop->index }})">Accept</button>
+                                            <button class="btn btn-danger" onclick="openModal({{ $loop->index }})">Decline</button> 
                                         @endif
                                     </td>
                                 </tr>

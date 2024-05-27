@@ -112,7 +112,7 @@ class AdminDashboard extends Component
     {
         $index = $this->currentIndex;
 
-        if (isset($this->bookingsData[$index]) && $this->bookingsData[$index]['Action'] !== 'canceled') {
+        if (isset($this->bookingsData[$index]) && $this->bookingsData[$index]['Action'] !== 'decline') {
             $bookingId = $this->bookingsData[$index]['Id'];
             $booking = Bookings::find($bookingId);
 
@@ -120,8 +120,8 @@ class AdminDashboard extends Component
                 $booking->update(['status' => 'canceled']);
             }
 
-            $this->bookingsData[$index]['Action'] = 'canceled';
-            $this->dispatchBrowserEvent('refreshComponent');
+            $this->bookingsData[$index]['Action'] = 'decline';
+            $this->dispatchBrowserEvent('refreshComponent');    
         }
 
         $this->closeModal();
