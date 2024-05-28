@@ -18,7 +18,8 @@
                     </div>
                     <div class="max-w-xl py-2">
                         <!-- User Information -->
-                        <p class=" font-semibold ml-2">Gender</p>
+                        <p class=" font-semibold ml-2">
+                        </p>
                         <div class="border p-2 rounded-lg"> {{ $user->gender }}</div>
                     </div>
                     <div class="max-w-xl py-2">
@@ -27,17 +28,14 @@
                         <div class="border p-2 rounded-lg"> {{ $user->birthday }}</div>
                     </div>
                 </div>
+                
                 <div class="p-4 sm:p-8 bg-white sm:rounded-lg border">
                     <div class="max-w-xl">
                         @include('profile.partials.update-password-form')
                     </div>
                 </div>
-
-           
-
         </div>
     </div>
-
 
     </div>
 </x-app-layout>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Livewire\Booking;
 use App\Models\User;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -134,6 +135,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 
@@ -170,7 +172,6 @@ Route::middleware(['auth', 'role:employee|admin', 'verified'])->prefix('booking'
 
 
 
-
 /** ADMIN UI Routes */
 
 // Insecure way to ADMIN Dashboard - FOR DEVELOPMENT PURPOSES
@@ -201,6 +202,7 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/support', function () {
         return view('admin.support');
     })->name('support');
+    
 });
 
 
