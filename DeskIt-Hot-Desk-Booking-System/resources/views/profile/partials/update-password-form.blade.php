@@ -9,8 +9,7 @@
             {{ __('Manage Password') }}
         </h2>
 
-        <p class="mt-1 tex\
-        t-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __('Set the new password for your account so you can login and access all features.') }}
         </p>
     </header>
