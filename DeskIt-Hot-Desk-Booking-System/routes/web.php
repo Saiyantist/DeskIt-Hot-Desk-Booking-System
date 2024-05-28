@@ -108,7 +108,7 @@ Route::get('/dashboard', function () {
     if ($user->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {return view('admin.dashboard'); } 
 
     /** EMPLOYEE */
-    if ($user->hasRole('employee')) {return view('home.dashboard'); }   
+    if ($user->hasRole('employee')) {return app(HomeController::class)->dashboard(); }   
   
     /** NO ROLE */
     elseif (!$user->hasAnyRole(['superadmin', 'admin', 'officemanager', 'employee'])) {return redirect()->route('waiting'); }
@@ -150,7 +150,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/booking-history', function () {
         return view('home.bookingHistory');
     })->name('booking-history');
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 });
 
 
