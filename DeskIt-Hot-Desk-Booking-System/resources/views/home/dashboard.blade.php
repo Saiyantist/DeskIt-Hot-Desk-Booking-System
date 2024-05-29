@@ -2,8 +2,8 @@
 <x-app-layout>
     @section('content')
     <section class="bg-pink">
-        <div class="mt-16" >
-            <h2 class="pl-32 pt-16">Good Morning,
+        <div class="pt-12" >
+            <h2 class="pl-32 pt-8">Good Morning,
                 <span class=" text-yellowB"> {{Auth::user()->name}}</span>
             </h2>
             <h6 class="pl-32 font-light text-lg">Let's do the best today!</h6>
@@ -30,11 +30,11 @@
                                 {{ $todaysBooking->booking_date }} 
                             </h6>
                         @else
-                            <p>No booking for today</p> 
+                            <p class=" text-base">No booking for today</p> 
                         @endif
                     </div>  
                 </div>
-                <div class="w-3/4 h-[93vh] ">
+                <div class="w-3/4 h-max">
                     <div id="calendar"></div>
                 </div>
                 
@@ -43,10 +43,10 @@
     </section>
 
     <section class="bg-pink flex justify-center items-center"> 
-        <div class=" ml-24 p-2 flex flex-col bg-white rounded-lg w-[90%] drop-shadow-lg"> 
+        <div class="m-10 ml-24 p-2 flex flex-col bg-white rounded-lg w-[70%] drop-shadow-lg text-lg"> 
             <div class="flex justify-between p-2">
-                <h6>Upcoming Bookings</h6>
-                <a class="no-underline text-block" wire:navigate href="{{ route('booking-history') }}">Bookings <i class="fa-solid fa-arrow-right"></i></a>
+                <p class="text-lg">Upcoming Bookings</p>
+                <a class="no-underline text-block text-lg" wire:navigate href="{{ route('booking-history') }}">Bookings <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <table class="text-center">
                 <thead class="bg-gray">
@@ -62,13 +62,13 @@
                 </thead>
                 <tbody>
                     @foreach($upcomingBookings as $booking)
-                    <tr>
-                        <td>{{ $booking->id }}</td>
-                        <td>{{ $booking->user->name }}</td>
-                        <td>{{ $booking->user->email }}</td>
-                        <td>{{ $booking->floor }}</td>
-                        <td>{{ $booking->desk->desk_num }}</td>
-                        <td>{{ $booking->booking_date }}</td>
+                    <tr >
+                        <td class="p-2">{{ $booking->id }}</td>
+                        <td class="p-2">{{ $booking->user->name }}</td>
+                        <td class="p-2">{{ $booking->user->email }}</td>
+                        <td class="p-2">{{ $booking->floor }}</td>
+                        <td class="p-2">{{ $booking->desk->desk_num }}</td>
+                        <td class="p-2">{{ $booking->booking_date }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -90,11 +90,11 @@
             color: black;
             text-decoration: none;
         }
-
+/* 
         td.fc-daygrid-day {
-            height: 11.9vh;
-        }
-        
+            height: 5vh;
+        } */
+          
         div.fc-event-main {
         background-color: #F9F6F6;
         color: black;
@@ -109,7 +109,9 @@
        div#calendar {
         background-color: white;
         height: 15vh;
+        width: 60vw;
         border-radius: 10px;
+        font-size:1rem;
        }
 
        div.fc-header-toolbar {
@@ -128,6 +130,7 @@
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
+                height: 'max-content',
                 validRange: {
                     start: startDate,
                     end: endDate
