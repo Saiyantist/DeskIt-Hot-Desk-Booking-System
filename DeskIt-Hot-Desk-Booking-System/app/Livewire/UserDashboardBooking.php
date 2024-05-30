@@ -42,7 +42,7 @@ final class UserDashboardBooking extends PowerGridComponent
     {
         $this->showCheckBox();
         return [
-            Header::make()->showSearchInput(),
+            Header::make()->showSearchInput()->includeViewOnTop('components.top-component'),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),

@@ -1,5 +1,5 @@
 <div
-    class="items-center justify-between sm:flex gap-2"
+    class="items-center justify-between sm:flex gap-2 "
     wire:loading.class="blur-[2px]"
     wire:target="loadMore"
 >

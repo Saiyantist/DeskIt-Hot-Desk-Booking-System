@@ -4,11 +4,11 @@
 >
     <div
         id="power-grid-table-container"
-        class="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8 w-[98%]"
+        class="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8 w-[98%] text-base "
     >
         <div
             id="power-grid-table-base"
-            class="p-3 align-middle inline-block min-w-full w-full sm:px-6 lg:px-8"
+            class="p-3 align-middle inline-block min-w-full w-full sm:px-6 lg:px-8 " 
         >
 
             @include(data_get($theme, 'layout.header'), [
