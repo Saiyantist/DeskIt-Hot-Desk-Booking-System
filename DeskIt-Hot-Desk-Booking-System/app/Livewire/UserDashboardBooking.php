@@ -42,7 +42,9 @@ final class UserDashboardBooking extends PowerGridComponent
     {
         $this->showCheckBox();
         return [
-            Header::make()->showSearchInput()->includeViewOnTop('components.top-component'),
+            Header::make()
+                ->showSearchInput()
+                ->includeViewOnTop('components.top-component'),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -54,10 +56,7 @@ final class UserDashboardBooking extends PowerGridComponent
     {
         return [
             Filter::datepicker('booking_date', 'bookings.booking_date'),
-            Filter::inputText('desk_num', 'desks.desk_num')
-                ->operators([ 'contains', 'starts_with', 'ends_with']),
-            Filter::inputText('name', 'users.name')
-                ->operators(['contains', 'starts_with', 'ends_with']),
+            Filter::number('desk_num', 'desks.desk_num'),
         ];
     }
 
@@ -65,7 +64,7 @@ final class UserDashboardBooking extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('name', fn ($dish) => $dish->name)
+            ->addColumn('name')
             ->addColumn('email')
             ->addColumn('desk_num', fn ($dish) => $dish->desk_num)
             ->addColumn('floor')
