@@ -71,8 +71,7 @@ final class UserDashboardBooking extends PowerGridComponent
             ->addColumn('floor')
             ->addColumn('booking_date', function(Bookings $model) {
                 return Carbon::parse($model->booking_date)->format('F j, Y');
-            }, fn ($dish) => $dish->booking_date)
-            ->addColumn('action');
+            }, fn ($dish) => $dish->booking_date);
     }
 
     public function columns(): array
@@ -101,8 +100,6 @@ final class UserDashboardBooking extends PowerGridComponent
             Column::make('Date', 'booking_date')
                 ->searchable()
                 ->sortable(),
-
-            Column::action('Action'),
         ];
     }
 }
