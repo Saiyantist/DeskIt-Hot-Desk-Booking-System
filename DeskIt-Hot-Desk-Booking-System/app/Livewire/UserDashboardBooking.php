@@ -38,7 +38,6 @@ final class UserDashboardBooking extends PowerGridComponent
             DB::raw('(CASE WHEN desks.id <= 36 THEN 1 ELSE 2 END) as floor')
         );
     }
-
     public function setUp(): array
     {
         $this->showCheckBox();
@@ -47,6 +46,7 @@ final class UserDashboardBooking extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
+            
         ];
     }
 
