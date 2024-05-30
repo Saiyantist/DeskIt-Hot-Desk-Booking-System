@@ -87,7 +87,6 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 80%;
 }
 
 #sidebar.expand .toggle-btn i {
@@ -95,7 +94,6 @@ h1 {
     display: flex;
     justify-content: end;
     margin-right: 25px;
-    padding-top: 60px;
 }
 
 #sidebar:not(.expand) a.sidebar-link span {
