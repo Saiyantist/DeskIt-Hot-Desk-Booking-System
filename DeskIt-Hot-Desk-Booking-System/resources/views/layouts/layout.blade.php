@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{config('app.name', 'laravel')}}</title>
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/stylesWelcome.css">
     <link rel="stylesheet" href="/css/stylesUhome.css">
     <link rel="stylesheet" href="/css/stylesBooking.css">

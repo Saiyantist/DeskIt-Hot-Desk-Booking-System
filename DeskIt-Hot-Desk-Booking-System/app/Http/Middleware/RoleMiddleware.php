@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class RoleMiddleware
 {
@@ -16,27 +15,21 @@ class RoleMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle($request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, $role)
     {
-        if (Auth::user()->hasRole('admin')) {
-            if ($request->is('dashboard' || 'superadmin.dashboard')) {
+        if ($request->user()->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {
+            if ($request->is('dashboard')) {
                 return redirect()->route('admin.dashboard');
             }
             return $next($request);
         }
+        
 
-        if (Auth::user()->hasRole('superadmin')) {
-            if ($request->is('dashboard' || 'admin.dashboard')) {
-                return redirect()->route('superadmin.dashboard');
+        if ($request->user()->hasRole('employee')) {
+            if ($request->is('booking')) {
+                return $next($request);
             }
-            return $next($request);
-        }
-
-        if (Auth::user()->hasRole('employee')) {
-            if ($request->is('admin.dashboard' || 'superadmin.dashboard')) {
-                return redirect()->route('dashboard');
-            }
-            return $next($request);
+            return redirect()->route('dashboard');
         }
 
         abort(403, 'Unauthorized');

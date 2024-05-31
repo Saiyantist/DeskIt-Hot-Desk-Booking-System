@@ -2,10 +2,9 @@
 
 <x-app-layout>
     @section('content')
-    @livewire('admin-booking')
+    @livewire('admin-dashboard')
     @livewireScripts
    
-
     <script src="{{ asset('js/myScript2.js') }}"></script>
     
     @endsection

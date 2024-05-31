@@ -1,127 +1,67 @@
-<div class="flex flex-col container mt-24">
+<div class="flex flex-col container mt-16">
 
-    @if ($showConfirmation)
-    <div id="Modal" class="flex flex-column justify-start bg-yellowB rounded-4 absolute h-48 w-72">
-        
-        <div class='self-end my-1 mr-4 '>
-            <button class="font-bold" wire:click="closeModal">X</button>
-        </div>
-
-        <div class='flex flex-column bg-white rounded-bottom-4 py-4 px-2.5'>
-            <div class='flex justify-center'>
-                <p class=" text-lg text-center">Are you sure you want to DISABLE this desk?</p>
-            </div>
-
-            <div class="flex justify-center">
-                <p class="text-lg text-center">Desk: {{$selectedDesk}}</p>
-            </div>
-    
-            <div class="flex justify-center">
-                <button class="bg-secondary px-6 py-2 rounded-4 mt-3 text-white font-black"
-                    wire:click="setDeskAvailability">
-                    DISABLE
-                </button>
-            </div>
-        </div>
-        
-    </div>
-    @endif
-
-    @if ($showNotification)
-    <div id="Modal" class="flex flex-column justify-start bg-yellowB rounded-4 absolute h-48 w-72">
-        
-        <div class='self-end my-1 mr-4 '>
-            <button class="font-bold" wire:click="closeModal">X</button>
-        </div>
-
-        <div class='flex flex-column bg-white py-4 px-2.5'>
-            <div class='flex justify-center'>
-                <p class=" text-lg text-center">Desk Successfully Disabled!</p>
-                
-            </div>
-    
-            <div class="flex justify-center">
-                <p class="bg-yellowA mx-2 p-1 rounded-2 text-lg text-center">Related bookings were set to CANCELED!</p>
-            </div>
-        </div>
-    </div>
-    @endif
-
-    @if ($showEnableModal)
-    <div id="Modal" class="flex flex-column justify-start bg-yellowB rounded-4 absolute h-48 w-72">
-        
-        <div class='self-end my-1 mr-4 '>
-            <button class="font-bold" wire:click="closeModal">X</button>
-        </div>
-
-        <div class='flex flex-column bg-white rounded-bottom-4 py-4 px-2.5'>
-            <div class='flex justify-center'>
-                <p class=" text-lg text-center">ENABLE this desk?</p>
-            </div>
-
-            <div class="flex justify-center">
-                <p class="text-lg text-center">Desk: {{$selectedDesk}}</p>
-            </div>
-    
-            <div class="flex justify-center">
-                <button class="bg-green px-6 py-2 rounded-4 mt-3 text-white font-black"
-                    wire:click="setDeskAvailability">
-                    Enable
-                </button>
-            </div>
-        </div>
-        
-        {{-- <div id="Modal" class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72">
-        
-        <div class='self-end my-1 mr-4 '>
-            <button class="font-bold" wire:click="closeModal">X</button>
-        </div>
-
-        <div class='flex flex-column bg-white py-4 px-2.5'>
-            <div class='flex justify-center'>
-                <p class=" text-lg text-center">This Desk is already Disabled</p>
-            </div>
-            
-            <div class="flex flex-column  justify-center">
-                <p class="text-lg text-center">Desk: {{$selectedDesk}}</p>
-            </div>
-        </div>
-        
-        </div> --}}
-    </div>
-    @endif
-
-    @if ($showEnabledNotification)
-    <div id="Modal" class="flex flex-column justify-start bg-yellowB rounded-4 absolute h-48 w-72">
-        
-        <div class='self-end my-1 mr-4 '>
-            <button class="font-bold" wire:click="closeModal">X</button>
-        </div>
-
-        <div class='flex flex-column bg-white py-4 px-2.5'>
-            <div class='flex justify-center'>
-                <p class=" text-lg text-center">Desk Successfully Enabled!</p>
-                
-            </div>
-    
-            <div class="flex justify-center">
-                <p class="bg-yellowA mx-2 p-1 rounded-2 text-lg text-center">Related CANCELED bookings were set back to ACCEPTED!</p>
-            </div>
-        </div>
-    </div>
-    @endif
-
+    @include("admin.modals.updatedDeskmap")
     {{-- UI --}}
-    <main class="flex flex-row justify-evenly align-items-center">
+    <main class="flex flex-row justify-evenly align-items-center m-10 ml-24 ">
 
         {{-- Side Panel Section --}}
-        <section class="side-panel-container self-start" style="height:35.8rem;">
+        <section class="side-panel-container ">
 
                 {{-- Side Panel Header --}}
-                <div class="header bg-gray">
-                    <p class=" text-lg font-extrabold">Desks Managment</p>
-                    <p class=" text-sm font-normal">Enable and disable desks conveniently without going to the Database.
-                    </p>
+                <div class="header bg-gray text-center">
+                    
+                    <h5 class="mb-3 font-semibold"> DESK MAP</h5>
+                    <table class="justify-center items-center text-center">
+                        <thead>
+                            <tr>
+                                <th class=" text-sm px-2"> SUMMARY REPORT </th>
+                                <th class=" text-sm px-2"> TOTAL  </th>
+                            </tr>
+                        </thead>
+                        <tbody class="mt-2">
+                            <tr>
+                                <td>BOOKINGS </td>
+                                <td> {{ $bookedCount }} </td>
+                            </tr>
+                            <tr>
+                                <td>AVAILABLE DESK</td>
+                                <td>{{ $availableDeskCount }}</td>
+                            </tr>
+                            <tr>
+                                <td>NOT AVAILABLE</td>
+                                <td>{{ $notAvailableCount }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="mt-3">
+                        <thead>
+                            <tr>
+                                <th class="text-sm">LEGENDS:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="flex justify-center mt-1">
+                                    <img style="width: 1rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
+                                </td>
+                                <td class="text-start">Available</td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="flex justify-center mt-1">
+                                    <img style="width: 1rem" src="{{ asset('images/circleBooked.svg')}}" alt="SVG Image"/>
+                                </td>
+                                <td class="text-start">Booked</td>
+                            </tr>
+                            <tr>
+                                <td class="flex justify-center mt-1"> 
+                                    <img style="width: 1rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image"/>
+                                </td>
+                                <td class="text-start">Not Available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
                 </div>
 
                 {{-- Side Panel Body --}}
@@ -177,7 +117,7 @@
         </section>
 
         {{-- Main Content --}}
-        <section class="d-flex flex-col items-center justify-center p-4 pt-0 bg-yellowA rounded-2 ">
+        <section class="d-flex flex-col items-center justify-center p-4 pt-0 ml-4 bg-yellowA rounded-2 ">
 
             {{-- Desk Map Controllers --}}
             <div class="flex flex-row py-3 self-start  ">
@@ -186,7 +126,7 @@
                 <div x-data="{ open: false }" @click.away="open = false" class="text-center">
                     <form method="POST" action="">
                     @csrf
-                        <select class="form-select bg-warning text-light text-center floors"
+                        <select class="form-select bg-warning text-dark text-center floors"
                         wire:model.live="floor" 
                         wire:change='refreshMap'
                         >
