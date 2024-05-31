@@ -4,7 +4,7 @@
 >
     <div
         id="power-grid-table-container"
-        class="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8 w-[98%] text-base "
+        class="my-2 overflow-x-auto sm:-mx-3 lg:-mx-8 w-[98%] text-base bg-gray rounded-md"
     >
         <div
             id="power-grid-table-base"

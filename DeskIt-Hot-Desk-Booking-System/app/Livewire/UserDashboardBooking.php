@@ -56,7 +56,8 @@ final class UserDashboardBooking extends PowerGridComponent
     {
         return [
             Filter::datepicker('booking_date', 'bookings.booking_date'),
-            Filter::number('desk_num', 'desks.desk_num'),
+            Filter::inputText('desk_num', 'desks.desk_num')
+            ->operators(['contains']),
         ];
     }
 

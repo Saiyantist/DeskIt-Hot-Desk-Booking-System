@@ -122,7 +122,6 @@
         </div>
     @endif
     @livewireScripts
-    @powerGridSripts
     <script src="{{ asset('vendor/powergrid/powergrid.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  

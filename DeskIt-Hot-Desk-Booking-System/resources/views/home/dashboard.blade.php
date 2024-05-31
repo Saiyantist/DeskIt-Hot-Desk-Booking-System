@@ -2,8 +2,8 @@
 <x-app-layout>
     @section('content')
     <section class="bg-pink">
-        <div class="pt-12" >
-            <h2 class="pl-32 pt-8">Good Morning,
+        <div class="mt-16" >
+            <h2 class="pl-32 pt-12">Good Morning,
                 <span class=" text-yellowB"> {{Auth::user()->name}}</span>
             </h2>
             <h6 class="pl-32 font-light text-lg">Let's do the best today!</h6>
@@ -30,7 +30,7 @@
                                 {{ $todaysBooking->booking_date }} 
                             </h6>
                         @else
-                            <p class=" text-base">No booking for today</p> 
+                            <div class="text-base">No booking for today</div> 
                         @endif
                     </div>  
                 </div>
@@ -109,7 +109,7 @@
        div#calendar {
         background-color: white;
         height: 15vh;
-        width: 60vw;
+        width: 67vw;
         border-radius: 10px;
         font-size:1rem;
        }

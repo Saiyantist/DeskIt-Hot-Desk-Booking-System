@@ -4,8 +4,8 @@
 <x-app-layout>
     
     @section('content')
-    <div class=" ml-40 mt-16 rounded-lg">
-        <div class="p-2">
+    <div class=" ml-40 mt-16">
+        <div class="pt-10">
             <livewire:user-dashboard-booking/> 
         </div>
         
