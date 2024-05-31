@@ -26,7 +26,6 @@
     <link href="{{ asset('vendor/powergrid/powergrid.css') }}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     @livewireStyles
-    @powerGridStyles
 </head>
 
 <body>
