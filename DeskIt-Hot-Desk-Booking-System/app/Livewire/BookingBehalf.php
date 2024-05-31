@@ -57,7 +57,7 @@ class BookingBehalf extends Component
         /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
         $this->selectedDesk = '-';
         $this->bookedDesk ='-';
-        $this->selectedUser = '-';
+        $this->selectedUserID = '-';
 
         /**
          * Check IF there is a date and floor selected

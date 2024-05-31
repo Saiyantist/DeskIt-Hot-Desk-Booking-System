@@ -9,9 +9,12 @@ use App\Models\Users;
 use App\Models\Desk;
 use Carbon\Carbon;
 use DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
-
-class AdminBooking extends Component
+class AdminDashboard extends Component
 {
 
     use WithPagination;
@@ -39,6 +42,8 @@ class AdminBooking extends Component
     public $min;
     public $max;
 
+    public $autoAccept;
+
     public function mount()
     {   
         $deskRange = range(1, 36);
@@ -60,6 +65,26 @@ class AdminBooking extends Component
         $this->floor2BookedCount = Bookings::whereIn('desk_id', $deskRange2)->where('status', 'accepted')->count();
 
         $this->fetchBookings();
+        $this->autoAccept = Config::get('bookings.auto_accept');
+    }
+
+    // Toggle for Auto Accepting of New Bookings
+    public function toggleAutoAccept()
+    {
+        // Toggle the autoAccept property
+        $this->autoAccept = !$this->autoAccept; 
+        $this->updateAutoAccept();
+        $this->dispatch('refreshPage');
+    }   
+
+    // Configuration process for the Toggle
+    public function updateAutoAccept()
+    {
+        // Update the configuration value
+        $config = Config::get('bookings');
+        $config['auto_accept'] = $this->autoAccept;
+        $configString = '<?php return ' . var_export($config, true) . ';';
+        file_put_contents(config_path('bookings.php'), $configString);
     }
 
     public function fetchBookings()
@@ -83,12 +108,11 @@ class AdminBooking extends Component
         }
     }
 
-
     public function handleAction()
     {
         $index = $this->currentIndex;
 
-        if (isset($this->bookingsData[$index]) && $this->bookingsData[$index]['Action'] !== 'canceled') {
+        if (isset($this->bookingsData[$index]) && $this->bookingsData[$index]['Action'] !== 'decline') {
             $bookingId = $this->bookingsData[$index]['Id'];
             $booking = Bookings::find($bookingId);
 
@@ -96,8 +120,8 @@ class AdminBooking extends Component
                 $booking->update(['status' => 'canceled']);
             }
 
-            $this->bookingsData[$index]['Action'] = 'canceled';
-            $this->dispatchBrowserEvent('refreshComponent');
+            $this->bookingsData[$index]['Action'] = 'decline';
+            $this->dispatchBrowserEvent('refreshComponent');    
         }
 
         $this->closeModal();
@@ -119,6 +143,6 @@ class AdminBooking extends Component
         $this->max = Carbon::today()->addDays(14)->toDateString();
         $this->min = Carbon::today()->toDateString();
 
-        return view('livewire.admin-booking');
+        return view('livewire.admin-dashboard');
     }
 }

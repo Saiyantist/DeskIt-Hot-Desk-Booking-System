@@ -144,7 +144,7 @@
                     </form>
                 </div>
 
-                {{-- onboarding guide --}}
+                {{-- Onboarding Guide --}}
                 <div class="absolute right-5">
                     <a class="helpIcon cursor-pointer">
                         <img src="{{ asset('images/help.svg') }}" class="w-8 h-8">
