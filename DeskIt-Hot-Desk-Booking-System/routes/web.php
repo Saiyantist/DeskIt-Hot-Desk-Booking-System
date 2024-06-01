@@ -148,7 +148,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
     Route::get('/user/support', function () {
-        return view('admin.support');
+        return view('support.support');
     })->name('userSupport');
 });
 
@@ -202,7 +202,7 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
         return view('admin.profileEdit');
     })->name('profile-edit');
     Route::get('/admin/support', function () {
-        return view('admin.support');
+        return view('support.support');
     })->name('support');
     Route::get('/admin/feedbacks-reports', function () {
         return view('admin.feedbacks-reports');

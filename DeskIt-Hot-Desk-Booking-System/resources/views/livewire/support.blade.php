@@ -69,7 +69,7 @@
                   </div>
                   <div class="bg-white rounded-b-xl shadow-md p-4 h-68">
                      <h2 class="text-2xl">Submit a Report or Feedback</h2>
-                     <p class=" text-base font-light py-2">submit your report or feedback to help us improve our services.</p>
+                     <p class=" text-lg font-light py-2">submit your report or feedback to help us improve our services.</p>
                      <button  href="#" data-toggle="modal" data-target="#ModalCreate" class="btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
                   </div>
                </div>
@@ -82,8 +82,8 @@
                   </div>
                   <div class="bg-white rounded-b-xl shadow-md p-3 h-68">
                      <h2 class="text-2xl">View Reports or Feedbacks</h2>
-                     <p class=" text-base font-light p-2">submit your report or feedback to help us improve our services.</p>
-                     <button wire:navigate href="{{ route('feedbacks-reports') }}" class="btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
+                     <p class=" text-base font-light py-1 px-2">submit your report or feedback to help us improve our services.</p>
+                     <button wire:navigate href="{{ route('feedbacks-reports') }}" class="mb-2 btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
                   </div>
                </div>
             @endif

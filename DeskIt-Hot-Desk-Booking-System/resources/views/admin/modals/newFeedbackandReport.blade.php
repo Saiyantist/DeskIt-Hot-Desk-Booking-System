@@ -21,13 +21,13 @@
                    
                 </div>
                 <div class="modal-body">
-                    <div class="form-group mb-4">
-                        <label for="email">Email <span class="text-red">*</span></label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                    <div class="form-group mb-2">
+                        <Strong for="email">Email <span class="text-red">*</span></Strong>
+                        <input type="email" id="email" name="email" class="form-control my-2" required>
 
                         
                     </div>
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-2">
                         <strong class="text-start">Select Feedback <span class="text-red">*</span></strong>
                         <select class="form-select text-center my-2" required>
                         <option value="">Choose one</option>
@@ -39,17 +39,17 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group m-2">
                             <strong>Describe the Issue <span class="text-red">*</span></strong>
-                            <textarea id="desc" name="desc" placeholder="description" class="border border-gray-300 rounded w-full my-2 px-3 p-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 h-32 resize-none" required></textarea>
+                            <textarea id="desc" name="desc" placeholder="description" class="border border-gray-300 rounded w-full my-2 px-3 p-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 h-20 resize-none" required></textarea>
                         </div>
 
                         </div>
                         <label class="flex items-center">
-                            <input type="checkbox" class="form-checkbox text-blue-600 border" checked>
-                            <span class="text-base px-3 py-2"> Deskit can contact me to learn about my experiences and to improve Deskit services. I acknowledge the Deskit Privacy Policy.</span>
+                            <input type="checkbox" class="form-checkbox text-blue-600 border border-2">
+                            <span class="text-sm px-3"> Deskit can contact me to learn about my experiences and to improve Deskit services. I acknowledge the Deskit Privacy Policy.</span>
                         </label>
                     </div>
 
-                    <div class="mb-4 mt-2 d-flex justify-end">
+                    <div class="mb-4 mt-1 d-flex justify-end">
                         <button type="button" class="btn grey btn-outline-secondary mx-3" data-dismiss="modal">{{
                             __('Cancel') }}</button>
                         <button type="submit" class="btn btn-outline-warning text-dark mr-8">{{ __('Submit') }}</button>
