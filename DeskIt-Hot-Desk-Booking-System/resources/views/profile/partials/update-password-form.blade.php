@@ -42,9 +42,7 @@
                 </div>
 
                 <div class="flex-1">
-                    {{-- @error('password') <span class="error">{{ $message }}</span> @enderror --}}
-                    <x-input-error :messages="$errors->updatePassword->get('current_password')"/>
-
+                    @error('password') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </div>
 
@@ -57,8 +55,7 @@
                 </div>
 
                 <div class="flex-1">
-                    {{-- @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror --}}
-                    <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" />
+                    @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </div>
 
