@@ -1,8 +1,10 @@
 <section>
     
-    @if (session('status') === 'password-updated')
-    @include('profile.partials.success-change')
-@else
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
 
     <header>
         <h2 class="text-lg font-medium text-bla">
@@ -14,60 +16,63 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('password.update') }}" wire:submit.prevent="updatePassword">
         @csrf
         @method('put')
 
+        {{-- current password --}}
         <div class="row">
             <div class="col-md-12 flex">
                 <div class="flex-1">
-                    <x-input-label for="current_password" :value="__('Current Password')" />
-                    <x-text-input id="current_password" name="current_password" type="password" class="form-control" autocomplete="current-password" />
+                    <label for="current_password">Current Password</label>
+                    <input type="password" id="current_password" wire:model.defer="current_password" class="form-control">
                 </div> 
-                    <div class="flex-1">
-                    <x-input-error :messages="$errors->updatePassword->get('current_password')"/>
+                
+                <div class="flex-1">
+                    @error('current_password') <span class="error">{{ $message }}</span> @enderror
                  </div>
                 
             </div>
 
+            {{-- new password --}}
             <div class="col-md-12 flex">
                 <div class="flex-1">
-                    <x-input-label for="password" :value="__('New Password')" />
-                    <x-text-input id="password" name="password" type="password" class="mt-1 form-control" autocomplete="new-password" />
+                    <label for="password">New Password</label>
+                    <input type="password" id="password" wire:model.defer="password" class="form-control mt-1">
                 </div>
 
                 <div class="flex-1">
-                    <x-input-error :messages="$errors->updatePassword->get('password')" />
+                    {{-- @error('password') <span class="error">{{ $message }}</span> @enderror --}}
+                    <x-input-error :messages="$errors->updatePassword->get('current_password')"/>
+
                 </div>
             </div>
 
+            {{-- confirm new password --}}
             <div class="col-md-12 flex">
                 <div class="flex-1">
-                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                    <label for="password_confirmation">Confirm New Password</label>
+                    <input type="password" id="password_confirmation" wire:model.defer="password_confirmation" class="form-control mt-1">
                     
-                    <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 form-control" autocomplete="new-password" />
                 </div>
 
                 <div class="flex-1">
+                    {{-- @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror --}}
                     <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" />
                 </div>
             </div>
 
+            {{-- forget password --}}
             <div class="relative justify-end">
                 <a href="" class="mt-1 text-sm text-gray-600 dark:text-gray-400">Forget password</a>
             </div>
         </div>
 
+        {{-- submit button --}}
         <div class="mt-3">
-            <button type="submit" class="bg-amber-300 hover:bg-amber-400 text-gray-600 font-bold py-2 px-4 rounded-md">
-                {{ __('Update Password') }}
+            <button wire:submit wire:click='updatePassword' class="bg-amber-300 hover:bg-amber-400 text-gray-600 font-bold py-2 px-4 rounded-md">
+                Update Password
             </button>
-           
-            @if (session('status') === 'profile-updated')
-            
-                @include('profile.partials.success-change') <hr>
-        @endif
         </div>
     </form>
-    @endif
 </section>
