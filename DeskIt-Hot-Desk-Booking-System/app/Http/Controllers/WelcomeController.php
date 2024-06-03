@@ -21,15 +21,15 @@ class WelcomeController extends Controller
     }
 
     public function show1(): View {
-        return view('faq');
+        return view('support.faq');
     }
 
     public function show2(): View {
-        return view('privacyPolicy');
+        return view('support.privacyPolicy');
     }
 
     public function show3(): View {
-        return view('guides');
+        return view('support.guides');
     }
 
     public function show4(){
