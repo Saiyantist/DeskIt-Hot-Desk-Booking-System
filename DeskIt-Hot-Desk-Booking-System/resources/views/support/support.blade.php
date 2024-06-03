@@ -4,7 +4,7 @@
 <x-app-layout>
     
     @section('content')
-    @livewire('admin-support')
+    @livewire('support')
     @livewireScripts
     @endsection
 </x-app-layout>

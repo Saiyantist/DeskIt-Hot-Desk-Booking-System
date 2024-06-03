@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class AdminSupport extends Component
+class Support extends Component
 {
     public function render()
     {
-        return view('livewire.admin-support');
+        return view('livewire.support');
     }
 }
