@@ -79,14 +79,7 @@
                       </div>
                     @enderror
                   </div>
-
             </div>
-
-            {{-- forget password --}}
-            <div class="relative justify-end">
-                <a href="{{ route('password.request') }}" class="mt-1 text-sm text-gray-600 dark:text-gray-400">Forget password</a>
-            </div>
-        </div>
 
         {{-- submit button --}}
         <div class="mt-3">
