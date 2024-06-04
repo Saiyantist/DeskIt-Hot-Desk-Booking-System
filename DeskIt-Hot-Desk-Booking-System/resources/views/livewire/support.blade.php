@@ -31,7 +31,7 @@
                   <h2 class="text-2xl">FAQs</h2>
                   <p class="text-lg font-light py-2"> Explore Frequently-Asked-Questions for instant problem-solving
                      insights.</p>
-                  <button wire:navigate href="{{ route('faq') }}" class=" btn-warning rounded-xl h-9 w-[80%]">View
+                  <button wire:navigate href="{{ route('faq') }}" class="btn btn-warning rounded-xl h-9 w-[80%]">View
                      FAQs</button>
                </div>
             </div>
@@ -44,7 +44,7 @@
                <div class="bg-white rounded-b-xl shadow-md p-4 h-68">
                   <h2 class="text-2xl">Privacy Policy</h2>
                   <p class="text-lg font-light py-2 px-2"> Explore our commitment to safeguarding your privacy rights.</p>
-                  <button wire:navigate href="{{ route('privacyPolicy') }}" class="btn-warning rounded-xl h-9 w-[80%]">View Privacy Policy</button>
+                  <button wire:navigate href="{{ route('privacyPolicy') }}" class="btn btn-warning rounded-xl h-9 w-[80%]">View Privacy Policy</button>
                </div>
             </div>
 
@@ -57,7 +57,7 @@
                   <h2 class="text-2xl">Guides</h2>
                   <p class="text-lg font-light py-2 px-3"> Efficiently use every feature with our user-friendly website
                      guide.</p>
-                  <button wire:navigate href="{{ route('guides') }}" class=" btn-warning rounded-xl h-9 w-[80%]">View Guides</button>
+                  <button wire:navigate href="{{ route('guides') }}" class="btn btn-warning rounded-xl h-9 w-[80%]">View Guides</button>
                </div>
             </div>
 
@@ -70,7 +70,7 @@
                   <div class="bg-white rounded-b-xl shadow-md p-4 h-68">
                      <h2 class="text-2xl">Submit a Report or Feedback</h2>
                      <p class=" text-lg font-light py-2">submit your report or feedback to help us improve our services.</p>
-                     <button  href="#" data-toggle="modal" data-target="#ModalCreate" class="btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
+                     <button  href="#" data-toggle="modal" data-target="#ModalCreate" class="btn btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
                   </div>
                </div>
 
@@ -83,7 +83,7 @@
                   <div class="bg-white rounded-b-xl shadow-md p-3 h-68">
                      <h2 class="text-2xl">View Reports or Feedbacks</h2>
                      <p class=" text-base font-light py-1 px-2">submit your report or feedback to help us improve our services.</p>
-                     <button wire:navigate href="{{ route('feedbacks-reports') }}" class="mb-2 btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
+                     <button wire:navigate href="{{ route('feedbacks-reports') }}" class="mb-2 btn btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
                   </div>
                </div>
             @endif

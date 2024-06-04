@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Bookings;
 use Livewire\WithPagination;
-use App\Models\Users;
+use App\Models\User;
 use App\Models\Desk;
 use Carbon\Carbon;
 use DataTables;
@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
+
+use function Livewire\once;
 
 class AdminDashboard extends Component
 {
@@ -35,14 +37,14 @@ class AdminDashboard extends Component
     public $floor2NotAvailableCount;
 
     public $bookingsData = [];
-    public $showModal = false;
-    public $currentIndex;
+    
+    public $autoAccept;
+    public $alterBooking;
 
     public $date;
     public $min;
     public $max;
 
-    public $autoAccept;
 
     public function mount()
     {   
@@ -77,7 +79,7 @@ class AdminDashboard extends Component
         $this->dispatch('refreshPage');
     }   
 
-    // Configuration process for the Toggle
+    // Configuration process for the Toggle Auto Accept Functionality
     public function updateAutoAccept()
     {
         // Update the configuration value
@@ -108,34 +110,37 @@ class AdminDashboard extends Component
         }
     }
 
-    public function handleAction()
+    public function acceptBooking()
     {
-        $index = $this->currentIndex;
-
-        if (isset($this->bookingsData[$index]) && $this->bookingsData[$index]['Action'] !== 'decline') {
-            $bookingId = $this->bookingsData[$index]['Id'];
-            $booking = Bookings::find($bookingId);
-
-            if ($booking) {
-                $booking->update(['status' => 'canceled']);
-            }
-
-            $this->bookingsData[$index]['Action'] = 'decline';
-            $this->dispatchBrowserEvent('refreshComponent');    
+        if($this->alterBooking->status === 'pending' )
+        {
+            $this->alterBooking->update([
+                'status' => 'accepted',
+            ]);
+            $this->dispatch('refreshPage');
         }
-
-        $this->closeModal();
     }
 
-    public function closeModal()
+    public function declineBooking()
     {
-        $this->showModal = false;
+        // if($this->alterBooking->status ===  'accepted' ){
+        if($this->alterBooking->status === 'pending' ){
+            $this->alterBooking->update([
+                'status' => 'canceled',
+            ]);
+            $this->dispatch('refreshPage');
+        }
     }
 
-    public function openModal($index)
+    public function saveId($id)
     {
-        $this->currentIndex = $index;
-        $this->showModal = true;
+        $this->alterBooking = Bookings::with(['user','desk'])->find($id);
+    }
+
+    public function resetEditData() {
+        $this->reset(
+            'alterBooking',
+        );
     }
 
     public function render()

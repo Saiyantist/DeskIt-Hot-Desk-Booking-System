@@ -108,7 +108,7 @@ Route::get('/dashboard', function () {
     if ($user->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {return view('admin.dashboard'); } 
 
     /** EMPLOYEE */
-    if ($user->hasRole('employee')) {return view('home.dashboard'); }   
+    if ($user->hasRole('employee')) {return app(HomeController::class)->dashboard(); }   
   
     /** NO ROLE */
     elseif (!$user->hasAnyRole(['superadmin', 'admin', 'officemanager', 'employee'])) {return redirect()->route('waiting'); }
@@ -144,12 +144,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
     Route::get('/user/profile', function () {
-        return view('profile.profile');
+        return view('admin.profile');
         // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
     Route::get('/user/support', function () {
         return view('support.support');
     })->name('userSupport');
+    Route::get('/user/booking-history', function () {
+        return view('home.bookingHistory');
+    })->name('booking-history');
 });
 
 
