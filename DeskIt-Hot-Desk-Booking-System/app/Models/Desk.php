@@ -14,4 +14,9 @@ class Desk extends Model
         "desk_num",
         "status"
     ];
+
+    public function booking()
+    {
+        return $this->hasMany(Bookings::class, 'desk_id');
+    }
 }

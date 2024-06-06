@@ -58,4 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new ResetPassword($token));
     }
+
+    public function booking()
+    {
+        return $this->hasMany(Bookings::class, 'user_id');
+    }
 }

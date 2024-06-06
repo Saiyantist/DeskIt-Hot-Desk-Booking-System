@@ -5,6 +5,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\IssueController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Livewire\Booking;
@@ -119,13 +120,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-// Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
-//     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
-
-// });
-
-
-
 /**
  * PROFILE Routes (MyAccount)
  */
@@ -211,6 +205,10 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
         return view('admin.feedbacks-reports');
     })->name('feedbacks-reports');
 });
+
+
+Route::apiResource('/issues', IssueController::class)->middleware(['auth', 'role:admin', 'verified']);
+
 
 
 require __DIR__.'/auth.php';
