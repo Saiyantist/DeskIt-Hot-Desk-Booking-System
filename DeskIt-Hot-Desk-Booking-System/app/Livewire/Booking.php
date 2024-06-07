@@ -15,7 +15,6 @@ class Booking extends Component
 {
     public $date;
     public $time;
-    public $endtime;
     public $floor = "1";
     public $selectedDesk ='-';
     public $bookedDesk = '-';
@@ -76,7 +75,6 @@ class Booking extends Component
                     'desk_id' => $booking->desk_id,
                     'booking_date' => $booking->booking_date,
                     'booking_time' => $booking->booking_time,
-                    'booking_endtime' => $booking->booking_endtime,
                     ]
                 );
             }
@@ -154,7 +152,7 @@ class Booking extends Component
         $desks = Desk::all();
 
         /** Can't click if there's NO DATE && FLOOR && TIME */
-        if($this->date && $this->floor && $this->time && $this->endtime){
+        if($this->date && $this->floor && $this->time){
             
             /** Check if the Desk Selected is 'in_use' */ 
             if($desks[$key]->status == 'in_use')
@@ -181,10 +179,6 @@ class Booking extends Component
             }
         }
 
-
-
-
-
         // if ($desks[$key]->statuses_id == '1'){
         //     $this->selectedDesk = $desks[$key]->desk_num;
         //     // dd('sige, go.');
@@ -204,13 +198,12 @@ class Booking extends Component
         $selectedDesk = $this->selectedDesk; 
         $canBook = $this->canBook;
         $time = $this->time;
-        $endtime = $this->endtime;
 
-        if ($canBook && ($date && $floor && ($selectedDesk != '-') && $time && $endtime))
+        if ($canBook && ($date && $floor && ($selectedDesk != '-') && $time))
         {
             $this->showConfirmation = true;
         }
-        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time && $endtime))
+        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time))
         {
             $this->showWarning = true;
         }
@@ -235,19 +228,17 @@ class Booking extends Component
     {
         $date = $this->date;
         $time = $this->time;
-        $endtime = $this->endtime;
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk;
         $selectedDeskID = $this->selectedDeskID;
 
         $user = Auth::user()->id;
 
-        if ($date && $floor && ($selectedDesk != '-') && $time && $endtime){
+        if ($date && $floor && ($selectedDesk != '-') && $time){
 
             Bookings::create([
                 "booking_date" => $date,
                 "booking_time" => $time,
-                "booking_endtime" => $endtime,
                 "status" => 'accepted',
                 "user_id" => $user,
                 "desk_id" => $selectedDeskID,
@@ -257,8 +248,6 @@ class Booking extends Component
             $this->showNotification = true;
             Booking::refreshMap();
         }
-
-
 
         // $status = "booked";
 
@@ -281,10 +270,6 @@ class Booking extends Component
 
         $this->min= Carbon::today()->toDateString();
         $min = $this->min;
-
-        
-
-
 
         return view('livewire.booking', compact('desks', 'max', 'min'));
     }

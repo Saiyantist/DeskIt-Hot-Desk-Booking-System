@@ -43,7 +43,7 @@
                         {{-- End time --}}
                         <div class="flex flex-row justify-content-between mb-2">
                             <p class="ml-2 text-lg text-left">End:</h6>
-                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-32 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $endtime }}</h6>
+                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-32 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"></h6>
                         </div>
 
 
