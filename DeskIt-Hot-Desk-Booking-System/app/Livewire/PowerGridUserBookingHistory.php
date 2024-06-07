@@ -20,7 +20,7 @@ use App\Models\Bookings;
 use App\Models\Desk;
 use Illuminate\Support\Facades\Auth;
 
-final class UserDashboardBooking extends PowerGridComponent
+class UserDashboardBooking extends PowerGridComponent
 {
     public function datasource(): ?Builder
     {
@@ -30,14 +30,14 @@ final class UserDashboardBooking extends PowerGridComponent
             ->join('users', 'users.id', '=', 'bookings.user_id')
             ->leftJoin('desks', 'desks.id', '=', 'bookings.desk_id')
             ->where('bookings.user_id', $userId)
-            ->select('bookings.id', 
-            'bookings.booking_date', 
-            'users.name as name', 
-            'users.email as email', 
-            'desks.desk_num', 
-            DB::raw('(CASE WHEN desks.id <= 36 THEN 1 ELSE 2 END) as floor')
-        );
+            ->select(
+                'bookings.id',
+                'bookings.booking_date',
+                'desks.desk_num',
+                DB::raw('(CASE WHEN desks.id <= 36 THEN 1 ELSE 2 END) as floor')
+            );
     }
+
     public function setUp(): array
     {
         $this->showCheckBox();
@@ -48,7 +48,6 @@ final class UserDashboardBooking extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
-            
         ];
     }
 
@@ -57,7 +56,7 @@ final class UserDashboardBooking extends PowerGridComponent
         return [
             Filter::datepicker('booking_date', 'bookings.booking_date'),
             Filter::inputText('desk_num', 'desks.desk_num')
-            ->operators(['contains']),
+                  ->operators(['contains']),
         ];
     }
 
@@ -65,8 +64,6 @@ final class UserDashboardBooking extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('name')
-            ->addColumn('email')
             ->addColumn('desk_num', fn ($dish) => $dish->desk_num)
             ->addColumn('floor')
             ->addColumn('booking_date', function(Bookings $model) {
@@ -80,23 +77,12 @@ final class UserDashboardBooking extends PowerGridComponent
             Column::make('ID', 'id')
                 ->searchable()
                 ->sortable(),
-
-            Column::make('Name', 'name')
-                ->searchable()
-                ->sortable(),
-
-            Column::make('Email', 'email')
-                ->searchable()
-                ->sortable(),
-
             Column::make('Desk #', 'desk_num')
                 ->searchable()
                 ->sortable(),
-
             Column::make('Floor #', 'floor')
                 ->searchable()
                 ->sortable(),
-
             Column::make('Date', 'booking_date')
                 ->searchable()
                 ->sortable(),

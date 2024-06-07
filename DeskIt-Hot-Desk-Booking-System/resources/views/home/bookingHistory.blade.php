@@ -6,7 +6,7 @@
     @section('content')
     <div class=" ml-40 mt-16">
         <div class="pt-10">
-            <livewire:user-dashboard-booking/> 
+            <livewire:outside-filter-user /> 
         </div>
         
     </div>
