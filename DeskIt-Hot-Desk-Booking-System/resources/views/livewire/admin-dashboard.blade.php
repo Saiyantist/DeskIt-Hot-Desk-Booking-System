@@ -1,202 +1,145 @@
-<main class=" rounded-lg mt-16 ml-16">
-    <section class="section2">
-        <div class="bg">
-            <div class="content flex flex-row mx-20">
-                {{-- Title and Date Picker --}}
-                <div class="w-25 mx-5">
-                    <h2>Dashboard</h2>
-                </div>
+<main class="rounded-lg mt-16 ml-16">
+   
+    <div class="container mx-auto p-4">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Welcome!</h1>
+            <button class="btn btn-warning text-white">  
+                <img class="h-6 w-6 inline-block" src="{{ asset('images/plus.svg') }}" alt="create booking"/>
+                <span>{{ __('Create Booking') }}</span>
+            </button>
+        </div>
 
-                {{-- Main Statistics --}}
-                <div class='w-75 flex flex-row bg-yellowB rounded-4 p-0'>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
+                <p>Weekdays</p>
+                <p>8:00 am - 7:00 pm</p>
+                <p>7:00 pm - 3:00 am</p>
+                <p class="mt-2">Weekends</p>
+                <p>Closed</p>
+                <div class="mt-4 flex justify-between items-center">
                     <div>
-                        <p class="text font-semibold text-white">TOTAL BOOKED DESKS</p>
-                        <p class="text-data text-white">{{ $bookedCount }}</p>
+                        <p>Mon Jun</p>
+                        <h3 class="text-xl font-bold">7</h3>
                     </div>
                     <div>
-                        <p class="text font-semibold text-white">TOTAL UNBOOKED DESKS</p>
-                        <p class="text-data text-white">{{ $availableDeskCount - $bookedCount }}</p>
+                        <p>2:00 PM</p>
                     </div>
-                    <div>
-                        <p class="text font-semibold text-white">AVAILABLE DESKS</p>
-                        <p class="text-data text-white">{{ $availableDeskCount }}</p>
+                </div>
+            </div>
+    
+            <div class="bg-white p-4 rounded shadow flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">New Bookings</h2>
+                        <span class="text-2xl">16</span>
                     </div>
-                    <div>
-                        <p class="text font-semibold text-white">NOT AVAILABLE</p>
-                        <p class="text-data text-white">{{ $notAvailableCount }}</p>
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-lg font-semibold">Available</h2>
+                        <span class="text-2xl">2</span>
                     </div>
+                </div>
+                <div class="mt-4">
+                    <input type="checkbox" id="autoBooking" class="mr-2">
+                    <label for="autoBooking">Enable automatic booking</label>
+                </div>
+            </div>
+    
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-lg font-semibold mb-2">Booking Stats</h2>
+                <div>
+                    <h3 class="text-2xl font-bold">5,000.00</h3>
+                    <p>50 Orders</p>
+                </div>
+                <div class="mt-4">
+                    <canvas id="ordersChart"></canvas>
+                </div>
+                <div class="mt-4">
+                    <canvas id="pieChart"></canvas>
                 </div>
             </div>
         </div>
-        <div class="half">
-            <div class="floor1">
-                <div class="floor-content">
-                    <div class="floor">
-                        <p class="text">FLOOR 1</p>
-                        <p class="text-data">{{ $floor1Count }}</p>
+    
+        <div class="bg-white p-4 rounded shadow mt-6">
+            <h2 class="text-lg font-semibold mb-2">Bookings</h2>
+            <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p>Kayla Acosta</p>
+                        <p class="text-sm text-gray-500">kayla.acosta@test.com</p>
                     </div>
-                    <div class="floor-bg">
-                        <p class="text">BOOKED DESKS</p>
-                        <p class="text-data">{{ $floor1BookedCount }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">UNBOOKED DESKS</p>
-                        <p class="text-data">{{ $floor1BookedCount - ($bookedCount - 36) }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">AVAILABLE DESK</p>
-                        <p class="text-data">{{ $floor1AvailableDeskCount }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">NOT AVAILABLE</p>
-                        <p class="text-data">{{ $floor1NotAvailableCount }}</p>
-                    </div>
+                    <div class="text-red-500">Rejected</div>
+                    <div class="text-sm text-gray-500">May 29, 2024</div>
                 </div>
-            </div>
-            <div class="floor2">
-                <div class="floor-content">
-                    <div class="floor">
-                        <p class="text">FLOOR 2</p>
-                        <p class="text-data">{{ $floor2Count }}</p>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p>Rieza Espejo</p>
+                        <p class="text-sm text-gray-500">rieza.espejo@test.com</p>
                     </div>
-                    <div class="floor-bg">
-                        <p class="text">BOOKED DESKS</p>
-                        <p class="text-data">{{ $floor2BookedCount }}</p>
+                    <div class="text-red-500">Rejected</div>
+                    <div class="text-sm text-gray-500">May 30, 2024</div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p>Azhelle Casimiro</p>
+                        <p class="text-sm text-gray-500">azhelle.casimiro@test.com</p>
                     </div>
-                    <div class="floor-bg">
-                        <p class="text">UNBOOKED DESKS</p>
-                        <p class="text-data">{{ $floor2BookedCount - ($bookedCount - 36) }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">AVAILABLE DESK</p>
-                        <p class="text-data">{{ $floor2AvailableDeskCount }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">NOT AVAILABLE</p>
-                        <p class="text-data">{{ $floor2NotAvailableCount }}</p>
-                    </div>
+                    <div class="text-green-500">Accepted</div>
+                    <div class="text-sm text-gray-500">May 30, 2024</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <div class="mt-4">
+        <input type="checkbox" id="autoBooking" class="mr-2">
+        <label for="autoBooking">Enable automatic booking</label>
+    </div>
+</div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('ordersChart').getContext('2d');
+        var ordersChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Orders',
+                    data: [5, 10, 15, 20, 25, 30],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+        var pieCtx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Available', 'Booked', 'Not Available'],
+                datasets: [{
+                    data: [20, 8, 2],
+                    backgroundColor: ['#00CC2D', '#FFAE35', '#575757'],
+                    hoverOffset: 4
+                }]
+            }
+        });
+    </script>
     
     
-    <section class="mt-44">
-        <div class="flex justify-center">
-            <div class="bg-white rounded-lg w-[80%]">
+   
 
-                {{-- Tabs? --}}
-                <div class="self-start w-full flex">
-                    
-                    {{-- Bookings tab? --}}
-                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 rounded-tl-xl border-solid border-yellowB border-b-[3px] bg-yellowLight"
-                        wire:click="">
-                        <h2 class="justify-center text-xl">Bookings</h2>
-                    </div>
 
-                    {{-- Foo tab? --}}
-                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200"
-                        wire:click="">
-                    <h2 class="justify-center text-xl">Foo</h2>
-                </div>
-                </div>
-
-                <div class="p-3 bg-gray-100">
-
-                    {{-- Toggle Auto Accept --}}
-                    <div class="mt-1 mb-4 bg-yellowLight w-fit p-3 px-4 rounded-xl border-1 border-solid border-gray-200 shadow-md">
-                        @if ( Config::get('bookings.auto_accept') )
-                        <span class="text-lg font-semibold">Auto-accept: ON</span>
-                        <button class="justify-center items-center bg-yellowB text-white hover:bg-slate-200 hover:text-red font-bold rounded-xl h-10 p-1 px-3 text-md ml-4"
-                                wire:model.change="autoAccept"
-                                wire:click='toggleAutoAccept'
-                                wire:submit>Turn OFF
-                        </button>
-                        @else
-                        <span class="text-lg">Auto-accept: OFF</span>
-                        <button class="justify-center items-center bg-slate-300 hover:bg-amber-500 text-white font-bold rounded-xl h-10 p-1 px-3 text-md ml-4"
-                                wire:model.change="autoAccept"
-                                wire:click='toggleAutoAccept'
-                                wire:submit>Turn ON
-                        </button>
-                        @endif
-                    </div>
-                    
-                    {{-- <div>
-                        <span class='cursor-pointer'
-                            wire:click='$refresh'
-                            >Refresh Table
-                        </span>
-                    </div> --}}
-
-                    <!-- Yajra Datatable -->
-                    <div class="bg-white p-3">
-                        <table id="bookingsTable" class="table text-center">
-                            <thead>
-                                <tr>
-                                    <th class="w-1/6">ID</th>
-                                    <th class="w-1/6">Name</th>
-                                    <th class="w-1/6">Date</th>
-                                    <th class="w-1/6">Desk ID</th>
-                                    <th class="w-1/6">Status</th>
-                                    <th class="w-1/6">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($bookingsData as $booking)
-                                <tr>
-                                    <td>{{ $booking['Id'] }}</td>
-                                    <td class="max-w-64 truncate ...">{{ $booking['Name'] }}</td>
-                                    <td>{{ $booking['Date'] }}</td>
-                                    <td>{{ $booking['Desk ID'] }}</td>
-                                    <td>{{ $booking['Status'] }}</td>
-
-                                    {{-- Action --}}
-                                    <td class="p-2 w-full flex justify-content-around">
-                                    @if($booking['Status'] === 'pending' )
-
-                                        {{-- Accept Modal Open  --}}
-                                        <button class="transition ease-in-out hover:bg-green-300 hover:scale-101 duration-200 bg-green-200 px-2.5 py-2 rounded-md flex items-center cursor-pointer text-green-800 text-sm"
-                                            wire:click="saveId({{ $booking['Id'] }})"
-                                            x-data x-on:click="$dispatch('open-modal', {name: 'accept-modal'})"
-                                            >Accept
-                                        </button>
-            
-                                        {{-- Decline Modal Open  --}}
-                                        <button class="transition ease-in-out hover:bg-red-300 hover:scale-101 duration-200 bg-red-200 ml-1 px-2 rounded-md flex items-center cursor-pointer text-red-800 text-sm"
-                                            wire:click="saveId({{ $booking['Id'] }})"
-                                            x-data x-on:click="$dispatch('open-modal', {name: 'decline-modal'})"
-                                            >Decline
-                                        </button>
-
-                                    @elseif($booking['Status'] === 'accepted')
-
-                                        <p class="text-sm">. . .</p>
-
-                                        {{-- For Testing Convenience purpose --}}
-
-                                        {{-- <button class="transition ease-in-out hover:bg-red-300 hover:scale-101 duration-200 bg-red-200 ml-1 px-2 py-2 rounded-md flex items-center cursor-pointer text-red-800 text-sm"
-                                            wire:click="saveId({{ $booking['Id'] }})"
-                                            x-data x-on:click="$dispatch('open-modal', {name: 'decline-modal'})"
-                                            >Decline
-                                        </button> --}}
-                                    
-                                    @elseif($booking['Status'] === 'canceled')
-                                        <p class="text-sm">. . .</p>
-
-                                    @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-{{-- Approve Modal --}}
 <x-modal name="accept-modal" title="Accept Booking">
     <x-slot:body>
         <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
