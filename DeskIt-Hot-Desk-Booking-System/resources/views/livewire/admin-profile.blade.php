@@ -29,39 +29,39 @@
 
                 {{-- Account Settings SECONDARY TABS --}}
                 @if($activeSection === 1)    
-                <div class="flex flex-row">
-                    <div class="flex flex-col m-10">
-                        <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
-                            {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
-                            >
-                            <h2 wire:click="setActiveAS(1)" class="text-lg">
-                                Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                    <div class="flex flex-row">
+                        <div class="flex flex-col m-10">
+                            <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
+                                {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                                >
+                                <h2 wire:click="setActiveAS(1)" class="text-lg">
+                                    Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                            </div>
+
+                            <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
+                                {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                                >
+                                <h2 wire:click="setActiveAS(2)" class=" text-lg">
+                                    Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                            </div>
                         </div>
 
-                        <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
-                            {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
-                            >
-                            <h2 wire:click="setActiveAS(2)" class=" text-lg">
-                                Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
-                        </div>
-                    </div>
-
-                    <div>
-                        @if($activeSecondaryTabAS === 1)
                         <div>
-                            @include('admin.profileEdit')
-                        </div>
-                        
-                        @elseif($activeSecondaryTabAS === 2)
-                        <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
-                            <div class="max-w-xl ">
-                                @include('profile.partials.update-password-form')
+                            @if($activeSecondaryTabAS === 1)
+                            <div>
+                                @include('admin.profileEdit')
                             </div>
                             
-                            @endif
+                            @elseif($activeSecondaryTabAS === 2)
+                            <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
+                                <div class="max-w-xl ">
+                                    @include('profile.partials.update-password-form')
+                                </div>
+                                
+                                @endif
+                            </div>
                         </div>
                     </div>
-
                 {{-- Manage Users SECONDARY Tabs --}}
                 @elseif($activeSection === 2)
                 

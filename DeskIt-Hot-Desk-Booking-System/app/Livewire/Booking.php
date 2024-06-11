@@ -259,17 +259,6 @@ class Booking extends Component
         }
 
 
-
-        // $status = "booked";
-
-        // Booking::create([
-        //     "booking_date" => $this->date,    /** This whole block doesn't work yet.. */
-        //     "status" => $status,            
-        //     "user_id" => Auth::user(),
-        //     // "desk_id" => 101,
-        // ]);
-
-        // dd($status); 
     }
 
     public function render()

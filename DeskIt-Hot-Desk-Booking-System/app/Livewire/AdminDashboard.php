@@ -13,9 +13,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
-
+use Illuminate\Support\Facades\Auth;
 use function Livewire\once;
 
+//notification
+use App\Notifications\AdminToggleNotification;
+use App\Notifications\AcceptBookingNotification;
+use App\Notifications\DeclineBookingNotification;
 class AdminDashboard extends Component
 {
 
@@ -44,6 +48,7 @@ class AdminDashboard extends Component
     public $date;
     public $min;
     public $max;
+    public $message;
 
 
     public function mount()
@@ -68,6 +73,18 @@ class AdminDashboard extends Component
 
         $this->fetchBookings();
         $this->autoAccept = Config::get('bookings.auto_accept');
+
+        // Check if there are any pending bookings
+        $bookings = Bookings::where('status', 'pending')->count();
+        
+        if ($bookings) {
+            $adminUser = Auth::user();
+            //check role
+            $rolesToCheck = ['admin', 'superadmin'];
+            $userRoles = $adminUser->roles->pluck('name')->intersect($rolesToCheck);
+            $rolesString = $userRoles->implode(', ');
+            $adminUser->notify(new AdminToggleNotification($rolesString));
+        }        
     }
 
     // Toggle for Auto Accepting of New Bookings
@@ -77,6 +94,7 @@ class AdminDashboard extends Component
         $this->autoAccept = !$this->autoAccept; 
         $this->updateAutoAccept();
         $this->dispatch('refreshPage');
+        
     }   
 
     // Configuration process for the Toggle Auto Accept Functionality
@@ -116,6 +134,8 @@ class AdminDashboard extends Component
         {
             $this->alterBooking->update([
                 'status' => 'accepted',
+                $user = Auth::user(),
+                $user->notify(new AcceptBookingNotification('employee')),
             ]);
             $this->dispatch('refreshPage');
         }
@@ -127,6 +147,9 @@ class AdminDashboard extends Component
         if($this->alterBooking->status === 'pending' ){
             $this->alterBooking->update([
                 'status' => 'canceled',
+                
+                $user = Auth::user(),
+                $user->notify(new DeclineBookingNotification('employee')),
             ]);
             $this->dispatch('refreshPage');
         }
