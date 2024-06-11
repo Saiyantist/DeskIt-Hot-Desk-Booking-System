@@ -51,8 +51,8 @@ class AcceptBookingNotification extends Notification
     {
         return [
             'role' =>  $this->role,
-            'title' => 'Booking Accepted',
-            'message' => 'Your booking has been successfully accepted',
+            'title' => 'Desk Reservation Approval',
+            'message' => 'Your booking has been successfully approved',
             'date_created' => now(),
         ];
     }

@@ -2,7 +2,10 @@
 <x-app-layout>
     @section('content')
     <main class=" ml-20 mt-16">
-        <h1 class=" d-flex justify-start text-xl">Notifications</h1>
+        <div class="flex justify-between">
+            <h1 class=" d-flex justify-start text-2xl pl-10 py-10">Notifications</h1>
+            
+        </div>
         <section>
 
             @livewire('all-notification')

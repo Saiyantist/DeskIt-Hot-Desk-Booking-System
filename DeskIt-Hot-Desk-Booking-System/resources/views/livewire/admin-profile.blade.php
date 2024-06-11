@@ -15,8 +15,8 @@
                         <h2 class="justify-center text-xl">Account Settings</h2>
                     </div>
 
+                    {{-- Manage Users (hidden for employees) --}}
                     @if(Auth::user()->roles->whereNotIn('name', 'employee')->isNotEmpty())
-                    {{-- Manage Users --}}
                     <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSection == 2 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
                         wire:click="setActiveSection(2)">
                         <h2 class="justify-center text-xl">Manage Users</h2>
@@ -25,6 +25,15 @@
                     {{-- show nothing --}}
                     @endif
 
+                    {{-- Notification Settings(hidden for admins) --}}
+                    @if(Auth::user()->roles->where('name', 'employee')->isNotEmpty())
+                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200  {{ $activeSection == 3 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
+                        wire:click="setActiveSection(3)">
+                        <h2 class="justify-center text-xl">Notification Settings</h2>
+                    </div>
+                    @else
+                    {{-- show nothing --}}
+                    @endif
                 </div>
 
                 {{-- Account Settings SECONDARY TABS --}}
@@ -62,6 +71,19 @@
                             </div>
                         </div>
                     </div>
+
+                {{-- Notification Settings SECONDARY Tabls --}}
+                @elseif($activeSection === 3) 
+                <div class="bg-white">
+                    <h3 class="text-base p-4">Choose which notifications you want to receive and how you'd like to be notified. Please note that while you can manage most of your notification preferences, we will still send you important notifications about your account to ensure you stay informed about updates and security information.</h3>
+
+                    <div>
+                        {{-- insert table --}}
+                    </div>
+                </div>
+
+
+
                 {{-- Manage Users SECONDARY Tabs --}}
                 @elseif($activeSection === 2)
                 

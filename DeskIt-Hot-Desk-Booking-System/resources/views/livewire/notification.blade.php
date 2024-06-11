@@ -46,7 +46,7 @@
                                                                 
                                 <div class="text-base">
                                     @foreach ($notifications as $notification)
-                                    <div class="{{ $notification->read_at ? 'bg-gray' : 'bg-pink' }} p-3 mb-1 rounded-lg">
+                                    <div class="{{ $notification->read_at ? 'bg-gray' : 'bg-white' }} p-3 mb-1 rounded-lg border border-b-2">
                                         <div class="text-block text-base">
                                             <div class="font-semibold pb-1"> {{ $notification->data['title'] }}</div>
                                             <div class="pb-1">{{ $notification->data['message'] }}</div>

@@ -51,8 +51,8 @@ class DeclineBookingNotification extends Notification
     {
         return [
             'role' =>  $this->role,
-            'title' => 'Booking Declined',
-            'message' => 'Unfortunately, your booking has been declined',
+            'title' => 'Desk Reservation Rejection',
+            'message' => 'Unfortunately, your booking has been rejected',
             'date_created' => now(),
         ];
     }
