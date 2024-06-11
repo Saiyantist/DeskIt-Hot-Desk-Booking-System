@@ -22,7 +22,6 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $tomorrow = now()->addDay()->toDateString();
 
-            // Log the start of the notification process
             Log::info("Starting to send upcoming booking notifications for {$tomorrow}");
 
             DB::transaction(function () use ($tomorrow) {
@@ -40,7 +39,6 @@ class Kernel extends ConsoleKernel
                 });
             });
 
-            // Log the end of the notification process
             Log::info("Finished sending upcoming booking notifications for {$tomorrow}");
         })->daily();
     }
