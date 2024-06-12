@@ -6,8 +6,6 @@ use App\Models\Bookings;
 use App\Notifications\UpcomingBookingNotification;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -21,25 +19,11 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $tomorrow = now()->addDay()->toDateString();
+            $bookings = Bookings::whereDate('booking_date', $tomorrow)->get();
 
-            Log::info("Starting to send upcoming booking notifications for {$tomorrow}");
-
-            DB::transaction(function () use ($tomorrow) {
-                $bookings = Bookings::whereDate('booking_date', $tomorrow)->get();
-
-                $bookings->chunk(100, function ($bookingsChunk) {
-                    foreach ($bookingsChunk as $booking) {
-                        try {
-                            $booking->user->notify(new UpcomingBookingNotification($booking));
-                            Log::info("Notification sent to user {$booking->user->id} for booking {$booking->id}");
-                        } catch (\Exception $e) {
-                            Log::error("Failed to send notification for booking {$booking->id}: {$e->getMessage()}");
-                        }
-                    }
-                });
-            });
-
-            Log::info("Finished sending upcoming booking notifications for {$tomorrow}");
+            foreach ($bookings as $booking) {
+                $booking->user->notify(new UpcomingBookingNotification($booking));
+            }
         })->daily();
     }
 

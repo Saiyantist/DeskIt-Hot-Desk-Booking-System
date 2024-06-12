@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Livewire\Booking;
 use App\Models\User;
-use App\Models\Bookings;
-use App\Notifications\UpcomingBookingNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,20 +20,6 @@ use App\Notifications\UpcomingBookingNotification;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/test-notification', function () {
-    $user = Auth::user() ?? User::first();
-
-    $booking = new Bookings();
-    $booking->user_id = $user->id;
-    $booking->booking_date = now()->addDay()->toDateString();
-    $booking->desk_id = 15;
-    $booking->save();
-
-    $user->notify(new UpcomingBookingNotification($booking));
-
-    return 'Notification sent!';
-});
 
 Route::get('/dbconn', function () {
     if (DB::connection()->getPdo()){

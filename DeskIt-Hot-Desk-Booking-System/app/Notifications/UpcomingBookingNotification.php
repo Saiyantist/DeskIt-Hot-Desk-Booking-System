@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Carbon\Carbon;
 
 class UpcomingBookingNotification extends Notification implements ShouldQueue
 {
@@ -26,12 +25,9 @@ class UpcomingBookingNotification extends Notification implements ShouldQueue
 
     public function toMail($notifiable)
     {
-        $bookingDate = \Carbon\Carbon::parse($this->booking->booking_date)->format('F j, Y');
-        
         return (new MailMessage)
-                    ->subject('Upcoming Booking Reminder')
-                    ->line('Hello! Just a reminder that you have an upcoming booking.')
-                    ->line('Booking Date: ' . $bookingDate)
+                    ->subject('Hello! Just a reminder')
+                    ->line('You have an upcoming booking on ' . $this->booking->booking_date)
                     ->line('Thank you for using DeskIt!');
     }
 
