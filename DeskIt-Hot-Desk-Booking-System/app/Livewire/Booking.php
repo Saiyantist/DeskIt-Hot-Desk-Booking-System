@@ -32,6 +32,7 @@ class Booking extends Component
     public $showNotification = false;
     public $showWarning = false;
     public $showWarning2 = false;
+    public $showWarning3 = false;
     
 
 
@@ -43,7 +44,7 @@ class Booking extends Component
         $user = Auth::user()->id;
         $desks = Desk::all(); 
         $canBook = $this->canBook;
-        
+        $time = $this->time;
 
         /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
         $this->selectedDesk = '-';
@@ -53,7 +54,7 @@ class Booking extends Component
          * Check IF there is a date and floor selected
          * ELSE, return NOTHING
          */
-        if($this->date && $this->floor){
+        if($this->date && $this->floor && $this->time){
 
         
             // Access all Bookings
