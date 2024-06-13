@@ -16,6 +16,11 @@ class Issue extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function desk()
+    {
+        return $this->belongsTo(Desk::class);
+    }
+
     public function response()
     {
         return $this->hasMany(Response::class);

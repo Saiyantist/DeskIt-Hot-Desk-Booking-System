@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('type',['bug', 'feedback']);
             $table->enum('status',['to review', 'reviewing', 'resolved']);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('desk_id')->constrained();
             $table->timestamp('resolved_at')->nullable();
             $table->timestamps();
         });
