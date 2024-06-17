@@ -5,10 +5,15 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\IssueController;
+use App\Livewire\AdminIssues;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Livewire\Booking;
 use App\Models\User;
+use App\Models\Bookings;
+use App\Notifications\UpcomingBookingNotification;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +25,20 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/test-notification', function () {
+    $user = Auth::user() ?? User::first();
+
+    $booking = new Bookings();
+    $booking->user_id = $user->id;
+    $booking->booking_date = now()->addDay()->toDateString();
+    $booking->desk_id = 38;
+    $booking->save();
+
+    $user->notify(new UpcomingBookingNotification($booking));
+
+    return 'Notification sent!';
+});
 
 Route::get('/dbconn', function () {
     if (DB::connection()->getPdo()){
@@ -119,13 +138,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-// Route::middleware(['auth', 'role:admin', 'verified']) ->group(function () {
-//     Route::get('/notification', [HomeController::class,'notif'])->name('notif');
-
-// });
-
-
-
 /**
  * PROFILE Routes (MyAccount)
  */
@@ -134,6 +146,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 
@@ -141,7 +154,10 @@ Route::middleware('auth')->group(function () {
  * HOME Routes
  */
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/notification', [HomeController::class,'notif'])->name('notif');
+    Route::get('/user/notification', function () {
+        return view('home.notifications');
+        // changed from home.profile, because it exposes an admin page (admin.profile).
+    })->name('userNotification');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
     Route::get('/user/profile', function () {
         return view('admin.profile');
@@ -176,7 +192,6 @@ Route::middleware(['auth', 'role:employee|admin', 'verified'])->prefix('booking'
 
 
 
-
 /** ADMIN UI Routes */
 
 // Insecure way to ADMIN Dashboard - FOR DEVELOPMENT PURPOSES
@@ -207,10 +222,21 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/support', function () {
         return view('support.support');
     })->name('support');
-    Route::get('/admin/feedbacks-reports', function () {
-        return view('admin.feedbacks-reports');
-    })->name('feedbacks-reports');
+    Route::get('/admin/issues', function () {
+        return view('admin.issues');
+    })->name('issues');
+    Route::get('/admin/issues/{id}', [IssueController::class, 'show'])->name('issues.show');
+    //Route::get('/admin/feedbacks-reports', function () {
+        //return view('admin.feedbacks-reports');
+    //})->name('feedbacks-reports');
+    Route::get('/admin/notification', function () {
+        return view('admin.notifications');
+        // changed from home.profile, because it exposes an admin page (admin.profile).
+    })->name('notification');
 });
+
+// Route::apiResource('/issues', IssueController::class)->middleware(['auth', 'role:admin', 'verified']);
+
 
 
 require __DIR__.'/auth.php';

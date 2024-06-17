@@ -68,8 +68,11 @@ $currentRoute = Route::currentRouteName();
                 
                 {{-- profile --}}
                 <div class="justify-content-lg-end d-flex flex-row px-2">
+                    <div class="compile mr-10 text-xl">
+                        @livewire('notification')
+                    </div>
+                    
                     <div class="compile mr-10">
-
                         <a wire:navigate href="{{route('userProfile')}}"
                             class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full dark:text-gray-400 bg-yellowA dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150 text-block no-underline"
                             style="border: 1px solid #FBB503">
