@@ -167,7 +167,6 @@
 
                 {{-- Tabs? --}}
                 <div class="self-start w-full flex">
-
                     {{-- Bookings tab? --}}
                     <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 rounded-tl-xl border-solid border-yellowB border-b-[3px] bg-yellowLight"
                         wire:click="">
