@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Models\Bookings;
+use App\Notifications\UpcomingBookingNotification;
+use App\Notifications\UserBookingNotification;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,8 +18,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('cache:prune-stale-tags')->hourly();
+        $schedule->call(function () {
+            $tomorrow = now()->addDay()->toDateString();
+            $bookings = Bookings::whereDate('booking_date', $tomorrow)->get();
+
+            foreach ($bookings as $booking) {
+                $booking->user->notify(new UpcomingBookingNotification($booking));
+                $booking->user->notify(new UserBookingNotification($booking, 'employee'));
+            }
+        })->daily();
     }
 
     /**

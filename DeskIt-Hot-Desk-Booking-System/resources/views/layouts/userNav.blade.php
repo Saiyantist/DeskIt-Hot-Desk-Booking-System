@@ -68,8 +68,11 @@ $currentRoute = Route::currentRouteName();
                 
                 {{-- profile --}}
                 <div class="justify-content-lg-end d-flex flex-row px-2">
+                    <div class="compile mr-10 text-xl">
+                        @livewire('notification')
+                    </div>
+                    
                     <div class="compile mr-10">
-
                         <a wire:navigate href="{{route('userProfile')}}"
                             class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full dark:text-gray-400 bg-yellowA dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150 text-block no-underline"
                             style="border: 1px solid #FBB503">
@@ -109,6 +112,17 @@ $currentRoute = Route::currentRouteName();
                             <img src="{{ asset('images/adeskmap.svg') }}" class="py-3 alternative-image"
                                 alt="Alternative SVG Image">
                             <span class="text-yellowB">Desk Booking</span>
+                        </a>
+                    </li>
+
+                    {{-- Support --}}
+                    <li class="sidebar-item">
+                        <a wire:navigate href="{{ route('userSupport') }}" 
+                            class="hidden sidebar-link {{ $currentRoute === 'userSupport' ? 'active' : '' }}">
+                            <img src="{{ asset('images/help.svg') }}" class="py-3 default-image" alt="Default SVG Image">
+                            <img src="{{ asset('images/ahelp.svg') }}" class="py-3 alternative-image"
+                                alt="Alternative SVG Image">
+                            <span class="text-yellowB"> Help Desk</span>
                         </a>
                     </li>
 

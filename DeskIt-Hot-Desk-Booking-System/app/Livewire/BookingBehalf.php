@@ -21,6 +21,7 @@ class BookingBehalf extends Component
     public $selectedUserID;
 
     public $date;
+    public $time;
     public $floor = "1";
     public $selectedDesk ='-';
     public $bookedDesk = '-';
@@ -38,6 +39,7 @@ class BookingBehalf extends Component
     public $showNotification = false;
     public $showWarning = false;
     public $showWarning2 = false;
+    public $showWarning3 = false;
     
 
     public function mount() {
@@ -52,18 +54,18 @@ class BookingBehalf extends Component
         $user = $this->selectedUserID;
         $desks = Desk::all(); 
         $canBook = $this->canBook;
-        
+        $time = $this->time;
 
         /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
         $this->selectedDesk = '-';
         $this->bookedDesk ='-';
-        $this->selectedUser = '-';
+        $this->selectedUserID = '-';
 
         /**
          * Check IF there is a date and floor selected
          * ELSE, return NOTHING
          */
-        if($this->date && $this->floor){
+        if($this->date && $this->floor && $this->time && $this->selectedUserID){
 
         
             // Access all Bookings
@@ -161,7 +163,7 @@ class BookingBehalf extends Component
         $desks = Desk::all();
 
         /** Can't click if there's NO DATE && FLOOR */
-        if($this->date && $this->floor){
+        if($this->date && $this->floor && $this->time && $this->selectedUserID){
             
             /** Check if the Desk Selected is 'in_use' */ 
             if($desks[$key]->status == 'in_use')
@@ -210,16 +212,20 @@ class BookingBehalf extends Component
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk; 
         $user = $this->selectedUserID;
-
+        $time = $this->time;
         $canBook = $this->canBook;
 
-        if ($canBook && ($date && $floor && ($selectedDesk != '-') && $user))
+        if ($canBook && ($date && $floor && ($selectedDesk != '-') && $time && $user))
         {
             $this->showConfirmation = true;
         }
-        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-')  && $user))
+        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time))
         {
             $this->showWarning = true;
+        } 
+        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time && $user))
+        {
+            $this->showWarning3 = true;
         }
         // dd($this->showConfirmation);
     }
@@ -230,6 +236,7 @@ class BookingBehalf extends Component
         $this->showNotification = false;  
         $this->showWarning = false;
         $this->showWarning2 = false;
+        $this->showWarning3 = false;
     }
 
     public function goHome()
@@ -245,7 +252,7 @@ class BookingBehalf extends Component
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk;
         $selectedDeskID = $this->selectedDeskID;
-
+        $time = $this->time;
         $user = $this->selectedUserID;
 
         if ($date && $floor && ($selectedDesk != '-')) {
@@ -279,7 +286,8 @@ class BookingBehalf extends Component
 
     public function render()
     {
-        $usersWithRoles = User::with('roles')->get();
+        $usersWithRoles = User::role('employee')->get();
+
         $desks = Desk::all();
 
         $this->max = Carbon::today()->addDays(14)->toDateString();

@@ -16,8 +16,11 @@ $currentRoute = Route::currentRouteName();
 
             {{-- Profile --}}
             <div class="justify-content-lg-end d-flex flex-row px-2">
+                <div class="compile mr-10 text-xl">
+                    @livewire('notification')
+                </div>
+                
                 <div class="compile mr-10">
-
                     <a wire:navigate href="{{route('profile')}}"
                         class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full bg-yellowA hover:text-yellowBdarker dark:hover:text-yellowBdarker focus:outline-none transition ease-in-out duration-150 text-block no-underline"
                         style="border: 1px solid #FBB503">
@@ -70,7 +73,7 @@ $currentRoute = Route::currentRouteName();
                     </a>
                 </li>
 
-                {{-- book on behalf --}}
+                {{-- Support --}}
                 <li class="sidebar-item">
                     <a wire:navigate href="{{ route('support') }}" 
                         class="hidden sidebar-link {{ $currentRoute === 'support' ? 'active' : '' }}">
@@ -93,7 +96,7 @@ $currentRoute = Route::currentRouteName();
                             
                             <!-- Modal -->
                             <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75"
-                                x-show="showLogoutModal">
+                                x-show="showLogoutModal" x-cloak>
 
                                 <div class="flex flex-col justify-center items-center bg-white p-8 rounded-xl shadow-lg"
                                 style="border-top: 10px solid rgb(255, 237, 193); border-bottom: 10px solid rgb(255, 237, 193);">

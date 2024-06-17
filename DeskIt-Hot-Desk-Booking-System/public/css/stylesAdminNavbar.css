@@ -218,13 +218,13 @@ p {
 }
 
 .text {
-  font-size: medium;
+  font-size: 15px;
   font-weight: 600;
   
 }
 
 .text-data {
-  font-size: 12;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -247,10 +247,4 @@ p {
 
 .active-secondaryTabAS {
   background: #FCDF9D;
-}
-
-.box {
-  border-radius: 10px;
-  background: linear-gradient(to top, #ffffff 50%, #f0f0f0 50%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

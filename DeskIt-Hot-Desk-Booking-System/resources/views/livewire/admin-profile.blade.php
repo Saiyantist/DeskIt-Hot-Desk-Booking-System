@@ -15,46 +15,74 @@
                         <h2 class="justify-center text-xl">Account Settings</h2>
                     </div>
 
-                    {{-- Manage Users --}}
+                    {{-- Manage Users (hidden for employees) --}}
+                    @if(Auth::user()->roles->whereNotIn('name', 'employee')->isNotEmpty())
                     <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSection == 2 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
                         wire:click="setActiveSection(2)">
                         <h2 class="justify-center text-xl">Manage Users</h2>
                     </div>
+                    @else
+                    {{-- show nothing --}}
+                    @endif
 
+                    {{-- Notification Settings(hidden for admins) --}}
+                    @if(Auth::user()->roles->where('name', 'employee')->isNotEmpty())
+                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200  {{ $activeSection == 3 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
+                        wire:click="setActiveSection(3)">
+                        <h2 class="justify-center text-xl">Notification Settings</h2>
+                    </div>
+                    @else
+                    {{-- show nothing --}}
+                    @endif
                 </div>
 
                 {{-- Account Settings SECONDARY TABS --}}
                 @if($activeSection === 1)    
-                <div class="flex flex-row">
-                    <div class="flex flex-col m-10">
-                        <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
-                            style="border:1px solid rgba(128, 128, 128, 0.9);">
-                            <h2 wire:click="setActiveAS(1)" class="text-lg">
-                                Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                    <div class="flex flex-row">
+                        <div class="flex flex-col m-10">
+                            <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
+                                {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                                >
+                                <h2 wire:click="setActiveAS(1)" class="text-lg">
+                                    Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                            </div>
+
+                            <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
+                                {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                                >
+                                <h2 wire:click="setActiveAS(2)" class=" text-lg">
+                                    Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                            </div>
                         </div>
 
-                        <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
-                            style="border:1px solid rgba(128, 128, 128, 0.9);">
-                            <h2 wire:click="setActiveAS(2)" class=" text-lg">
-                                Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
-                        </div>
-                    </div>
-
-                    <div>
-                        @if($activeSecondaryTabAS === 1)
                         <div>
-                            @include('admin.profileEdit')
-                        </div>
-                        
-                        @elseif($activeSecondaryTabAS === 2)
-                        <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
-                            <div class="max-w-xl ">
-                                @include('profile.partials.update-password-form')
+                            @if($activeSecondaryTabAS === 1)
+                            <div>
+                                @include('admin.profileEdit')
                             </div>
                             
-                            @endif
+                            @elseif($activeSecondaryTabAS === 2)
+                            <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
+                                <div class="max-w-xl ">
+                                    @include('profile.partials.update-password-form')
+                                </div>
+                                
+                                @endif
+                            </div>
                         </div>
                     </div>
+
+                {{-- Notification Settings SECONDARY Tabls --}}
+                @elseif($activeSection === 3) 
+                <div class="bg-white">
+                    <h3 class="text-base p-4">Choose which notifications you want to receive and how you'd like to be notified. Please note that while you can manage most of your notification preferences, we will still send you important notifications about your account to ensure you stay informed about updates and security information.</h3>
+
+                    <div>
+                        @livewire('notifcation-preferences')
+                    </div>
+                </div>
+
+
 
                 {{-- Manage Users SECONDARY Tabs --}}
                 @elseif($activeSection === 2)

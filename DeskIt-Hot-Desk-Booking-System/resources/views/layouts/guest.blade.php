@@ -31,10 +31,8 @@
             <div class="w-full sm:max-w-md sm:rounded-lg  shadow-md overflow-hidden ">
                 
                 {{ $slot }}
-                
+                   
             </div>
-            
-           
         </div>
     </body>
 </html>

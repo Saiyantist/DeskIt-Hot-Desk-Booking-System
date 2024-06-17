@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\IssueController;
 use App\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
@@ -58,4 +59,24 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new ResetPassword($token));
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Bookings::class, 'user_id');
+    }
+
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    }
+
+    public function responses()
+    {
+        return $this->hasManyThrough(Response::class, Issue::class);
+    }
+    
+    public function prefersNotification($type) {
+        return $this->preferences[$type] ?? true;
+    }
+    
 }

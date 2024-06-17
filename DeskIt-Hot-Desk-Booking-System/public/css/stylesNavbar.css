@@ -5,9 +5,12 @@
     border: 0;
 }
 
+html {
+  background-color: #FCF8F8;
+}
 /* navbar */
 .navbar-custom {
-    background-color: #FCF8F8;
+    background-color: white;
 }
 .navbar {
     box-shadow: 0 4px 2px -3px gray;
