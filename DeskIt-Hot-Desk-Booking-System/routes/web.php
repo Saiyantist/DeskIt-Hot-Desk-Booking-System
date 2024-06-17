@@ -11,6 +11,7 @@ use App\Livewire\Booking;
 use App\Models\User;
 use App\Models\Bookings;
 use App\Notifications\UpcomingBookingNotification;
+use App\Notifications\UserBookingNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,9 @@ Route::get('/test-notification', function () {
     $booking->desk_id = 38;
     $booking->save();
 
-    $user->notify(new UpcomingBookingNotification($booking));
+    // $user->notify(new UpcomingBookingNotification($booking));
+    
+    $booking->user->notify(new UserBookingNotification($booking, 'employee'));
 
     return 'Notification sent!';
 });
