@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Bookings;
 use App\Notifications\UpcomingBookingNotification;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -145,6 +146,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 
@@ -187,7 +189,6 @@ Route::middleware(['auth', 'role:employee|admin', 'verified'])->prefix('booking'
     Route::get('/floor2', [BookingController::class,'floor2'])->name('booking.floor2');
     Route::post('/floor2', [BookingController::class, 'store']);
 });
-
 
 
 
