@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Bookings;
 use Livewire\WithPagination;
+
 use App\Models\User;
 use App\Models\Desk;
 use Carbon\Carbon;
@@ -37,6 +38,8 @@ class AdminDashboard extends Component
     public $floor2NotAvailableCount;
 
     public $bookingsData = [];
+    public $showModal = false;
+    public $currentIndex;
     
     public $autoAccept;
     public $alterBooking;
@@ -44,7 +47,6 @@ class AdminDashboard extends Component
     public $date;
     public $min;
     public $max;
-
 
     public function mount()
     {   
@@ -67,6 +69,7 @@ class AdminDashboard extends Component
         $this->floor2BookedCount = Bookings::whereIn('desk_id', $deskRange2)->where('status', 'accepted')->count();
 
         $this->fetchBookings();
+
         $this->autoAccept = Config::get('bookings.auto_accept');
     }
 
@@ -109,6 +112,7 @@ class AdminDashboard extends Component
             ];
         }
     }
+
 
     public function acceptBooking()
     {
