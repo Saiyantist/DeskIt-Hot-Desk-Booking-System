@@ -81,9 +81,9 @@
                      <img src="{{ asset('images/report.svg')}}">
                   </div>
                   <div class="bg-white rounded-b-xl shadow-md p-3 h-68">
-                     <h2 class="text-2xl">View Reports or Feedbacks</h2>
-                     <p class=" text-base font-light py-1 px-2">submit your report or feedback to help us improve our services.</p>
-                     <button wire:navigate href="{{ route('feedbacks-reports') }}" class="mb-2 btn btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
+                     <h2 class="text-2xl">View Issues</h2>
+                     <p class=" text-base font-light py-1 px-2">See all the submitted issues.</p>
+                     <button wire:navigate href="{{ route('issues') }}" class="mb-2 btn btn-warning rounded-xl h-9 w-[80%]">go to <i class="fa-solid fa-arrow-right"></i></button>
                   </div>
                </div>
             @endif

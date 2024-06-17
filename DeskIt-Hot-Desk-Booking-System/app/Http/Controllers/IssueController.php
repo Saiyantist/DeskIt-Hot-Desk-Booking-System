@@ -12,7 +12,12 @@ class IssueController extends Controller
      */
     public function index()
     {
-        return view('admin.feedbacks-reports');
+        // return view('admin.feedbacks-reports');
+        // $issues = Issue::with('desk', 'user')->get();
+        
+        // return view('admin.issues', compact('issues'));
+        return view('admin.issues');
+    
     }
 
     /**
@@ -26,9 +31,13 @@ class IssueController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Issue $issue)
+    public function show($id)
     {
-        //
+        // dd($id);
+        // $issue = Issue::with('responses')->findOrFail($id);
+        // return view('admin.issue', compact('issue'));
+        // return view('admin.issue', ['issueId' => $id]);
+        return view('admin.issue', ['issueId' => $id]);
     }
 
     /**

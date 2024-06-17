@@ -21,7 +21,7 @@ class Issue extends Model
         return $this->belongsTo(Desk::class);
     }
 
-    public function response()
+    public function responses()
     {
         return $this->hasMany(Response::class);
     }

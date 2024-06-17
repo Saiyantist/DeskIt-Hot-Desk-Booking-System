@@ -15,12 +15,12 @@ class Desk extends Model
         "status"
     ];
 
-    public function booking()
+    public function bookings()
     {
         return $this->hasMany(Bookings::class, 'desk_id');
     }
 
-    public function issue()
+    public function issues()
     {
         return $this->hasMany(Issue::class);
     }
