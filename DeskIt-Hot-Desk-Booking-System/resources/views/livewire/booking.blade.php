@@ -148,7 +148,6 @@
                 <div class="absolute right-5">
                     <a class="helpIcon cursor-pointer">
                         <img src="{{ asset('images/help.svg') }}" class="w-8 h-8">
-                        <script>startIntro();</script>
                     </a>
                 </div>
             </div>
@@ -1328,7 +1327,7 @@
         </section>
 
     </main>
-    
+    <script>window.tutorialCompleted = @json($tutorialCompleted);</script>
     <script src="{{ asset('js/myScript3.js') }}">
     </script>
 </div>

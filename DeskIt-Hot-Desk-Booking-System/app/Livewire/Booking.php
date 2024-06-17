@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
+use App\Models\User;
 use Illuminate\Validation\Rules\Can;
 
 use function PHPUnit\Framework\returnValue;
@@ -34,7 +35,7 @@ class Booking extends Component
     public $showWarning = false;
     public $showWarning2 = false;
     
-
+    public $tutorialCompleted;
 
 
     public function refreshMap() 
@@ -271,6 +272,24 @@ class Booking extends Component
 
         // dd($status); 
     }
+    public function mount()
+    {
+        $user = Auth::user();
+        $this->tutorialCompleted = $user->tutorial_completed;
+    }
+
+    public function completeTutorial()
+    {
+        $user = Auth::user();
+        $user->tutorial_completed = true;
+        $user->save();
+
+        $this->tutorialCompleted = true;
+    }
+    
+    protected $listeners = [
+        'completeTutorial' => 'completeTutorial'
+    ];
 
     public function render()
     {
@@ -282,10 +301,11 @@ class Booking extends Component
         $this->min= Carbon::today()->toDateString();
         $min = $this->min;
 
-        
-
-
-
-        return view('livewire.booking', compact('desks', 'max', 'min'));
+        return view('livewire.booking', [
+            'desks' => $desks,
+            'max' => $this->max,
+            'min' => $this->min,
+            'tutorialCompleted' => $this->tutorialCompleted,
+        ]);
     }
 }
