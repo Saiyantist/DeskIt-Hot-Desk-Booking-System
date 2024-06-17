@@ -78,7 +78,7 @@
                     <h3 class="text-base p-4">Choose which notifications you want to receive and how you'd like to be notified. Please note that while you can manage most of your notification preferences, we will still send you important notifications about your account to ensure you stay informed about updates and security information.</h3>
 
                     <div>
-                        {{-- insert table --}}
+                        @livewire('notifcation-preferences')
                     </div>
                 </div>
 

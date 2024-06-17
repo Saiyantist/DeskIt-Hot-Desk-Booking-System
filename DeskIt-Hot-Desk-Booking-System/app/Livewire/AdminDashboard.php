@@ -130,13 +130,21 @@ class AdminDashboard extends Component
 
     public function acceptBooking()
     {
-        if($this->alterBooking->status === 'pending' )
-        {
+        if ($this->alterBooking->status === 'pending') {
+            // Update the booking status
             $this->alterBooking->update([
                 'status' => 'accepted',
-                $user = Auth::user(),
-                $user->notify(new AcceptBookingNotification('employee')),
             ]);
+    
+            // Get the user associated with the booking
+            $user = $this->alterBooking->user;
+    
+            // Notify the user if they prefer notifications for reserved desk status
+            if ($user->prefersNotification('reserved_desk_status')) {
+                $user->notify(new AcceptBookingNotification('employee'));
+            }
+    
+            // Dispatch the refreshPage event
             $this->dispatch('refreshPage');
         }
     }
@@ -147,10 +155,16 @@ class AdminDashboard extends Component
         if($this->alterBooking->status === 'pending' ){
             $this->alterBooking->update([
                 'status' => 'canceled',
-                
-                $user = Auth::user(),
-                $user->notify(new DeclineBookingNotification('employee')),
             ]);
+
+            // Get the user associated with the booking
+            $user = $this->alterBooking->user;
+    
+            // Notify the user if they prefer notifications for reserved desk status
+            if ($user->prefersNotification('reserved_desk_status')) {
+                $user->notify(new DeclineBookingNotification('employee'));
+            }
+            
             $this->dispatch('refreshPage');
         }
     }

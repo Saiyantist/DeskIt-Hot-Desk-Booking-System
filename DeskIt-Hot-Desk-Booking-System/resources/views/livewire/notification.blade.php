@@ -1,9 +1,23 @@
 <div x-data="{ showModal: false }">
     {{-- Navigation Bell Button--}}
-    <button type="button" class="flex" @click="showModal = true">
-        <i class="fa-regular fa-bell"></i> 
+    @php
+    $currentRoute = Route::currentRouteName();
+@endphp
+
+<button 
+    wire:click="updateNotification" 
+    type="button" 
+    class="flex relative"
+    @click="showModal = true"
+    @if($currentRoute === 'notification' || $currentRoute === 'userNotification') disabled @endif
+>
+    <i class="fa-regular fa-bell @if($currentRoute === 'notification' || $currentRoute === 'userNotification') fa-solid fa-bell text-yellowB  bg-gray-100 p-1.5 px-2.5 rounded-full @endif"></i>
+
+    @if(!($currentRoute === 'notification' || $currentRoute === 'userNotification'))
         <h6 class="ml-1 border border-2 border-blue px-1 rounded-md text-xs">{{ $unreadCount }}</h6>
-    </button>
+    @endif
+</button>
+
 
     {{-- Modal --}}
     <div class="fixed right-0 z-10" x-show="showModal" @click.away="showModal = false" x-cloak>
@@ -53,10 +67,19 @@
                                             <div class="text-gray-500 pb-1"> {{($notification->created_at)->diffForHumans() }}</div>
                                         </div>
                                         <div class="flex justify-end">
-                                            <button wire:click="markAsRead('{{ $notification->id }}')"
-                                                class="{{ $notification->read_at ? 'text-gray-500' : 'text-blue-500' }}">
-                                                Mark as Read
-                                            </button>
+                                            @if($notification)
+                                                @if(is_null($notification->read_at))
+                                                    <button wire:click="markAsRead('{{ $notification->id }}')"
+                                                        class="text-blue-500">
+                                                        Mark as Read
+                                                    </button>
+                                                @else
+                                                    <button wire:click="markAsUnread('{{ $notification->id }}')"
+                                                        class="text-gray-500">
+                                                        Mark as Unread
+                                                    </button>
+                                                @endif
+                                            @endif
                                         </div>
                                     </div>
                                     @endforeach
