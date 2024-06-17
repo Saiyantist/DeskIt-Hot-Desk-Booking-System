@@ -270,6 +270,7 @@
          </div>
     </section>
 
+    {{-- Accept Modal --}}
     <x-modal name="accept-modal" title="Accept Booking">
         <x-slot:body>
             <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
@@ -293,7 +294,7 @@
         </x-slot:body>
     </x-modal>
 
-
+    {{-- Decline Modal --}}
     <x-modal name="decline-modal" title="Decline Booking">
         <x-slot:body>
             <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>

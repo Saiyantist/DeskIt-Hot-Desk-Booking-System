@@ -191,26 +191,6 @@ class AdminDeskmap extends Component
         // }
     }
 
-    public function setDeskAvailabilityConfirmation()
-    {
-        $floor = $this->floor;
-        $selectedDesk = $this->selectedDesk; 
-        $deskDisabled = $this->deskDisabled;
-
-        if (!$deskDisabled && ($floor && ($selectedDesk != '-')))
-        {
-            $this->showConfirmation = true;
-        }
-
-        elseif ($deskDisabled)
-        {
-            $this->showEnableModal = true;
-        }
-
-
-        // dd($this->showConfirmation);
-    }
-
     public function closeModal()
     {
         $this->showConfirmation = false;  
@@ -266,6 +246,7 @@ class AdminDeskmap extends Component
             AdminDeskmap::refreshMap();
         }
 
+        AdminDeskmap::mount();
 
 
         // $status = "booked";
@@ -278,6 +259,14 @@ class AdminDeskmap extends Component
         // ]);
 
         // dd($status); 
+    }
+
+    public function resetEditData() {
+        $this->reset(
+            'selectedDesk',
+        );
+
+        $this->mount();
     }
 
     public function render()
