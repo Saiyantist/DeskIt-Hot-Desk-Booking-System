@@ -5,13 +5,19 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Bookings;
 use Livewire\WithPagination;
-use App\Models\Users;
+
+use App\Models\User;
 use App\Models\Desk;
 use Carbon\Carbon;
 use DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
+use function Livewire\once;
 
-class AdminBooking extends Component
+class AdminDashboard extends Component
 {
 
     use WithPagination;
@@ -34,6 +40,9 @@ class AdminBooking extends Component
     public $bookingsData = [];
     public $showModal = false;
     public $currentIndex;
+    
+    public $autoAccept;
+    public $alterBooking;
 
     public $date;
     public $min;
@@ -60,6 +69,27 @@ class AdminBooking extends Component
         $this->floor2BookedCount = Bookings::whereIn('desk_id', $deskRange2)->where('status', 'accepted')->count();
 
         $this->fetchBookings();
+
+        $this->autoAccept = Config::get('bookings.auto_accept');
+    }
+
+    // Toggle for Auto Accepting of New Bookings
+    public function toggleAutoAccept()
+    {
+        // Toggle the autoAccept property
+        $this->autoAccept = !$this->autoAccept; 
+        $this->updateAutoAccept();
+        $this->dispatch('refreshPage');
+    }   
+
+    // Configuration process for the Toggle Auto Accept Functionality
+    public function updateAutoAccept()
+    {
+        // Update the configuration value
+        $config = Config::get('bookings');
+        $config['auto_accept'] = $this->autoAccept;
+        $configString = '<?php return ' . var_export($config, true) . ';';
+        file_put_contents(config_path('bookings.php'), $configString);
     }
 
     public function fetchBookings()
@@ -84,34 +114,37 @@ class AdminBooking extends Component
     }
 
 
-    public function handleAction()
+    public function acceptBooking()
     {
-        $index = $this->currentIndex;
-
-        if (isset($this->bookingsData[$index]) && $this->bookingsData[$index]['Action'] !== 'canceled') {
-            $bookingId = $this->bookingsData[$index]['Id'];
-            $booking = Bookings::find($bookingId);
-
-            if ($booking) {
-                $booking->update(['status' => 'canceled']);
-            }
-
-            $this->bookingsData[$index]['Action'] = 'canceled';
-            $this->dispatchBrowserEvent('refreshComponent');
+        if($this->alterBooking->status === 'pending' )
+        {
+            $this->alterBooking->update([
+                'status' => 'accepted',
+            ]);
+            $this->dispatch('refreshPage');
         }
-
-        $this->closeModal();
     }
 
-    public function closeModal()
+    public function declineBooking()
     {
-        $this->showModal = false;
+        // if($this->alterBooking->status ===  'accepted' ){
+        if($this->alterBooking->status === 'pending' ){
+            $this->alterBooking->update([
+                'status' => 'canceled',
+            ]);
+            $this->dispatch('refreshPage');
+        }
     }
 
-    public function openModal($index)
+    public function saveId($id)
     {
-        $this->currentIndex = $index;
-        $this->showModal = true;
+        $this->alterBooking = Bookings::with(['user','desk'])->find($id);
+    }
+
+    public function resetEditData() {
+        $this->reset(
+            'alterBooking',
+        );
     }
 
     public function render()
@@ -119,6 +152,6 @@ class AdminBooking extends Component
         $this->max = Carbon::today()->addDays(14)->toDateString();
         $this->min = Carbon::today()->toDateString();
 
-        return view('livewire.admin-booking');
+        return view('livewire.admin-dashboard');
     }
 }

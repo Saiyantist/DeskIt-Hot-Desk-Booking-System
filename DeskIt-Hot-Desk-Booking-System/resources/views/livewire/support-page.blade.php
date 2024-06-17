@@ -4,9 +4,13 @@
 
         <div class="pt-10">
             @if($sectionNumber === 1)
-            <h1 class="font-bold">FREQUENTLY ASKED QUESTIONS</h1>
+
+            <button class="btn btn-warning text-white" onclick="goBack()">Go Back</button>
+            <div class="text-center">
+                <p class="font-bold">FREQUENTLY ASKED QUESTIONS</p>
+            </div>
             <div>
-                <h1 class="text-yellowB mt-4 font-semibold">General Functionality:</h1>
+                <p class="text-yellowB mt-4 font-semibold">General Functionality:</p>
                 <div class="bg-pink shadow-md mt-2">
                     <p class="flex items-center justify-between p-2 m-1" wire:click="toggleDescription(1)"
                         style="cursor: pointer">
@@ -44,7 +48,7 @@
 
                 <!-- start of user interface -->
 
-                <h1 class="text-yellowB mt-4 font-semibold">User Interface:</h1>
+                <p class="text-yellowB mt-4 font-semibold">User Interface:</p>
                 <div class="bg-pink shadow-md mt-2">
                     <!-- question -->
                     <p class="flex items-center justify-between p-2 m-1" wire:click="toggleDescription(3)"
@@ -104,7 +108,7 @@
                     <!-- end of answer -->
                 </div>
 
-                <h1 class="text-yellowB mt-4 font-semibold">End-User Interface:</h1>
+                <p class="text-yellowB mt-4 font-semibold">End-User Interface:</p>
                 <div class="bg-pink shadow-md mt-2">
                     <p class="flex items-center justify-between p-2 m-1" wire:click="toggleDescription(6)"
                         style="cursor: pointer">
@@ -162,7 +166,7 @@
                     @endif
                     <!-- end of answer -->
                 </div>
-                <h1 class="text-yellowB mt-4 font-semibold">Admin Interface:</h1>
+                <p class="text-yellowB mt-4 font-semibold">Admin Interface:</p>
                 <div class="bg-pink shadow-md mt-2">
                     <p class="flex items-center justify-between p-2 m-1" wire:click="toggleDescription(9)"
                         style="cursor: pointer">
@@ -224,7 +228,7 @@
                     @endif
                     <!-- end of answer -->
                 </div>
-                <h1 class="text-yellowB mt-4 font-semibold">Floor Plan Updates:</h1>
+                <p class="text-yellowB mt-4 font-semibold">Floor Plan Updates:</p>
                 <div class="bg-pink shadow-md mt-2">
                     <p class="flex items-center justify-between p-2 m-1" wire:click="toggleDescription(12)"
                         style="cursor: pointer">
@@ -283,77 +287,81 @@
 
 
             @elseif($sectionNumber === 2)
-            <h1 class="font-bold">Privacy Policy</h1>
+            <button class="btn btn-warning text-white" onclick="goBack()">Go Back</button>
+            <div class="text-center">
+                <p class="font-bold">PRIVACY POLICY</p>
+            </div>
+            
             <p class="mt-2"> Deskit is committed to protecting the privacy of its users. This Privacy Policy outlines
                 our practices
                 concerning the collection, use, and disclosure of personal information provided by users through the
                 Deskit website.
             </p>
             <div>
-                <h1 class=" text-yellowB mt-4 font-bold">Information We Collect:</h1>
+                <p class=" text-yellowB mt-4 font-bold">Information We Collect:</p>
                 <p class="mt-2">To provide Deskit Website functionality, we collect the following information from
                     users:</p>
 
-                <h1 class="font-semibold mt-3">End-User</h1>
+                <p class="font-semibold mt-3">End-User</p>
                 <p>&#8226; Full Name</p>
                 <p>&#8226; Email Address</p>
                 <p>&#8226; Booking Preferences (date, time, hotdesk selection)</p>
                 <p>&#8226; Booking History</p>
 
-                <h1 class="font-semibold mt-3">Admin</h1>
+                <p class="font-semibold mt-3">Admin</p>
                 <p>&#8226; Full Name</p>
                 <p>&#8226; Email Address</p>
             </div>
 
             <div>
-                <h1 class=" text-yellowB mt-4 font-semibold">How Do We Use Information?</h1>
+                <p class=" text-yellowB mt-4 font-semibold">How Do We Use Information?</p>
                 <p>We use the collected information for the following purposes:</p>
-                <h1 class="font-semibold mt-3">End-User Interface:</h1>
+                <p class="font-semibold mt-3">End-User Interface:</p>
                 <p>&#8226; Facilitate hotdesk bookings</p>
                 <p>&#8226; Display available desks per date</p>
                 <p>&#8226; Confirm and manage hotdesk bookings</p>
 
-                <h1 class="font-semibold mt-3">Admin Interface:</h1>
+                <p class="font-semibold mt-3">Admin Interface:</p>
                 <p>&#8226; Manage user accounts (add/delete users)</p>
                 <p>&#8226; Manage hotdesks (add/delete hotdesks)</p>
                 <p>&#8226; Cancel hotdesk bookings when required</p>
                 <p>&#8226; Delegate admin roles</p>
 
-                <h1 class="font-semibold mt-3">Update Floor Plan:</h1>
+                <p class="font-semibold mt-3">Update Floor Plan:</p>
                 <p>&#8226; Display and update floor plans</p>
             </div>
 
             <div>
-                <h1 class=" text-yellowB mt-4 font-semibold">Information Sharing and Disclosure</h1>
+                <p class=" text-yellowB mt-4 font-semibold">Information Sharing and Disclosure</p>
                 <p>We do not sell, trade, or otherwise transfer your personal information to outside parties.</p>
             </div>
 
             <div>
-                <h1 class=" text-yellowB mt-4 font-semibold">Security</h1>
+                <p class=" text-yellowB mt-4 font-semibold">Security</p>
                 <p>We implement a variety of security measures to maintain the safety of your personal information. All
                     information is stored on secure servers.</p>
             </div>
 
             <div>
-                <h1 class=" text-yellowB mt-4 font-semibold">Consent</h1>
+                <p class=" text-yellowB mt-4 font-semibold">Consent</p>
                 <p>By using the Deskit website, you consent to our privacy policy.</p>
             </div>
 
             <div>
-                <h1 class=" text-yellowB mt-4 font-semibold">
-                    Changes to this Privacy Policy</h1>
+                <p class=" text-yellowB mt-4 font-semibold">
+                    Changes to this Privacy Policy</p>
                 <p>We reserve the right to update or change our Privacy Policy at any time. Any changes will be posted
                     on this page.</p>
             </div>
 
             <div>
-                <h1 class=" text-yellowB mt-4 font-semibold">Contact Information</h1>
+                <p class=" text-yellowB mt-4 font-semibold">Contact Information</p>
                 <p>If there are any questions regarding this privacy policy, you may contact us at contact@deskit.com.
                 </p>
             </div>
 
             <div>
-                <h1 class=" text-yellowB mt-4 font-semibold">Your Responsibilities</h1>
+                <p class="text-yellowB mt-4 font-semibold">Your Responsibilities</p>
                 <p>As a user of the Deskit website, you are responsible for maintaining the confidentiality of your
                     account information and for restricting access to your computer or device. Ensure that you log out
                     of your account after each session to prevent unauthorized access.</p>
@@ -361,11 +369,15 @@
 
             <p class="mt-3">By using Deskit, you agree to comply with all applicable laws and regulations.</p>
             <p class="mt-3">Thank you for choosing Deskit!</p>
-            @elseif($sectionNumber === 3)
-            <h1 class="font-bold text-xl">Guides</h1>
-            <h1 class="font-semibold mt-3">End-User Interface:</h1>
 
-            <h1 class="text-yellowB mt-1 font-semibold">Booking a Hotdesk</h1>
+            @elseif($sectionNumber === 3)
+            <button class="btn btn-warning text-white" onclick="goBack()">Go Back</button>
+            <div class="text-center">
+                <p class="font-bold">GUIDES</p>
+            </div>
+            <p class="font-semibold mt-3">End-User Interface:</p>
+
+            <p class="text-yellowB mt-1 font-semibold">Booking a Hotdesk</p>
             <p>&#8226; Navigate to the "Desk Booking" section.</p>
             <p>&#8226; Select the desired date for hotdesk booking.</p>
             <p>&#8226; Choose a floor from the displayed options.</p>
@@ -374,7 +386,7 @@
             <p>&#8226; View Available Desks per Date at Landing Page.</p>
 
             <div>
-                <h1 class="text-yellowB mt-4 font-semibold">Cancel or View Hotdesk Booking:</h1>
+                <p class="text-yellowB mt-4 font-semibold">Cancel or View Hotdesk Booking:</p>
                 <p>&#8226; Go to the "Profile" section</p>
                 <p>&#8226; View list of current bookings from “Your Bookings”</p>
                 <p>&#8226; Cancel a booking if needed.</p>
@@ -385,15 +397,15 @@
                 After successfully booking a hotdesk, the user should receive a notification for confirmation.</p>
 
             <div>
-                <h1 class="font-semibold mt-4">Admin Interface: </h1>
-                <h1 class="text-yellowB mt-1 font-semibold">Add/Delete User:</h1>
+                <p class="font-semibold mt-4">Admin Interface: </p>
+                <p class="text-yellowB mt-1 font-semibold">Add/Delete User:</p>
                 <p>&#8226; Navigate to the "Profile" section.</p>
                 <p>&#8226; Add a new user by providing necessary details.</p>
                 <p>&#8226; Delete a user if needed.</p>
             </div>
 
             <div>
-                <h1 class="text-yellowB mt-4 font-semibold">Add/Delete Hotdesk and Update Floor Plan:</h1>
+                <p class="text-yellowB mt-4 font-semibold">Add/Delete Hotdesk and Update Floor Plan:</p>
                 <p>&#8226; Access the "Desk Map" section.</p>
                 <p>&#8226; Add a new hotdesk and change status into “Available”.</p>
                 <p>&#8226; Delete a hotdesk and change status into “Not Available” due to maintenance.</p>
@@ -401,19 +413,19 @@
             </div>
 
             <div>
-                <h1 class="text-yellowB mt-4 font-semibold">Cancel Hotdesk Booking:</h1>
+                <p class="text-yellowB mt-4 font-semibold">Cancel Hotdesk Booking:</p>
                 <p>&#8226; In the admin dashboard, find the list of current bookings.</p>
                 <p>&#8226; Cancel a booking on behalf of a user when required.</p>
             </div>
 
             <div>
-                <h1 class="text-yellowB mt-4 font-semibold">Delegate Admin Roles:</h1>
+                <p class="text-yellowB mt-4 font-semibold">Delegate Admin Roles:</p>
                 <p>&#8226; In the "Profile" section, delegate admin roles.</p>
                 <p>&#8226; Specify roles such as Office Manager and assign appropriate permissions.</p>
             </div>
 
             <div>
-                <h1 class="font-semibold mt-4">Note:</h1>
+                <p class="font-semibold mt-4">Note:</p>
                 <p>&#8226; Ensure that the user interface is intuitive and user-friendly.</p>
                 <p>&#8226; Implement proper authentication and authorization mechanisms for both end-users and admin
                     users.</p>
@@ -425,4 +437,10 @@
             @endif
         </div>
     </main>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </div>
