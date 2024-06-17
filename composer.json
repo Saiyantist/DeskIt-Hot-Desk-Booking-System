@@ -1,0 +1,5 @@
+{
+    "require": {
+        "power-components/livewire-powergrid": "^5.8"
+    }
+}
