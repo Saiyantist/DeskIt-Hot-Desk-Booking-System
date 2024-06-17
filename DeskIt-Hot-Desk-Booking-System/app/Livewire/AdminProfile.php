@@ -6,9 +6,10 @@ use Livewire\Component;
 use App\Models\User;
 // use App\Models\Bookings;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Features\SupportFormObjects\Form;
-
-use function PHPUnit\Framework\isNull;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password as PasswordRules;
+use Illuminate\Validation\ValidationException;
 
 class AdminProfile extends Component
 {   
@@ -70,6 +71,13 @@ class AdminProfile extends Component
     public $email;
     public $gender;
     public $birthday;
+
+    // change password
+    public $current_password;
+    public $password;
+    public $password_confirmation;
+
+
 
     public function mount()
     {       
@@ -326,7 +334,7 @@ class AdminProfile extends Component
 
     //save profile
     public function editProfile()
-{
+    {
     $user = Auth::user();
 
     if ($user) {
@@ -344,7 +352,40 @@ class AdminProfile extends Component
     $this->redirect(request()->header('Referer'));
     
     
-}
+    }
+
+    //change password
+    protected function rules()
+    {
+        return [
+            'current_password' => ['required', 'current_password'],
+            'password' => [
+                'required',
+                'confirmed',
+                PasswordRules::min(10)
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols(),
+            ],
+        ];
+    }
+
+    public function updatePassword()
+    {
+        $this->validate();
+
+        if (!Hash::check($this->current_password, auth()->user()->password)) {
+            $this->addError('current_password', 'The current password is incorrect.');
+            return;
+        }
+
+        auth()->user()->update([
+            'password' => Hash::make($this->password),
+        ]);
+
+        session()->flash('message', 'Password successfully updated.');
+    }
 
 
     public function render()
