@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="container">
-                    <div class="bg-white p-3 rounded shadow flex justify-between">
+                    <div class="bg-white p-3 rounded shadow-sm flex justify-between">
                         <div class="w-1/2">
                             <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
                             <p class="text-xs">Weekdays</p>
@@ -19,7 +19,7 @@
                         <div class="w-1/2 flex items-center justify-evenly">
                             <div class="min-w-32 bg-white min-h-32 pr-4 font-medium">
                                 <div
-                                    class="w-32 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow-sm">
+                                    class="w-32 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow">
                                     <div class="block rounded-t overflow-hidden text-center">
                                         <div class="bg-amber-300 text-white py-1">
                                             June
@@ -48,8 +48,8 @@
                     </div>
                 </div>
 
-                <div class="flex mt-3 mr-2">
-                    <div class="bg-white ml-6 p-4 rounded shadow flex-grow flex flex-col justify-between mr-3">
+                <div class="flex mt-3 flex-row justify-between gap-3 mx-2.5">
+                    <div class="bg-white p-4 rounded shadow-sm flex-grow flex flex-col justify-between">
                         <div class>
                             <h2 class="text-lg font-semibold">New Bookings</h2>
                         </div>
@@ -57,7 +57,7 @@
                             <div class="text-3xl font-bold">16</div>
                         </div>
                     </div>
-                    <div class="bg-white p-4 rounded shadow flex-grow mr-5 flex flex-col justify-between">
+                    <div class="bg-white p-4 rounded shadow-sm flex-grow flex flex-col justify-between">
                         <h2 class="text-lg font-semibold">Available</h2>
                         <div>
                             <div class="text-3xl font-bold">2</div>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <h2 class="text-lg font-semibold mx-2">Bookings</h2>
-                <div class="bg-white p-4 rounded shadow">
+                <div class="bg-white p-4 rounded shadow-sm">
                     <div class="space-y-2">
                         <div class="flex justify-between items-center">
                             <div>
@@ -152,8 +152,9 @@
                         <div
                             class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-yellow-300 dark:peer-focus:ring-yellow-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400">
                         </div>
-                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-500">Enable Automatic
-                            booking</span>
+                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-500"
+                            >Enable Automatic booking
+                        </span>
                     </label>
 
                 </div>
@@ -161,9 +162,9 @@
         </div>
     </section>
 
-    <section class="mt-20">
+    <section class="mt-5">
         <div class="flex justify-center">
-            <div class="bg-white rounded-lg w-[80%]">
+            <div class="bg-white rounded-lg w-[80%] shadow-md">
                 
                 {{-- Tabs? --}}
                 <div class="self-start w-full flex">
@@ -183,7 +184,7 @@
 
                     {{-- Toggle Auto Accept --}}
                     <div
-                        class="mt-1 mb-4 bg-yellowLight w-fit p-3 px-4 rounded-xl border-1 border-solid border-gray-200 shadow-md">
+                        class="mt-1 mb-4 bg-yellowLight w-fit p-3 px-4 rounded-xl border-1 border-solid border-gray-200 shadow-sm">
                         @if (Config::get('bookings.auto_accept'))
                             <span class="text-lg font-semibold">Auto-accept: ON</span>
                             <button
