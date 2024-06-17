@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
+use Carbon\Carbon;
 class UserBookingNotification extends Notification
 {
     use Queueable;
@@ -52,10 +52,20 @@ class UserBookingNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
+        $bookingDate = Carbon::parse($this->booking->booking_date)->format('F j, Y');
+        $deskNumber = $this->booking->desk->desk_num;
+        $floor = $this->booking->desk_id <= 36 ? 1 : 2;
+        $time = $this->booking->booking_time;
+        $message = "Hello! Just a reminder that you have an upcoming booking.\n" .
+               "Booking Date: $bookingDate\n" .
+               "Time: $time\n" .
+               "Desk Number: $deskNumber\n" .
+               "Floor: $floor";
+
         return [
             'role' => $this->role,
             'title' => 'Booking Reminder',
-            'message' => 'You have an upcoming booking on ' . $this->booking->booking_date,
+            'message' => $message,
             'date_created' => now(),
         ];
     }
