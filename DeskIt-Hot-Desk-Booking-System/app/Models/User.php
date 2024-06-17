@@ -74,4 +74,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasManyThrough(Response::class, Issue::class);
     }
+    
+    public function prefersNotification($type) {
+        return $this->preferences[$type] ?? true;
+    }
+    
 }

@@ -12,7 +12,6 @@ class Bookings extends Model
     protected $fillable = [
         "booking_date",
         "booking_time",
-        "booking_endtime",
         "status",
         "user_id",
         "desk_id",

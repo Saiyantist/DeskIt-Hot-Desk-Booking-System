@@ -37,6 +37,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            animation: {
+                fadeOutRight: 'fadeOutRight 1s ease forwards',
+            },
         },
     },
 

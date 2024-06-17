@@ -115,7 +115,7 @@ class AdminProfile extends Component
             }
         }
         
-        if($section === 1){
+        if($section === 1 ){
             $this->reset('activeSecondaryTabAS');
         }
     }
