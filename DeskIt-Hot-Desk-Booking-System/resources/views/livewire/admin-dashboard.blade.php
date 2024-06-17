@@ -1,86 +1,156 @@
-<main class=" rounded-lg mt-16 ml-16">
-    <section class="section2">
-        <div class="bg">
-            <div class="content flex flex-row mx-20">
-                {{-- Title and Date Picker --}}
-                <div class="w-25 mx-5">
-                    <h2>Dashboard</h2>
+<main class="rounded-lg mt-16 ml-16 overflow-hidden h-screen">
+    <div class="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
+        <!-- Left Column -->
+        <div class="space-y-2 overflow-y-auto h-full">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">Welcome!</h1>
+            </div>
+            
+            <div class="container">
+                <div class="bg-white p-3 rounded shadow flex justify-between">
+                    <div class="w-1/2">
+                        <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
+                        <p class="text-xs">Weekdays</p>
+                        <p class="text-xs pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
+                        <p class="text-xs pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
+                        <p class="mt-2 text-xs">Weekends <span class="pl-12">Closed</span></p>
+                    </div>
+                    <div class="w-1/2 flex items-center justify-evenly">
+                        <div class="min-w-32 bg-white min-h-32 pr-4 font-medium">
+                            <div class="w-32 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow-sm">
+                                <div class="block rounded-t overflow-hidden text-center">
+                                    <div class="bg-amber-300 text-white py-1">
+                                        June
+                                    </div>
+                                    <div class="pt-1 border-l border-r border-white bg-white">
+                                        <span class="text-4xl font-bold leading-tight">
+                                            10
+                                        </span>
+                                    </div>
+                                    <div class="border-l border-r border-b rounded-b-lg text-center border-white bg-white -pt-2 -mb-1">
+                                        <span class="text-sm">
+                                            Monday
+                                        </span>
+                                    </div>
+                                    <div class="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
+                                        <span class="text-xs leading-normal">
+                                            8:00 am
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+                
+            <div class="flex mt-3 mr-2">
+                <div class="bg-white ml-6 p-4 rounded shadow flex-grow flex flex-col justify-between mr-3"> 
+                    <div class>
+                        <h2 class="text-lg font-semibold">New Bookings</h2>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold">16</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded shadow flex-grow mr-5 flex flex-col justify-between">
+                    <h2 class="text-lg font-semibold">Available</h2>
+                    <div>
+                        <div class="text-3xl font-bold">2</div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-lg font-semibold mx-2">Bookings</h2>
+            <div class="bg-white p-4 rounded shadow">
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-lg">Steffanie Egloso</p>
+                            <p class="text-sm text-gray-500">steff.egloso@test.com</p>
+                        </div>
+                        <div class="text-red-500">Rejected</div>
+                        <div class="text-sm text-gray-500">May 29, 2024</div>
+                        <div class="text-gray-500">&#8942;</div>
+                    </div>
 
-                {{-- Main Statistics --}}
-                <div class='w-75 flex flex-row bg-yellowB rounded-4 p-0'>
-                    <div>
-                        <p class="text font-semibold text-white">TOTAL BOOKED DESKS</p>
-                        <p class="text-data text-white">{{ $bookedCount }}</p>
+                    {{-- <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-lg">Steffanie Egloso</p>
+                            <p class="text-sm text-gray-500">steff.egloso@test.com</p>
+                        </div>
+                        <div class="text-red-500">Rejected</div>
+                        <div class="text-sm text-gray-500">May 29, 2024</div>
+                        <div class="text-gray-500">&#8942;</div>
                     </div>
-                    <div>
-                        <p class="text font-semibold text-white">TOTAL UNBOOKED DESKS</p>
-                        <p class="text-data text-white">{{ $availableDeskCount - $bookedCount }}</p>
-                    </div>
-                    <div>
-                        <p class="text font-semibold text-white">AVAILABLE DESKS</p>
-                        <p class="text-data text-white">{{ $availableDeskCount }}</p>
-                    </div>
-                    <div>
-                        <p class="text font-semibold text-white">NOT AVAILABLE</p>
-                        <p class="text-data text-white">{{ $notAvailableCount }}</p>
-                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-lg">Steffanie Egloso</p>
+                            <p class="text-sm text-gray-500">steff.egloso@test.com</p>
+                        </div>
+                        <div class="text-red-500">Rejected</div>
+                        <div class="text-sm text-gray-500">May 29, 2024</div>
+                        <div class="text-gray-500">&#8942;</div>
+                    </div> --}}
+                    
                 </div>
             </div>
         </div>
-        <div class="half">
-            <div class="floor1">
-                <div class="floor-content">
-                    <div class="floor">
-                        <p class="text">FLOOR 1</p>
-                        <p class="text-data">{{ $floor1Count }}</p>
+
+            <div class="container mx-auto space-y-3">
+                <div class="d-flex justify-content-end mb-3">
+                    <button class="btn btn-warning text-white">  
+                        <img class="h-6 w-6 inline-block" src="{{ asset('images/plus.svg') }}" alt="create booking"/>
+                        <span>{{ __('Create Booking') }}</span>
+                    </button>
+                </div>
+                
+                <h2 class="text-lg font-semibold">Booking Stats</h2>
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h3 class="text-xl font-bold">DISTRIBUTED COLUMN</h3>
+                            <p>180 Bookings</p>
+                        </div>
+                        <div class="relative">
+                            <select class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                <option>This Week</option>
+                                <option>Last Week</option>
+                                <option>June 3 - June 7</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <img src="/images/dropdown.svg" alt="drop down">
+                            </div>
+                        </div>            
                     </div>
-                    <div class="floor-bg">
-                        <p class="text">BOOKED DESKS</p>
-                        <p class="text-data">{{ $floor1BookedCount }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">UNBOOKED DESKS</p>
-                        <p class="text-data">{{ $floor1BookedCount - ($bookedCount - 36) }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">AVAILABLE DESK</p>
-                        <p class="text-data">{{ $floor1AvailableDeskCount }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">NOT AVAILABLE</p>
-                        <p class="text-data">{{ $floor1NotAvailableCount }}</p>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="p-3">
+                                <div class="mt-2">
+                                    <canvas id="deskChart" class="w-full" style="height: 200px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="p-3">
+                                <div class="mt-2">
+                                    <canvas id="pieChart" class="w-full" style="height: 300px;"></canvas>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                 </div>
-            </div>
-            <div class="floor2">
-                <div class="floor-content">
-                    <div class="floor">
-                        <p class="text">FLOOR 2</p>
-                        <p class="text-data">{{ $floor2Count }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">BOOKED DESKS</p>
-                        <p class="text-data">{{ $floor2BookedCount }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">UNBOOKED DESKS</p>
-                        <p class="text-data">{{ $floor2BookedCount - ($bookedCount - 36) }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">AVAILABLE DESK</p>
-                        <p class="text-data">{{ $floor2AvailableDeskCount }}</p>
-                    </div>
-                    <div class="floor-bg">
-                        <p class="text">NOT AVAILABLE</p>
-                        <p class="text-data">{{ $floor2NotAvailableCount }}</p>
-                    </div>
+                <div class="mt-3">
+              
+                    <label class="inline-flex items-center me-5 cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-yellow-300 dark:peer-focus:ring-yellow-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400"></div>
+                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-500">Enable Automatic booking</span>
+                      </label>
+                      
                 </div>
             </div>
-        </div>
-    </section>
-    
-    
+         </div>
+    </div>
     <section class="mt-44">
         <div class="flex justify-center">
             <div class="bg-white rounded-lg w-[80%]">
@@ -193,7 +263,6 @@
             </div>
         </div>
     </section>
-
 {{-- Approve Modal --}}
 <x-modal name="accept-modal" title="Accept Booking">
     <x-slot:body>
@@ -241,6 +310,68 @@
         </div>
     </x-slot:body>
 </x-modal>
+</main>
+     
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // Define shared data for both charts
+                var weekDays = ['Mon', 'Tues', 'Wed', 'Thurs', 'Friday'];
+                var deskData = [15, 10, 12, 30, 10, 15]; 
+        
+                // Bar Chart
+                var ctx = document.getElementById('deskChart').getContext('2d');
+                var ordersChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: weekDays,
+                        datasets: [{
+                            label: 'Desk',
+                            data: deskData.slice(0, 5), // Only use data for weekdays
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    }
+                });
+        
+                // Pie Chart
+                var pieCtx = document.getElementById('pieChart').getContext('2d');
+                var pieChart = new Chart(pieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Available', 'Not Available', 'Booked'],
+                        datasets: [{
+                            data: [deskData[0], deskData[1], deskData.slice(2).reduce((a, b) => a + b, 0)],
+                            backgroundColor: ['#00CC2D', '#575757', '#FFAE35'],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'bottom'
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    }
+                });
+            </script>
 
 @livewireScripts
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  
@@ -249,40 +380,12 @@
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-</main>
-
 <script>
-    // Automatically refresh the Livewire component when a browser event is received
-    Livewire.on('refreshComponent', function () {
-        Livewire.emit('refresh');
-    });
-    Livewire.on('refreshPage', function () {
-        window.location.reload();
-    });
-    
-    // Livewire doesn't work because of this
-    // $(document).ready(function() {
-    //     $('#bookingsTable').DataTable({
-    //         lengthChange: false,
-    //         searching: true,
-    //         initComplete: function () {
-    //             // Add dropdown filter for Status column
-    //             this.api().columns(4).every(function () {
-    //                 var column = this;
-    //                 var select = $('<select><option value="">Status</option><option value="accepted">Accepted</option><option value="canceled">Canceled</option></select>')
-    //                     .appendTo($(column.header()).empty())
-    //                     .on('change', function () {
-    //                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
-    //                         column.search(val ? '^' + val + '$' : '', true, false).draw();
-    //                     });
 
-    //                 // Add select styling
-    //                 select.select2({ width: '100%', theme: 'bootstrap' });
-    //             });
-    //         }
-            
-    //     });
-    // });
+Livewire.on('refreshComponent', function () {
+    Livewire.emit('refresh');
+});
+Livewire.on('refreshPage', function () {
+    window.location.reload();
+});
 </script>
-
