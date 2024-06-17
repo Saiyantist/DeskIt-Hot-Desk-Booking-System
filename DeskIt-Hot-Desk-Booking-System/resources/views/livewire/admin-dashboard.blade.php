@@ -267,7 +267,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
     </section>
 
     <x-modal name="accept-modal" title="Accept Booking">
