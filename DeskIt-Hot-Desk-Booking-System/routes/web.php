@@ -157,7 +157,10 @@ Route::middleware('auth')->group(function () {
  * HOME Routes
  */
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/notification', [HomeController::class,'notif'])->name('notif');
+    Route::get('/user/notification', function () {
+        return view('home.notifications');
+        // changed from home.profile, because it exposes an admin page (admin.profile).
+    })->name('userNotification');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
     Route::get('/user/profile', function () {
         return view('admin.profile');
@@ -226,6 +229,10 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/feedbacks-reports', function () {
         return view('admin.feedbacks-reports');
     })->name('feedbacks-reports');
+    Route::get('/admin/notification', function () {
+        return view('admin.notifications');
+        // changed from home.profile, because it exposes an admin page (admin.profile).
+    })->name('notification');
 });
 
 

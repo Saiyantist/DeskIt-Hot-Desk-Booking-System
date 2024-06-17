@@ -164,7 +164,7 @@
     <section class="mt-20">
         <div class="flex justify-center">
             <div class="bg-white rounded-lg w-[80%]">
-
+                
                 {{-- Tabs? --}}
                 <div class="self-start w-full flex">
                     {{-- Bookings tab? --}}
@@ -226,22 +226,22 @@
                                         <td>{{ $booking['Desk ID'] }}</td>
                                         <td>{{ $booking['Status'] }}</td>
 
-                                        {{-- Action --}}
-                                        <td class="p-2 w-full flex justify-content-around">
-                                            @if($booking['Status'] === 'pending')
-                                                {{-- Accept Modal Open --}}
-                                                <button
-                                                    class="transition ease-in-out hover:bg-green-300 hover:scale-101 duration-200 bg-green-200 px-2.5 py-2 rounded-md flex items-center cursor-pointer text-green-800 text-sm"
-                                                    wire:click="saveId({{ $booking['Id'] }})" x-data
-                                                    x-on:click="$dispatch('open-modal', {name: 'accept-modal'})">Accept
-                                                </button>
-
-                                                {{-- Decline Modal Open --}}
-                                                <button
-                                                    class="transition ease-in-out hover:bg-red-300 hover:scale-101 duration-200 bg-red-200 ml-1 px-2 rounded-md flex items-center cursor-pointer text-red-800 text-sm"
-                                                    wire:click="saveId({{ $booking['Id'] }})" x-data
-                                                    x-on:click="$dispatch('open-modal', {name: 'decline-modal'})">Decline
-                                                </button>
+                                    {{-- Action --}}
+                                    <td class="p-2 w-full flex justify-content-around">
+                                    @if($booking['Status'] === 'pending' )
+                                        {{-- Accept Modal Open  --}}
+                                        <button class="transition ease-in-out hover:bg-green-300 hover:scale-101 duration-200 bg-green-200 px-2.5 py-2 rounded-md flex items-center cursor-pointer text-green-800 text-sm"
+                                            wire:click="saveId({{ $booking['Id'] }})"
+                                            x-data x-on:click="$dispatch('open-modal', {name: 'accept-modal'})"
+                                            >Accept
+                                        </button>
+            
+                                        {{-- Decline Modal Open  --}}
+                                        <button class="transition ease-in-out hover:bg-red-300 hover:scale-101 duration-200 bg-red-200 ml-1 px-2 rounded-md flex items-center cursor-pointer text-red-800 text-sm"
+                                            wire:click="saveId({{ $booking['Id'] }})"
+                                            x-data x-on:click="$dispatch('open-modal', {name: 'decline-modal'})"
+                                            >Decline
+                                        </button>
 
                                             @elseif($booking['Status'] === 'accepted')
 

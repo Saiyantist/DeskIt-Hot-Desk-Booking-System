@@ -250,6 +250,7 @@ class Booking extends Component
             Booking::refreshMap();
         }
 
+
         // $status = "booked";
 
         // Booking::create([

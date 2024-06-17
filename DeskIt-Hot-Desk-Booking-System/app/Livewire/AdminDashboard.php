@@ -14,9 +14,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
-
+use Illuminate\Support\Facades\Auth;
 use function Livewire\once;
 
+//notification
+use App\Notifications\AdminToggleNotification;
+use App\Notifications\AcceptBookingNotification;
+use App\Notifications\DeclineBookingNotification;
 class AdminDashboard extends Component
 {
 
@@ -47,6 +51,7 @@ class AdminDashboard extends Component
     public $date;
     public $min;
     public $max;
+    public $message;
 
     public function mount()
     {   
@@ -71,6 +76,18 @@ class AdminDashboard extends Component
         $this->fetchBookings();
 
         $this->autoAccept = Config::get('bookings.auto_accept');
+
+        // Check if there are any pending bookings
+        $bookings = Bookings::where('status', 'pending')->count();
+        
+        if ($bookings) {
+            $adminUser = Auth::user();
+            //check role
+            $rolesToCheck = ['admin', 'superadmin'];
+            $userRoles = $adminUser->roles->pluck('name')->intersect($rolesToCheck);
+            $rolesString = $userRoles->implode(', ');
+            $adminUser->notify(new AdminToggleNotification($rolesString));
+        }        
     }
 
     // Toggle for Auto Accepting of New Bookings
@@ -80,6 +97,7 @@ class AdminDashboard extends Component
         $this->autoAccept = !$this->autoAccept; 
         $this->updateAutoAccept();
         $this->dispatch('refreshPage');
+        
     }   
 
     // Configuration process for the Toggle Auto Accept Functionality
@@ -116,11 +134,21 @@ class AdminDashboard extends Component
 
     public function acceptBooking()
     {
-        if($this->alterBooking->status === 'pending' )
-        {
+        if ($this->alterBooking->status === 'pending') {
+            // Update the booking status
             $this->alterBooking->update([
                 'status' => 'accepted',
             ]);
+    
+            // Get the user associated with the booking
+            $user = $this->alterBooking->user;
+    
+            // Notify the user if they prefer notifications for reserved desk status
+            if ($user->prefersNotification('reserved_desk_status')) {
+                $user->notify(new AcceptBookingNotification('employee'));
+            }
+    
+            // Dispatch the refreshPage event
             $this->dispatch('refreshPage');
         }
     }
@@ -132,6 +160,15 @@ class AdminDashboard extends Component
             $this->alterBooking->update([
                 'status' => 'canceled',
             ]);
+
+            // Get the user associated with the booking
+            $user = $this->alterBooking->user;
+    
+            // Notify the user if they prefer notifications for reserved desk status
+            if ($user->prefersNotification('reserved_desk_status')) {
+                $user->notify(new DeclineBookingNotification('employee'));
+            }
+            
             $this->dispatch('refreshPage');
         }
     }
