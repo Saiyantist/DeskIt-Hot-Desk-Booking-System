@@ -35,8 +35,7 @@ class Booking extends Component
     public $showWarning = false;
     public $showWarning2 = false;
     
-    public $tutorialCompleted;
-
+    public $tutorialCompleted = false;
 
     public function refreshMap() 
     {
@@ -278,6 +277,7 @@ class Booking extends Component
         $this->tutorialCompleted = $user->tutorial_completed;
     }
 
+    protected $listeners = ['completeTutorial'];
     public function completeTutorial()
     {
         $user = Auth::user();
@@ -287,9 +287,6 @@ class Booking extends Component
         $this->tutorialCompleted = true;
     }
     
-    protected $listeners = [
-        'completeTutorial' => 'completeTutorial'
-    ];
 
     public function render()
     {
