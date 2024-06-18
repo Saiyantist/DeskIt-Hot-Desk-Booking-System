@@ -1,6 +1,6 @@
 <div class="flex flex-col container mt-16">
 
-    @include("admin.modals.updatedDeskmap")
+    {{-- @include("admin.modals.updatedDeskmap") --}}
     {{-- UI --}}
     <main class="flex flex-row justify-evenly align-items-center m-10 ml-24 ">
 
@@ -95,13 +95,13 @@
                     
                     @if($deskDisabled)
                         <button class="justify-center items-center bg-yellowB rounded-xl w-28 h-10 p-1 mb-3 text-black"
-                            wire:click='setDeskAvailabilityConfirmation'
+                            x-data x-on:click="$dispatch('open-modal', {name: 'enable-desk-modal'})"
                             wire:submit>
                             Enable
                         </button>
                     @else
                         <button class="justify-center items-center bg-gray rounded-xl w-28 h-10 p-1 mb-3 text-black"
-                            wire:click='setDeskAvailabilityConfirmation'
+                            x-data x-on:click="$dispatch('open-modal', {name: 'disable-desk-modal'})"
                             wire:submit>
                             Disable
                         </button>
@@ -1311,6 +1311,50 @@
                 </div>
             </div>
         </section>
+
+        {{-- Disable Desk Modal --}}
+        <x-modal name="disable-desk-modal" title="Disable Desk">
+            <x-slot:body>
+                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                    @if($selectedDesk)
+                    <div class='flex flex-column justify-center'>
+                        <p class="text-lg text-center">Are you sure you want to DISABLE</p>
+                        <p class="text-lg text-center truncate ...">Desk: {{$selectedDesk}}</p>
+                    </div>
+            
+                    <div class="flex justify-center mt-3">
+                        <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                                wire:click="setDeskAvailability"
+                                x-on:click="$dispatch('close-modal')">
+                            Disable
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
+
+        {{-- Enable  Desk Modal --}}
+        <x-modal name="enable-desk-modal" title="Enable Desk">
+            <x-slot:body>
+                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                    @if($selectedDesk)
+                    <div class='flex flex-column justify-center'>
+                        <p class="text-lg text-center">Are you sure you want to ENABLE</p>
+                        <p class="text-lg text-center truncate ...">Desk: {{$selectedDesk}}</p>
+                    </div>
+            
+                    <div class="flex justify-center mt-3">
+                        <button class="flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                                wire:click="setDeskAvailability"
+                                x-on:click="$dispatch('close-modal')">
+                            Enable
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
 
     </main>
 

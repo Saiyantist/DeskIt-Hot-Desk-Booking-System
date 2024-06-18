@@ -3,7 +3,7 @@
         <div class="flex justify-between">
 
             <div class="m-10">
-                <h2 class="font-extrabold text-2xl">Personal Information</h2>
+                <h2 class="font-semibold text-2xl">Personal Information</h2>
             </div>
 
         </div>

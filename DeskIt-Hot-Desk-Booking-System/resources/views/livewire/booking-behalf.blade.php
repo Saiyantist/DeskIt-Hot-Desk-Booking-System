@@ -52,7 +52,14 @@
                             <p class="text-sm text-left">Book for:</h6>
                         </div>
                         <div>
-                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedUserID }}</h6>
+                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 p-1 flex items-center justify-center truncate ..."
+                            >
+                            @if($user)
+                                {{ $user->name }}
+                            @else
+                                
+                            @endif
+                            </h6>
                         </div>
                         
                     </div>
@@ -128,8 +135,8 @@
                     @csrf
                         <div class="col-12">
                             <div class="input-group bookBehalf">
-                                <select class="form-control bg-warning text-center text-black uppercase" wire:model="selectedUserID" wire:change='refreshMap' id="user" name="user">
-                                    <option value="" class="text-center">Select a User</option>
+                                <select class="form-control bg-warning text-center text-black uppercase" wire:model.live="selectedUserID" wire:change='refreshMap' id="user" name="user">
+                                    <option value="" class="text-center truncate ...">Select a User</option>
                                         @foreach($usersWithRoles as $user)
                                             @foreach($user->roles as $role)
                                                 <option value= '{{ $user->id }}'>{{ $user->name }} ({{ $role->name }})</option>

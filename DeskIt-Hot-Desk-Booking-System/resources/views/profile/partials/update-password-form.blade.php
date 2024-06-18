@@ -7,7 +7,7 @@
     @endif
 
     <header>
-        <h2 class="text-lg font-medium text-bla">
+        <h2 class="text-2xl font-semibold text-black">
             {{ __('Manage Password') }}
         </h2>
 

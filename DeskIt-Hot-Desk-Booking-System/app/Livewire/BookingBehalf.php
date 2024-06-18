@@ -19,6 +19,7 @@ class BookingBehalf extends Component
     public $bookedCount;
     public $notAvailableCount;
     public $selectedUserID;
+    public $user;
 
     public $date;
     public $time;
@@ -51,20 +52,21 @@ class BookingBehalf extends Component
     {
         $date = $this->date;
         $floor = $this->floor;
-        $user = $this->selectedUserID;
+        $this->user = User::find($this->selectedUserID);
         $desks = Desk::all(); 
         $canBook = $this->canBook;
         $time = $this->time;
 
         /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
-        $this->selectedDesk = '-';
+        // $this->selectedDesk = '-';
         $this->bookedDesk ='-';
-        $this->selectedUserID = '-';
+        // $this->selectedUserID = '-';
 
         /**
          * Check IF there is a date and floor selected
          * ELSE, return NOTHING
          */
+
         if($this->date && $this->floor && $this->time && $this->selectedUserID){
 
         
@@ -129,10 +131,10 @@ class BookingBehalf extends Component
                         }
                     }
 
-                    if ($user != $bookingUserID){
+                    if ($this->user->id != $bookingUserID){
                         $canBook = true;
                     }
-                    elseif ($user == $bookingUserID){
+                    elseif ($this->user->id == $bookingUserID){
                         // dd($bookings[$booking]['desk_id'] - 1);
                         $deskNum = $bookings[$booking]['desk_id'] - 1;
                         // dd($deskNum);

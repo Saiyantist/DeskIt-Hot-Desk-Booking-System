@@ -126,6 +126,7 @@ class AdminProfile extends Component
         if($section === 1 ){
             $this->reset('activeSecondaryTabAS');
         }
+        $this->resetEditData();
     }
     public function setActiveAS($accountSet)
     {
@@ -312,6 +313,7 @@ class AdminProfile extends Component
             'editEmail',
             'editGender',
             'editBirthday',
+            'editMode',
             'deleteUserId',
             'activateUserId',
             'deactUserId',
