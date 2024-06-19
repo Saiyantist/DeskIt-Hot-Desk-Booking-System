@@ -49,7 +49,7 @@
                      {{-- Behalf Booking --}}
                      <div class="flex flex-row justify-content-between ">
                         <div>
-                            <p class="text-sm text-left">Book for:</h6>
+                            <p class="text-lg text-left">Book for:</h6>
                         </div>
                         <div>
                             <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 p-1 flex items-center justify-center truncate ..."
@@ -59,7 +59,7 @@
                             @else
                                 
                             @endif
-                            </h6>
+                            </p>
                         </div>
                         
                     </div>
@@ -168,8 +168,15 @@
                                 @if($floor == 1)
 
                                 {{-- Iterator --}}
-                                @for($i = 0; $i < 4; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex
-                                    w-16" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
+                                @for($i = 0; $i < 4; $i++)
+                                
+                                    
+                                {{-- Desk --}}
+                                <div id={{ $desks[$i]->desk_num}}
+                                    class="flex w-16 cursor-pointer"
+                                    wire:model.live='bookedDeskIDs'
+                                    wire:click="clickDesk({{$i}})"
+                                    >
 
                                     {{-- Image --}}
                                     <a><img class="" src="{{ asset('images/left-chair.svg') }}" alt="SVG Image" /></a>
@@ -209,8 +216,13 @@
                             @elseif($floor == 2)
 
                             {{-- Iterator --}}
-                            @for($i = 36; $i <= 39; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex
-                                w-16" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})" >
+                            @for($i = 36; $i <= 39; $i++)
+                            
+                            {{-- Desk --}}
+                            <div id={{ $desks[$i]->desk_num}}
+                                class="flex w-16 cursor-pointer"
+                                wire:model.live='bookedDeskIDs'
+                                wire:click="clickDesk({{$i}})">
 
                                 {{-- Image --}}
                                 <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image" /></a>
@@ -265,8 +277,13 @@
                         @if($floor == 1)
 
                         {{-- Iterator --}}
-                        @for($i = 4; $i < 10; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex
-                            flex-row mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+                        @for($i = 4; $i < 10; $i++)
+
+                        {{-- Desk --}}
+                        <div id={{ $desks[$i]->desk_num}}
+                            class="flex flex-row mx-1 cursor-pointer"
+                            wire:model.live='bookedDeskIDs'
+                            wire:click="clickDesk({{$i}})">
 
                             {{-- Image --}}
                             <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" /></a>
@@ -310,8 +327,12 @@
                     @elseif($floor == 2)
 
                     {{-- Iterator --}}
-                    @for($i = 40; $i < 46; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex flex-row
-                        mx-1" wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+                    @for($i = 40; $i < 46; $i++)
+                    {{-- Desk --}}
+                    <div id={{ $desks[$i]->desk_num}}
+                        class="flex flex-row mx-1 cursor-pointer"
+                        wire:model.live='bookedDeskIDs'
+                        wire:click="clickDesk({{$i}})">
 
                         {{-- Image --}}
                         <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" /></a>
@@ -369,8 +390,13 @@
         @if($floor == 1)
 
         {{-- Iterator --}}
-        @for($i = 10; $i < 16; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1"
-            wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+        @for($i = 10; $i < 16; $i++)
+
+        {{-- Desk --}}
+        <div id={{ $desks[$i]->desk_num}}
+            class="flex flex-row mx-1 cursor-pointer"
+            wire:model.live='bookedDeskIDs'
+            wire:click="clickDesk({{$i}})">
 
             {{-- Image --}}
             <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" /></a>
@@ -410,8 +436,13 @@
     @elseif($floor == 2)
 
     {{-- Iterator --}}
-    @for($i = 46; $i < 52; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1"
-        wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+    @for($i = 46; $i < 52; $i++) 
+    
+    {{-- Desk --}}
+     <div id={{ $desks[$i]->desk_num}}
+        class="flex flex-row mx-1 cursor-pointer"
+        wire:model.live='bookedDeskIDs' 
+        wire:click="clickDesk({{$i}})">
 
         {{-- Image --}}
         <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" /></a>
@@ -465,8 +496,13 @@
         @if($floor == 1)
 
         {{-- Iterator --}}
-        @for($i = 16; $i < 22; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1"
-            wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+        @for($i = 16; $i < 22; $i++) 
+        
+        {{-- Desk --}}
+         <div id={{ $desks[$i]->desk_num}}
+            class="flex flex-row mx-1 cursor-pointer"
+            wire:model.live='bookedDeskIDs' 
+            wire:click="clickDesk({{$i}})">
 
             {{-- Image --}}
             <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" /></a>
@@ -506,8 +542,13 @@
     @elseif($floor == 2)
 
     {{-- Iterator --}}
-    @for($i = 52; $i < 58; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1"
-        wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+    @for($i = 52; $i < 58; $i++) 
+    
+    {{-- Desk --}}
+     <div id={{ $desks[$i]->desk_num}}
+        class="flex flex-row mx-1 cursor-pointer"
+        wire:model.live='bookedDeskIDs' 
+        wire:click="clickDesk({{$i}})">
 
         {{-- Image --}}
         <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image" /></a>
@@ -562,8 +603,13 @@
         @if($floor == 1)
 
         {{-- Iterator --}}
-        @for($i = 22; $i < 28; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1"
-            wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+        @for($i = 22; $i < 28; $i++) 
+        
+        {{-- Desk --}}
+         <div id={{ $desks[$i]->desk_num}}
+            class="flex flex-row mx-1 cursor-pointer"
+            wire:model.live='bookedDeskIDs' 
+            wire:click="clickDesk({{$i}})">
 
             {{-- Image --}}
             <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" /></a>
@@ -603,8 +649,13 @@
     @elseif($floor == 2)
 
     {{-- Iterator --}}
-    @for($i = 58; $i < 64; $i++) {{-- Desk --}} <div id={{ $desks[$i]->desk_num}} class="flex flex-row mx-1"
-        wire:model.live='bookedDeskIDs' wire:click="clickDesk({{$i}})">
+    @for($i = 58; $i < 64; $i++) 
+    
+    {{-- Desk --}}
+     <div id={{ $desks[$i]->desk_num}}
+        class="flex flex-row mx-1 cursor-pointer"
+        wire:model.live='bookedDeskIDs' 
+        wire:click="clickDesk({{$i}})">
 
         {{-- Image --}}
         <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image" /></a>
@@ -663,7 +714,7 @@
 
             {{-- Desk 129--}}
             <div id={{ $desks[28]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{28}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-end">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-end">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
@@ -700,7 +751,7 @@
 
             {{-- Desk 130--}}
             <div id={{ $desks[29]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{29}})"
-                class="position-relative flex flex-column-reverse align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
@@ -739,7 +790,7 @@
 
             {{-- Desk 229 --}}
             <div id={{ $desks[64]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{64}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-end">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-end">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
@@ -776,7 +827,7 @@
 
             {{-- Desk 230--}}
             <div id={{ $desks[65]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{65}})"
-                class="position-relative flex flex-column-reverse align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
@@ -823,7 +874,7 @@
 
             {{-- Desk 132 --}}
             <div id={{ $desks[31]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{31}})"
-                class="position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
@@ -861,7 +912,7 @@
 
             {{-- Desk 131 --}}
             <div id={{ $desks[30]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{30}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-start ">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-start ">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
@@ -901,7 +952,7 @@
 
             {{-- Desk 232 --}}
             <div id={{ $desks[67]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{67}})"
-                class="position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
@@ -939,7 +990,7 @@
 
             {{-- Desk 231 --}}
             <div id={{ $desks[66]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{66}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-start ">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-start ">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
@@ -991,7 +1042,7 @@
 
             {{-- Desk 133--}}
             <div id={{ $desks[32]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{32}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-end">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-end">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
@@ -1028,7 +1079,7 @@
 
             {{-- Desk 134--}}
             <div id={{ $desks[33]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{33}})"
-                class="position-relative flex flex-column-reverse align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
@@ -1067,7 +1118,7 @@
 
             {{-- Desk 233 --}}
             <div id={{ $desks[68]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{68}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-end">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-end">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
@@ -1104,7 +1155,7 @@
 
             {{-- Desk 234--}}
             <div id={{ $desks[69]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{69}})"
-                class="position-relative flex flex-column-reverse align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
@@ -1151,7 +1202,7 @@
 
             {{-- Desk 136 --}}
             <div id={{ $desks[35]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{35}})"
-                class="position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
@@ -1189,7 +1240,7 @@
 
             {{-- Desk 135 --}}
             <div id={{ $desks[34]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{34}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-start ">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-start ">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
@@ -1229,7 +1280,7 @@
 
             {{-- Desk 236 --}}
             <div id={{ $desks[71]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{71}})"
-                class="position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-end align-items-center p-0">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
@@ -1267,7 +1318,7 @@
 
             {{-- Desk 235 --}}
             <div id={{ $desks[70]->desk_num}} wire:model.live='bookedDeskIDs' wire:click="clickDesk({{70}})"
-                class="position-relative flex flex-column-reverse justify-content-start align-items-start ">
+                class="cursor-pointer position-relative flex flex-column-reverse justify-content-start align-items-start ">
 
                 {{-- Image --}}
                 <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
