@@ -11,7 +11,8 @@
     class="fixed z-50 inset-0 bg-white-500">
 
     
-    <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px]"
+    {{-- <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px]" --}}
+    <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px] backdrop-brightness-[0.60]"
         wire:click='resetEditData'></div>
 
     {{-- Modal Dynamic Sizes according to modal type --}}
@@ -131,10 +132,10 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[80%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
-
+    {{-- Decline Booking Modal  --}}
     @elseif($name === 'decline-modal')
         <div class="fixed inset-0 border-solid border-red-500 border-1 bg-red-300 rounded-4 m-auto w-1/4 max-h-[300px]">
 
@@ -150,10 +151,47 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[80%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
-    
+    {{-- Disable Desk Modal --}}
+    @elseif($name === 'disable-desk-modal')
+        <div class="fixed inset-0 border-solid border-red-500 border-1 bg-red-300 rounded-4 m-auto w-1/4 max-h-[300px]">
+
+                @if(isset($title))
+                <div class="flex justify-between m-3 mb-2 ">
+                    <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                    <span class=" font-medium text-xl text-red-50">{{ $title }}</span>
+                    <button class="mr-6 font-bold text-white text-2xl"
+                            x-on:click="$dispatch('close-modal')"
+                            wire:click='resetEditData'
+                            >x
+                    </button>
+                </div>
+                @endif
+                <hr class="bg-darkergray m-0 p-0">
+                <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
+                    {{ $body }}
+                </div>
+    {{--Enable Desk Modal  --}}
+    @elseif($name === 'enable-desk-modal')
+    <div class="fixed inset-0 border-solid border-green-500 border-1 bg-green-300 rounded-4 m-auto w-1/4 max-h-[300px]">
+
+            @if(isset($title))
+            <div class="flex justify-between m-3 mb-2 ">
+                <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                <span class=" font-medium text-xl text-green-50">{{ $title }}</span>
+                <button class="mr-6 font-bold text-white text-2xl"
+                        x-on:click="$dispatch('close-modal')"
+                        wire:click='resetEditData'
+                        >x
+                </button>
+            </div>
+            @endif
+            <hr class="bg-darkergray m-0 p-0">
+            <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
+                {{ $body }}
+            </div>
     @endif
     </div>
 

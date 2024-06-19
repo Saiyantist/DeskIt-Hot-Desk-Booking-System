@@ -63,7 +63,10 @@
                                     <div class="{{ $notification->read_at ? 'bg-gray' : 'bg-white' }} p-3 mb-1 rounded-lg border border-b-2">
                                         <div class="text-block text-base">
                                             <div class="font-semibold pb-1"> {{ $notification->data['title'] }}</div>
-                                            <div class="pb-1">{{ $notification->data['message'] }}</div>
+                                            <div class="pb-1">
+                                                {!! nl2br(e($notification->data['message'])) !!}
+                                            </div>
+                                            
                                             <div class="text-gray-500 pb-1"> {{($notification->created_at)->diffForHumans() }}</div>
                                         </div>
                                         <div class="flex justify-end">
