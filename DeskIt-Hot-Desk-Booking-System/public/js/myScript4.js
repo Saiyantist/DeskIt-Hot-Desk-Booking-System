@@ -1,14 +1,3 @@
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    const helpIcon = document.querySelector('.helpIcon');
-    if (helpIcon) {
-        helpIcon.addEventListener('click', function () {
-            startIntro();
-        });
-    }
-});
-
 function startIntro() {
     introJs().setOptions({
         steps: [
@@ -28,21 +17,27 @@ function startIntro() {
                 intro: "Now, what time would you like to kick off your workday? Choose your preferred start time"
             },
             {
-                element: document.querySelector('.etime'),
-                title: "Step 4",
-                intro: "Now, let's decide when you'll wrap up. How long will you need the desk for? Just select the end time that suits your schedule."
-            },
-            {
                 element: document.querySelector('.desk'),
-                title: "Step 5",
+                title: "Step 4",
                 intro: "Now, let's find you the perfect spot. You'll see a list of available desks for your chosen time slot and floor."
             },
             {
                 element: document.querySelector('.book'),
-                title: "Step 6",
+                title: "Step 5",
                 intro: "Lastly, book your chosen date, time and desk."
             }
-        ]
-    }).start();
+        ],
+
+    }).oncomplete(function() {
+                window.dispatchEvent(new Event('completeTutorial'));
+            }).onexit(function() {
+                window.dispatchEvent(new Event('completeTutorial'));
+            }).start();
+
+    window.addEventListener('completeTutorial', function () {
+        Livewire.emit('completeTutorial');
+    });
 }
+
+window.onload = startIntro();
 
