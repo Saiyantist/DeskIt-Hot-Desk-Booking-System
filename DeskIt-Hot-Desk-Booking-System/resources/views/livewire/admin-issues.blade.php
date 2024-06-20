@@ -15,7 +15,7 @@
     </button>
 
     <div>
-        <table class="bg-gray-200 mt-5">
+        {{-- <table class="bg-gray-200 mt-5">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -27,7 +27,7 @@
                 @foreach($issues as $issue)
                     <tr>
                         <td>{{ $issue->id }}</td>
-                        {{-- <td><a href="{{ route('issues.show', $issue->id) }}">{{ $issue->subject }}</a></td> --}}
+                        <td><a href="{{ route('issues.show', $issue->id) }}">{{ $issue->subject }}</a></td>
                         <td><a wire:click="show({{$issue->id}})">{{ $issue->subject }}</a></td>
                         <td>{{ $issue->created_at }}</td>
                     </tr>
@@ -35,7 +35,8 @@
             </tbody>
         </table>
     
-        {{ $issues->links() }}
+        {{ $issues->links() }} --}}
+        <livewire:p-g-issues/>
     </div>
 
     </div>

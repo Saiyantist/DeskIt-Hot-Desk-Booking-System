@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->string('subject');
             $table->text('description');
             $table->enum('type',['bug', 'feedback']);
-            $table->enum('status',['to review', 'reviewing', 'resolved']);
+            $table->enum('status',['to review', 'reviewing', 'resolved'])->default('to review');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('desk_id')->constrained();
             $table->timestamp('resolved_at')->nullable();
