@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Models\Bookings;
 use App\Notifications\UpcomingBookingNotification;
+use App\Notifications\UserBookingNotification;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
 
             foreach ($bookings as $booking) {
                 $booking->user->notify(new UpcomingBookingNotification($booking));
+                $booking->user->notify(new UserBookingNotification($booking, 'employee'));
             }
         })->daily();
     }

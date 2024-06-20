@@ -15,8 +15,8 @@
                         <h2 class="justify-center text-xl">Account Settings</h2>
                     </div>
 
+                    {{-- Manage Users (hidden for employees) --}}
                     @if(Auth::user()->roles->whereNotIn('name', 'employee')->isNotEmpty())
-                    {{-- Manage Users --}}
                     <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSection == 2 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
                         wire:click="setActiveSection(2)">
                         <h2 class="justify-center text-xl">Manage Users</h2>
@@ -25,42 +25,61 @@
                     {{-- show nothing --}}
                     @endif
 
+                    {{-- Notification Settings(hidden for admins) --}}
+                    @if(Auth::user()->roles->where('name', 'employee')->isNotEmpty())
+                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200  {{ $activeSection == 3 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
+                        wire:click="setActiveSection(3)">
+                        <h2 class="justify-center text-xl">Notification Settings</h2>
+                    </div>
+                    @else
+                    {{-- show nothing --}}
+                    @endif
                 </div>
 
                 {{-- Account Settings SECONDARY TABS --}}
                 @if($activeSection === 1)    
-                <div class="flex flex-row">
-                    <div class="flex flex-col m-10">
-                        <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
-                            {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
-                            >
-                            <h2 wire:click="setActiveAS(1)" class="text-lg">
-                                Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                    <div class="flex flex-row">
+                        <div class="flex flex-col m-10">
+                            <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
+                                {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                                >
+                                <h2 wire:click="setActiveAS(1)" class="text-lg">
+                                    Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                            </div>
+
+                            <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
+                                {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
+                                >
+                                <h2 wire:click="setActiveAS(2)" class=" text-lg">
+                                    Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
+                            </div>
                         </div>
 
-                        <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
-                            {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
-                            >
-                            <h2 wire:click="setActiveAS(2)" class=" text-lg">
-                                Manage Password <i class="fa-solid fa-chevron-right pl-10"></i></h2>
-                        </div>
-                    </div>
-
-                    <div>
-                        @if($activeSecondaryTabAS === 1)
                         <div>
-                            @include('admin.profileEdit')
-                        </div>
-                        
-                        @elseif($activeSecondaryTabAS === 2)
-                        <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
-                            <div class="max-w-xl ">
-                                @include('profile.partials.update-password-form')
+                            @if($activeSecondaryTabAS === 1)
+                            <div>
+                                @include('admin.profileEdit')
                             </div>
                             
+                            @elseif($activeSecondaryTabAS === 2)
+                            <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
+                                <div class="max-w-xl ">
+                                    @include('profile.partials.update-password-form')
+                                </div>
+                            </div>  
                             @endif
                         </div>
                     </div>
+                
+                {{-- Notification Settings SECONDARY Tabls --}}
+                @elseif($activeSection === 3) 
+                <div class="bg-white">
+                    <h3 class="text-base p-4">Choose which notifications you want to receive and how you'd like to be notified. Please note that while you can manage most of your notification preferences, we will still send you important notifications about your account to ensure you stay informed about updates and security information.</h3>
+
+                    <div>
+                        @livewire('notifcation-preferences')
+                    </div>
+                </div>
 
                 {{-- Manage Users SECONDARY Tabs --}}
                 @elseif($activeSection === 2)
@@ -148,69 +167,28 @@
                                     <td class="p-2">{{ $user->gender }}</td>
                                     <td class="p-2">{{ $user->birthday }}</td>
 
+
                                 {{-- Change Role--}}
 
-                                    {{-- Make Emp Modal --}}
-                                    <x-modal name="makeEmp-modal" title="Change to Employee">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($makeEmpId)
-                                                <div class='flex justify-center'>
-                                                    <p class="text-lg text-center truncate ...">User: {{$makeEmpId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
-                                                            wire:click="makeEmp"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Make Employee
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
+                                    <td class="p-2 flex justify-content-around">
 
-                                    {{-- Make OM Modal --}}
-                                    <x-modal name="makeOM-modal" title="Change to Office Manager">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($makeOMId)
-                                                <div class='flex justify-center'>
-                                                    <p class="text-lg text-center truncate ...">User: {{$makeOMId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
-                                                            wire:click="makeOM"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Make Office Mgr.
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
+                                        {{-- Make Employee Open --}}
+                                        <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
+                                                wire:click="saveEmpId({{ $user->id }})"
+                                                x-data x-on:click="$dispatch('open-modal', {name: 'makeEmp-modal'})">
+                                            <img src="{{ asset('images/employee_new.svg') }}" class="h-6">
+                                            <span class="text-yellowBdarker text-sm font-medium pl-2">Employee</span>
+                                        </button>
 
-                                <td class="p-2 flex justify-content-around">
+                                        {{-- Make OM Open --}}
+                                        <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
+                                                wire:click="saveOMId({{ $user->id }})"
+                                                x-data x-on:click="$dispatch('open-modal', {name: 'makeOM-modal'})">
+                                            <img src="{{ asset('images/omanager_new.svg') }}" class="h-6">
+                                            <span class="text-yellowBdarker text-sm font-medium pl-2">Office Mgr.</span>
+                                        </button>
 
-                                    {{-- Make Employee Open --}}
-                                    <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
-                                            wire:click="saveEmpId({{ $user->id }})"
-                                            x-data x-on:click="$dispatch('open-modal', {name: 'makeEmp-modal'})">
-                                        <img src="{{ asset('images/employee_new.svg') }}" class="h-6">
-                                        <span class="text-yellowBdarker text-sm font-medium pl-2">Employee</span>
-                                    </button>
-
-                                    {{-- Make OM Open --}}
-                                    <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
-                                            wire:click="saveOMId({{ $user->id }})"
-                                            x-data x-on:click="$dispatch('open-modal', {name: 'makeOM-modal'})">
-                                        <img src="{{ asset('images/omanager_new.svg') }}" class="h-6">
-                                        <span class="text-yellowBdarker text-sm font-medium pl-2">Office Mgr.</span>
-                                    </button>
-
-                                </td>
+                                    </td>
 
                                 @endif
     
@@ -247,126 +225,7 @@
           
                                     </div>
 
-                                    {{-- Edit Modal --}}
-                                    <x-modal name="edit-modal" title="Edit User">
-                                        <x-slot:body>
-                                            <div class='flex justify-center rounded-3 w-[100%] h-[100%]'>
-                                                @if($editUserId)
-                                                <form method="post" action="{{route('profile.update')}}"
-                                                      class="flex flex-column justify-evenly w-[85%]"
-                                                      wire:submit="editProfileSave">
-                                                    @csrf
-                                                    @method('patch')
-                                                    
-                                                    {{-- Row 1 --}}
-                                                    <div class="flex flex-row justify-content-evenly">
 
-                                                        {{-- Name --}}
-                                                        <div class="flex flex-column">
-                                                            <label class="self-start ml-3" for="name"> Name:</label>
-                                                            <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}"
-                                                                class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                wire:model.live='editName'/>
-                                                        </div>
-
-                                                        {{-- Email --}}
-                                                        <div class="flex flex-column ">
-                                                            <label class="self-start ml-3" for="email"> Email:</label>
-                                                            <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}"
-                                                                class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1 "
-                                                                wire:model.live='editEmail'/>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Row 2 --}}
-                                                    <div class="flex flex-row justify-content-evenly mt-3">
-                                                        
-                                                        {{-- Gender --}}
-                                                        <div class="flex flex-column">
-                                                            <label class="self-start ml-3" for="name"> Gender:</label>
-                                                            <select class="p-2.5 border-2 border-black border bg-white text-black text-left rounded-lg w-80 m-2 mt-1"
-                                                            wire:model.live="editGender">
-
-                                                                @if($editUserId->gender === 'male')
-                                                                <option value='' selected>male</option>
-                                                                <option value="female">female</option>
-                                                                
-                                                                @elseif($editUserId->gender === 'female')
-                                                                <option value='' selected>female</option>
-                                                                <option value="male">male</option>
-                                                            
-                                                                @endif
-                                                            </select>
-                                                        </div>
-                                                        
-
-                                                        {{-- Birthday --}}
-                                                        <div class="flex flex-column ">
-                                                            <label class="self-start ml-3" for="birthday"> Birthday:</label>
-                                                            <input type="date" name="birthday" value='' placeholder="{{ $editUserId->birthday }}"
-                                                                class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                wire:model.live='editBirthday'/>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Save Button --}}
-                                                    <div class="flex justify-center items-center mt-3">
-                                                        <button x-on:click="$dispatch('close-modal')"
-                                                                type="submit"
-                                                                class="border-solid border-blue-400 border-1 bg-blue-300 rounded-xl px-4 py-2 font-medium text-xl text-blue-50"
-                                                                >Save
-                                                        </button>
-                                                    </div>
-
-                                                </form>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-
-                                    {{-- Deact Modal --}}
-                                    <x-modal name="deact-modal" title="Deactivate User">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($deactUserId)
-                                                <div class='flex flex-column justify-center'>
-                                                    <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
-                                                    <p class="text-lg text-center truncate ...">User: {{$deactUserId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
-                                                            wire:click="deactUser"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Deactivate
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-
-                                    {{-- Delete Modal --}}
-                                    <x-modal name="delete-modal" title="Delete User">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($deleteUserId)
-                                                <div class='flex flex-column justify-center'>
-                                                    <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
-                                                    <p class="text-lg text-center truncate ...">User: {{$deleteUserId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
-                                                            wire:click="deleteUser"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
                                 </td>
                                 @endif
 
@@ -421,53 +280,7 @@
                                         <img src="{{ asset('images/admin.svg') }}" class="h-6">
                                         <span class="text-yellowBdarker text-sm font-medium pl-2">Admin</span>
                                     </button>
-
-                                    {{-- Make Admin Modal --}}
-                                    <x-modal name="makeAdmin-modal" title="Change to Admin">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($makeAdminId)
-                                                <div class='flex justify-center'>
-                                                    <p class="text-lg text-center truncate ...">User: {{$makeAdminId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
-                                                            wire:click="makeAdmin"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                            
-                                                        Make Admin
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-                                    
                                     @endif
-
-                                    {{-- Make Emp Modal --}}
-                                    <x-modal name="makeEmp-modal" title="Change to Employee">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($makeEmpId)
-                                                <div class='flex justify-center'>
-                                                    <p class="text-lg text-center truncate ...">User: {{$makeEmpId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
-                                                            wire:click="makeEmp"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Make Employee
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-                                    
-
 
                                 </td>
 
@@ -504,128 +317,6 @@
                                         </button>
           
                                     </div>
-
-                                    {{-- Edit Modal --}}
-                                    <x-modal name="edit-modal" title="Edit User">
-                                        <x-slot:body>
-                                            <div class='flex justify-center rounded-3 w-[100%] h-[100%]'>
-                                                @if($editUserId)
-                                                <form method="post" action="{{route('profile.update')}}"
-                                                      class="flex flex-column justify-evenly w-[85%]"
-                                                      wire:submit="editProfileSave">
-                                                    @csrf
-                                                    @method('patch')
-                                                    
-                                                    {{-- Row 1 --}}
-                                                    <div class="flex flex-row justify-content-evenly">
-
-                                                        {{-- Name --}}
-                                                        <div class="flex flex-column">
-                                                            <label class="self-start ml-3" for="name"> Name:</label>
-                                                            <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}"
-                                                                class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                wire:model.live='editName'/>
-                                                        </div>
-
-                                                        {{-- Email --}}
-                                                        <div class="flex flex-column ">
-                                                            <label class="self-start ml-3" for="email"> Email:</label>
-                                                            <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}"
-                                                                class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1 "
-                                                                wire:model.live='editEmail'/>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Row 2 --}}
-                                                    <div class="flex flex-row justify-content-evenly mt-3">
-                                                        
-                                                        {{-- Gender --}}
-                                                        <div class="flex flex-column">
-                                                            <label class="self-start ml-3" for="name"> Gender:</label>
-                                                            <select class="p-2.5 border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
-                                                            wire:model.live="editGender">
-
-                                                                @if($editUserId->gender === 'male')
-                                                                <option value='' selected>male</option>
-                                                                <option value="female">female</option>
-                                                                
-                                                                @elseif($editUserId->gender === 'female')
-                                                                <option value='' selected>female</option>
-                                                                <option value="male">male</option>
-                                                            
-                                                                @endif
-                                                            </select>
-                                                        </div>
-                                                        
-
-                                                        {{-- Birthday --}}
-                                                        <div class="flex flex-column ">
-                                                            <label class="self-start ml-3" for="birthday"> Birthday:</label>
-                                                            <input type="date" name="birthday" value='' placeholder="{{ $editUserId->birthday }}"
-                                                                class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                wire:model.live='editBirthday'/>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Save Button --}}
-                                                    <div class="flex justify-center items-center mt-3">
-                                                        <button x-on:click="$dispatch('close-modal')"
-                                                                wire:submit wire:click='editProfileSave'
-                                                                class="border-solid border-blue-400 border-1 bg-blue-300 rounded-xl px-4 py-2 font-medium text-xl text-blue-50"
-                                                                >Save
-                                                        </button>
-                                                    </div>
-
-                                                </form>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-
-                                    {{-- Deact Modal --}}
-                                    <x-modal name="deact-modal" title="Deactivate User">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($deactUserId)
-                                                <div class='flex flex-column justify-center'>
-                                                    <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
-                                                    <p class="text-lg text-center truncate ...">User: {{$deactUserId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
-                                                            wire:click="deactUser"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Deactivate
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-
-                                    {{-- Delete Modal --}}
-                                    <x-modal name="delete-modal" title="Delete User">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($deleteUserId)
-                                                <div class='flex flex-column justify-center'>
-                                                    <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
-                                                    <p class="text-lg text-center truncate ...">User: {{$deleteUserId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
-                                                            wire:click="deleteUser"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-
                                 </td>
 
                             </tr>
@@ -689,55 +380,10 @@
                                             <img src="{{ asset('images/admin.svg') }}" class="h-6">
                                             <span class="text-yellowBdarker text-sm font-medium pl-2">Admin</span>
                                         </button>
-
-                                        {{-- Make Admin Modal --}}
-                                        <x-modal name="makeAdmin-modal" title="Change to Admin">
-                                            <x-slot:body>
-                                                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                    @if($makeAdminId)
-                                                    <div class='flex justify-center'>
-                                                        <p class="text-lg text-center truncate ...">User: {{$makeAdminId->name}}</p>
-                                                    </div>
-                                            
-                                                    <div class="flex justify-center mt-3">
-                                                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
-                                                                wire:click="makeAdmin"
-                                                                x-on:click="$dispatch('close-modal')">
-                                                            Make Admin
-                                                        </button>
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </x-slot:body>
-                                        </x-modal>
-
                                         @endif
-
-                                        {{-- Make OM Modal --}}
-                                        <x-modal name="makeOM-modal" title="Change to Office Manager">
-                                            <x-slot:body>
-                                                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                    @if($makeOMId)
-                                                    <div class='flex justify-center'>
-                                                        <p class="text-lg text-center truncate ...">User: {{$makeOMId->name}}</p>
-                                                    </div>
-                                            
-                                                    <div class="flex justify-center mt-3">
-                                                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
-                                                                wire:click="makeOM"
-                                                                x-on:click="$dispatch('close-modal')">
-                                                            Make Office Mgr.
-                                                        </button>
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </x-slot:body>
-                                        </x-modal>
 
                                     </td>
                                 
-                                
-
                                     {{-- Action --}}
                                     <td class="p-2">
 
@@ -770,126 +416,7 @@
             
                                         </div>
 
-                                        {{-- Edit Modal --}}
-                                        <x-modal name="edit-modal" title="Edit User">
-                                            <x-slot:body>
-                                                <div class='flex justify-center rounded-3 w-[100%] h-[100%]'>
-                                                    @if($editUserId)
-                                                    <form method="post" action="{{route('profile.update')}}"
-                                                        class="flex flex-column justify-evenly w-[85%]"
-                                                        wire:submit="editProfileSave">
-                                                        @csrf
-                                                        @method('patch')
-                                                        
-                                                        {{-- Row 1 --}}
-                                                        <div class="flex flex-row justify-content-evenly">
 
-                                                            {{-- Name --}}
-                                                            <div class="flex flex-column">
-                                                                <label class="self-start ml-3" for="name"> Name:</label>
-                                                                <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}"
-                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                    wire:model.live='editName'/>
-                                                            </div>
-
-                                                            {{-- Email --}}
-                                                            <div class="flex flex-column ">
-                                                                <label class="self-start ml-3" for="email"> Email:</label>
-                                                                <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}"
-                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1 "
-                                                                    wire:model.live='editEmail'/>
-                                                            </div>
-                                                        </div>
-
-                                                        {{-- Row 2 --}}
-                                                        <div class="flex flex-row justify-content-evenly mt-3">
-                                                            
-                                                            {{-- Gender --}}
-                                                            <div class="flex flex-column">
-                                                                <label class="self-start ml-3" for="name"> Gender:</label>
-                                                                <select class="p-2.5 border-2 border-black border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
-                                                                wire:model.live="editGender">
-
-                                                                    @if($editUserId->gender === 'male')
-                                                                    <option value='' selected>male</option>
-                                                                    <option value="female">female</option>
-                                                                    
-                                                                    @elseif($editUserId->gender === 'female')
-                                                                    <option value='' selected>female</option>
-                                                                    <option value="male">male</option>
-                                                                
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                            
-
-                                                            {{-- Birthday --}}
-                                                            <div class="flex flex-column ">
-                                                                <label class="self-start ml-3" for="birthday"> Birthday:</label>
-                                                                <input type="date" name="birthday" value='' placeholder="{{ $editUserId->birthday }}"
-                                                                    class="border-2 border-black border rounded-lg text-left w-80 m-2 mt-1"
-                                                                    wire:model.live='editBirthday'/>
-                                                            </div>
-                                                        </div>
-
-                                                        {{-- Save Button --}}
-                                                        <div class="flex justify-center items-center mt-3">
-                                                            <button x-on:click="$dispatch('close-modal')"
-                                                                    wire:submit wire:click='editProfileSave'
-                                                                    class="border-solid border-blue-400 border-1 bg-blue-300 rounded-xl px-4 py-2 font-medium text-xl text-blue-50"
-                                                                    >Save
-                                                            </button>
-                                                        </div>
-
-                                                    </form>
-                                                    @endif
-                                                </div>
-                                            </x-slot:body>
-                                        </x-modal>
-
-                                        {{-- Deact Modal --}}
-                                        <x-modal name="deact-modal" title="Deactivate User">
-                                            <x-slot:body>
-                                                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                    @if($deactUserId)
-                                                    <div class='flex flex-column justify-center'>
-                                                        <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
-                                                        <p class="text-lg text-center truncate ...">User: {{$deactUserId->name}}</p>
-                                                    </div>
-                                            
-                                                    <div class="flex justify-center mt-3">
-                                                        <button class="flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
-                                                                wire:click="deactUser"
-                                                                x-on:click="$dispatch('close-modal')">
-                                                            Deactivate
-                                                        </button>
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </x-slot:body>
-                                        </x-modal>
-
-                                        {{-- Delete Modal --}}
-                                        <x-modal name="delete-modal" title="Delete User">
-                                            <x-slot:body>
-                                                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                    @if($deleteUserId)
-                                                    <div class='flex flex-column justify-center'>
-                                                        <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
-                                                        <p class="text-lg text-center truncate ...">User: {{$deleteUserId->name}}</p>
-                                                    </div>
-                                            
-                                                    <div class="flex justify-center mt-3">
-                                                        <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
-                                                                wire:click="deleteUser"
-                                                                x-on:click="$dispatch('close-modal')">
-                                                            Delete
-                                                        </button>
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </x-slot:body>
-                                        </x-modal>
 
                                     </td>
                                 @endif
@@ -999,13 +526,196 @@
                 </div>
 
                 @endif
-
+                
             </div>
         </div>
 
+    {{-- Modals--}}
+        {{-- Make Emp Modal --}}
+        <x-modal name="makeEmp-modal" title="Change to Employee">
+            <x-slot:body>
+                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                    @if($makeEmpId)
+                    <div class='flex justify-center'>
+                        <p class="text-lg text-center truncate ...">User: {{$makeEmpId->name}}</p>
+                    </div>
+            
+                    <div class="flex justify-center mt-3">
+                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                                wire:click="makeEmp"
+                                x-on:click="$dispatch('close-modal')">
+                            Make Employee
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
 
+        {{-- Make OM Modal --}}
+        <x-modal name="makeOM-modal" title="Change to Office Manager">
+            <x-slot:body>
+                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                    @if($makeOMId)
+                    <div class='flex justify-center'>
+                        <p class="text-lg text-center truncate ...">User: {{$makeOMId->name}}</p>
+                    </div>
+            
+                    <div class="flex justify-center mt-3">
+                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                                wire:click="makeOM"
+                                x-on:click="$dispatch('close-modal')">
+                            Make Office Mgr.
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
 
-    </div>
+        {{-- Make Admin Modal --}}
+        <x-modal name="makeAdmin-modal" title="Change to Admin">
+            <x-slot:body>
+                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                    @if($makeAdminId)
+                    <div class='flex justify-center'>
+                        <p class="text-lg text-center truncate ...">User: {{$makeAdminId->name}}</p>
+                    </div>
+            
+                    <div class="flex justify-center mt-3">
+                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                                wire:click="makeAdmin"
+                                x-on:click="$dispatch('close-modal')">
+                                
+                            Make Admin
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
+            
+        {{-- Edit Modal --}}
+        <x-modal name="edit-modal" title="Edit User">
+            <x-slot:body>
+                <div class='flex justify-center rounded-3 w-[100%] h-[100%]'>
+                    @if($editUserId)
+                    <form method="post" action="{{route('profile.update')}}"
+                            class="flex flex-column justify-evenly w-[85%]"
+                            wire:submit="editProfileSave">
+                        @csrf
+                        @method('patch')
+                        
+                        {{-- Row 1 --}}
+                        <div class="flex flex-row justify-content-evenly">
+
+                            {{-- Name --}}
+                            <div class="flex flex-column">
+                                <label class="self-start ml-3" for="name"> Name:</label>
+                                <input type="text" name="name" value='' placeholder="{{ $editUserId->name }}"
+                                    class="border-1 border-gray-200 border rounded-lg text-left w-80 m-2 mt-1"
+                                    wire:model.live='editName'/>
+                            </div>
+
+                            {{-- Email --}}
+                            <div class="flex flex-column ">
+                                <label class="self-start ml-3" for="email"> Email:</label>
+                                <input type="email" name="email" value='' placeholder="{{ $editUserId->email }}"
+                                    class="border-1 border-gray-200 border rounded-lg text-left w-80 m-2 mt-1 "
+                                    wire:model.live='editEmail'/>
+                            </div>
+                        </div>
+
+                        {{-- Row 2 --}}
+                        <div class="flex flex-row justify-content-evenly mt-3">
+                            
+                            {{-- Gender --}}
+                            <div class="flex flex-column">
+                                <label class="self-start ml-3" for="name"> Gender:</label>
+                                <select class="p-2.5 border-1 border-gray-200 border bg-white text-black text-left rounded-lg  w-80 m-2 mt-1"
+                                wire:model.live="editGender">
+
+                                    @if($editUserId->gender === 'male')
+                                    <option value='' selected>male</option>
+                                    <option value="female">female</option>
+                                    
+                                    @elseif($editUserId->gender === 'female')
+                                    <option value='' selected>female</option>
+                                    <option value="male">male</option>
+                                
+                                    @endif
+                                </select>
+                            </div>
+                            
+
+                            {{-- Birthday --}}
+                            <div class="flex flex-column ">
+                                <label class="self-start ml-3" for="birthday"> Birthday:</label>
+                                <input type="date" name="birthday" value='' placeholder="{{ $editUserId->birthday }}"
+                                    class="border-1 border-gray-200 border rounded-lg text-left w-80 m-2 mt-1"
+                                    wire:model.live='editBirthday'/>
+                            </div>
+                        </div>
+
+                        {{-- Save Button --}}
+                        <div class="flex justify-center items-center mt-3">
+                            <button x-on:click="$dispatch('close-modal')"
+                                    wire:submit wire:click='editProfileSave'
+                                    class="border-solid border-blue-400 border-1 bg-blue-300 rounded-xl px-4 py-2 font-medium text-xl text-blue-50"
+                                    >Save
+                            </button>
+                        </div>
+
+                    </form>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
+
+        {{-- Deact Modal --}}
+        <x-modal name="deact-modal" title="Deactivate User">
+            <x-slot:body>
+                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                    @if($deactUserId)
+                    <div class='flex flex-column justify-center'>
+                        <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
+                        <p class="text-lg text-center truncate ...">User: {{$deactUserId->name}}</p>
+                    </div>
+            
+                    <div class="flex justify-center mt-3">
+                        <button class="flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
+                                wire:click="deactUser"
+                                x-on:click="$dispatch('close-modal')">
+                            Deactivate
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
+
+        {{-- Delete Modal --}}
+        <x-modal name="delete-modal" title="Delete User">
+            <x-slot:body>
+                <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                    @if($deleteUserId)
+                    <div class='flex flex-column justify-center'>
+                        <p class="text-lg text-center">Are you sure you want to DEACTIVATE</p>
+                        <p class="text-lg text-center truncate ...">User: {{$deleteUserId->name}}</p>
+                    </div>
+            
+                    <div class="flex justify-center mt-3">
+                        <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                                wire:click="deleteUser"
+                                x-on:click="$dispatch('close-modal')">
+                            Delete
+                        </button>
+                    </div>
+                    @endif
+                </div>
+            </x-slot:body>
+        </x-modal>
+        </div>
 
     {{-- @include("admin.modals.manageUser") --}}
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+
 
 class PasswordController extends Controller
 {
@@ -29,5 +31,6 @@ class PasswordController extends Controller
         ]);
 
         return back()->with('status', 'password-updated');
-    }
+    }      
+
 }

@@ -85,3 +85,24 @@
 
 </div>
 @endif
+
+{{-- for book on behalf --}}
+@if ($showWarning3)
+<div id="Modal" class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72">
+
+    <div class='self-end my-1 mr-4 '>
+        <button class="font-bold" wire:click="closeModal">X</button>
+    </div>
+
+    <div class='flex flex-column bg-white py-4 px-2.5'>
+        <div class='flex justify-center'>
+            <p class=" text-lg text-center">Please select a user you want to book for</p>
+        </div>
+
+        <div class="flex flex-column  justify-center">
+            <p class="text-lg text-center"> User: empty</p>
+        </div>
+    </div>
+
+</div>
+@endif

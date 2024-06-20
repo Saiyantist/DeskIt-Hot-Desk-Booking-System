@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Desk;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +12,6 @@ class Bookings extends Model
     protected $fillable = [
         "booking_date",
         "booking_time",
-        "booking_endtime",
         "status",
         "user_id",
         "desk_id",
