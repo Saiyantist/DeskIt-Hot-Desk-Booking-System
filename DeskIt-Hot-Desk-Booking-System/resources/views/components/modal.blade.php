@@ -10,7 +10,6 @@
 
     class="fixed z-50 inset-0 bg-white-500">
 
-    
     {{-- <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px]" --}}
     <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px] backdrop-brightness-[0.60]"
         wire:click='resetEditData'></div>
@@ -192,6 +191,44 @@
             <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
+
+    {{-- Confirm Booking Modal  --}}
+    @elseif($name === 'confirm-booking-modal')
+        <div class="fixed inset-0 border-solid border-green-500 border-1 bg-green-300 rounded-4 m-auto w-1/4 max-h-[375px]">
+            @if(isset($title))
+            <div class="flex justify-between m-3 mb-2 ">
+                <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                <span class=" font-medium text-xl text-green-50">{{ $title }}</span>
+                <button class="mr-6 font-bold text-white text-2xl"
+                        x-on:click="$dispatch('close-modal')"
+                        wire:click='resetEditData'
+                        >x
+                </button>
+            </div>
+            @endif
+            <hr class="bg-darkergray m-0 p-0">
+            <div class="flex h-[85%] items-center justify-center bg-white rounded-bottom-4 ">
+                {{ $body }}
+            </div>
+    {{-- Desk Booking Modal  --}}
+    @elseif($name === 'desk-booking-modal')
+        <div class="fixed inset-0 border-solid border-yellowLight border-1 bg-yellowB rounded-4 m-auto w-1/4 max-h-[250px]">
+
+                @if(isset($title))
+                <div class="flex justify-between m-3 mb-2 ">
+                    <span class="ml-6 font-thin text-2xl text-yellowA"> </span>
+                    <span class=" font-medium text-xl text-white">{{ $title }}</span>
+                    <button class="mr-6 font-bold text-white text-2xl"
+                            x-on:click="$dispatch('close-modal')"
+                            wire:click='resetEditData'
+                            >x
+                    </button>
+                </div>
+                @endif
+                <hr class="bg-darkergray m-0 p-0">
+                <div class="flex h-[78%] items-center justify-center bg-white rounded-bottom-4 ">
+                    {{ $body }}
+                </div>
     @endif
     </div>
 

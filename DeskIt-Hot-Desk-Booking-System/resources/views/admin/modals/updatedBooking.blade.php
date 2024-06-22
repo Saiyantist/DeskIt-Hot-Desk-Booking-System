@@ -1,5 +1,5 @@
 
-@if ($showConfirmation)
+{{-- @if ($showConfirmation)
 <div id="Modal" class="flex flex-column justify-start bg-green rounded-4 absolute h-48 w-72">
 
     <div class='self-end my-1 mr-4 '>
@@ -19,9 +19,9 @@
     </div>
 
 </div>
-@endif
+@endif --}}
 
-@if ($showNotification)
+{{-- @if ($showNotification)
 <div id="Modal" class="flex flex-column justify-start bg-yellowB rounded-4 absolute h-48 w-72">
 
     <div class='self-end my-1 mr-4 '>
@@ -41,7 +41,7 @@
     </div>
 
 </div>
-@endif
+@endif --}}
 
 @if ($showWarning)
 <div id="Modal" class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72">

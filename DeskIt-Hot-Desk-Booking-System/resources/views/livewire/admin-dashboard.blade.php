@@ -229,7 +229,9 @@
 
                                     {{-- Action --}}
                                     <td class="p-2 w-full flex justify-content-around">
+                                        
                                     @if($booking['Status'] === 'pending' )
+
                                         {{-- Accept Modal Open  --}}
                                         <button class="transition ease-in-out hover:bg-green-300 hover:scale-101 duration-200 bg-green-200 px-2.5 py-2 rounded-md flex items-center cursor-pointer text-green-800 text-sm"
                                             wire:click="saveId({{ $booking['Id'] }})"

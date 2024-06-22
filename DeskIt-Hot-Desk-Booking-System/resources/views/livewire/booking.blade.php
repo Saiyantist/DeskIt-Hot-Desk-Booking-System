@@ -2,6 +2,7 @@
 
     @include("admin.modals.updatedBooking")
 
+
     {{-- UI --}}
     <main class="flex flex-row justify-evenly align-items-center p-8">
 
@@ -19,20 +20,20 @@
                                 <p class="text-lg text-left">Floor#:</h6>
                             </div>
                             <div>
-                                <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $floor }}</h6>
+                                <p class="text-lg bg-white shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $floor }}</h6>
                             </div>
                         </div>
 
                         {{-- Date --}}
                         <div class="flex flex-row justify-content-between mb-2">
                             <p class="text-lg text-left">Date:</h6>
-                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $date }}</h6>
+                            <p class="text-lg bg-white shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $date }}</h6>
                         </div>
 
                         {{-- Time --}}
                         <div class="flex flex-row justify-content-between mb-2">
                             <p class="m-0 text-lg text-left">Time:</h6>
-                            <p class="text-sm bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $time }}</h6>
+                            <p class="text-sm bg-white shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $time }}</h6>
                         </div>
 
                     
@@ -42,7 +43,7 @@
                                 <p class="text-lg text-left">Desk#:</h6>
                             </div>
                             <div>
-                                <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
+                                <p class="text-lg bg-white shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
                             </div>
                         </div>
 
@@ -50,9 +51,11 @@
 
                     {{-- Booking Button --}}
                     <button class="book justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-6 mt-3 text-lg"
+                        :disabled={{$selectedDesk === '-'}}
                         wire:click='validateBooking'
-                        wire:submit>
-                        Book
+                        wire:submit
+                        x-data x-on:click="$dispatch('open-modal', {name: 'confirm-booking-modal'})"
+                        >Book
                     </button>
 
 
@@ -1300,7 +1303,75 @@
         </section>
 
     </main>
-    
+
+    {{-- Modals --}}
+
+    {{-- Confirm Booking Modal --}}
+    <x-modal name="confirm-booking-modal" title="Booking Confirmation">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <div class="flex flex-row justify-evenly">
+
+                    {{-- Left Column --}}
+                    <div class='flex flex-column justify-center gap-4'>
+                        <span class="text-lg text-left truncate ...">Floor</span>
+                        <span class="text-lg text-left truncate ...">Desk</span>
+                        <span class="text-lg text-left truncate ...">Booking Date</span>
+                        <span class="text-lg text-left truncate ...">Booking Time</span>
+                    </div>
+
+                    {{-- Right Column --}}
+                    <div class='flex flex-column justify-center gap-3 w-50'>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $floor }}</span>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $selectedDesk }}</span>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $date }}</span>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $time }}</span>
+                    </div>
+                </div>
+
+                {{-- Button --}}
+                <div class="flex justify-center">
+                    <button
+                        class="flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        wire:click="book" x-on:click="$dispatch('close-modal'); $dispatch('open-modal', {name: 'desk-booking-modal'});">
+                        Desk It
+                    </button>
+                </div>
+
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+    {{-- Desk Booking Modal --}}
+    <x-modal name="desk-booking-modal" title="Desk Booking">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <div class="">
+                    @if(session('autoAccept'))
+                        <p class="text-center text-2xl">{{session('autoAccept')}}</p>
+                    @elseif(session('pending'))
+                        <p class="text-center text-2xl">{{session('pending')}}</p>
+                        <p class="text-center text-lg">Please wait for approval.</p>
+                    @endif
+                </div>
+
+                {{-- Button --}}
+                <div class="flex justify-center">
+                    <button
+                        class="flex items-center border-solid border-yellowBdarker border-1 bg-yellowB px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        wire:click="goHome" x-on:click="$dispatch('close-modal')">
+                        Go Home
+                    </button>
+                </div>
+
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+    {{-- Booking Warning Modal --}}
+
     <script src="{{ asset('js/myScript3.js') }}">
     </script>
 </div>

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
@@ -92,7 +93,6 @@ class Booking extends Component
              *    check the selected floor level,
              *    then GET and STORE the desk_ids in an array.
             */
-
 
             // 2nd array
             $bookedDeskIDs = [];
@@ -250,17 +250,17 @@ class Booking extends Component
             Booking::refreshMap();
         }
 
+        if(Config::get('bookings.auto_accept')){
+            session()->flash('autoAccept', 'Desk Booked Successfully!');
+        }
+        else{
+            session()->flash('pending', 'Desk Booking is placed!');
+        }
+    }
 
-        // $status = "booked";
-
-        // Booking::create([
-        //     "booking_date" => $this->date,    /** This whole block doesn't work yet.. */
-        //     "status" => $status,            
-        //     "user_id" => Auth::user(),
-        //     // "desk_id" => 101,
-        // ]);
-
-        // dd($status); 
+    public function resetEditData()
+    {
+        
     }
 
     public function render()
