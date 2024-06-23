@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 
 <x-app-layout>
-
+    @include("admin.modals.updateProfile") 
     @section('content')
     <div class="flex justify-center items-center mt-16 ml-16">
         <div class="bg-white mt-10 w-11/12 h-56 flex justify-start items-center drop-shadow-lg">
@@ -11,7 +11,7 @@
                 <img class="w-40 h-40 rounded-full border border-gray-500 ml-10" src="/images/anonymous.jpg"
                      alt="Profile Picture">
                 <div class="flex self-end -ml-10 mr-5">
-                    <a wire:navigate href="#"><img src="{{ asset('images/cam.svg') }}"></a>
+                    <a data-toggle="modal" href="#ModalCreate"><img src="{{ asset('images/cam.svg') }}"></a>
                 </div>
              </div>
 
