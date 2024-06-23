@@ -2,64 +2,63 @@
 
     @include("admin.modals.updatedBooking")
 
-    {{-- UI --}}
-    <main class="flex flex-row justify-evenly align-items-center p-8">
 
-        {{-- Side Panel Section --}}
-        <section class="side-panel-container self-center">
+    <main class="flex flex-row gap-4 py-8 align-item-center self-center">
+        <div class="h-auto border shadow-lg w-96 px-4 py-4 ml-10 rounded-lg">
 
-                {{-- Side Panel Body --}}
-                <div class="body text-center">
-                    <p class="book-desk text-2xl py-4 bg-yellowB text-center text-white ">Book a Desk</p>
-                    <div class="px-3">
+            <p class="text-2xl py-1 text-center text-slate-600 font-mono italic rounded-lg drop-shadow-md ">Book a Desk</p>
 
-                         {{-- Floor --}}
-                         <div class="flex flex-row justify-content-between my-2">
-                            <div>
-                                <p class="text-lg text-left">Floor#:</h6>
-                            </div>
-                            <div>
-                                <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $floor }}</h6>
-                            </div>
-                        </div>
-
-                        {{-- Date --}}
-                        <div class="flex flex-row justify-content-between mb-2">
-                            <p class="text-lg text-left">Date:</h6>
-                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $date }}</h6>
-                        </div>
-
-                        {{-- Time --}}
-                        <div class="flex flex-row justify-content-between mb-2">
-                            <p class="m-0 text-lg text-left">Time:</h6>
-                            <p class="text-sm bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $time }}</h6>
-                        </div>
-
-                    
-                        {{-- Desk --}}
-                        <div class="flex flex-row justify-content-between">
-                            <div>
-                                <p class="text-lg text-left">Desk#:</h6>
-                            </div>
-                            <div>
-                                <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {{-- Booking Button --}}
-                    <button class="book justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-6 mt-3 text-lg"
-                        wire:click='validateBooking'
-                        wire:submit>
-                        Book
-                    </button>
-
-
+            <div class="flex pt-2">
+                <div class="w-1/2 pr-2">
+                    <p class="text-base text-left">Desk#:
+                        <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $selectedDesk }}</span>
+                    </p>
                 </div>
+                <div class="w-1/2 pr-2">
+                    <p class="text-base text-left">Floor#:
+                        <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $floor }}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="w-1/2 pr-2">
+                    <p class="text-base text-left">Date:
+                       <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $date }}</span>
+                   </p>
+                </div>
+                <div class="w-1/2 pr-2">
+                    <p class="text-base text-left">Time:
+                          <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $time }}</span>
+                   </p>
+                </div>
+            </div>
 
-        </section>
+           <div>
+              <p class="text-lg pt-4"> Desk #:  </p>
+               <div class="flex">
+                   <div class="w-1/2 pr-2">
+                       <img src="{{ asset('images/desk101.svg') }}">
+                   </div>
+                   <div class="w-1/2">
+                         <span class ="text-base font-semibold">Amenities: </span>
+                         <p class="text-xs">
+                          Adju231stable Chairs
+                          Personal Computer
+                          Desk Dividers
+                          Desk Drawers/Storage unit
+                       </p>
+                   </div>
+                </div>
+            </div>
 
+             {{-- Booking Button --}}
+             <button class="book justify-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl px-24 py-1 ml-3 mt-2 text-lg flex self-center"
+                  wire:click='validateBooking'
+                  wire:submit>
+                   Book
+              </button>
+        </div>
+        
         {{-- Main Content --}}
         <section class="d-flex flex-col items-center justify-center p-4 pt-0 bg-yellowA rounded-2 relative">
 
@@ -120,6 +119,7 @@
                 <div class="absolute right-5">
                     <a class="helpIcon cursor-pointer">
                         <img src="{{ asset('images/help.svg') }}" class="w-8 h-8">
+                        <script>startIntro();</script>
                     </a>
                 </div>
             </div>
@@ -1299,58 +1299,7 @@
         </section>
 
     </main>
-
-    <div>
-        @if (!$tutorialCompleted)
-        
-            <script>
-                function startIntro() {
-                    introJs().setOptions({
-                        steps: [
-                            {
-                                element: document.querySelector('.floor'),
-                                title: "Step 1",
-                                intro: "Welcome! To start booking your desk, let's select the floor where you'd like to work."
-                            },
-                            {
-                                element: document.querySelector('.date'),
-                                title: "Step 2",
-                                intro: "Now, let's pick the date you need the desk for. Just tap on the calendar and select the date you have in mind."
-                            },
-                            {
-                                element: document.querySelector('.stime'),
-                                title: "Step 3",
-                                intro: "Now, what time would you like to kick off your workday? Choose your preferred start time"
-                            },
-                            {
-                                element: document.querySelector('.desk'),
-                                title: "Step 4",
-                                intro: "Now, let's find you the perfect spot. You'll see a list of available desks for your chosen time slot and floor."
-                            },
-                            {
-                                element: document.querySelector('.book'),
-                                title: "Step 5",
-                                intro: "Lastly, book your chosen date, time and desk."
-                            }
-                        ],
-
-                    }).oncomplete(function() {
-                                window.dispatchEvent(new Event('completeTutorial'));
-                            }).onexit(function() {
-                                window.dispatchEvent(new Event('completeTutorial'));
-                            }).start();
-
-                    window.addEventListener('completeTutorial', function () {
-                        Livewire.emit('completeTutorial');
-                    });
-                }
-                window.onload = startIntro();
-
-            </script>
-        @else
-            {{-- tutorial is completed --}}
-        @endif
-            <script src="{{ asset('js/myScript3.js') }}">
-            </script>
-    </div>
+    
+    <script src="{{ asset('js/myScript3.js') }}">
+    </script>
 </div>
