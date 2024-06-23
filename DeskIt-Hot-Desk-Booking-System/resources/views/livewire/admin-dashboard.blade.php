@@ -16,29 +16,30 @@
                             <p class="text-xs pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
                             <p class="mt-2 text-xs">Weekends <span class="pl-12">Closed</span></p>
                         </div>
+
                         <div class="w-1/2 flex items-center justify-evenly">
                             <div class="min-w-32 bg-white min-h-32 pr-4 font-medium">
                                 <div
                                     class="w-32 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow">
                                     <div class="block rounded-t overflow-hidden text-center">
                                         <div class="bg-amber-300 text-white py-1">
-                                            June
+                                            {{ $currentMonth }}
                                         </div>
                                         <div class="pt-1 border-l border-r border-white bg-white">
                                             <span class="text-4xl font-bold leading-tight">
-                                                10
+                                                {{ $currentDay }}
                                             </span>
                                         </div>
                                         <div
                                             class="border-l border-r border-b rounded-b-lg text-center border-white bg-white -pt-2 -mb-1">
                                             <span class="text-sm">
-                                                Monday
+                                                {{ $currentWeek }}
                                             </span>
                                         </div>
                                         <div
                                             class="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
                                             <span class="text-xs leading-normal">
-                                                8:00 am
+                                                {{ $currentTime }} 
                                             </span>
                                         </div>
                                     </div>
@@ -108,7 +109,7 @@
                     </button>
                 </div>
 
-                <h2 class="text-lg font-semibold">Booking Stats</h2>
+                <h2 class="text-lg font-semibold">Booking Statistics</h2>
                 <div class="bg-white p-4 rounded shadow-sm">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
@@ -130,14 +131,14 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-4">
-                            <div class="p-3">
+                            <div>
                                 <div class="mt-2">
                                     <canvas id="deskChart" class="w-full" style="height: 200px;"></canvas>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
-                            <div class="p-3">
+                            <div>
                                 <div class="mt-2">
                                     <canvas id="pieChart" class="w-full" style="height: 300px;"></canvas>
                                 </div>
@@ -160,6 +161,62 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Define shared data for both charts
+            var weekDays = ['Mon', 'Tues', 'Wed', 'Thurs', 'Friday'];
+            var deskData = [15, 10, 12, 30, 10, 15];
+
+            // Bar Chart
+            var ctx = document.getElementById('deskChart').getContext('2d');
+            var ordersChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: weekDays,
+                    datasets: [{
+                        label: 'Desk',
+                        data: deskData.slice(0, 5), // Only use data for weekdays
+                        backgroundColor: ['red', 'blue', 'green', 'pink', 'yellow', 'violet', 'orange'],
+                        borderColor: ['orange','red', 'blue', 'green', 'pink', 'yellow', 'violet'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+            });
+
+            // Pie Chart
+            var pieCtx = document.getElementById('pieChart').getContext('2d');
+            var pieChart = new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Available', 'Not Available', 'Booked'],
+                    datasets: [{
+                        data: [deskData[0], deskData[1], deskData.slice(2).reduce((a, b) => a + b, 0)],
+                        backgroundColor: ['#00CC2D', '#575757', '#FFAE35'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+            });
+        </script>
     </section>
 
     <section class="mt-5">
@@ -230,6 +287,7 @@
                                     {{-- Action --}}
                                     <td class="p-2 w-full flex justify-content-around">
                                     @if($booking['Status'] === 'pending' )
+                                   
                                         {{-- Accept Modal Open  --}}
                                         <button class="transition ease-in-out hover:bg-green-300 hover:scale-101 duration-200 bg-green-200 px-2.5 py-2 rounded-md flex items-center cursor-pointer text-green-800 text-sm"
                                             wire:click="saveId({{ $booking['Id'] }})"
@@ -330,66 +388,7 @@
         crossorigin="anonymous"></script>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Define shared data for both charts
-    var weekDays = ['Mon', 'Tues', 'Wed', 'Thurs', 'Friday'];
-    var deskData = [15, 10, 12, 30, 10, 15];
 
-    // Bar Chart
-    var ctx = document.getElementById('deskChart').getContext('2d');
-    var ordersChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: weekDays,
-            datasets: [{
-                label: 'Desk',
-                data: deskData.slice(0, 5), // Only use data for weekdays
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        }
-    });
-
-    // Pie Chart
-    var pieCtx = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(pieCtx, {
-        type: 'pie',
-        data: {
-            labels: ['Available', 'Not Available', 'Booked'],
-            datasets: [{
-                data: [deskData[0], deskData[1], deskData.slice(2).reduce((a, b) => a + b, 0)],
-                backgroundColor: ['#00CC2D', '#575757', '#FFAE35'],
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                },
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        }
-    });
-</script>
 <script>
     Livewire.on('refreshComponent', function () {
         Livewire.emit('refresh');
@@ -397,4 +396,10 @@
     Livewire.on('refreshPage', function () {
         window.location.reload();
     });
+</script>
+
+<script>
+     document.addEventListener('livewire:load', function () {
+            @this.checkPendingBookings();
+        });
 </script>

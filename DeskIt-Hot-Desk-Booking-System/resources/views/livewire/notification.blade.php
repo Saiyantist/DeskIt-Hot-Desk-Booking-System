@@ -41,7 +41,7 @@
                                     <div x-show="showModal1" @click.away="showModal1 = false" x-cloak class="absolute bg-white shadow-sm p-3 right-6 top-0 w-max rounded-lg">
                                         <div class="flex flex-col">
                                             <a wire:navigate href="{{ Auth::user()->hasRole('admin') || Auth::user()->hasRole('superadmin') ? route('notification') : route('userNotification') }}" class="text-block pb-1 text-sm no-underline"><i class="fa-regular fa-eye text-sm"></i> See all</a>
-                                            <a href="" class="text-block text-sm no-underline"><i class="fa-solid fa-gear text-sm"></i> Notification settings</a>
+                                            {{-- <a href="" class="text-block text-sm no-underline"><i class="fa-solid fa-gear text-sm"></i> Notification settings</a> --}}
                                         </div>
                                     </div>
                                 </div>

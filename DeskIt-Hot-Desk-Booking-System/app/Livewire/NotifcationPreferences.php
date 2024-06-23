@@ -6,22 +6,42 @@ use Livewire\Component;
 
 class NotifcationPreferences extends Component
 {
-    public $reservedDeskStatus;
+    public $bookingRemindersDb;
+    public $bookingRemindersEmail;
+    public $reservedDeskStatusDb;
+    public $reservedDeskStatusEmail;
 
-    public function mount()
-    {
+    public function mount() {
         $user = Auth::user();
-        $this->reservedDeskStatus = $user->prefersNotification('reserved_desk_status');
+        $this->bookingRemindersDb = $user->preferences['booking_reminders_db'] ?? true;
+        $this->bookingRemindersEmail = $user->preferences['booking_reminders_email'] ?? true;
+        $this->reservedDeskStatusDb = $user->preferences['reserved_desk_status_db'] ?? true;
+        $this->reservedDeskStatusEmail = $user->preferences['reserved_desk_status_email'] ?? true;
     }
 
-    public function toggle()
-    {
+    public function toggle($type) {
         $user = Auth::user();
-        $this->reservedDeskStatus = !$this->reservedDeskStatus;
-
-        // Assuming preferences are stored in a JSON column
         $preferences = $user->preferences;
-        $preferences['reserved_desk_status'] = $this->reservedDeskStatus;
+
+        switch ($type) {
+            case 'booking_reminders_db':
+                $this->bookingRemindersDb = !$this->bookingRemindersDb;
+                $preferences['booking_reminders_db'] = $this->bookingRemindersDb;
+                break;
+            case 'booking_reminders_email':
+                $this->bookingRemindersEmail = !$this->bookingRemindersEmail;
+                $preferences['booking_reminders_email'] = $this->bookingRemindersEmail;
+                break;
+            case 'reserved_desk_status_db':
+                $this->reservedDeskStatusDb = !$this->reservedDeskStatusDb;
+                $preferences['reserved_desk_status_db'] = $this->reservedDeskStatusDb;
+                break;
+            case 'reserved_desk_status_email':
+                $this->reservedDeskStatusEmail = !$this->reservedDeskStatusEmail;
+                $preferences['reserved_desk_status_email'] = $this->reservedDeskStatusEmail;
+                break;
+        }
+
         $user->preferences = $preferences;
         $user->save();
     }

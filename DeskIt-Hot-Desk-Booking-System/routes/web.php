@@ -34,11 +34,15 @@ Route::get('/test-notification', function () {
     $booking->user_id = $user->id;
     $booking->booking_date = now()->addDay()->toDateString();
     $booking->desk_id = 38;
+    $booking->booking_time = '8:00 am - 7:00 pm';
     $booking->save();
 
-    // $user->notify(new UpcomingBookingNotification($booking));
-    
-    $booking->user->notify(new UserBookingNotification($booking, 'employee'));
+    if ($user->prefersNotification('booking_reminders_db')) {
+        $booking->user->notify(new UserBookingNotification($booking, 'employee'));
+    }
+    if ($user->prefersNotification('booking_reminders_email')) {
+        $booking->user->notify(new UpcomingBookingNotification($booking));
+    }
 
     return 'Notification sent!';
 });

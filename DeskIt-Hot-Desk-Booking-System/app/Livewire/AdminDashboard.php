@@ -21,6 +21,8 @@ use function Livewire\once;
 use App\Notifications\AdminToggleNotification;
 use App\Notifications\AcceptBookingNotification;
 use App\Notifications\DeclineBookingNotification;
+use App\Notifications\AcceptBookingEmail;
+use App\Notifications\DeclineBookingEmail;
 class AdminDashboard extends Component
 {
 
@@ -53,6 +55,14 @@ class AdminDashboard extends Component
     public $max;
     public $message;
 
+    public $hasPendingBookings = false;
+
+    public $currentMonth;
+    public $currentDay;
+    public $currentWeek;
+    public $currentTime;
+    public $currentMeridiem;
+
     public function mount()
     {   
         $deskRange = range(1, 36);
@@ -76,18 +86,37 @@ class AdminDashboard extends Component
         $this->fetchBookings();
 
         $this->autoAccept = Config::get('bookings.auto_accept');
+        $this->checkAndNotifyPendingBookings();
 
-        // Check if there are any pending bookings
-        $bookings = Bookings::where('status', 'pending')->count();
         
-        if ($bookings) {
+        date_default_timezone_set('Asia/Manila'); 
+        $this->currentMonth = Carbon::now()->format('F');
+        $this->currentDay = Carbon::now()->format('d');
+        $this->currentWeek = Carbon::now()->format('l');
+        $this->currentTime = Carbon::now()->format('h:i A');
+
+    }
+
+    public function checkAndNotifyPendingBookings()
+    {
+        // Check if there are any pending bookings
+        $countPendingBookings = Bookings::where('status', 'pending')->count();
+
+        if ($countPendingBookings > 0) {
             $adminUser = Auth::user();
-            //check role
+            
+            // Check user roles
             $rolesToCheck = ['admin', 'superadmin'];
             $userRoles = $adminUser->roles->pluck('name')->intersect($rolesToCheck);
-            $rolesString = $userRoles->implode(', ');
-            $adminUser->notify(new AdminToggleNotification($rolesString));
-        }        
+            
+            // If user has roles 'admin' or 'superadmin'
+            if ($userRoles->isNotEmpty()) {
+                $rolesString = $userRoles->implode(', ');
+                $adminUser->notify(new AdminToggleNotification($rolesString));
+            }
+        } else {
+            // No pending bookings, do nothing or handle accordingly
+        }
     }
 
     // Toggle for Auto Accepting of New Bookings
@@ -97,6 +126,7 @@ class AdminDashboard extends Component
         $this->autoAccept = !$this->autoAccept; 
         $this->updateAutoAccept();
         $this->dispatch('refreshPage');
+        
         
     }   
 
@@ -128,7 +158,9 @@ class AdminDashboard extends Component
                 'Status' => $booking->status,
                 'Action' => 'canceled',
             ];
+            
         }
+         
     }
 
 
@@ -143,9 +175,13 @@ class AdminDashboard extends Component
             // Get the user associated with the booking
             $user = $this->alterBooking->user;
     
-            // Notify the user if they prefer notifications for reserved desk status
-            if ($user->prefersNotification('reserved_desk_status')) {
+            // For reserved desk status
+            if ($user->prefersNotification('reserved_desk_status_db')) {
                 $user->notify(new AcceptBookingNotification('employee'));
+            }
+            if ($user->prefersNotification('reserved_desk_status_email')) {
+                $booking = new Bookings();
+                $user->notify(new AcceptBookingEmail($booking));
             }
     
             // Dispatch the refreshPage event
@@ -163,10 +199,13 @@ class AdminDashboard extends Component
 
             // Get the user associated with the booking
             $user = $this->alterBooking->user;
-    
-            // Notify the user if they prefer notifications for reserved desk status
-            if ($user->prefersNotification('reserved_desk_status')) {
+    // For reserved desk status
+            if ($user->prefersNotification('reserved_desk_status_db')) {
                 $user->notify(new DeclineBookingNotification('employee'));
+            }
+            if ($user->prefersNotification('reserved_desk_status_email')) {
+                $booking = new Bookings();
+                $user->notify(new DeclineBookingEmail($booking));
             }
             
             $this->dispatch('refreshPage');
@@ -176,6 +215,20 @@ class AdminDashboard extends Component
     public function saveId($id)
     {
         $this->alterBooking = Bookings::with(['user','desk'])->find($id);
+
+        // Check if there are any pending bookings
+        $bookings = Bookings::where('status', 'pending')
+        ->where('created_at', '>=', Carbon::now()->subDay())
+        ->get();
+        
+        if ($bookings) {
+            $adminUser = Auth::user();
+            //check role
+            $rolesToCheck = ['admin', 'superadmin'];
+            $userRoles = $adminUser->roles->pluck('name')->intersect($rolesToCheck);
+            $rolesString = $userRoles->implode(', ');
+            $adminUser->notify(new AdminToggleNotification($rolesString));
+        }        
     }
 
     public function resetEditData() {

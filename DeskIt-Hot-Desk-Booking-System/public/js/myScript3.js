@@ -1,6 +1,4 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-
     const helpIcon = document.querySelector('.helpIcon');
     if (helpIcon) {
         helpIcon.addEventListener('click', function () {
@@ -45,4 +43,3 @@ function startIntro() {
         ]
     }).start();
 }
-
