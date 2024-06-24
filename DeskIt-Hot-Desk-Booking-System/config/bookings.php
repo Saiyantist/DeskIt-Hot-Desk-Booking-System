@@ -1,3 +1,3 @@
 <?php return array (
-  'auto_accept' => false,
+  'auto_accept' => true,
 );

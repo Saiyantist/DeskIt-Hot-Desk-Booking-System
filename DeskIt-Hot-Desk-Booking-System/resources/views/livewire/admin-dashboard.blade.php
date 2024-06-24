@@ -1,166 +1,167 @@
 <main class="rounded-lg mt-16 ml-16 overflow-hidden">
     <section>
-        <div class="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
+       
+        <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4">
             <!-- Left Column -->
-            <div class="space-y-2 overflow-y-auto h-full">
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-bold">Welcome!</h1>
-                </div>
-
-                <div class="container">
-                    <div class="bg-white p-3 rounded shadow-sm flex justify-between">
-                        <div class="w-1/2">
-                            <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
-                            <p class="text-xs">Weekdays</p>
-                            <p class="text-xs pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
-                            <p class="text-xs pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
-                            <p class="mt-2 text-xs">Weekends <span class="pl-12">Closed</span></p>
-                        </div>
-
-                        <div class="w-1/2 flex items-center justify-evenly">
-                            <div class="min-w-32 bg-white min-h-32 pr-4 font-medium">
-                                <div
-                                    class="w-32 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow">
-                                    <div class="block rounded-t overflow-hidden text-center">
-                                        <div class="bg-amber-300 text-white py-1">
-                                            {{ $currentMonth }}
-                                        </div>
-                                        <div class="pt-1 border-l border-r border-white bg-white">
-                                            <span class="text-4xl font-bold leading-tight">
-                                                {{ $currentDay }}
-                                            </span>
-                                        </div>
-                                        <div
-                                            class="border-l border-r border-b rounded-b-lg text-center border-white bg-white -pt-2 -mb-1">
-                                            <span class="text-sm">
-                                                {{ $currentWeek }}
-                                            </span>
-                                        </div>
-                                        <div
-                                            class="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
-                                            <span class="text-xs leading-normal">
-                                                {{ $currentTime }} 
-                                            </span>
-                                        </div>
-                                    </div>
+            <div class="col-span-2 lg:col-span-2 space-y-4 lg:ml-5">
+                <!-- Welcome Section -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h1 class="text-3xl font-bold mb-4">Welcome!</h1>
+                    <!-- Current Date and Time -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                        <!-- Current Date Widget -->
+                        <div class="col-span-3 lg:col-span-2">
+                            <div class="shadow rounded-lg p-4">
+                                <div class="text-center">
+                                    <div class="text-amber-500 text-xl font-semibold mb-2">{{ $currentMonth }}</div>
+                                    <div class="text-6xl font-bold mb-2">{{ $currentDay }}</div>
+                                    <div class="text-lg">{{ $currentWeek }}</div>
+                                    <div class="text-sm">{{ $currentTime }}</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <!-- Working Hours Section -->
+                        <div class="col-span-9 lg:col-span-6">
 
-                <div class="flex mt-3 flex-row justify-between gap-3 mx-2.5">
-                    <div class="bg-white p-4 rounded shadow-sm flex-grow flex flex-col justify-between">
-                        <div class>
-                            <h2 class="text-lg font-semibold">New Bookings</h2>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-bold">16</div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-4 rounded shadow-sm flex-grow flex flex-col justify-between">
-                        <h2 class="text-lg font-semibold">Available</h2>
-                        <div>
-                            <div class="text-3xl font-bold">2</div>
+                            <div class="col-span-7 lg:col-span-7">
+                                <div class="bg-white pl-14 py-8 rounded shadow ">
+                                    <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
+                                    <p class="text-xs">Weekdays</p>
+                                    <p class="text-xs pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
+                                    <p class="text-xs pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
+                                    <p class="mt-2 text-xs">Weekends <span class="pl-12">Closed</span></p>
+                                </div>
+                            </div>       
                         </div>
                     </div>
                 </div>
-                <h2 class="text-lg font-semibold mx-2">Bookings</h2>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg">Steffanie Egloso</p>
-                                <p class="text-sm text-gray-500">steff.egloso@test.com</p>
+        
+                <!-- Stats Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <!-- New Bookings -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-100 to-yellow-300 shadow rounded-lg p-4">
+                            <div class="flex items-center justify-center mb-2">
+                                <h2 class="text-6xl font-semibold">11</h2>
+                                <img src="{{ asset('images/new.svg') }}" class="h-12 w-12 ml-4" alt="New Bookings">
                             </div>
-                            <div class="text-red-500">Rejected</div>
-                            <div class="text-sm text-gray-500">May 29, 2024</div>
-                            <div class="text-gray-500">&#8942;</div>
+                            <span class="text-lg font-semibold pl-24">New Bookings</span>
                         </div>
-
-                        {{-- <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg">Steffanie Egloso</p>
-                                <p class="text-sm text-gray-500">steff.egloso@test.com</p>
+                    </div>
+                    <!-- Total Bookings -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-100 to-yellow-300 shadow rounded-lg p-4">
+                            <div class="flex items-center justify-center mb-2">
+                                <h2 class="text-6xl font-semibold">11</h2>
+                                <img src="{{ asset('images/total.svg') }}" class="h-12 w-12 ml-4" alt="Total Bookings">
                             </div>
-                            <div class="text-red-500">Rejected</div>
-                            <div class="text-sm text-gray-500">May 29, 2024</div>
-                            <div class="text-gray-500">&#8942;</div>
+                            <span class="text-lg font-semibold   pl-24">Total Bookings</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg">Steffanie Egloso</p>
-                                <p class="text-sm text-gray-500">steff.egloso@test.com</p>
-                            </div>
-                            <div class="text-red-500">Rejected</div>
-                            <div class="text-sm text-gray-500">May 29, 2024</div>
-                            <div class="text-gray-500">&#8942;</div>
-                        </div> --}}
+                    </div>
 
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- Floor 1 Bookings -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
+                            <img src="{{ asset('images/floorone.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
+                            <h2 class="text-5xl font-semibold mt-4 text-center">26</h2>
+                            <p class="text-sm mt-4 text-center">Floor 1 Bookings</p>
+                        </div>
+                    </div>
+                    <!-- Available Desks -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
+                            <img src="{{ asset('images/available.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
+                            <h2 class="text-5xl font-semibold mt-4 text-center">22</h2>
+                            <p class="text-sm mt-4 text-center">Available Desk</p>
+                        </div>
+                    </div>
+                    <!-- Not Available Desks -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
+                            <img src="{{ asset('images/not.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
+                            <h2 class="text-5xl font-semibold mt-4 text-center">20</h2>
+                            <p class="text-sm mt-4 text-center">Not Available Desk</p>
+                        </div>
                     </div>
                 </div>
+
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- Floor 1 Bookings -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
+                            <img src="{{ asset('images/floortwo.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
+                            <h2 class="text-5xl font-semibold mt-4 text-center">39</h2>
+                            <p class="text-sm mt-4 text-center">Floor 2 Bookings</p>
+                        </div>
+                    </div>
+                    <!-- Available Desks -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
+                            <img src="{{ asset('images/available.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
+                            <h2 class="text-5xl font-semibold mt-4 text-center">10</h2>
+                            <p class="text-sm mt-4 text-center">Available Desk</p>
+                        </div>
+                    </div>
+                    <!-- Not Available Desks -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
+                            <img src="{{ asset('images/not.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
+                            <h2 class="text-5xl font-semibold mt-4 text-center">30</h2>
+                            <p class="text-sm mt-4 text-center">Not Available Desk</p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
-            <div class="container mx-auto space-y-3">
-                <div class="d-flex justify-content-end mb-3">
-                    <button class="btn btn-warning text-white">
-                        <img class="h-6 w-6 inline-block" src="{{ asset('images/plus.svg') }}" alt="create booking" />
-                        <span>{{ __('Create Booking') }}</span>
-                    </button>
-                </div>
 
-                <h2 class="text-lg font-semibold">Booking Statistics</h2>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <h3 class="text-xl font-bold">DISTRIBUTED COLUMN</h3>
-                            <p>180 Bookings</p>
-                        </div>
-                        <div class="relative">
-                            <select
-                                class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option>This Week</option>
-                                <option>Last Week</option>
-                                <option>June 3 - June 7</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <img src="/images/dropdown.svg" alt="drop down">
-                            </div>
-                        </div>
+
+            
+        
+            <!-- Right Column -->
+            <div class="col-span-1 lg:col-span-1">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-end mb-3">
+                        <button class="btn btn-warning text-white">
+                            <img class="h-6 w-6 inline-block mr-2" src="{{ asset('images/plus.svg') }}" alt="Create Booking">
+                            <span>Create Booking</span>
+                        </button>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
+                    <h2 class="text-lg font-semibold mb-3">Booking Statistics</h2>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-center mb-3">
                             <div>
-                                <div class="mt-2">
-                                    <canvas id="deskChart" class="w-full" style="height: 200px;"></canvas>
+                                <h3 class="text-lg font-bold">DISTRIBUTED COLUMN</h3>
+                                <p class="text-sm">180 Bookings</p>
+                            </div>
+                            <div class="relative">
+                                <select class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option>This Week</option>
+                                    <option>Last Week</option>
+                                    <option>June 3 - June 7</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <img src="/images/dropdown.svg" alt="Dropdown Icon">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div>
-                                <div class="mt-2">
-                                    <canvas id="pieChart" class="w-full" style="height: 300px;"></canvas>
-                                </div>
-                            </div>
+                        <!-- Placeholder for charts -->
+                        <div class="mt-4">
+                            <canvas id="deskChart" class="w-full" style="height: 300px;"></canvas>
+                        </div>
+                        <div class="mt-4">
+                            <canvas id="pieChart" class="w-full" style="height: 300px;"></canvas>
                         </div>
                     </div>
-                </div>
-                <div class="mt-3">
-
-                    <label class="inline-flex items-center me-5 cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" checked>
-                        <div
-                            class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-yellow-300 dark:peer-focus:ring-yellow-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400">
-                        </div>
-                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-500"
-                            >Enable Automatic booking
-                        </span>
-                    </label>
-
                 </div>
             </div>
         </div>
+        
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             // Define shared data for both charts
@@ -182,7 +183,6 @@
                     }]
                 },
                 options: {
-                    
                     plugins: {
                         legend: {
                             display: false
@@ -219,6 +219,7 @@
         </script>
     </section>
 
+
     <section class="mt-5">
         <div class="flex justify-center">
             <div class="bg-white rounded-lg w-[80%] shadow-md">
@@ -239,24 +240,23 @@
 
                 <div class="p-3 bg-gray-100">
 
-                    {{-- Toggle Auto Accept --}}
-                    <div
-                        class="mt-1 mb-4 bg-yellowLight w-fit p-3 px-4 rounded-xl border-1 border-solid border-gray-200 shadow-sm">
-                        @if (Config::get('bookings.auto_accept'))
-                            <span class="text-lg font-semibold">Auto-accept: ON</span>
-                            <button
-                                class="justify-center items-center bg-yellowB text-white hover:bg-slate-200 hover:text-red font-bold rounded-xl h-10 p-1 px-3 text-md ml-4"
-                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>Turn OFF
-                            </button>
-                        @else
-                            <span class="text-lg">Auto-accept: OFF</span>
-                            <button
-                                class="justify-center items-center bg-slate-300 hover:bg-amber-500 text-white font-bold rounded-xl h-10 p-1 px-3 text-md ml-4"
-                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>Turn ON
-                            </button>
-                        @endif
-                    </div>
-
+              {{-- Toggle Auto Accept --}}
+              <div
+              class="mt-1 mb-4 bg-yellowLight w-fit p-3 px-4 rounded-xl border-1 border-solid border-gray-200 shadow-sm">
+              @if (Config::get('bookings.auto_accept'))
+                  <span class="text-lg font-semibold">Auto-accept: ON</span>
+                  <button
+                      class="justify-center items-center bg-yellowB text-white hover:bg-slate-200 hover:text-red font-bold rounded-xl h-10 p-1 px-3 text-md ml-4"
+                      wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>Turn OFF
+                  </button>
+              @else
+                  <span class="text-lg">Auto-accept: OFF</span>
+                  <button
+                      class="justify-center items-center bg-slate-300 hover:bg-amber-500 text-white font-bold rounded-xl h-10 p-1 px-3 text-md ml-4"
+                      wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>Turn ON
+                  </button>
+              @endif
+          </div>
                     {{-- <div>
                         <span class='cursor-pointer' wire:click='$refresh'>Refresh Table
                         </span>
