@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Notifications\AdminToggleNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +24,7 @@ class Bookings extends Model
     {
         parent::boot();
 
+
         static::creating(function ($Bookings) {
             $autoAccept = config('bookings.auto_accept');
 
@@ -28,9 +32,20 @@ class Bookings extends Model
                 $Bookings->status = 'accepted';
             }
 
-            else if (!$autoAccept){
+            else if (!$autoAccept) {
                 $Bookings->status = 'pending';
+            
+                // Notify admin users
+                $adminUsers = User::whereHas('roles', function($query) {
+                    $query->whereIn('name', ['admin', 'superadmin']);
+                })->get();
+
+                foreach ($adminUsers as $adminUser) {
+                    // Notify each admin user about the new booking
+                    $adminUser->notify(new AdminToggleNotification($adminUser->roles->pluck('name')->implode(', ')));
+                }
             }
+            
         });
         
     }
