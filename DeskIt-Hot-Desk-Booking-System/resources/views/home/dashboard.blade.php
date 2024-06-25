@@ -52,11 +52,10 @@
                 <thead class="bg-gray">
                     <tr>
                         <th class="w-1/12">ID</th>
-                        <th class="w-1/12">Name</th>
-                        <th class="w-1/12">Email</th>
                         <th class="w-1/12">Floor #</th>
                         <th class="w-1/12">Desk #</th>
                         <th class="w-1/12">Date</th>
+                        <th class="w-1/12">Status</th>
                         <!-- <th class="w-1/12">Booked By</th> -->
                     </tr>
                 </thead>
@@ -64,11 +63,10 @@
                     @foreach($upcomingBookings as $booking)
                     <tr >
                         <td class="p-2">{{ $booking->id }}</td>
-                        <td class="p-2">{{ $booking->user->name }}</td>
-                        <td class="p-2">{{ $booking->user->email }}</td>
                         <td class="p-2">{{ $booking->floor }}</td>
                         <td class="p-2">{{ $booking->desk->desk_num }}</td>
                         <td class="p-2">{{ $booking->booking_date }}</td>
+                        <td class="p-2">{{ $booking->status }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -135,16 +133,25 @@
                     start: startDate,
                     end: endDate
                 },
-                
                 events: "{{ route('user.bookings', auth()->id()) }}",
                 eventClick: function (info) {
                     // Handle event click if needed
+                },
+                eventContent: function(arg) {
+                    let title = document.createElement('div');
+                    title.innerHTML = arg.event.title;
+
+                    let statusTitle = document.createElement('div');
+                    statusTitle.innerHTML = arg.event.extendedProps.statusTitle;
+
+                    let arrayOfDomNodes = [ title, statusTitle ];
+                    return { domNodes: arrayOfDomNodes };
                 }
             });
             calendar.render();
-
         });
     </script>
+
     
     @endpush
     @endsection
