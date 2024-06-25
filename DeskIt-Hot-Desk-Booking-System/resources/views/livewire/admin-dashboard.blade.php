@@ -42,7 +42,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-100 to-yellow-300 shadow rounded-lg p-4">
                             <div class="flex items-center justify-center mb-2">
-                                <h2 class="text-6xl font-semibold">11</h2>
+                                <h2 class="text-6xl font-semibold">{{$newBookings}}</h2>
                                 <img src="{{ asset('images/new.svg') }}" class="h-12 w-12 ml-4" alt="New Bookings">
                             </div>
                             <span class="text-lg font-semibold pl-24">New Bookings</span>
@@ -52,7 +52,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-100 to-yellow-300 shadow rounded-lg p-4">
                             <div class="flex items-center justify-center mb-2">
-                                <h2 class="text-6xl font-semibold">11</h2>
+                                <h2 class="text-6xl font-semibold">{{ $totalBookings }}</h2>
                                 <img src="{{ asset('images/total.svg') }}" class="h-12 w-12 ml-4" alt="Total Bookings">
                             </div>
                             <span class="text-lg font-semibold   pl-24">Total Bookings</span>
@@ -66,7 +66,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
                             <img src="{{ asset('images/floorone.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">26</h2>
+                            <h2 class="text-5xl font-semibold mt-4 text-center">{{ $floor1Bookings }}</h2>
                             <p class="text-sm mt-4 text-center">Floor 1 Bookings</p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
                             <img src="{{ asset('images/available.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">22</h2>
+                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor1AvailableDesk}}</h2>
                             <p class="text-sm mt-4 text-center">Available Desk</p>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
                             <img src="{{ asset('images/not.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">20</h2>
+                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor1NotAvailable}}</h2>
                             <p class="text-sm mt-4 text-center">Not Available Desk</p>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
                             <img src="{{ asset('images/floortwo.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">39</h2>
+                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor2Bookings}}</h2>
                             <p class="text-sm mt-4 text-center">Floor 2 Bookings</p>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
                             <img src="{{ asset('images/available.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">10</h2>
+                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor2AvailableDesk}}</h2>
                             <p class="text-sm mt-4 text-center">Available Desk</p>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                     <div class="col-span-1 lg:col-span-1">
                         <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
                             <img src="{{ asset('images/not.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">30</h2>
+                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor2NotAvailable}}</h2>
                             <p class="text-sm mt-4 text-center">Not Available Desk</p>
                         </div>
                     </div>
