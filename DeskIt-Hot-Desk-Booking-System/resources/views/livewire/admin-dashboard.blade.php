@@ -9,26 +9,26 @@
                     <h1 class="text-3xl font-bold mt-4">Welcome!</h1>
                    
 
-                    <div class="mx-auto flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 lg:space-x-4 w-1/2 max-w-screen-lg p-6 rounded-lg">
+                    <div class="mx-auto flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 max-w-screen-md p-2 rounded-lg">
                         <!-- Calendar Section -->
-                        <div class="shadow rounded-lg p-4 bg-white flex-shrink-0">
+                        <div class="shadow rounded-lg p-3 bg-white flex-shrink-0">
                           <div class="text-center">
                             <div class="text-amber-500 text-xl font-semibold mb-2">{{ $currentMonth }}</div>
-                            <div class="text-6xl font-bold mb-2">{{ $currentDay }}</div>
-                            <div class="text-lg">{{ $currentWeek }}</div>
+                            <div class="text-2xl font-bold mb-2">{{ $currentDay }}</div>
+                            <div class="text-base">{{ $currentWeek }}</div>
                             <div class="text-sm">{{ $currentTime }}</div>
                           </div>
                         </div>
                     
                         <!-- Working Hours Section -->
-                        <div class="bg-white py-6 px-10 rounded shadow w-auto flex-shrink-0">
-                          <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
-                          <p class="text-xs">Weekdays</p>
-                          <p class="text-xs pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
-                          <p class="text-xs pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
-                          <p class="mt-2 text-xs">Weekends <span class="pl-12">Closed</span></p>
+                        <div class="bg-white py-2 px-10 rounded shadow w-auto flex-shrink-0">
+                          <h2 class="text-lg font-semibold mt-2 mb-2">Working Hours</h2>
+                          <p class="text-sm m-0">Weekdays</p>
+                          <p class="text-sm m-0 pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
+                          <p class="text-sm m-0 pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
+                          <p class="mt-1 text-sm">Weekends <span class="pl-12">Closed</span></p>
                         </div>
-                      </div>
+                    </div>
                 </div>
                       
                   
