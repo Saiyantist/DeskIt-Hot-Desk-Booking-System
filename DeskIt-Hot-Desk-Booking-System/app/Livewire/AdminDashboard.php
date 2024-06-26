@@ -66,7 +66,7 @@ class AdminDashboard extends Component
         $deskRange = range(1, 36);
         $deskRange2 = range(37, 72);
 
-        $this->totalBookings = Bookings::where('status', 'accepted')->count() ?: 0;
+        $this->totalBookings = Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::today())->count() ?: 0;
         $this->newBookings = Bookings::where('status', 'accepted')->whereDate('created_at', Carbon::today())->count() ?: 0;
 
         $this->floor1Bookings = Bookings::whereIn('desk_id', $deskRange)->whereDate('booking_date', Carbon::today())->count() ?: 0;
