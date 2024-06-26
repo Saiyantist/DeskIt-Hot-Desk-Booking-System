@@ -4,125 +4,139 @@
         <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4">
             <!-- Left Column -->
             <div class="col-span-2 lg:col-span-2 space-y-4 lg:ml-5">
-                <!-- Welcome Section -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h1 class="text-3xl font-bold mb-4">Welcome!</h1>
-                    <!-- Current Date and Time -->
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                        <!-- Current Date Widget -->
-                        <div class="col-span-3 lg:col-span-2">
-                            <div class="shadow rounded-lg p-4">
-                                <div class="text-center">
-                                    <div class="text-amber-500 text-xl font-semibold mb-2">{{ $currentMonth }}</div>
-                                    <div class="text-6xl font-bold mb-2">{{ $currentDay }}</div>
-                                    <div class="text-lg">{{ $currentWeek }}</div>
-                                    <div class="text-sm">{{ $currentTime }}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Working Hours Section -->
-                        <div class="col-span-9 lg:col-span-6">
 
-                            <div class="col-span-7 lg:col-span-7">
-                                <div class="bg-white pl-14 py-8 rounded shadow ">
-                                    <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
-                                    <p class="text-xs">Weekdays</p>
-                                    <p class="text-xs pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
-                                    <p class="text-xs pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
-                                    <p class="mt-2 text-xs">Weekends <span class="pl-12">Closed</span></p>
-                                </div>
-                            </div>       
+                <div class=" rounded-lg ">
+                    <h1 class="text-3xl font-bold mt-4">Welcome!</h1>
+                   
+
+                    <div class="mx-auto flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 lg:space-x-4 w-1/2 max-w-screen-lg p-6 rounded-lg">
+                        <!-- Calendar Section -->
+                        <div class="shadow rounded-lg p-4 bg-white flex-shrink-0">
+                          <div class="text-center">
+                            <div class="text-amber-500 text-xl font-semibold mb-2">{{ $currentMonth }}</div>
+                            <div class="text-6xl font-bold mb-2">{{ $currentDay }}</div>
+                            <div class="text-lg">{{ $currentWeek }}</div>
+                            <div class="text-sm">{{ $currentTime }}</div>
+                          </div>
                         </div>
-                    </div>
+                    
+                        <!-- Working Hours Section -->
+                        <div class="bg-white py-6 px-10 rounded shadow w-auto flex-shrink-0">
+                          <h2 class="text-lg font-semibold mb-2">Working Hours</h2>
+                          <p class="text-xs">Weekdays</p>
+                          <p class="text-xs pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
+                          <p class="text-xs pl-2">Afternoon Shift <span class="pl-3">7:00 PM - 3:00 AM</span></p>
+                          <p class="mt-2 text-xs">Weekends <span class="pl-12">Closed</span></p>
+                        </div>
+                      </div>
                 </div>
-        
-                <!-- Stats Section -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      
+                  
+
+                  <div>
+                    <h2 class="font-mono text-center italic text-4xl font-semibold text-slate-600 ">
+                        Today's Booking
+                    </h2>
+                </div>
+                
+
+              
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 px-28">
                     <!-- New Bookings -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-100 to-yellow-300 shadow rounded-lg p-4">
-                            <div class="flex items-center justify-center mb-2">
-                                <h2 class="text-6xl font-semibold">{{$newBookings}}</h2>
-                                <img src="{{ asset('images/new.svg') }}" class="h-12 w-12 ml-4" alt="New Bookings">
+                    <div class="w-full">
+                        <div class="bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-400 shadow rounded-md p-4">
+                            <div class="flex items-center justify-center mb-1">
+                                <h2 class="text-4xl font-semibold">{{$newBookings}}</h2>
+                                <img src="{{ asset('images/new.svg') }}" class="h-8 w-8 ml-4" alt="New Bookings">
                             </div>
-                            <span class="text-lg font-semibold pl-24">New Bookings</span>
+                            <span class="text-md font-semibold pl-10">New Bookings</span>
                         </div>
                     </div>
                     <!-- Total Bookings -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-100 to-yellow-300 shadow rounded-lg p-4">
-                            <div class="flex items-center justify-center mb-2">
-                                <h2 class="text-6xl font-semibold">{{ $totalBookings }}</h2>
-                                <img src="{{ asset('images/total.svg') }}" class="h-12 w-12 ml-4" alt="Total Bookings">
+                    <div class="w-full">
+                        <div class="bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-400 shadow rounded-md p-4">
+                            <div class="flex items-center justify-center mb-1">
+                                <h2 class="text-4xl font-semibold">{{ $totalBookings }}</h2>
+                                <img src="{{ asset('images/total.svg') }}" class="h-8 w-8 ml-4" alt="Total Bookings">
                             </div>
-                            <span class="text-lg font-semibold   pl-24">Total Bookings</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                    <!-- Floor 1 Bookings -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
-                            <img src="{{ asset('images/floorone.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">{{ $floor1Bookings }}</h2>
-                            <p class="text-sm mt-4 text-center">Floor 1 Bookings</p>
-                        </div>
-                    </div>
-                    <!-- Available Desks -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
-                            <img src="{{ asset('images/available.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor1AvailableDesk}}</h2>
-                            <p class="text-sm mt-4 text-center">Available Desk</p>
-                        </div>
-                    </div>
-                    <!-- Not Available Desks -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
-                            <img src="{{ asset('images/not.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor1NotAvailable}}</h2>
-                            <p class="text-sm mt-4 text-center">Not Available Desk</p>
+                            <span class="text-md font-semibold pl-10">Total Bookings</span>
                         </div>
                     </div>
                 </div>
+            
 
+
+                <div class="grid grid-cols-1 md:grid-cols-6 w-full gap-4 mx-auto">
+           
+                    <div>
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-md p-8 w-auto h-44 flex flex-col items-center">
+                            <img src="{{ asset('images/floorOne.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
+                            <div class="mb-1">
+                                <h2 class="text-4xl font-semibold">{{ $floor1Bookings }}</h2>
+                            </div>
+                            <span class="text-xs font-semibold text-center">Floor 1 Bookings </span>
+                        </div>
+                    </div>
+                          
+                    <div>
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-md p-8 w-auto h-44 flex flex-col items-center">
+                            <img src="{{ asset('images/available.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
+                            <div class="mb-1">
+                                <h2 class="text-4xl font-semibold">{{ $floor1AvailableDesk}}</h2>
+                            </div>
+                            <span class="text-xs font-semibold text-center">Available Desk </span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-md p-8 w-auto h-44 flex flex-col items-center">
+                            <img src="{{ asset('images/not.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
+                            <div class="mb-1">
+                                <h2 class="text-4xl font-semibold">{{ $floor1NotAvailable }}</h2>
+                            </div>
+                            <span class="text-xs font-semibold text-center">Not Available Desk </span>
+                        </div>
+                    </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                    <!-- Floor 1 Bookings -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
-                            <img src="{{ asset('images/floortwo.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor2Bookings}}</h2>
-                            <p class="text-sm mt-4 text-center">Floor 2 Bookings</p>
+
+
+
+                    <div>
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-md p-8 w-auto h-44 flex flex-col items-center">
+                            <img src="{{ asset('images/floortwo.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
+                            <div class="mb-1">
+                                <h2 class="text-4xl font-semibold">{{ $floor1Bookings }}</h2>
+                            </div>
+                            <span class="text-xs font-semibold text-center">Floor 2 Bookings </span>
                         </div>
                     </div>
-                    <!-- Available Desks -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
-                            <img src="{{ asset('images/available.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor2AvailableDesk}}</h2>
-                            <p class="text-sm mt-4 text-center">Available Desk</p>
+                          
+                    <div>
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-md p-8 w-auto h-44 flex flex-col items-center">
+                            <img src="{{ asset('images/available.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
+                            <div class="mb-1">
+                                <h2 class="text-4xl font-semibold">{{ $floor2AvailableDesk }}</h2>
+                            </div>
+                            <span class="text-xs font-semibold text-center">Available Desk </span>
                         </div>
                     </div>
-                    <!-- Not Available Desks -->
-                    <div class="col-span-1 lg:col-span-1">
-                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-lg p-4">
-                            <img src="{{ asset('images/not.svg') }}" class="h-10 w-16 mx-auto" alt="Floor 1 Bookings">
-                            <h2 class="text-5xl font-semibold mt-4 text-center">{{$floor2NotAvailable}}</h2>
-                            <p class="text-sm mt-4 text-center">Not Available Desk</p>
+                    
+                    <div>
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-md p-8 w-auto h-44 flex flex-col items-center">
+                            <img src="{{ asset('images/not.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
+                            <div class="mb-1">
+                                <h2 class="text-4xl font-semibold">{{ $floor2NotAvailable }}</h2>
+                            </div>
+                            <span class="text-xs font-semibold text-center"> Not Available Desk</span>
                         </div>
                     </div>
+
                 </div>
 
+               
 
             </div>
-
-
-
-            
-        
+                    
             <!-- Right Column -->
             <div class="col-span-1 lg:col-span-1">
                 <div class="bg-white p-6 rounded-lg shadow-md">
@@ -136,7 +150,7 @@
                     <div class="bg-white p-4 rounded-lg shadow-sm">
                         <div class="flex justify-between items-center mb-3">
                             <div>
-                                <h3 class="text-lg font-bold">DISTRIBUTED COLUMN</h3>
+                             
                                 <p class="text-sm">180 Bookings</p>
                             </div>
                             <div class="relative">
