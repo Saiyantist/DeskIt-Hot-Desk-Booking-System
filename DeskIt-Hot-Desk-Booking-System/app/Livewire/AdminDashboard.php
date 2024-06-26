@@ -88,7 +88,7 @@ class AdminDashboard extends Component
 
         
         date_default_timezone_set('Asia/Manila'); 
-        $this->currentMonth = Carbon::now()->format('F');
+        $this->currentMonth = Carbon::now()->format('F Y');
         $this->currentDay = Carbon::now()->format('d');
         $this->currentWeek = Carbon::now()->format('l');
         $this->currentTime = Carbon::now()->format('h:i A');
