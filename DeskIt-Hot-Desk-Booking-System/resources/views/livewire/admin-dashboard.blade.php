@@ -35,7 +35,7 @@
 
                   <div>
                     <h2 class="font-mono text-center italic text-4xl font-semibold text-slate-600 ">
-                        Today's Booking
+                        Today's Bookings
                     </h2>
                 </div>
                 
@@ -66,8 +66,7 @@
             
 
 
-                <div class="grid grid-cols-1 md:grid-cols-6 w-full gap-4 mx-auto">
-           
+                <div class="grid grid-cols-1 md:grid-cols-6 w-full gap-4 pt-6 mx-auto">
                     <div>
                         <div class="bg-gradient-to-r from-yellow-50 to-yellow-200 shadow rounded-md p-8 w-auto h-44 flex flex-col items-center">
                             <img src="{{ asset('images/floorOne.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
