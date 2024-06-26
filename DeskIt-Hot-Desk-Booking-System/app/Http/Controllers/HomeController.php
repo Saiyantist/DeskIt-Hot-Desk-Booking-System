@@ -36,6 +36,7 @@ class HomeController extends Controller
         $todaysBooking = Bookings::with('desk')
             ->where('user_id', $userId)
             ->where('booking_date', $today)
+            ->where('status', 'accepted')
             ->first();
             
         $upcomingBookings = Bookings::with('desk')
