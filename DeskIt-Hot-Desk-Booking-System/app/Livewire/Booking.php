@@ -9,11 +9,13 @@ use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
 use Illuminate\Validation\Rules\Can;
+use Livewire\Features\SupportEvents\HandlesEvents;
 
 use function PHPUnit\Framework\returnValue;
 
 class Booking extends Component
 {
+    use HandlesEvents;
     public $date;
     public $time;
     public $floor = "1";
@@ -168,9 +170,9 @@ class Booking extends Component
     
                 elseif(in_array($desks[$key]->id, $this->bookedDeskIDs))
                 {
-                    // dd('it\'s booked bruh');
                     $this->bookedDesk = $desks[$key]->desk_num;
-                    $this->showWarning2 = true;
+                    $this->dispatch('open-modal', name: 'warning-2-booking-modal');
+                    // $this->showWarning2 = true;
                 }
             }
     
@@ -179,17 +181,6 @@ class Booking extends Component
                 // dd('it\'s like broken eh..');
             }
         }
-
-        // if ($desks[$key]->statuses_id == '1'){
-        //     $this->selectedDesk = $desks[$key]->desk_num;
-        //     // dd('sige, go.');
-        // }
-        // else if ($desks[$key]->statuses_id == '2'){
-        //     dd('is booked bruh');
-        // }
-        // else {
-        //     dd('sira \'to');
-        // }
     }
 
     public function validateBooking()
@@ -202,13 +193,12 @@ class Booking extends Component
 
         if ($canBook && ($date && $floor && ($selectedDesk != '-') && $time))
         {
-            $this->showConfirmation = true;
+            $this->dispatch('open-modal', name: 'confirm-booking-modal');
         }
         elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time))
         {
-            $this->showWarning = true;
+            $this->dispatch('open-modal', name: 'warning-booking-modal');
         }
-        // dd($this->showConfirmation);
     }
 
     public function closeModal()
@@ -246,7 +236,7 @@ class Booking extends Component
             ]);
             $this->selectedDesk = '-';
             $this->bookedDesk = '-';
-            $this->showNotification = true;
+            // $this->showNotification = true;
             Booking::refreshMap();
         }
 

@@ -43,7 +43,7 @@
 </div>
 @endif --}}
 
-@if ($showWarning)
+{{-- @if ($showWarning)
 <div id="Modal" class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72">
 
     <div class='self-end my-1 mr-4 '>
@@ -58,15 +58,13 @@
         <div class="flex flex-column justify-center">
             <p class=" text-base text-center">Desk: {{$userBooking[count($userBooking) - 1]['desk_num']}}</p>
             <p class=" text-base text-center">Booking: {{$userBooking[count($userBooking) - 1]['booking_date']}}</p>
-            {{-- <p class=" text-base text-center">Desk: </p>
-            <p class=" text-base text-center">Booking: </p> --}}
         </div>
     </div>
 
 </div>
-@endif
+@endif --}}
 
-@if ($showWarning2)
+{{-- @if ($showWarning2)
 <div id="Modal" class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72">
 
     <div class='self-end my-1 mr-4 '>
@@ -82,12 +80,11 @@
             <p class="text-lg text-center">Desk: {{$bookedDesk}}</p>
         </div>
     </div>
-
 </div>
-@endif
+@endif --}}
 
 {{-- for book on behalf --}}
-@if ($showWarning3)
+{{-- @if ($showWarning3)
 <div id="Modal" class="flex flex-column justify-start bg-danger rounded-4 absolute h-48 w-72">
 
     <div class='self-end my-1 mr-4 '>
@@ -103,6 +100,5 @@
             <p class="text-lg text-center"> User: empty</p>
         </div>
     </div>
-
 </div>
-@endif
+@endif --}}

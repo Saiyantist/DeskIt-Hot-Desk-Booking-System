@@ -1,10 +1,7 @@
 <div class="flex flex-col mt-16 ml-[4.7rem]">
 
-    {{-- Modals --}}
-    @include("admin.modals.updatedBooking")
-
     {{-- UI --}}
-    <main class="flex justify-around p-8">
+    <main class="flex justify-center gap-5 p-8">
 
         {{-- Side Panel Section --}}
         <section class="flex side-panel-container self-center">
@@ -12,7 +9,7 @@
             {{-- Side Panel Body --}}
             <div class="body text-center">
 
-                <p class="book-desk text-2xl py-4 bg-yellowB text-center text-white ">Book a Desk</p>
+                <p class="book-desk text-2xl py-4 bg-yellowB text-center font-medium text-white ">Book a Desk</p>
 
                 <div class="px-3">
 
@@ -1343,5 +1340,126 @@
         </section>
 
     </main>
+
+    {{-- Modals --}}
+
+    {{-- Confirm Booking Modal --}}
+    <x-modal name="confirm-booking-modal" title="Booking Confirmation">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <div class="flex flex-row justify-evenly">
+
+                    {{-- Left Column --}}
+                    <div class='flex flex-column justify-center gap-4'>
+                        <span class="text-lg text-left truncate ...">Floor</span>
+                        <span class="text-lg text-left truncate ...">Desk</span>
+                        <span class="text-lg text-left truncate ...">Booking Date</span>
+                        <span class="text-lg text-left truncate ...">Booking Time</span>
+                    </div>
+
+                    {{-- Right Column --}}
+                    <div class='flex flex-column justify-center gap-3 w-50'>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $floor }}</span>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $selectedDesk }}</span>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $date }}</span>
+                        <span class="text-lg bg-white shadow-sm h-9 border rounded-xl border-slate-300 text-center flex items-center justify-center">{{ $time }}</span>
+                    </div>
+                </div>
+
+                {{-- Button --}}
+                <div class="flex justify-center">
+                    <button
+                        class="flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        wire:click="book" x-on:click="$dispatch('close-modal'); $dispatch('open-modal', {name: 'desk-booking-modal'});">
+                        Desk It
+                    </button>
+                </div>
+
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+    {{-- Desk Booking Modal --}}
+    <x-modal name="desk-booking-modal" title="Desk Booking">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <div class="">
+                    @if(session('autoAccept'))
+                        <p class="text-center text-2xl">{{session('autoAccept')}}</p>
+                    @elseif(session('pending'))
+                        <p class="text-center text-2xl">{{session('pending')}}</p>
+                        <p class="text-center text-lg">Please wait for approval.</p>
+                    @endif
+                </div>
+
+                {{-- Button --}}
+                <div class="flex justify-center">
+                    <button
+                        class="flex items-center border-solid border-yellowBdarker border-1 bg-yellowB px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        wire:click="goHome" x-on:click="$dispatch('close-modal')">
+                        Go Home
+                    </button>
+                </div>
+
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+    {{-- Booking Warning Modal --}}
+    <x-modal name="warning-booking-modal" title="Desk Booking">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <span class="text-center text-md font-bold">You cannot book 2 DESKS on the SAME DAY!</span>
+
+                <div class="flex flex-row justify-evenly">
+
+                    {{-- Left Column --}}
+                    <div class='flex flex-column justify-center gap-4'>
+                        <span class="text-md text-left truncate ...">Desk</span>
+                        <span class="text-md text-left truncate ...">Booking Date</span>
+                    </div>
+
+                    {{-- Right Column --}}
+                    <div class='flex flex-column justify-center gap-3 w-50'>
+                        <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            {{ $bookedDesk }}
+                        </span>
+
+                        <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            {{ $date }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+    {{-- Booking Warning 2 Modal --}}
+    <x-modal name="warning-2-booking-modal" title="Desk Booking">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <span class="text-center text-lg font-bold">This Desk is Booked</span>
+
+                <div class="flex flex-row justify-evenly">
+
+                    {{-- Left Column --}}
+                    <div class='flex flex-column justify-center gap-4'>
+                        <span class="text-md text-left truncate ...">Desk</span>
+                    </div>
+
+                    {{-- Right Column --}}
+                    <div class='flex flex-column justify-center gap-3 w-50'>
+                        <span class="text-md bg-white shadow-sm h-7 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            {{ $bookedDesk }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </x-slot:body>
+    </x-modal>
 
 </div>

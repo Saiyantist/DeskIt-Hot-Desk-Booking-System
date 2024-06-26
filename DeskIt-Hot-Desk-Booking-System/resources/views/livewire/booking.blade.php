@@ -1,8 +1,5 @@
 <div class="flex flex-col container mt-16">
 
-    @include("admin.modals.updatedBooking")
-
-
     {{-- UI --}}
     <main class="flex flex-row justify-evenly align-items-center p-8">
 
@@ -36,7 +33,6 @@
                             <p class="text-sm bg-white shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $time }}</h6>
                         </div>
 
-                    
                         {{-- Desk --}}
                         <div class="flex flex-row justify-content-between">
                             <div>
@@ -46,15 +42,13 @@
                                 <p class="text-lg bg-white shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
                             </div>
                         </div>
-
                     </div>
 
                     {{-- Booking Button --}}
                     <button class="book justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-48 h-10 p-1 mb-6 mt-3 text-lg"
                         :disabled={{$selectedDesk === '-'}}
-                        wire:click='validateBooking'
                         wire:submit
-                        x-data x-on:click="$dispatch('open-modal', {name: 'confirm-booking-modal'})"
+                        @click="$wire.validateBooking"
                         >Book
                     </button>
 
@@ -1371,6 +1365,61 @@
     </x-modal>
 
     {{-- Booking Warning Modal --}}
+    <x-modal name="warning-booking-modal" title="Desk Booking">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <span class="text-center text-md font-bold">You cannot book 2 DESKS on the SAME DAY!</span>
+
+                <div class="flex flex-row justify-evenly">
+
+                    {{-- Left Column --}}
+                    <div class='flex flex-column justify-center gap-4'>
+                        <span class="text-md text-left truncate ...">Desk</span>
+                        <span class="text-md text-left truncate ...">Booking Date</span>
+                    </div>
+
+                    {{-- Right Column --}}
+                    <div class='flex flex-column justify-center gap-3 w-50'>
+                        <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            {{ $selectedDesk }}
+                        </span>
+
+                        <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            {{ $date }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+    {{-- Booking Warning 2 Modal --}}
+    <x-modal name="warning-2-booking-modal" title="Desk Booking">
+        <x-slot:body>
+            <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
+
+                <span class="text-center text-lg font-bold">This Desk is Booked</span>
+
+                <div class="flex flex-row justify-evenly">
+
+                    {{-- Left Column --}}
+                    <div class='flex flex-column justify-center gap-4'>
+                        <span class="text-md text-left truncate ...">Desk</span>
+                    </div>
+
+                    {{-- Right Column --}}
+                    <div class='flex flex-column justify-center gap-3 w-50'>
+                        <span class="text-md bg-white shadow-sm h-7 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            {{ $bookedDesk }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+
 
     <script src="{{ asset('js/myScript3.js') }}">
     </script>
