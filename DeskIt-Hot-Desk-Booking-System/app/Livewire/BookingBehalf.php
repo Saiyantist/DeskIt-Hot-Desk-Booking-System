@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
@@ -180,9 +181,8 @@ class BookingBehalf extends Component
     
                 elseif(in_array($desks[$key]->id, $this->bookedDeskIDs))
                 {
-                    // dd('it\'s booked bruh');
                     $this->bookedDesk = $desks[$key]->desk_num;
-                    $this->showWarning2 = true;
+                    $this->dispatch('open-modal', name: 'warning-2-booking-modal');
                 }
             }
     
@@ -190,22 +190,8 @@ class BookingBehalf extends Component
             {
                 // dd('it\'s like broken eh..');
             }
+            // dd('cLick');
         }
-
-
-
-
-
-        // if ($desks[$key]->statuses_id == '1'){
-        //     $this->selectedDesk = $desks[$key]->desk_num;
-        //     // dd('sige, go.');
-        // }
-        // else if ($desks[$key]->statuses_id == '2'){
-        //     dd('is booked bruh');
-        // }
-        // else {
-        //     dd('sira \'to');
-        // }
     }
 
     public function validateBooking()
@@ -219,17 +205,16 @@ class BookingBehalf extends Component
 
         if ($canBook && ($date && $floor && ($selectedDesk != '-') && $time && $user))
         {
-            $this->showConfirmation = true;
+            $this->dispatch('open-modal', name: 'confirm-booking-modal');
         }
         elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time))
         {
-            $this->showWarning = true;
+            $this->dispatch('open-modal', name: 'warning-booking-modal');
         } 
         elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time && $user))
         {
             $this->showWarning3 = true;
         }
-        // dd($this->showConfirmation);
     }
 
     public function closeModal()
@@ -244,7 +229,6 @@ class BookingBehalf extends Component
     public function goHome()
     {
         $this->showNotification = false;
-
         $this->redirect('/dashboard');
     }
 
@@ -261,6 +245,7 @@ class BookingBehalf extends Component
 
             Bookings::create([
                 "booking_date" => $date,
+                "booking_time" => $time,
                 "status" => 'accepted',
                 "user_id" => $user,
                 "desk_id" => $selectedDeskID,
@@ -268,10 +253,15 @@ class BookingBehalf extends Component
 
             $this->selectedDesk = '-';
             $this->bookedDesk = '-';
-            $this->showNotification = true;
             $this->refreshMap(); 
         }
 
+        if(Config::get('bookings.auto_accept')){
+            session()->flash('autoAccept', 'Desk Booked Successfully!');
+        }
+        else{
+            session()->flash('pending', 'Desk Booking is placed!');
+        }
 
 
         // $status = "booked";
@@ -286,6 +276,11 @@ class BookingBehalf extends Component
         // dd($status); 
     }
 
+    public function resetEditData()
+    {
+        
+    }
+
     public function render()
     {
         $usersWithRoles = User::role('employee')->get();
@@ -297,8 +292,6 @@ class BookingBehalf extends Component
 
         $this->min= Carbon::today()->toDateString();
         $min = $this->min;
-
-
 
         return view('livewire.booking-behalf', compact('desks', 'max', 'min', 'usersWithRoles'));
     }
