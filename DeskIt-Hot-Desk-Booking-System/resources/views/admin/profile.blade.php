@@ -1,7 +1,7 @@
 @extends('layouts.adminlayout')
 
 <x-app-layout>
-
+    @include("admin.modals.updateProfile") 
     @section('content')
    <section id="sect">
         <div class="flex justify-center items-center mt-16 ml-35">

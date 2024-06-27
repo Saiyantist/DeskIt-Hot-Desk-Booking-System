@@ -22,12 +22,12 @@
                                 <input type="file" name="profile_picture" id="profile_picture" class="hidden">
                             </label>
                         </div>
-                        </div>
+                    </div>
                        
-                        <div class="col-xs-12 col-sm-12 col-md-12 mt-4  d-flex justify-content-center">
-                            {{-- <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">{{ __('Back') }}</button> --}}
-                            <button type="submit" class="btn btn-outline-warning text-dark py-24">{{ __('Save') }}</button>
-                        </div>                            
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-4  d-flex justify-content-center">
+                        {{-- <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">{{ __('Back') }}</button> --}}
+                        <button type="submit" class="btn btn-outline-warning text-dark py-24">{{ __('Save') }}</button>
+                    </div>                            
                 </div>
             </div>
         </div>
