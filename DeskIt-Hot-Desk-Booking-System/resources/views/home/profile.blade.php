@@ -1,6 +1,6 @@
 
 <x-app-layout>
-
+<main class="bg-pink">
     <div class="flex justify-center items-center mt-16 ml-16">
         <div class="bg-white mt-10 w-11/12 h-56 flex justify-start items-center drop-shadow-lg">
 
@@ -40,11 +40,17 @@
     </div>
 
     <section class="mt-1">
-        @livewire('admin-profile')
+        {{-- @livewire('admin-profile') --}}
+        @if (request()->routeIs('userProfileSetting'))
+        @livewire('admin-profile', ['activeSection' => 3])
+        @else
+            @livewire('admin-profile')
+        @endif
         {{--
             Next is a livewire version for the 'user-profile',
             only then we can use this profile.blade.php, 
             we'd use @if here to show the appropriate @livewire component
         --}}
     </section>
+</main>
 </x-app-layout>

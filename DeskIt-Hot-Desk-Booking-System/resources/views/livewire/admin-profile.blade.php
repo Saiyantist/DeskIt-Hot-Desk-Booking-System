@@ -72,7 +72,7 @@
                     </div>
                 
                 {{-- Notification Settings SECONDARY Tabls --}}
-                @elseif($activeSection === 3) 
+                @elseif($activeSection === 3 ) 
                 <div class="bg-white">
                         @livewire('notifcation-preferences')
                 </div>
@@ -169,7 +169,7 @@
                                     <td class="p-2 flex justify-content-around">
 
                                         {{-- Make Employee Open --}}
-                                        <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
+                                        <button class='transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
                                                 wire:click="saveEmpId({{ $user->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'makeEmp-modal'})">
                                             <img src="{{ asset('images/employee_new.svg') }}" class="h-6">
@@ -177,7 +177,7 @@
                                         </button>
 
                                         {{-- Make OM Open --}}
-                                        <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
+                                        <button class='transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
                                                 wire:click="saveOMId({{ $user->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'makeOM-modal'})">
                                             <img src="{{ asset('images/omanager_new.svg') }}" class="h-6">
@@ -270,7 +270,7 @@
                                     @if(Auth::user()->hasRole('superadmin'))
 
                                     {{-- Make Admin Open --}}
-                                    <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
+                                    <button class='transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
                                             wire:click="saveAdminId({{ $user4->id }})"
                                             x-data x-on:click="$dispatch('open-modal', {name: 'makeAdmin-modal'})">
                                         <img src="{{ asset('images/admin.svg') }}" class="h-6">
@@ -361,7 +361,7 @@
                                     <td class="p-2 flex justify-content-around">
 
                                         {{-- Make OM Open --}}
-                                        <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
+                                        <button class='transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
                                                 wire:click="saveOMId({{ $user2->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'makeOM-modal'})">
                                             <img src="{{ asset('images/omanager_new.svg') }}" class="h-6">
@@ -370,7 +370,7 @@
 
                                         @if(Auth::user()->hasRole('superadmin'))
                                         {{-- Make Admin Open --}}
-                                        <button class='transition ease-in-out transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
+                                        <button class='transition ease-in-out hover:bg-yellowA duration-50 bg-yellowLight px-2.5 rounded-2xl py-1.5 flex items-center cursor-pointer'
                                                 wire:click="saveAdminId({{ $user2->id }})"
                                                 x-data x-on:click="$dispatch('open-modal', {name: 'makeAdmin-modal'})">
                                             <img src="{{ asset('images/admin.svg') }}" class="h-6">

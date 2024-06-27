@@ -98,6 +98,7 @@
                 </div>
             </div>
         </section>
+        
         {{-- Main Content --}}
         <section class="flex flex-col p-4 pt-0 h-fit bg-yellowA rounded-2 relative">
 
