@@ -37,6 +37,7 @@ class Booking extends Component
     
     public $tutorialCompleted = false;
 
+    public $selectedDeskIndex = null;
     public function refreshMap() 
     {
         $date = $this->date;
@@ -164,6 +165,7 @@ class Booking extends Component
                     /** Then finally, assign the $selectedDesk as the Desk Selected */ 
                     $this->selectedDesk = $desks[$key]->desk_num;
                     $this->selectedDeskID = $desks[$key]->id;
+                    $this->selectedDeskIndex = $key;
                 }
     
                 elseif(in_array($desks[$key]->id, $this->bookedDeskIDs))

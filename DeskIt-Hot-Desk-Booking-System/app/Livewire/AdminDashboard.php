@@ -23,6 +23,7 @@ use App\Notifications\AcceptBookingNotification;
 use App\Notifications\DeclineBookingNotification;
 use App\Notifications\AcceptBookingEmail;
 use App\Notifications\DeclineBookingEmail;
+        
 class AdminDashboard extends Component
 {
 
@@ -118,14 +119,13 @@ class AdminDashboard extends Component
         $this->fetchBookings();
 
         $this->autoAccept = Config::get('bookings.auto_accept');
-        $this->checkAndNotifyPendingBookings();
 
-        
         date_default_timezone_set('Asia/Manila'); 
-        $this->currentMonth = Carbon::now()->format('F Y');
-        $this->currentDay = Carbon::now()->format('d');
-        $this->currentWeek = Carbon::now()->format('l');
-        $this->currentTime = Carbon::now()->format('h:i A');
+        $this->currentMonth = Carbon::now()->format('F Y');  // Full month name
+        $this->currentDay = Carbon::now()->format('d'); // Day of the month with leading zeros
+        $this->currentWeek = Carbon::now()->format('l'); // Full name of the day of the week
+        $this->currentTime = Carbon::now()->format('h:i A'); // 12-hour format with leading zeros and AM/PM
+
 
         $this->weekBookings = [
             'this_week' => [
@@ -146,27 +146,7 @@ class AdminDashboard extends Component
 
     }
 
-    public function checkAndNotifyPendingBookings()
-    {
-        // Check if there are any pending bookings
-        $countPendingBookings = Bookings::where('status', 'pending')->count();
-
-        if ($countPendingBookings > 0) {
-            $adminUser = Auth::user();
-            
-            // Check user roles
-            $rolesToCheck = ['admin', 'superadmin'];
-            $userRoles = $adminUser->roles->pluck('name')->intersect($rolesToCheck);
-            
-            // If user has roles 'admin' or 'superadmin'
-            if ($userRoles->isNotEmpty()) {
-                $rolesString = $userRoles->implode(', ');
-                $adminUser->notify(new AdminToggleNotification($rolesString));
-            }
-        } else {
-            // No pending bookings, do nothing or handle accordingly
-        }
-    }
+   
 
     // Toggle for Auto Accepting of New Bookings
     public function toggleAutoAccept()
@@ -175,7 +155,6 @@ class AdminDashboard extends Component
         $this->autoAccept = !$this->autoAccept; 
         $this->updateAutoAccept();
         $this->dispatch('refreshPage');
-        
         
     }   
 
@@ -266,20 +245,7 @@ class AdminDashboard extends Component
     public function saveId($id)
     {
         $this->alterBooking = Bookings::with(['user','desk'])->find($id);
-
-        // Check if there are any pending bookings
-        $bookings = Bookings::where('status', 'pending')
-        ->where('created_at', '>=', Carbon::now()->subDay())
-        ->get();
         
-        if ($bookings) {
-            $adminUser = Auth::user();
-            //check role
-            $rolesToCheck = ['admin', 'superadmin'];
-            $userRoles = $adminUser->roles->pluck('name')->intersect($rolesToCheck);
-            $rolesString = $userRoles->implode(', ');
-            $adminUser->notify(new AdminToggleNotification($rolesString));
-        }        
     }
 
     public function resetEditData() {

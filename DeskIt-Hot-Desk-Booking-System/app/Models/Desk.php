@@ -12,7 +12,12 @@ class Desk extends Model
     protected $fillable = [
         "id",
         "desk_num",
-        "status"
+        "status",
+        'amenities',
+    ];
+
+    protected $casts = [
+        'amenities' => 'array',
     ];
 
     public function bookings()

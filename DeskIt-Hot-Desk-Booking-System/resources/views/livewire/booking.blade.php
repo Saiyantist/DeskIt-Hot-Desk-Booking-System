@@ -3,70 +3,110 @@
     @include("admin.modals.updatedBooking")
 
 
-    <main class="flex flex-row gap-4 py-8 align-item-center self-center">
-        <div class="h-auto border shadow-lg w-96 px-4 py-4 ml-10 rounded-lg">
+    <main class="flex gap-4 py-8 justify-center items-center">
+       
+        <section class="flex flex-col">
+            <div class="h-auto border shadow-lg w-96 px-4 py-4 ml-10 rounded-xl">
 
-            <p class="text-2xl py-1 text-center text-slate-600 font-mono italic rounded-lg drop-shadow-md ">Book a Desk</p>
-
-            <div class="flex pt-2">
-                <div class="w-1/2 pr-2">
-                    <p class="text-base text-left">Desk#:
-                        <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $selectedDesk }}</span>
-                    </p>
-                </div>
-                <div class="w-1/2 pr-2">
-                    <p class="text-base text-left">Floor#:
-                        <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $floor }}</span>
-                    </p>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="w-1/2 pr-2">
-                    <p class="text-base text-left">Date:
-                       <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $date }}</span>
-                   </p>
-                </div>
-                <div class="w-1/2 pr-2">
-                    <p class="text-base text-left">Time:
-                          <span class="text-base bg-white border shadow-sm border border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $time }}</span>
-                   </p>
-                </div>
-            </div>
-
-           <div>
-              <p class="text-lg pt-4"> Desk #:  </p>
-               <div class="flex">
-                   <div class="w-1/2 pr-2">
-                       <img src="{{ asset('images/desk101.svg') }}">
-                   </div>
-                   <div class="w-1/2">
-                         <span class ="text-base font-semibold">Amenities: </span>
-                         <p class="text-xs">
-                          Adju231stable Chairs
-                          Personal Computer
-                          Desk Dividers
-                          Desk Drawers/Storage unit
+                <p class="text-2xl py-1 text-center text-slate-600 font-mono italic rounded-lg drop-shadow-md ">Book a Desk</p>
+    
+                <div class="flex">
+                    <div class=" w-1/6 pr-2">
+                        <p class="text-base text-left">Floor:
+                            <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $floor }}</span>
+                        </p>
+                    </div>
+                    <div class=" w-1/2 pr-2">
+                        <p class="text-base text-left">Date:
+                           <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $date }}</span>
                        </p>
-                   </div>
+                    </div>
+                    <div class=" w-9/12 pr-2">
+                        <p class="text-base text-left">Time:
+                              <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $time }}</span>
+                       </p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col">
+                   
+                    <div class="pr-2 flex flex-row items-center">
+                        <div>
+                            <p class="text-base text-left">Desk#: </p>
+                        </div>
+                        <div class="ml-2 w-1/2">
+                            <p class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $selectedDesk }}</p>
+                        </div>
+                    </div>
+                    
+                    @if($selectedDeskIndex === null)
+                        <div class="flex flex-col">
+                            <div class="w-full">
+                                <img src="{{ asset('images/chooseimg.svg') }}">
+                            </div>
+                            <div class="pt-2 opacity-55">
+                                <div class ="text-sm font-semibold pl-2 mt-2">Amenities: </div>
+                                <div class="flex flex-row">
+                                    <ul class="text-xs">
+                                        <li class="list-disc"> Choose a desk</li>
+                                        <li class="list-disc"> Choose a desk</li>
+                                        <li class="list-disc"> Choose a desk</li>
+                                        <li class="list-disc"> Choose a desk</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if($selectedDeskIndex !== null)
+                    <div class="flex flex-col">
+                        <div class="w-full">
+                            @if(($selectedDeskIndex >= 0 && $selectedDeskIndex < 4) || ($selectedDeskIndex >= 36 && $selectedDeskIndex <= 39))
+                                <img src="{{ asset('images/deskA.svg') }}">
+                            @elseif(($selectedDeskIndex >= 4 && $selectedDeskIndex < 10) || ($selectedDeskIndex >= 40 && $selectedDeskIndex < 46))
+                                <img src="{{ asset('images/deskB.svg') }}">
+                            @elseif(($selectedDeskIndex >= 10 && $selectedDeskIndex < 16) || ($selectedDeskIndex >= 46 && $selectedDeskIndex < 52))
+                                <img src="{{ asset('images/deskC.svg') }}">
+                            @elseif(($selectedDeskIndex >= 16 && $selectedDeskIndex < 22) || ($selectedDeskIndex >= 52 && $selectedDeskIndex < 58))
+                                <img src="{{ asset('images/deskD.svg') }}">
+                            @elseif(($selectedDeskIndex >= 22 && $selectedDeskIndex < 28) || ($selectedDeskIndex >= 58 && $selectedDeskIndex < 64))
+                                <img src="{{ asset('images/deskE.svg') }}">
+                            @elseif(($selectedDeskIndex >= 28 && $selectedDeskIndex < 36) || ($selectedDeskIndex >= 64 && $selectedDeskIndex < 72))
+                                <img src="{{ asset('images/deskF.svg') }}">
+                            @endif
+                        </div>
+                        <div class="pt-2">
+                            <div class ="text-sm font-semibold pl-2 mt-2">Amenities: </div>
+                            <div class="flex flex-row">
+                                <ul class="text-xs">
+                                    @foreach($desks[$selectedDeskIndex]->amenities as $amenity)
+                                        <li class="list-disc">{{ $amenity }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                </div>
+    
+                <div class="flex items-center justify-center">
+                    {{-- Booking Button --}}
+                    <button class="book justify-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl px-20 py-1 mt-2 text-lg"
+                        wire:click='validateBooking'
+                        wire:submit>
+                        Book
+                    </button>
                 </div>
             </div>
-
-             {{-- Booking Button --}}
-             <button class="book justify-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl px-24 py-1 ml-3 mt-2 text-lg flex self-center"
-                  wire:click='validateBooking'
-                  wire:submit>
-                   Book
-              </button>
-        </div>
+        </section>
         
         {{-- Main Content --}}
-        <section class="d-flex flex-col items-center justify-center p-4 pt-0 bg-yellowA rounded-2 relative">
+        <section class="flex flex-col p-4 pt-0 h-fit bg-yellowA rounded-2 relative">
 
             {{-- Booking  Controllers --}}
             <div class="flex flex-row py-3 self-start">
-                
-                {{-- Floor Chooser --}}
-                <div x-data="{ open: false }" @click.away="open = false" class="floor text-center mr-4">
+
+                 {{-- Floor Chooser --}}
+                 <div x-data="{ open: false }" @click.away="open = false" class="floor text-center mr-4">
                     <form method="POST" action="">
                     @csrf
                         <select class="form-select bg-warning text-center text-black uppercase floors"
@@ -125,7 +165,7 @@
             </div>
 
             {{-- Desk Map --}}
-            <div class=" w-12/12 h-100 bg-gray desk">
+            <div class=" w-12/12 h-fit bg-gray desk">
                 <div class="bg-gray desk m-4 flex flex-row relative justify-center">
 
                     <div class="absolute bottom-0 left-0">

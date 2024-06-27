@@ -32,8 +32,7 @@ final class UserDashboardBooking extends PowerGridComponent
             ->where('bookings.user_id', $userId)
             ->select('bookings.id', 
             'bookings.booking_date', 
-            'users.name as name', 
-            'users.email as email', 
+            'bookings.status',
             'desks.desk_num', 
             DB::raw('(CASE WHEN desks.id <= 36 THEN 1 ELSE 2 END) as floor')
         );
@@ -43,7 +42,6 @@ final class UserDashboardBooking extends PowerGridComponent
         $this->showCheckBox();
         return [
             Header::make()
-                ->showSearchInput()
                 ->includeViewOnTop('components.top-component'),
             Footer::make()
                 ->showPerPage()
@@ -65,27 +63,18 @@ final class UserDashboardBooking extends PowerGridComponent
     {
         return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('name')
-            ->addColumn('email')
             ->addColumn('desk_num', fn ($dish) => $dish->desk_num)
             ->addColumn('floor')
             ->addColumn('booking_date', function(Bookings $model) {
                 return Carbon::parse($model->booking_date)->format('F j, Y');
-            }, fn ($dish) => $dish->booking_date);
+            }, fn ($dish) => $dish->booking_date)
+            ->addColumn('status');
     }
 
     public function columns(): array
     {
         return [
             Column::make('ID', 'id')
-                ->searchable()
-                ->sortable(),
-
-            Column::make('Name', 'name')
-                ->searchable()
-                ->sortable(),
-
-            Column::make('Email', 'email')
                 ->searchable()
                 ->sortable(),
 
@@ -99,6 +88,8 @@ final class UserDashboardBooking extends PowerGridComponent
 
             Column::make('Date', 'booking_date')
                 ->searchable()
+                ->sortable(),
+            Column::make('Status', 'status')
                 ->sortable(),
         ];
     }

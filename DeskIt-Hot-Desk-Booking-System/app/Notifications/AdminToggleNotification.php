@@ -12,12 +12,10 @@ use Seld\PharUtils\Timestamps;
 class AdminToggleNotification extends Notification
 {
     use Queueable;
+   
     protected $role;
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct($role)
-    {
+
+    public function __construct( $role) {
         $this->role = $role;
     }
 
@@ -50,6 +48,7 @@ class AdminToggleNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
+
             'role' =>  $this->role,
             'title' => 'Action',
             'message' => 'Reminder: You have a pending booking that needs action.',
