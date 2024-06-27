@@ -193,9 +193,7 @@ class AdminDashboard extends Component
     {
         $bookings = Bookings::select('id', 'user_id', 'booking_date', 'desk_id', 'status')
             ->with(['user', 'desk'])
-            ->paginate($this->perPage);
-
-        $this->bookingsData = [];
+            ->get();
 
         foreach ($bookings as $booking) {
             $user = $booking->user->name ?? 'N/A';
@@ -209,9 +207,9 @@ class AdminDashboard extends Component
                 'Status' => $booking->status,
                 'Action' => 'canceled',
             ];
+            
         }
-
-        return $bookings;
+         
     }
 
 
@@ -293,11 +291,6 @@ class AdminDashboard extends Component
         $this->max = Carbon::today()->addDays(14)->toDateString();
         $this->min = Carbon::today()->toDateString();
 
-        $bookings = $this->fetchBookings();
-
-        return view('livewire.admin-dashboard', [
-            'bookingsData' => $this->bookingsData,
-            'bookings' => $bookings, 
-        ]);
+        return view('livewire.admin-dashboard');
     }
 }
