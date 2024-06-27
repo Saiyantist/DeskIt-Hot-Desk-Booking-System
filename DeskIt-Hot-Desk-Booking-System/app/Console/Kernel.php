@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Models\Bookings;
 use App\Notifications\UpcomingBookingNotification;
 use App\Notifications\UserBookingNotification;
+use Auth;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -21,10 +22,14 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $tomorrow = now()->addDay()->toDateString();
             $bookings = Bookings::whereDate('booking_date', $tomorrow)->get();
-
+            $user = Auth::user();
             foreach ($bookings as $booking) {
-                $booking->user->notify(new UpcomingBookingNotification($booking));
-                $booking->user->notify(new UserBookingNotification($booking, 'employee'));
+                if ($user->prefersNotification('booking_reminders_db')) {
+                    $booking->user->notify(new UserBookingNotification($booking, 'employee'));
+                }
+                if ($user->prefersNotification('booking_reminders_email')) {
+                    $booking->user->notify(new UpcomingBookingNotification($booking));
+                }
             }
         })->daily();
     }

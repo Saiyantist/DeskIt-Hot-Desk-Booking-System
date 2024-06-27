@@ -15,7 +15,7 @@
     </div>
 </div>
 
-@push('scripts')
+{{-- @push('scripts')
 <script>
     document.addEventListener('livewire:load', function () {
         Livewire.hook('message.processed', (message, component) => {
@@ -24,4 +24,4 @@
         });
     });
 </script>
-@endpush
+@endpush --}}

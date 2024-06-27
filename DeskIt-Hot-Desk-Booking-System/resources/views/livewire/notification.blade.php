@@ -1,22 +1,22 @@
-<div x-data="{ showModal: false }">
+<div x-data="{ showModal: false }" wire:poll="updateNotification">
     {{-- Navigation Bell Button--}}
     @php
     $currentRoute = Route::currentRouteName();
 @endphp
 
-<button 
-    wire:click="updateNotification" 
-    type="button" 
-    class="flex relative"
-    @click="showModal = true"
-    @if($currentRoute === 'notification' || $currentRoute === 'userNotification') disabled @endif
->
-    <i class="fa-regular fa-bell @if($currentRoute === 'notification' || $currentRoute === 'userNotification') fa-solid fa-bell text-yellowB  bg-gray-100 p-1.5 px-2.5 rounded-full @endif"></i>
+    <button 
+        {{-- wire:click="updateNotification"  --}}
+        type="button" 
+        class="flex relative"
+        @click="showModal = true"
+        @if($currentRoute === 'notification' || $currentRoute === 'userNotification') disabled @endif
+    >
+        <i class="fa-regular fa-bell @if($currentRoute === 'notification' || $currentRoute === 'userNotification') fa-solid fa-bell text-yellowB  bg-gray-100 p-1.5 px-2.5 rounded-full @endif"></i>
 
-    @if(!($currentRoute === 'notification' || $currentRoute === 'userNotification'))
-        <h6 class="ml-1 border border-2 border-blue px-1 rounded-md text-xs">{{ $unreadCount }}</h6>
-    @endif
-</button>
+        @if(!($currentRoute === 'notification' || $currentRoute === 'userNotification'))
+            <h6 class="ml-1 border border-2 border-blue px-1 rounded-md text-xs">{{ $unreadCount }}</h6>
+        @endif
+    </button>
 
 
     {{-- Modal --}}
@@ -41,7 +41,9 @@
                                     <div x-show="showModal1" @click.away="showModal1 = false" x-cloak class="absolute bg-white shadow-sm p-3 right-6 top-0 w-max rounded-lg">
                                         <div class="flex flex-col">
                                             <a wire:navigate href="{{ Auth::user()->hasRole('admin') || Auth::user()->hasRole('superadmin') ? route('notification') : route('userNotification') }}" class="text-block pb-1 text-sm no-underline"><i class="fa-regular fa-eye text-sm"></i> See all</a>
-                                            <a href="" class="text-block text-sm no-underline"><i class="fa-solid fa-gear text-sm"></i> Notification settings</a>
+                                            @if(Auth::user()->roles->where('name', 'employee')->isNotEmpty())
+                                                <a wire:navigate href="{{route('userProfileSetting')}}" class="text-block text-sm no-underline"><i class="fa-solid fa-gear text-sm"></i> Notification settings</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

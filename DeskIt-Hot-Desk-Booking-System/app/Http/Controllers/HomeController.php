@@ -36,6 +36,7 @@ class HomeController extends Controller
         $todaysBooking = Bookings::with('desk')
             ->where('user_id', $userId)
             ->where('booking_date', $today)
+            ->where('status', 'accepted')
             ->first();
             
         $upcomingBookings = Bookings::with('desk')
@@ -68,6 +69,7 @@ class HomeController extends Controller
         foreach ($userBookings as $booking) {
             $bookingDate = $booking->booking_date;
             $deskID = $booking->desk_id;
+            $status = $booking->status;
 
             $desk = Desk::find($deskID);
 
@@ -78,6 +80,7 @@ class HomeController extends Controller
 
                 $events[] = [
                     'title' => 'Floor ' . $floor . ' - ' . 'Desk ' . $deskNum,
+                    'statusTitle' => 'Status: ' . $status,
                     'start' => $bookingDate,
                     'end' => $bookingDate,
                 ];

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
+use App\Models\User;
 use Illuminate\Validation\Rules\Can;
 
 use function PHPUnit\Framework\returnValue;
@@ -34,9 +35,9 @@ class Booking extends Component
     public $showWarning2 = false;
     public $showWarning3 = false;
     
+    public $tutorialCompleted = false;
 
-
-
+    public $selectedDeskIndex = null;
     public function refreshMap() 
     {
         $date = $this->date;
@@ -164,6 +165,7 @@ class Booking extends Component
                     /** Then finally, assign the $selectedDesk as the Desk Selected */ 
                     $this->selectedDesk = $desks[$key]->desk_num;
                     $this->selectedDeskID = $desks[$key]->id;
+                    $this->selectedDeskIndex = $key;
                 }
     
                 elseif(in_array($desks[$key]->id, $this->bookedDeskIDs))
@@ -262,6 +264,22 @@ class Booking extends Component
 
         // dd($status); 
     }
+    public function mount()
+    {
+        $user = Auth::user();
+        $this->tutorialCompleted = $user->tutorial_completed;
+    }
+
+    protected $listeners = ['completeTutorial'];
+    public function completeTutorial()
+    {
+        $user = Auth::user();
+        $user->tutorial_completed = true;
+        $user->save();
+
+        $this->tutorialCompleted = true;
+    }
+    
 
     public function render()
     {
@@ -273,6 +291,11 @@ class Booking extends Component
         $this->min= Carbon::today()->toDateString();
         $min = $this->min;
 
-        return view('livewire.booking', compact('desks', 'max', 'min'));
+        return view('livewire.booking', [
+            'desks' => $desks,
+            'max' => $this->max,
+            'min' => $this->min,
+            'tutorialCompleted' => $this->tutorialCompleted,
+        ]);
     }
 }
