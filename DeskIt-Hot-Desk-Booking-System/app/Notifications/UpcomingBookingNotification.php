@@ -46,6 +46,7 @@ class UpcomingBookingNotification extends Notification implements ShouldQueue
         return [
             'booking_id' => $this->booking->id,
             'booking_date' => $this->booking->booking_date,
+            'booking_time' => $this->booking->booking_time,
             'desk_num' => $this->booking->desk->desk_num,
             'floor' => $this->booking->desk_id <= 36 ? 1 : 2,
         ];

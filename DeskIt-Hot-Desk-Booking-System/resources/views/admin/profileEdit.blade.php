@@ -37,7 +37,8 @@
                             wire:model.live="name" 
                             type="text" 
                             name="name"
-                            @click.away="$wire.set('editMode', false)">
+                            {{-- @click.away="$wire.set('editMode', false)" --}}
+                            >
                     
                         @else
                         <div class="border p-2 rounded-lg w-80" 
@@ -54,7 +55,9 @@
     
                         @if ($editMode)
                         <input class="border p-2 rounded-lg w-80" 
-                            wire:model.live="email" type="email">
+                            wire:model.live="email" type="email"
+                            {{-- @click.away="$wire.set('editMode', false)" --}}
+                            >
                             
                         @else
                         <div class="border p-2 rounded-lg w-80" 
@@ -75,7 +78,9 @@
     
                         @if ($editMode)
                         <select class="border p-2 rounded-lg w-80" name="gender" 
-                            wire:model.live="editGender">
+                            wire:model.live="editGender"
+                            {{-- @click.away="$wire.set('editMode', false)" --}}
+                            >
     
                             @if(Auth::user()->gender === 'male')
                             <option value='' selected>male</option>
@@ -86,6 +91,7 @@
                             <option value="male">male</option>
     
                             @endif
+                            
                         </select>
     
                         @else
@@ -104,7 +110,9 @@
                         @if ($editMode)
                         <input class="border p-2 rounded-lg w-80" 
                             wire:model.live="birthday" type="date"
-                            name="birthday">
+                            name="birthday"
+                            {{-- @click.away="$wire.set('editMode', false)" --}}
+                            >
                             
                         @else
                         <div class="border p-2 rounded-lg w-80" 

@@ -34,11 +34,15 @@ Route::get('/test-notification', function () {
     $booking->user_id = $user->id;
     $booking->booking_date = now()->addDay()->toDateString();
     $booking->desk_id = 38;
+    $booking->booking_time = '8:00 am - 7:00 pm';
     $booking->save();
 
-    // $user->notify(new UpcomingBookingNotification($booking));
-    
-    $booking->user->notify(new UserBookingNotification($booking, 'employee'));
+    if ($user->prefersNotification('booking_reminders_db')) {
+        $booking->user->notify(new UserBookingNotification($booking, 'employee'));
+    }
+    if ($user->prefersNotification('booking_reminders_email')) {
+        $booking->user->notify(new UpcomingBookingNotification($booking));
+    }
 
     return 'Notification sent!';
 });
@@ -163,9 +167,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('userNotification');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
     Route::get('/user/profile', function () {
-        return view('admin.profile');
+        return view('home.profile');
         // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
+    Route::get('/user/profile/notification-settings', function () {
+        return view('home.profile');
+    })->name('userProfileSetting');
     Route::get('/user/support', function () {
         return view('support.support');
     })->name('userSupport');

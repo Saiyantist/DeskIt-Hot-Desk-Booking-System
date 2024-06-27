@@ -21,25 +21,26 @@ use function Livewire\once;
 use App\Notifications\AdminToggleNotification;
 use App\Notifications\AcceptBookingNotification;
 use App\Notifications\DeclineBookingNotification;
+use App\Notifications\AcceptBookingEmail;
+use App\Notifications\DeclineBookingEmail;
+        
 class AdminDashboard extends Component
 {
 
     use WithPagination;
 
     public $perPage = 10;
-    public $availableDeskCount;
-    public $bookedCount;
-    public $notAvailableCount;
+    public $totalBookings;
+    public $newBookings;
+    public $floor1Bookings;
+    public $floor1AvailableDesk;
+    public $floor1NotAvailable;
+    public $bookedDeskIdsFloor1;
+    public $bookedDeskIdsFloor2;
 
-    public $floor1Count;
-    public $floor1AvailableDeskCount;
-    public $floor1BookedCount;
-    public $floor1NotAvailableCount;
-
-    public $floor2Count;
-    public $floor2AvailableDeskCount;
-    public $floor2BookedCount;
-    public $floor2NotAvailableCount;
+    public $floor2Bookings;
+    public $floor2AvailableDesk;
+    public $floor2NotAvailable;
 
     public $bookingsData = [];
     public $showModal = false;
@@ -53,42 +54,99 @@ class AdminDashboard extends Component
     public $max;
     public $message;
 
+    public $hasPendingBookings = false;
+
+    public $currentMonth;
+    public $currentDay;
+    public $currentWeek;
+    public $currentTime;
+    public $currentMeridiem;
+
+    public $weekBookings;
+    public $availableDesksThisWeek;
+    public $notAvailableDesksThisWeek;
+    public $bookedDesksThisWeek;
+    public $availableDesksLastWeek;
+    public $notAvailableDesksLastWeek;
+    public $bookedDesksLastWeek;
+
+    
+
+
     public function mount()
     {   
         $deskRange = range(1, 36);
-        $deskRange2 = range(36, 71);
+        $deskRange2 = range(37, 72);
 
-        $this->availableDeskCount = Desk::where('status', 'in_use')->count();
-        $this->notAvailableCount = Desk::where('status', 'not_available')->count();
-        $this->bookedCount = Bookings::where('status', 'accepted')->count();
+        $this->totalBookings = Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::today())->count() ?: 0;
+        $this->newBookings = Bookings::where('status', 'accepted')->whereDate('created_at', Carbon::today())->count() ?: 0;
 
-        $this->floor1Count = Desk::whereIn('id', $deskRange)->count();
-        $this->floor2Count = Desk::whereIn('id', $deskRange2)->count();
+        $this->floor1Bookings = Bookings::whereIn('desk_id', $deskRange)->whereDate('booking_date', Carbon::today())->count() ?: 0;
+        $this->floor2Bookings = Bookings::whereIn('desk_id', $deskRange2)->whereDate('booking_date', Carbon::today())->count() ?: 0;
 
-        $this->floor1AvailableDeskCount = Desk::whereIn('id', $deskRange)->where('status', 'in_use')->count();
-        $this->floor1NotAvailableCount = Desk::whereIn('id', $deskRange)->where('status', 'not_available')->count();
-        $this->floor2AvailableDeskCount = Desk::whereIn('id', $deskRange)->where('status', 'in_use')->count();
-        $this->floor2NotAvailableCount = Desk::whereIn('id', $deskRange2)->where('status', 'not_available')->count();
+        $this->bookedDeskIdsFloor1 = Bookings::whereIn('desk_id', $deskRange)->where('status', 'accepted')->whereDate('booking_date', Carbon::today())->pluck('desk_id')->toArray();
+        $this->bookedDeskIdsFloor2 = Bookings::whereIn('desk_id', $deskRange2)->where('status', 'accepted')->whereDate('booking_date', Carbon::today())->pluck('desk_id')->toArray();
+        
+        $this->floor1AvailableDesk = count($deskRange) - count($this->bookedDeskIdsFloor1);
+        $this->floor2AvailableDesk = count($deskRange2) - count($this->bookedDeskIdsFloor2);
+        
+        $this->floor1NotAvailable = Bookings::whereIn('desk_id', $deskRange)->where('status', 'not_available')->count();
+        $this->floor2NotAvailable = Bookings::whereIn('desk_id', $deskRange2)->where('status', 'not_available')->count();
+ 
+        $this->availableDesksThisWeek = $this->floor1AvailableDesk + $this->floor2AvailableDesk;
+        $this->notAvailableDesksThisWeek = $this->floor1NotAvailable + $this->floor2NotAvailable;
+        $this->bookedDesksThisWeek = count($this->bookedDeskIdsFloor1) + count($this->bookedDeskIdsFloor2);
 
-        $this->floor1BookedCount = Bookings::whereIn('desk_id', $deskRange)->where('status', 'accepted')->count();
-        $this->floor2BookedCount = Bookings::whereIn('desk_id', $deskRange2)->where('status', 'accepted')->count();
+        $this->availableDesksLastWeek = 
+            count($deskRange) + count($deskRange2) - 
+            Bookings::whereIn('desk_id', array_merge($deskRange, $deskRange2))
+            ->where('status', 'accepted')
+            ->whereBetween('booking_date', [Carbon::now()->startOfWeek()->subWeek(), Carbon::now()->endOfWeek()->subWeek()])
+            ->count();
+
+        $this->notAvailableDesksLastWeek = 
+            Bookings::whereIn('desk_id', array_merge($deskRange, $deskRange2))
+            ->where('status', 'not_available')
+            ->whereBetween('booking_date', [Carbon::now()->startOfWeek()->subWeek(), Carbon::now()->endOfWeek()->subWeek()])
+            ->count();
+
+        $this->bookedDesksLastWeek = 
+            Bookings::whereIn('desk_id', array_merge($deskRange, $deskRange2))
+            ->where('status', 'accepted')
+            ->whereBetween('booking_date', [Carbon::now()->startOfWeek()->subWeek(), Carbon::now()->endOfWeek()->subWeek()])
+            ->count();
 
         $this->fetchBookings();
 
         $this->autoAccept = Config::get('bookings.auto_accept');
 
-        // Check if there are any pending bookings
-        $bookings = Bookings::where('status', 'pending')->count();
-        
-        if ($bookings) {
-            $adminUser = Auth::user();
-            //check role
-            $rolesToCheck = ['admin', 'superadmin'];
-            $userRoles = $adminUser->roles->pluck('name')->intersect($rolesToCheck);
-            $rolesString = $userRoles->implode(', ');
-            $adminUser->notify(new AdminToggleNotification($rolesString));
-        }        
+        date_default_timezone_set('Asia/Manila'); 
+        $this->currentMonth = Carbon::now()->format('F Y');  // Full month name
+        $this->currentDay = Carbon::now()->format('d'); // Day of the month with leading zeros
+        $this->currentWeek = Carbon::now()->format('l'); // Full name of the day of the week
+        $this->currentTime = Carbon::now()->format('h:i A'); // 12-hour format with leading zeros and AM/PM
+
+
+        $this->weekBookings = [
+            'this_week' => [
+                'monday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->addDays(0))->count() ?: 0,
+                'tuesday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->addDays(1))->count() ?: 0,
+                'wednesday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->addDays(2))->count() ?: 0,
+                'thursday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->addDays(3))->count() ?: 0,
+                'friday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->addDays(4))->count() ?: 0,
+            ],
+            'last_week' => [
+                'monday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->subWeek()->addDays(0))->count() ?: 0,
+                'tuesday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->subWeek()->addDays(1))->count() ?: 0,
+                'wednesday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->subWeek()->addDays(2))->count() ?: 0,
+                'thursday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->subWeek()->addDays(3))->count() ?: 0,
+                'friday' => Bookings::where('status', 'accepted')->whereDate('booking_date', Carbon::now()->startOfWeek()->subWeek()->addDays(4))->count() ?: 0,
+            ],
+        ];
+
     }
+
+   
 
     // Toggle for Auto Accepting of New Bookings
     public function toggleAutoAccept()
@@ -114,7 +172,9 @@ class AdminDashboard extends Component
     {
         $bookings = Bookings::select('id', 'user_id', 'booking_date', 'desk_id', 'status')
             ->with(['user', 'desk'])
-            ->get();
+            ->paginate($this->perPage);
+
+        $this->bookingsData = [];
 
         foreach ($bookings as $booking) {
             $user = $booking->user->name ?? 'N/A';
@@ -128,7 +188,9 @@ class AdminDashboard extends Component
                 'Status' => $booking->status,
                 'Action' => 'canceled',
             ];
+            
         }
+        return $bookings;
     }
 
 
@@ -143,9 +205,13 @@ class AdminDashboard extends Component
             // Get the user associated with the booking
             $user = $this->alterBooking->user;
     
-            // Notify the user if they prefer notifications for reserved desk status
-            if ($user->prefersNotification('reserved_desk_status')) {
+            // For reserved desk status
+            if ($user->prefersNotification('reserved_desk_status_db')) {
                 $user->notify(new AcceptBookingNotification('employee'));
+            }
+            if ($user->prefersNotification('reserved_desk_status_email')) {
+                $booking = new Bookings();
+                $user->notify(new AcceptBookingEmail($booking));
             }
     
             // Dispatch the refreshPage event
@@ -163,10 +229,13 @@ class AdminDashboard extends Component
 
             // Get the user associated with the booking
             $user = $this->alterBooking->user;
-    
-            // Notify the user if they prefer notifications for reserved desk status
-            if ($user->prefersNotification('reserved_desk_status')) {
+    // For reserved desk status
+            if ($user->prefersNotification('reserved_desk_status_db')) {
                 $user->notify(new DeclineBookingNotification('employee'));
+            }
+            if ($user->prefersNotification('reserved_desk_status_email')) {
+                $booking = new Bookings();
+                $user->notify(new DeclineBookingEmail($booking));
             }
             
             $this->dispatch('refreshPage');
@@ -176,6 +245,7 @@ class AdminDashboard extends Component
     public function saveId($id)
     {
         $this->alterBooking = Bookings::with(['user','desk'])->find($id);
+        
     }
 
     public function resetEditData() {
@@ -189,6 +259,11 @@ class AdminDashboard extends Component
         $this->max = Carbon::today()->addDays(14)->toDateString();
         $this->min = Carbon::today()->toDateString();
 
-        return view('livewire.admin-dashboard');
+        $bookings = $this->fetchBookings();
+
+        return view('livewire.admin-dashboard', [
+            'bookingsData' => $this->bookingsData,
+            'bookings' => $bookings,
+        ]);
     }
 }

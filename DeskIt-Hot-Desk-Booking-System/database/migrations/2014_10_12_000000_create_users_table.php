@@ -18,10 +18,12 @@ return new class extends Migration
             $table->string('name');
             $table->enum('gender', ['male', 'female']);
             $table->date('birthday')->nullable();
+            $table->string('avatar')->nullable();
             $table->enum('position', ['Employee', 'Front-end Dev', 'Back-end Dev', 'UI/UX Designer', 'System Analyst', 'Solutions Architect', 'Project Manager', 'Full Stack Developer'])->default('Employee');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('tutorial_completed')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -28,6 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'birthday',
         'position',
         'phone',
+        'avatar',
+        'tutorial_completed',
     ];
 
     /**
@@ -47,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'preferences' => 'array',
     ];
 
     /**
@@ -78,5 +81,4 @@ class User extends Authenticatable implements MustVerifyEmail
     public function prefersNotification($type) {
         return $this->preferences[$type] ?? true;
     }
-    
 }
