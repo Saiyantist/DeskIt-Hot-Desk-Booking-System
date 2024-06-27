@@ -263,6 +263,16 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="mt-4">
+                        {{ $bookings->links() }}
+                        @if ($bookings->previousPageUrl())
+                            <a href="{{ $bookings->previousPageUrl() }}" class="ml-2">&larr; Previous Page</a>
+                        @endif
+
+                        @if ($bookings->hasMorePages())
+                            <a href="{{ $bookings->nextPageUrl() }}" class="ml-2">Next Page &rarr;</a>
+                        @endif
+                    </div>
                 </div>
             </div>
 
