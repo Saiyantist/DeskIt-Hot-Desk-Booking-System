@@ -180,20 +180,23 @@
                         <h2 class="justify-center text-xl">Bookings</h2>
                     </div>
                     <div class="flex justify-center items-center mx-10">
-                        <h6>Enable Automatic Booking</h6>
+                        <div>
+                            <h6 class="m-0 p-0">Enable Automatic Booking</h6>
+                        </div>
                         <div>
                             @if (Config::get('bookings.auto_accept'))
-                            <button
-                                class="justify-center items-center bg-green-500 text-white hover:bg-green-600 hover:text-white font-bold rounded-xl p-0 px-3 text-md ml-4"
-                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>
-                                <i class="fa-solid fa-toggle-on"></i>
-                            </button>
+                            <i class="fa-solid fa-toggle-on text-2xl w-10 text-center 
+                                justify-center items-center bg-green-500 text-white hover:bg-green-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
+                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit
+                                >
+                            </i>
                             @else
-                            <button
-                                class="justify-center items-center bg-gray-300 hover:bg-gray-400 text-white font-bold rounded-xl p-0 px-3 text-md ml-4"
-                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>
-                                <i class="fa-solid fa-toggle-off"></i>
-                            </button>
+
+                            <i class="fa-solid fa-toggle-off text-2xl w-10 text-center 
+                                justify-center items-center bg-gray-500 text-white hover:bg-gray-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
+                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit
+                                >
+                            </i>
                             @endif
                         </div>
                     </div>
@@ -208,17 +211,17 @@
                                 <tr>
                                     <th class="w-1/6">ID</th>
                                     <th class="w-1/6">Name</th>
-                                    <th class="w-1/6">Date</th>
-                                    <th class="w-1/6">Desk ID</th>
+                                    <th class="w-1/5">Date</th>
+                                    <th class="w-[10%]">Desk ID</th>
                                     <th class="w-1/6">Status</th>
                                     <th class="w-1/6">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($bookingsData as $booking)
-                                <tr>
+                                <tr">
                                     <td>{{ $booking['Id'] }}</td>
-                                    <td class="max-w-64 truncate ...">{{ $booking['Name'] }}</td>
+                                    <td class="max-w-44 truncate ...">{{ $booking['Name'] }}</td>
                                     <td>{{ $booking['Date'] }}</td>
                                     <td>{{ $booking['Desk ID'] }}</td>
                                     <td>{{ $booking['Status'] }}</td>

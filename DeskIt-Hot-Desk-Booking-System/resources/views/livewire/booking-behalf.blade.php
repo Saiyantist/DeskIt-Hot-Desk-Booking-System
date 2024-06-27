@@ -35,18 +35,8 @@
                         <p class="text-sm bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $time }}</h6>
                     </div>
 
-                    {{-- Desk --}}
-                    <div class="flex flex-row justify-content-between mb-2">
-                        <div>
-                            <p class="text-lg text-left">Desk#:</h6>
-                        </div>
-                        <div>
-                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
-                        </div>
-                    </div>
-
                     {{-- Book on behalf --}}
-                    <div class="flex flex-row justify-content-between ">
+                    <div class="flex flex-row justify-content-between mb-2 ">
 
                         {{-- Label --}}
                         <div>
@@ -62,6 +52,16 @@
                                 
                             @endif
                             </p>
+                        </div>
+                    </div>
+
+                    {{-- Desk --}}
+                    <div class="flex flex-row justify-content-between">
+                        <div>
+                            <p class="text-lg text-left">Desk#:</h6>
+                        </div>
+                        <div>
+                            <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
                         </div>
                     </div>
                     
