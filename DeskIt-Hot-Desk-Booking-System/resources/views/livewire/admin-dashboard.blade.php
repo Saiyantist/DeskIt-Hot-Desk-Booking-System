@@ -262,24 +262,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="mt-4 flex justify-between items-center">
-                            <div>
-                                {{ $bookings->links() }}
-                            </div>
-                            <div>
-                                @if ($bookings->hasMorePages())
-                                    <button wire:click="gotoPage({{ $bookings->currentPage() + 1 }})"
-                                            class="px-3 py-1 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md focus:outline-none">
-                                        Next Page
-                                    </button>
-                                @endif
-                                @if ($bookings->currentPage() > 1)
-                                    <button wire:click="gotoPage({{ $bookings->currentPage() - 1 }})"
-                                            class="px-3 py-1 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md focus:outline-none">
-                                        Previous Page
-                                    </button>
-                                @endif
-                            </div>
                     </div>
                 </div>
             </div>
