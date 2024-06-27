@@ -262,6 +262,24 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div>
+                                {{ $bookings->links() }}
+                            </div>
+                            <div>
+                                @if ($bookings->hasMorePages())
+                                    <button wire:click="gotoPage({{ $bookings->currentPage() + 1 }})"
+                                            class="px-3 py-1 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md focus:outline-none">
+                                        Next Page
+                                    </button>
+                                @endif
+                                @if ($bookings->currentPage() > 1)
+                                    <button wire:click="gotoPage({{ $bookings->currentPage() - 1 }})"
+                                            class="px-3 py-1 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md focus:outline-none">
+                                        Previous Page
+                                    </button>
+                                @endif
+                            </div>
                     </div>
                 </div>
             </div>
@@ -283,11 +301,9 @@
                                 <p class="text-sm">{{ $totalBookings }}</p>
                             </div>
                             <div class="relative">
-                                <select
-                                    class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                    <option>This Week</option>
-                                    <option>Last Week</option>
-                                    <option>June 3 - June 7</option>
+                                <select id="weekSelector" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option value="this_week">This Week</option>
+                                    <option value="last_week">Last Week</option>
                                 </select>
                                 <div
                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-100">
@@ -343,58 +359,106 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Define shared data for both charts
-            var weekDays = ['Mon', 'Tues', 'Wed', 'Thurs', 'Friday'];
-            var deskData = [15, 10, 12, 30, 10, 15];
+        var weekBookings = @json($weekBookings);
 
-            // Bar Chart
-            var ctx = document.getElementById('deskChart').getContext('2d');
-            var ordersChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: weekDays,
-                    datasets: [{
-                        label: 'Desk',
-                        data: deskData.slice(0, 5), // Only use data for weekdays
-                        backgroundColor: ['#FFC0CB', '#ADD8E6', '#EE82EE', '#FFD700', '#FFA07A'],
-                        borderColor: ['#FFA07A', '#FFC0CB', '#ADD8E6', '#EE82EE', '#FFD700'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                }
-            });
+        var availableDesksThisWeek = @json($availableDesksThisWeek);
+        var notAvailableDesksThisWeek = @json($notAvailableDesksThisWeek);
+        var bookedDesksThisWeek = @json($bookedDesksThisWeek);
 
-            // Pie Chart
-            var pieCtx = document.getElementById('pieChart').getContext('2d');
-            var pieChart = new Chart(pieCtx, {
-                type: 'pie',
-                data: {
-                    labels: ['Available', 'Not Available', 'Booked'],
-                    datasets: [{
-                        data: [deskData[0], deskData[1], deskData.slice(2).reduce((a, b) => a + b, 0)],
-                        backgroundColor: ['#FFD700', '#FF69B4', '#FFA500'],
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom'
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
+        var availableDesksLastWeek = @json($availableDesksLastWeek);
+        var notAvailableDesksLastWeek = @json($notAvailableDesksLastWeek);
+        var bookedDesksLastWeek = @json($bookedDesksLastWeek);
+
+        var deskData = {
+            'this_week': [
+                weekBookings.this_week.monday,
+                weekBookings.this_week.tuesday,
+                weekBookings.this_week.wednesday,
+                weekBookings.this_week.thursday,
+                weekBookings.this_week.friday
+            ],
+            'last_week': [
+                weekBookings.last_week.monday,
+                weekBookings.last_week.tuesday,
+                weekBookings.last_week.wednesday,
+                weekBookings.last_week.thursday,
+                weekBookings.last_week.friday
+            ]
+        };
+
+        var pieData = {
+            'this_week': {
+                available: availableDesksThisWeek,
+                notAvailable: notAvailableDesksThisWeek,
+                booked: bookedDesksThisWeek
+            },
+            'last_week': {
+                available: availableDesksLastWeek,
+                notAvailable: notAvailableDesksLastWeek,
+                booked: bookedDesksLastWeek
+            }
+        };
+
+        var ctx = document.getElementById('deskChart').getContext('2d');
+        var ordersChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri'],
+                datasets: [{
+                    label: 'Desk',
+                    data: deskData.this_week,
+                    backgroundColor: ['#FFC0CB', '#ADD8E6', '#EE82EE', '#FFD700', '#FFA07A'],
+                    borderColor: ['#FFA07A', '#FFC0CB', '#ADD8E6', '#EE82EE', '#FFD700'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
                 }
-            });
+            }
+        });
+
+        var pieCtx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Available', 'Not Available', 'Booked'],
+                datasets: [{
+                    data: [pieData.this_week.available, pieData.this_week.notAvailable, pieData.this_week.booked],
+                    backgroundColor: ['#FFD700', '#FF69B4', '#FFA500'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            }
+        });
+
+        document.getElementById('weekSelector').addEventListener('change', function() {
+            var selectedWeek = this.value;
+
+            ordersChart.data.datasets[0].data = deskData[selectedWeek];
+            ordersChart.update();
+
+            pieChart.data.datasets[0].data = [
+                pieData[selectedWeek].available, 
+                pieData[selectedWeek].notAvailable, 
+                pieData[selectedWeek].booked
+            ];
+            pieChart.update();
+        });
     </script>
 
 
