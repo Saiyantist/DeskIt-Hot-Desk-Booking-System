@@ -189,11 +189,11 @@
                                 <i class="fa-solid fa-toggle-on"></i>
                             </button>
                             @else
-                                <button
-                                    class="justify-center items-center bg-gray-300 hover:bg-gray-400 text-white font-bold rounded-xl p-0 px-3 text-md ml-4"
-                                    wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>
-                                    <i class="fa-solid fa-toggle-off"></i>
-                                </button>
+                            <button
+                                class="justify-center items-center bg-gray-300 hover:bg-gray-400 text-white font-bold rounded-xl p-0 px-3 text-md ml-4"
+                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit>
+                                <i class="fa-solid fa-toggle-off"></i>
+                            </button>
                             @endif
                         </div>
                     </div>
@@ -266,11 +266,11 @@
                     <div class="mt-4">
                         {{ $bookings->links() }}
                         @if ($bookings->previousPageUrl())
-                            <a href="{{ $bookings->previousPageUrl() }}" class="ml-2">&larr; Previous Page</a>
+                        <a href="{{ $bookings->previousPageUrl() }}" class="ml-2">&larr; Previous Page</a>
                         @endif
 
                         @if ($bookings->hasMorePages())
-                            <a href="{{ $bookings->nextPageUrl() }}" class="ml-2">Next Page &rarr;</a>
+                        <a href="{{ $bookings->nextPageUrl() }}" class="ml-2">Next Page &rarr;</a>
                         @endif
                     </div>
                 </div>
@@ -279,21 +279,22 @@
             <div class="w-1/2">
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <div class="flex justify-end mb-3">
-                        <button class="btn btn-warning text-white">
+                        <button wire:navigate href="{{route('book-behalf')}}" class="btn btn-warning text-white">
                             <img class="h-6 w-6 inline-block mr-2" src="{{ asset('images/plus.svg') }}"
                                 alt="Create Booking">
                             <span>Create Booking</span>
                         </button>
                     </div>
                     <h2 class="text-lg font-semibold mb-3">Booking Statistics</h2>
-                    <div class="bg-white p-2 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center text-center mb-3">
-                            <div>
-                                <span class="text-sm">Total Bookings</span>
-                                <p class="text-sm">{{ $totalBookings }}</p>
+                    <div class="bg-white p-1 rounded-lg shadow-sm">
+                        <div class="flex justify-around items-center text-center mb-3">
+                            <div class="bg-yellowB p-2 rounded-lg">
+                                <span class="text-sm text-white">Total Bookings</span>
+                                <p class="text-sm font-semibold text-white m-0">{{ $totalBookings }}</p>
                             </div>
                             <div class="relative">
-                                <select id="weekSelector" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                <select id="weekSelector"
+                                    class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                     <option value="this_week">This Week</option>
                                     <option value="last_week">Last Week</option>
                                 </select>
@@ -306,41 +307,22 @@
                         <!-- Placeholder for charts -->
                         <div class="mt-4 flex justify-around">
                             <label class="inline-flex items-center">
-                                <input type="radio" name="chartOption" value="deskChart" checked class="h-2 w-2">
-                                <span class="ml-2 text-gray-700">Desk Chart</span>
+                                <input type="radio" name="chartOption" value="deskChart" checked
+                                    class="h-2 w-2 bg-darkgray">
+                                <span class="ml-2">Desk Chart</span>
                             </label>
-                            <label>
-                                <input type="radio" name="chartOption" value="pieChart" class="h-2 w-2">
-                                Pie Chart
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="chartOption" value="pieChart" class="h-2 w-2 bg-darkgray">
+                                <span class="ml-2">Pie Chart</span>
                             </label>
                         </div>
-                        
+
                         <div class="mt-4">
                             <canvas id="deskChart" width="200" height="200"></canvas>
                         </div>
                         <div class="mt-4" style="display: none;">
                             <canvas id="pieChart" width="200" height="200"></canvas>
                         </div>
-                        
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                const radioButtons = document.querySelectorAll('input[name="chartOption"]');
-                                const deskChartDiv = document.getElementById('deskChart').parentElement;
-                                const pieChartDiv = document.getElementById('pieChart').parentElement;
-                        
-                                radioButtons.forEach(radio => {
-                                    radio.addEventListener('change', function() {
-                                        if (this.value === 'deskChart') {
-                                            deskChartDiv.style.display = 'block';
-                                            pieChartDiv.style.display = 'none';
-                                        } else if (this.value === 'pieChart') {
-                                            deskChartDiv.style.display = 'none';
-                                            pieChartDiv.style.display = 'block';
-                                        }
-                                    });
-                                });
-                            });
-                        </script>
                     </div>
                 </div>
             </div>
@@ -348,6 +330,25 @@
     </div>
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="chartOption"]');
+            const deskChartDiv = document.getElementById('deskChart').parentElement;
+            const pieChartDiv = document.getElementById('pieChart').parentElement;
+    
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'deskChart') {
+                        deskChartDiv.style.display = 'block';
+                        pieChartDiv.style.display = 'none';
+                    } else if (this.value === 'pieChart') {
+                        deskChartDiv.style.display = 'none';
+                        pieChartDiv.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>

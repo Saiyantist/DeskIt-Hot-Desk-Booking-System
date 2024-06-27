@@ -167,9 +167,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('userNotification');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
     Route::get('/user/profile', function () {
-        return view('admin.profile');
+        return view('home.profile');
         // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
+    Route::get('/user/profile/notification-settings', function () {
+        return view('home.profile');
+    })->name('userProfileSetting');
     Route::get('/user/support', function () {
         return view('support.support');
     })->name('userSupport');
