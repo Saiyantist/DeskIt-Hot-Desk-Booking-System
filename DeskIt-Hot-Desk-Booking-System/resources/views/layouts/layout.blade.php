@@ -21,9 +21,57 @@
     </script>
     <script src="https://kit.fontawesome.com/8d7ba59e72.js" crossorigin="anonymous"></script>
     
-    
-    
     @livewireStyles
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+        <style>
+        .darkmode-layer, .darkmode-toggle {
+            z-index: 500;
+        }
+        .darkmode--activated .navbar{
+            -webkit-filter: invert(1);
+            filter: invert(1);
+        }
+
+    </style>
+    <script>
+    function darkModeToggle() {
+        return {
+            darkmode: null,
+            isDarkMode: false,
+            init() {
+                // Initialize darkmode instance
+                this.darkmode = new Darkmode({
+                    time: '0.5s',
+                    mixColor: '#fff',
+                    backgroundColor: '#fff',
+                    buttonColorDark: '#100f2c',
+                    buttonColorLight: '#fff',
+                    label: '🌓',
+                    saveInCookies: true,
+                    autoMatchOsTheme: false,
+                    
+                });
+                this.darkmode.showWidget();
+
+                // Apply dark mode on load if saved
+                if (this.darkmode.isActivated()) {
+                    this.isDarkMode = true;
+                }
+            },
+            toggleDarkMode() {
+                this.darkmode.toggle();
+                this.isDarkMode = this.darkmode.isActivated();
+                
+            },
+        };
+    }
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('darkModeToggle', darkModeToggle());
+    });
+</script>        
+    
 </head>
 
 <body>

@@ -46,5 +46,6 @@
             </main>
         </div>
         <script src="{{ asset('vendor/power-components/livewire-powergrid/powergrid.js') }}"></script>
+        @livewireScripts
     </body>
 </html>

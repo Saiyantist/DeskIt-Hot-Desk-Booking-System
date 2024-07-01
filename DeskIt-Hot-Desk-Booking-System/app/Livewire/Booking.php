@@ -16,7 +16,7 @@ use function PHPUnit\Framework\returnValue;
 
 class Booking extends Component
 {
-    use HandlesEvents;
+    // use HandlesEvents;
     public $date;
     public $time;
     public $floor = "1";

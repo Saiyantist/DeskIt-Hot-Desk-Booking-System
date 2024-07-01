@@ -5,31 +5,33 @@ $currentRoute = Route::currentRouteName();
 @endphp
 
 <section id="navigation">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-custom flex">
-        <div class="w-full flex justify-between">
-        
-            {{-- Brand Logo --}}
-            <div class="navbar-brand" > 
-                <img src="{{ asset('images/deskit_logo.png') }}"
-                class="object-contain" alt="logo">
-            </div>
+    <div x-data="darkModeToggle()">
+        <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-custom flex">
+            <div class="w-full flex justify-between">
+            
+                {{-- Brand Logo --}}
+                <div class="navbar-brand" > 
+                    <img src="{{ asset('images/deskit_logo.png') }}"
+                    class="object-contain" alt="logo">
+                </div>
 
-            {{-- Profile --}}
-            <div class="justify-content-lg-end d-flex flex-row px-2">
-                <div class="compile mr-10 text-xl">
-                    @livewire('notification')
-                </div>
-                
-                <div class="compile mr-10">
-                    <a wire:navigate href="{{route('profile')}}"
-                        class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full bg-yellowA hover:text-yellowBdarker dark:hover:text-yellowBdarker focus:outline-none transition ease-in-out duration-150 text-block no-underline"
-                        style="border: 1px solid #FBB503">
-                        <div class="py-1"> <i class="fa-regular fa-user mr-1"></i> {{ Auth::user()->name }}</div>
-                    </a>
+                {{-- Profile --}}
+                <div class="justify-content-lg-end d-flex flex-row px-2">
+                    <div class="compile mr-10 text-xl">
+                        @livewire('notification')
+                    </div>
+                    
+                    <div class="compile mr-10">
+                        <a wire:navigate href="{{route('profile')}}"
+                            class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-full bg-yellowA hover:text-yellowBdarker dark:hover:text-yellowBdarker focus:outline-none transition ease-in-out duration-150 text-block no-underline"
+                            style="border: 1px solid #FBB503">
+                            <div class="py-1"> <i class="fa-regular fa-user mr-1"></i> {{ Auth::user()->name }}</div>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
     
     {{-- sidebar --}}
     <div class="wrapper h-full z-50">

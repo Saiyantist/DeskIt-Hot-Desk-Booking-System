@@ -8,10 +8,12 @@
 html {
   background-color: #FCF8F8;
 }
+
 /* navbar */
 .navbar-custom {
     background-color: white;
 }
+
 .navbar {
     box-shadow: 0 4px 2px -3px gray;
 }
@@ -19,6 +21,7 @@ html {
 .navbar .navbar-brand {
     padding: 10px;
 }
+
 .navbar-brand img {
     width: 210px; 
     height: 37px;

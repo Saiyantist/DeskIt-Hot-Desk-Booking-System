@@ -2,8 +2,8 @@
 
 
     {{-- UI --}}
-    <main class="flex flex-row justify-evenly align-items-center p-8">
-    
+    <main class="flex flex-row justify-center items-center py-8 gap-4">
+        
         <section class="flex flex-col">
             <div class="h-auto border shadow-lg w-96 px-4 py-4 ml-10 rounded-xl">
             
