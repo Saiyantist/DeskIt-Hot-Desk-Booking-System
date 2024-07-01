@@ -186,7 +186,7 @@
                                         <div class='ml-3 mt-4'>
 
                                             {{-- Availability Circle --}}
-                                            @if($floor && $date && $time)
+                                            @if($floor && $date && $time && $selectedUserID)
                                             @if($desks[$i]->status == 'not_available')
                                             <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}"
                                                 alt="SVG Image" />
@@ -232,7 +232,7 @@
                                     <div class='ml-3 mt-4'>
 
                                         {{-- Availability Circle --}}
-                                        @if($floor && $date && $time)
+                                        @if($floor && $date && $time && $selectedUserID)
                                         @if($desks[$i]->status == 'not_available')
                                         <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}"
                                             alt="SVG Image" />
@@ -292,7 +292,7 @@
         
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-2 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}"
                                                     alt="SVG Image" />
@@ -341,7 +341,7 @@
         
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-2 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}"
                                                     alt="SVG Image" />
@@ -400,7 +400,7 @@
                         
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-3 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                         
@@ -446,7 +446,7 @@
                             
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-3 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                             
@@ -501,7 +501,7 @@
                         
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-2 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                         
@@ -547,7 +547,7 @@
                             
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-2 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                             
@@ -602,7 +602,7 @@
                         
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-3 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                         
@@ -648,7 +648,7 @@
                         
                                             {{-- Availability Circle --}}
                                             <div class="h-10 mt-3 ml-5">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[$i]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                         
@@ -702,7 +702,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[28]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -739,7 +739,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[29]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -778,7 +778,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[64]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -815,7 +815,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[65]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -862,7 +862,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[31]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -900,7 +900,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[30]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -940,7 +940,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[67]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -978,7 +978,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[66]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1029,7 +1029,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[32]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1066,7 +1066,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[33]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1105,7 +1105,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[68]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1142,7 +1142,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[69]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1188,7 +1188,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[35]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1225,7 +1225,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[34]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1264,7 +1264,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="flex ml-5 mb-1">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[71]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1302,7 +1302,7 @@
                     
                                             {{-- Availability Circle --}}
                                             <div class="">
-                                                @if($floor && $date && $time)
+                                                @if($floor && $date && $time && $selectedUserID)
                                                 @if($desks[70]->status == 'not_available')
                                                 <img style="width: 1.4rem" src="{{ asset('images/circleNA.svg')}}" alt="SVG Image" />
                     
@@ -1420,18 +1420,24 @@
                     <div class='flex flex-column justify-center gap-4'>
                         <span class="text-md text-left truncate ...">Desk</span>
                         <span class="text-md text-left truncate ...">Booking Date</span>
+                        <span class="text-md text-left truncate ...">Booking Time</span>
                     </div>
 
                     {{-- Right Column --}}
+                    @if($userBooking)
                     <div class='flex flex-column justify-center gap-3 w-50'>
                         <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
-                            {{ $bookedDesk }}
+                            {{ $desks[$userBooking[0]['desk_id'] - 1]->desk_num }}
                         </span>
-
                         <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
-                            {{ $date }}
+                            {{ $userBooking[0]['booking_date'] }}
+                        </span>
+                        <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            {{ $userBooking[0]['booking_time'] }}
                         </span>
                     </div>
+                    @else
+                    @endif  
                 </div>
             </div>
         </x-slot:body>
@@ -1448,11 +1454,19 @@
 
                     {{-- Left Column --}}
                     <div class='flex flex-column justify-center gap-4'>
+                        <span class="text-md text-left truncate ...">User</span>
                         <span class="text-md text-left truncate ...">Desk</span>
                     </div>
 
                     {{-- Right Column --}}
                     <div class='flex flex-column justify-center gap-3 w-50'>
+                        <span class="text-md bg-white shadow-sm h-7 border rounded-xl border-slate-300 text-center flex items-center justify-center">
+                            @if($userName)
+                            {{ $userName }}
+                            @else
+
+                            @endif  
+                        </span>
                         <span class="text-md bg-white shadow-sm h-7 border rounded-xl border-slate-300 text-center flex items-center justify-center">
                             {{ $bookedDesk }}
                         </span>
