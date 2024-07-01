@@ -14,7 +14,7 @@
         <i class="fa-regular fa-bell @if($currentRoute === 'notification' || $currentRoute === 'userNotification') fa-solid fa-bell text-yellowB  bg-gray-100 p-1.5 px-2.5 rounded-full @endif"></i>
 
         @if(!($currentRoute === 'notification' || $currentRoute === 'userNotification'))
-            <h6 class="ml-1 border border-2 border-blue px-1 rounded-md text-xs">{{ $unreadCount }}</h6>
+            <h6 class="ml-1 border border-2 border-blue px-1 rounded-md text-xs element-selector">{{ $unreadCount }}</h6>
         @endif
     </button>
 

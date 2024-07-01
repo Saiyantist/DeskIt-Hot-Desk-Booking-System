@@ -48,8 +48,13 @@
             color: #000000 !important; 
         }
         .darkmode--activated  {
-            background-color:  #e2e2e2 !important; /* Dark gray background similar to Twitter */
+            background-color:  #fcfeff !important; /* Dark gray background similar to Twitter */
             color:  #15202B !important;
+            position: relative;
+        }
+        .darkmode--activated .inverter {
+            -webkit-filter: invert(1);
+            filter: invert(1);
         }
     </style>
     <script>

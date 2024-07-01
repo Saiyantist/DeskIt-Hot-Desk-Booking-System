@@ -33,7 +33,7 @@
                         <h2 class="text-lg ml-2">Full Name</h2>
     
                         @if ($editMode)
-                        <input class="border p-2 rounded-lg w-80" 
+                        <input class="border p-2 rounded-lg w-80 element-selector" 
                             wire:model.live="name" 
                             type="text" 
                             name="name"
@@ -41,7 +41,7 @@
                             >
                     
                         @else
-                        <div class="border p-2 rounded-lg w-80" 
+                        <div class="border p-2 rounded-lg w-80 element-selector" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->name }}
                         </div>
@@ -54,13 +54,13 @@
                         <h2 class="text-lg ml-2">Email</h2>
     
                         @if ($editMode)
-                        <input class="border p-2 rounded-lg w-80" 
+                        <input class="border p-2 rounded-lg w-80 element-selector" 
                             wire:model.live="email" type="email"
                             {{-- @click.away="$wire.set('editMode', false)" --}}
                             >
                             
                         @else
-                        <div class="border p-2 rounded-lg w-80" 
+                        <div class="border p-2 rounded-lg w-80 element-selector" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->email }}
                         </div>
@@ -77,7 +77,7 @@
                         <h2 class="text-lg ml-2">Gender</h2>
     
                         @if ($editMode)
-                        <select class="border p-2 rounded-lg w-80" name="gender" 
+                        <select class="border p-2 rounded-lg w-80 element-selector" name="gender" 
                             wire:model.live="editGender"
                             {{-- @click.away="$wire.set('editMode', false)" --}}
                             >
@@ -95,7 +95,7 @@
                         </select>
     
                         @else
-                        <div class="border p-2 rounded-lg w-80" 
+                        <div class="border p-2 rounded-lg w-80 element-selector" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->gender }}
                         </div>
@@ -108,14 +108,14 @@
                         <h2 class="text-lg ml-2">Birthday</h2>
     
                         @if ($editMode)
-                        <input class="border p-2 rounded-lg w-80" 
+                        <input class="border p-2 rounded-lg w-80 element-selector" 
                             wire:model.live="birthday" type="date"
                             name="birthday"
                             {{-- @click.away="$wire.set('editMode', false)" --}}
                             >
                             
                         @else
-                        <div class="border p-2 rounded-lg w-80" 
+                        <div class="border p-2 rounded-lg w-80 element-selector" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->birthday }}
                         </div>

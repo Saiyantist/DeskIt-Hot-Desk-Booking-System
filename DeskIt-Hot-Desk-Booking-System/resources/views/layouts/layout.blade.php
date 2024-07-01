@@ -47,8 +47,12 @@
         .darkmode--activated  {
             background-color:  #fcfeff !important; /* Dark gray background similar to Twitter */
             color:  #15202B !important;
+            position: relative;
         }
-        
+        .darkmode--activated .inverter {
+            -webkit-filter: invert(1);
+            filter: invert(1);
+        }
     </style>
     <script>
     function darkModeToggle() {

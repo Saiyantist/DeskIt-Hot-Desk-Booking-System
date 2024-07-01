@@ -7,7 +7,7 @@
         <section class="flex side-panel-container self-center">
 
             {{-- Side Panel Body --}}
-            <div class="body text-center">
+            <div class="body text-center element-selector">
 
                 <p class="book-desk text-2xl py-4 bg-yellowB text-center font-medium text-white ">Book a Desk</p>
 
@@ -82,7 +82,7 @@
         <section class="d-flex flex-col items-center justify-center p-4 pt-0 bg-yellowA rounded-2 ">
 
             {{-- Booking Controllers --}}
-            <div class="flex flex-row py-3 self-start  ">
+            <div class="flex flex-row py-3 self-start">
 
                 {{-- Floor Chooser --}}
                 <div x-data="{ open: false }" @click.away="open = false" class="floor text-center mr-4">
@@ -152,7 +152,7 @@
 
             {{-- Desk Map --}}
             <div class=" w-12/12 h-100 bg-gray desk">
-                <div class="bg-gray desk m-4 flex flex-row relative justify-center">
+                <div class="bg-gray desk m-4 flex flex-row relative justify-center element-selector">
 
                     <div class="absolute bottom-0 left-0">
                         <img src="{{ asset('images/door.svg') }}" class="flex w-14 my-1" alt="SVG Image">

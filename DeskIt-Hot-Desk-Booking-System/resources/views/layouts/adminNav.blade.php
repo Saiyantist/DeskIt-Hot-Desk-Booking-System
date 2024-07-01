@@ -87,48 +87,46 @@ $currentRoute = Route::currentRouteName();
                 </li>
 
                 {{-- logout --}}
-                <li class="sidebar-item absolute bottom-20">
-                    <div x-cloak x-data="{ showLogoutModal: false }">
-
-                        <!-- Logout Link -->
-                        <a href="#" class="sidebar-link" @click.prevent="showLogoutModal = true">
-                            <img src="{{ asset('images/logout.svg') }}" class="hidden">
-                            <span class="text-yellowB hidden">Logout</span>
-                        </a>
-                            
-                            <!-- Modal -->
-                            <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75"
-                                x-show="showLogoutModal" x-cloak>
-
-                                <div class="flex flex-col justify-center items-center bg-white p-8 rounded-xl shadow-lg"
-                                style="border-top: 10px solid rgb(255, 237, 193); border-bottom: 10px solid rgb(255, 237, 193);">
-                                    <img src="{{ asset('images/!.svg') }}" class="w-10 h-10 mb-2">
-                                    <h2 class="text-lg font-semibold ">You are attempting to LOGOUT Deskit.</h2>
-                                    <p  class=" text-lg ">Are you sure you want to log out?</p>
-
-                                    <div class="mt-2 space-x-2">
-                                        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-lg"
-                                                @click="showLogoutModal = false"> Cancel </button>
-                                        <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg"
-                                                @click.prevent="document.getElementById('logout-form').submit();">
-                                                Logout </button>
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <!-- Hidden Logout Form -->
-                            <form id="logout-form" method="POST" action="{{ route('logout') }}"
-                                 style="display: none;">
-                                @csrf
-                            </form>
-                    </div>
+                <li class="sidebar-item absolute bottom-20 ">
+                    <!-- Logout Link -->
+                    <a href="#" class="sidebar-link" x-data x-on:click="$dispatch('open-modal', {name: 'logout-modal'})">
+                        <img src="{{ asset('images/logout.svg') }}" class="hidden">
+                        <span class="text-yellowB hidden">Logout</span>
+                    </a>
+                   
+                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                        @csrf
+                    </form>
+                
                 </li>
-                
-                
 
             </ul>
         </aside>
     </div>
+    
+    {{-- Logout Modal --}}
+    <x-modal name="logout-modal" title="Logout">
+        <x-slot:body>
+            <div class='flex flex-column items-center justify-center rounded-3 w-[100%] h-fit p-2'>
+                <div class='flex flex-column items-center justify-center text-center'>
+                    <img src="{{ asset('images/!.svg') }}" class="w-10 h-10 mb-2">
+                    <h2 class="text-lg font-semibold ">You are attempting to LOGOUT Deskit.</h2>
+                    <p class=" text-lg ">Are you sure you want to log out?</p>
+                </div>
+        
+                <div class="flex justify-center mt-3 space-x-4">
+                    <button class="flex items-center border-solid border-gray-400 border-1 bg-gray-300 px-4 py-2 rounded-4 font-semibold text-lg text-white"
+                            x-on:click="$dispatch('close-modal')">
+                        Cancel
+                    </button>
+                    <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-white"
+                            x-on:click="$dispatch('close-modal')"  @click.prevent="document.getElementById('logout-form').submit();">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </x-slot:body>
+    </x-modal>
 </section>
 
 <script src="{{ asset('js/myScript2.js') }}">

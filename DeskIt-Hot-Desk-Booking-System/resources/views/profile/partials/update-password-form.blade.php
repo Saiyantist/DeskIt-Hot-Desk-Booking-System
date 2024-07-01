@@ -25,7 +25,7 @@
           <div class="col-md-12 flex">
               <div class="flex-1">
                 <label for="current_password">Current Password</label>
-                <input type="password" id="current_password" wire:model.defer="current_password" class="form-control">
+                <input type="password" id="current_password" wire:model.defer="current_password" class="form-control element-selector">
                 
               </div>
 
@@ -48,7 +48,7 @@
           <div class="col-md-12 flex">
               <div class="flex-1">
                   <label for="password">New Password</label>
-                  <input type="password" id="password" wire:model.defer="password" class="form-control mt-1">
+                  <input type="password" id="password" wire:model.defer="password" class="form-control mt-1 element-selector">
               </div>
 
               <div class="flex-1 ml-3 mt-3">
@@ -70,7 +70,7 @@
           <div class="col-md-12 flex">
               <div class="flex-1">
                   <label for="password_confirmation">Confirm New Password</label>
-                  <input type="password" id="password_confirmation" wire:model.defer="password_confirmation" class="form-control mt-1">
+                  <input type="password" id="password_confirmation" wire:model.defer="password_confirmation" class="form-control mt-1 element-selector">
                   
               </div>
 
