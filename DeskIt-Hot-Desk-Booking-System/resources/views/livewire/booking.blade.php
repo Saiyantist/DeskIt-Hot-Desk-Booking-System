@@ -5,7 +5,7 @@
     <main class="flex flex-row justify-center items-center my-4 gap-4">
         
         <section class="flex flex-col w-96 ml-10 justify-center">
-            <div class=" border shadow-lg px-4 py-2 ml-10 rounded-xl">
+            <div class=" border shadow-lg px-4 py-3 ml-10 rounded-xl">
             
                 <p class="text-2xl py-1 text-center text-slate-600 font-mono italic rounded-lg drop-shadow-md ">Book a Desk</p>
    
@@ -54,10 +54,10 @@
                                 <div class ="text-sm font-semibold pl-2 mt-2">Amenities: </div>
                                 <div class="flex flex-row">
                                     <ul class="text-xs">
-                                        <li class="list-disc"> Choose a desk</li>
-                                        <li class="list-disc"> Choose a desk</li>
-                                        <li class="list-disc"> Choose a desk</li>
-                                        <li class="list-disc"> Choose a desk</li>
+                                        <li class="list-disc pt-1"> Choose a desk</li>
+                                        <li class="list-disc pt-1"> Choose a desk</li>
+                                        <li class="list-disc pt-1"> Choose a desk</li>
+                                        <li class="list-disc pt-1"> Choose a desk</li>
                                     </ul>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                             <div class="flex flex-row">
                                 <ul class="text-xs">
                                     @foreach($desks[$selectedDeskIndex]->amenities as $amenity)
-                                        <li class="list-disc">{{ $amenity }}</li>
+                                        <li class="list-disc pt-1">{{ $amenity }}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -96,7 +96,7 @@
     
                 <div class="flex items-center justify-center">
                     {{-- Booking Button --}}
-                    <button class="book justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-36 h-10 p-1 mb-6 mt-3 text-lg"
+                    <button class="book justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-36 h-10 p-1 mb-2 text-lg"
                         :disabled={{$selectedDesk === '-'}}
                         wire:submit
                         @click="$wire.validateBooking"
