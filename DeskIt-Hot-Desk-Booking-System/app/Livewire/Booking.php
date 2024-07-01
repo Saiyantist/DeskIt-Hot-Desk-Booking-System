@@ -27,7 +27,6 @@ class Booking extends Component
 
     public $bookedDeskIDs = [];
     public $userBooking = [];
-    public $canBook;
 
     public $max;
     public $min;
@@ -41,114 +40,23 @@ class Booking extends Component
     public $tutorialCompleted = false;
 
     public $selectedDeskIndex = null;
+
     public function refreshMap() 
     {
         $date = $this->date;
         $floor = $this->floor;
-        $user = Auth::user()->id;
-        $desks = Desk::all(); 
-        $canBook = $this->canBook;
         $time = $this->time;
+
+        $desks = Desk::all(); 
 
         /** Reset selectedDesk if DATE/FLOOR is CHANGED or if DATE is CLEARED (i.e. user cleared the date.) */
         $this->selectedDesk = '-';
         $this->bookedDesk ='-';
 
-        /**
-         * Check IF there is a date and floor selected
-         * ELSE, return NOTHING
-         */
-        if($this->date && $this->floor && $this->time){
-
-        
-            // Access all Bookings
-            $tmpBookings = Bookings::all();
-
-            /** 
-             * Get the id, desk_id, and booking_date of all rows
-             *     in DB bookings_table
-             *     and store to an array.
-            */
-
-            // 1st array
-            $bookings = [];
-
-            foreach ($tmpBookings as $booking){
-                array_push($bookings, [
-                    'id' => $booking->id,
-                    'user_id' => $booking->user_id,
-                    'desk_id' => $booking->desk_id,
-                    'booking_date' => $booking->booking_date,
-                    'booking_time' => $booking->booking_time,
-                    ]
-                );
-            }
-
-            /**
-             * Find user_id that are same as the current user's
-             * if true,
-             *     store in an array.
-             */
-
-            /** 
-             * Find booking_dates that are same as the selected date,
-             * if true,
-             *    check the selected floor level,
-             *    then GET and STORE the desk_ids in an array.
-            */
-
-            // 2nd array
-            $bookedDeskIDs = [];
-            
-            $canBook = true;
-
-            // Access each row of $bookings.
-            for ($booking = 0; $booking <= count($bookings) - 1 ; $booking++){
-
-                // Access its user_id
-                $bookingUserID = $bookings[$booking]['user_id'];
-                $bookingDate = $bookings[$booking]['booking_date'];
-
-                if ($date == $bookingDate){
-  
-                    if($floor == 1){
-                        if ($bookings[$booking]['desk_id'] <= 36){
-                            array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
-                        }
-                    }
-                    elseif($floor == 2){
-                        if ($bookings[$booking]['desk_id'] >= 37){
-                            array_push($bookedDeskIDs, $bookings[$booking]['desk_id']);
-                        }
-                    }
-
-                    if ($user != $bookingUserID){
-                        $canBook = true;
-                    }
-                    elseif ($user == $bookingUserID){
-                        // dd($bookings[$booking]['desk_id'] - 1);
-                        $deskNum = $bookings[$booking]['desk_id'] - 1;
-                        // dd($deskNum);
-                        array_push($this->userBooking, [
-                            'user_id' => $bookings[$booking]['user_id'],
-                            'desk_num' => $desks[$deskNum]['desk_num'],
-                            'booking_date' => $bookings[$booking]['booking_date'],
-                        ]);
-                        $canBook = false;
-                        break;
-                    }
-                    
-                }
-            };
-
-            $this->bookedDeskIDs = $bookedDeskIDs;
-
-            
-            $this->canBook = $canBook;
-            
-            
-            // dd('User\'s Bookings today:', $this->userBooking, $canBook); 
-        }  
+        if($date && $floor && $time)
+        {
+            $this->bookedDeskIDs = Bookings::where('booking_date', $date)->whereIn('status', ['accepted', 'pending'])->pluck('desk_id')->toArray();
+        }
     }
 
     public function clickDesk($key)
@@ -190,17 +98,24 @@ class Booking extends Component
         $date = $this->date;
         $floor = $this->floor;
         $selectedDesk = $this->selectedDesk; 
-        $canBook = $this->canBook;
         $time = $this->time;
 
-        if ($canBook && ($date && $floor && ($selectedDesk != '-') && $time))
+        $desks = Desk::all(); 
+        $user = Auth::user()->id;
+
+        $this->userBooking = Bookings::where('booking_date', $date)->where('user_id', $user)->where('status', 'accepted')->get()->toArray();
+
+        if (($date && $floor && ($selectedDesk != '-') && $time))
         {
-            $this->dispatch('open-modal', name: 'confirm-booking-modal');
+            if($this->userBooking){
+
+                $this->dispatch('open-modal', name: 'warning-booking-modal');
+            }
+            elseif(empty($this->userBooking)){
+                $this->dispatch('open-modal', name: 'confirm-booking-modal');
+            }
         }
-        elseif ($canBook === false && ($date && $floor && ($selectedDesk != '-') && $time))
-        {
-            $this->dispatch('open-modal', name: 'warning-booking-modal');
-        }
+
     }
 
     public function closeModal()

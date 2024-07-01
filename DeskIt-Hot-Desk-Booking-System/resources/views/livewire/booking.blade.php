@@ -1431,11 +1431,19 @@
                     {{-- Right Column --}}
                     <div class='flex flex-column justify-center gap-3 w-50'>
                         <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
-                            {{ $selectedDesk }}
+                            @if($userBooking)
+                            {{ $desks[$userBooking[0]['desk_id'] - 1]->desk_num }}
+                            @else
+
+                            @endif   
                         </span>
 
                         <span class="text-md bg-white shadow-sm h-8 border rounded-xl border-slate-300 text-center flex items-center justify-center">
-                            {{ $date }}
+                            @if($userBooking)
+                            {{ $userBooking[0]['booking_date']}}
+                            @else
+
+                            @endif
                         </span>
                     </div>
                 </div>
