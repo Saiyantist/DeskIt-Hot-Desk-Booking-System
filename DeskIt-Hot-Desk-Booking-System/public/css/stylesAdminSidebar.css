@@ -27,8 +27,8 @@ h1 {
 
 .wrapper {
     display: flex;
-    
     position: fixed;
+    border-right: 0.1px solid gray;
 }
 
 /* .main {

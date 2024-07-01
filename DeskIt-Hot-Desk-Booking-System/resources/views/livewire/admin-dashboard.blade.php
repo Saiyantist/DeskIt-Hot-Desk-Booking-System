@@ -20,7 +20,7 @@
                 </div>
 
                 <!-- Working Hours Section -->
-                <div class="bg-white py-2 px-4 rounded shadow w-auto flex-shrink-0">
+                <div class="bg-white py-2 px-4 rounded shadow w-auto flex-shrink-0 element-selector">
                     <h2 class="text-lg font-semibold mt-2 mb-2">Working Hours</h2>
                     <p class="text-sm m-0">Weekdays</p>
                     <p class="text-sm m-0 pl-2">Morning Shift <span class="pl-5">8:00 AM - 7:00 PM</span></p>
@@ -171,7 +171,7 @@
             </div>
         </div>
         <div class="flex justify-between">
-            <div class="bg-white rounded-lg shadow-md w-full mx-10">
+            <div class="bg-white rounded-lg shadow-md w-full mx-10 element-selector">
                 {{-- Tabs? --}}
                 <div class="self-start w-full flex justify-between">
                     {{-- Bookings tab? --}}
@@ -202,7 +202,7 @@
                     </div>
                 </div>
 
-                <div class="p-3 bg-gray-100">
+                <div class="p-3 bg-gray-100 element-selector">
 
                     <!-- Yajra Datatable -->
                     <div class="bg-white p-3">
@@ -282,7 +282,7 @@
             </div>
 
             <div class="w-1/2">
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md element-selector">
                     <div class="flex justify-end mb-3">
                         <button wire:navigate href="{{route('book-behalf')}}" class="btn btn-warning text-white">
                             <img class="h-6 w-6 inline-block mr-2" src="{{ asset('images/plus.svg') }}"

@@ -8,7 +8,7 @@
         <section class="side-panel-container ">
 
                 {{-- Side Panel Header --}}
-                <div class="header bg-gray text-center">
+                <div class="header bg-gray text-center element-selector">
                     
                     <h5 class="mb-3 font-semibold"> DESK MAP</h5>
                     <table class="justify-center items-center text-center">
@@ -65,7 +65,7 @@
                 </div>
 
                 {{-- Side Panel Body --}}
-                <div class="body text-center bg-yellowA">
+                <div class="body text-center bg-yellowA element-selector">
                     <p class="book-desk text-lg font-semibold py-2 bg-yellowB text-white ">Set Desk Availability</p>
                     <div class="px-10">
 
@@ -140,7 +140,7 @@
 
             {{-- Desk Map --}}
             <div class=" w-12/12 h-100 bg-gray desk">
-                <div class="bg-gray desk m-4 flex flex-row relative justify-center">
+                <div class="bg-gray desk m-4 flex flex-row relative justify-center element-selector">
 
                     <div class="absolute bottom-0 left-0">
                         <img src="{{ asset('images/door.svg') }}" class="flex w-14 my-1" alt="SVG Image">

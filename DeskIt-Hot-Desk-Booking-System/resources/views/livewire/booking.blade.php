@@ -5,7 +5,7 @@
     <main class="flex flex-row justify-center items-center my-4 gap-4">
         
         <section class="flex flex-col w-96 ml-10 justify-center">
-            <div class=" border shadow-lg px-4 py-3 ml-10 rounded-xl">
+            <div class=" border shadow-lg px-4 py-3 ml-10 rounded-xl element-selector">
             
                 <p class="text-2xl py-1 text-center text-slate-600 font-mono italic rounded-lg drop-shadow-md ">Book a Desk</p>
    
@@ -14,14 +14,14 @@
                      {{-- Floor --}}
                     <div class=" w-5/12 pr-2">
                         <p class="text-base text-left">Floor#:
-                            <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $floor }}</span>
+                            <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $floor }}</span>
                         </p>
                     </div>
                     
                     {{-- Date --}}
                     <div class=" w-7/12">
                         <p class="text-base text-left">Date:
-                           <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $date }}</span>
+                           <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $date }}</span>
                        </p>
                     </div>
                 </div>
@@ -32,14 +32,14 @@
                         {{-- Time --}}
                         <div class=" w-9/12 pr-2">
                             <p class="text-base text-left">Time:
-                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $time }}</span>
+                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $time }}</span>
                             </p>
                         </div>
 
                         {{-- Desk --}}
                         <div class="w-5/12">
                             <p class="text-base text-left">Desk#:
-                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center">{{ $selectedDesk }}</span>
+                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $selectedDesk }}</span>
                             </p>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     {{-- Amenities --}}
                     @if($selectedDeskIndex === null)
                         <div class="flex flex-col">
-                            <div class="w-full">
+                            <div class="w-full z-40">
                                 <img src="{{ asset('images/chooseimg.svg') }}">
                             </div>
                             <div class="pt-2 opacity-55">
@@ -65,7 +65,7 @@
                     @endif
                     @if($selectedDeskIndex !== null)
                     <div class="flex flex-col">
-                        <div class="w-full">
+                        <div class="w-full z-40">
                             @if(($selectedDeskIndex >= 0 && $selectedDeskIndex < 4) || ($selectedDeskIndex >= 36 && $selectedDeskIndex <= 39))
                                 <img src="{{ asset('images/deskA.svg') }}">
                             @elseif(($selectedDeskIndex >= 4 && $selectedDeskIndex < 10) || ($selectedDeskIndex >= 40 && $selectedDeskIndex < 46))
@@ -173,7 +173,7 @@
 
             {{-- Desk Map --}}
             <div class=" w-12/12 h-fit bg-gray desk">
-                <div class="bg-gray desk m-4 flex flex-row relative justify-center">
+                <div class="bg-gray desk m-4 flex flex-row relative justify-center element-selector">
 
                     <div class="absolute bottom-0 left-0">
                         <img src="{{ asset('images/door.svg') }}" class="flex w-14 my-1" alt="SVG Image">

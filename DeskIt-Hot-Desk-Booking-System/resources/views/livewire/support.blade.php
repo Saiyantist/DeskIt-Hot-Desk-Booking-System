@@ -23,8 +23,8 @@
          <div class="flex justify-evenly items-center m-10 text-center">
             
             <!-- FACQ -->
-            <div class="w-[20%]">
-               <div class=" bg-grey rounded-t-xl shadow-md p-10">
+            <div class="w-[20%] mb-10">
+               <div class=" bg-grey rounded-t-xl shadow-md p-10 relative z-40">
                   <img src="{{ asset('images/facq.svg')}}">
                </div>
                <div class="bg-white rounded-b-xl shadow-md p-4 h-68">
@@ -37,8 +37,8 @@
             </div>
 
             <!-- Privacy Policy -->
-            <div class="w-[20%]">
-               <div class=" bg-grey rounded-t-xl shadow-md p-10">
+            <div class="w-[20%] mb-10">
+               <div class=" bg-grey rounded-t-xl shadow-md p-10 relative z-40">
                   <img src="{{ asset('images/privacy.svg')}}">
                </div>
                <div class="bg-white rounded-b-xl shadow-md p-4 h-68">
@@ -49,8 +49,8 @@
             </div>
 
             <!-- Guides -->
-            <div class="w-[20%]">
-               <div class=" bg-grey rounded-t-xl shadow-md p-10">
+            <div class="w-[20%] mb-10">
+               <div class=" bg-grey rounded-t-xl shadow-md p-10 relative z-40">
                   <img src="{{ asset('images/guides.svg')}}">
                </div>
                <div class="bg-white rounded-b-xl shadow-md p-4 h-68">
@@ -63,8 +63,8 @@
 
             <!-- Feedback/report for Employees -->
             @if(Auth::user()->roles->contains('name', 'employee'))
-               <div class="w-[20%]">
-                  <div class=" bg-grey rounded-t-xl shadow-md p-10">
+               <div class="w-[20%] mb-10">
+                  <div class=" bg-grey rounded-t-xl shadow-md p-10 relative z-40">
                      <img src="{{ asset('images/report.svg')}}">
                   </div>
                   <div class="bg-white rounded-b-xl shadow-md p-4 h-68">
@@ -76,8 +76,8 @@
 
             <!-- Feedback/report for Admins -->
             @else 
-               <div class="w-[20%]">
-                  <div class=" bg-grey rounded-t-xl shadow-md p-10">
+               <div class="w-[20%] mb-10">
+                  <div class=" bg-grey rounded-t-xl shadow-md p-10 relative z-40">
                      <img src="{{ asset('images/report.svg')}}">
                   </div>
                   <div class="bg-white rounded-b-xl shadow-md p-3 h-68">

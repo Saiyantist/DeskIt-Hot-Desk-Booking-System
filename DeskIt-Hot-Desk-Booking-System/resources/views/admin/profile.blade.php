@@ -7,7 +7,7 @@
         <div class="flex justify-center items-center mt-16 ml-35">
             <div class="bg-white ml-20 mt-10 w-11/12 h-56 flex justify-start items-center drop-shadow-lg">
 
-                <div class="flex">
+                <div class="flex relative z-40">
                     <!-- Profile Picture -->
                     <img class="w-40 h-40 rounded-full border border-gray-500 ml-10" src="/images/anonymous.jpg"
                         alt="Profile Picture">

@@ -24,15 +24,31 @@
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
-        <style>
+    <style>
         .darkmode-layer, .darkmode-toggle {
-            z-index: 500;
+            z-index: 20;
         }
         .darkmode--activated .navbar{
             -webkit-filter: invert(1);
             filter: invert(1);
         }
-
+        .darkmode--activated .sidebar-item {
+            -webkit-filter: invert(1);
+            filter: invert(1);
+        }
+        .darkmode--activated .toggle-btn {
+            -webkit-filter: invert(1);
+            filter: invert(1);
+        }
+        .darkmode--activated .element-selector {
+            background-color: #c7c6c6 !important;
+            color: #000000 !important; 
+        }
+        .darkmode--activated  {
+            background-color:  #fcfeff !important; /* Dark gray background similar to Twitter */
+            color:  #15202B !important;
+        }
+        
     </style>
     <script>
     function darkModeToggle() {
@@ -41,12 +57,12 @@
             isDarkMode: false,
             init() {
                 // Initialize darkmode instance
-                this.darkmode = new Darkmode({
+                this.darkmode = new Darkmode({ 
                     time: '0.5s',
-                    mixColor: '#fff',
-                    backgroundColor: '#fff',
-                    buttonColorDark: '#100f2c',
-                    buttonColorLight: '#fff',
+                    mixColor: '#ffffff', 
+                    backgroundColor: '#15202B',
+                    buttonColorDark: '#333333',
+                    buttonColorLight: '#ffffff', 
                     label: '🌓',
                     saveInCookies: true,
                     autoMatchOsTheme: false,

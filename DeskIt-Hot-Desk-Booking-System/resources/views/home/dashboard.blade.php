@@ -15,7 +15,7 @@
             <div class="myBook-container flex flex-row justify-evenly">
                 <div>
                     <h6 class="font-semibold">TODAY'S BOOKING</h6>
-                    <div class="bg-white p-3 rounded-lg drop-shadow-lg mt-3">
+                    <div class="bg-white p-3 rounded-lg drop-shadow-lg mt-3 element-selector">
                         @if($todaysBooking)
                             <h6 class="flex">
                                 <img src="{{ asset('images/calendar.svg') }}" class="pr-2">
@@ -30,12 +30,12 @@
                                 {{ $todaysBooking->booking_date }} 
                             </h6>
                         @else
-                            <div class="text-base">No booking for today</div> 
+                            <div class="text-base element-selector">No booking for today</div> 
                         @endif
                     </div>  
                 </div>
                 <div class="w-3/4 h-max">
-                    <div id="calendar"></div>
+                    <div id="calendar" class="element-selector"></div>
                 </div>
                 
             </div>
@@ -43,7 +43,7 @@
     </section>
 
     <section class="bg-pink flex justify-center items-center"> 
-        <div class="m-10 ml-24 p-2 flex flex-col bg-white rounded-lg w-[70%] drop-shadow-lg text-lg"> 
+        <div class="m-10 ml-24 p-2 flex flex-col bg-white rounded-lg w-[70%] drop-shadow-lg text-lg element-selector"> 
             <div class="flex justify-between p-2">
                 <p class="text-lg">Upcoming Bookings</p>
                 <a class="no-underline text-block text-lg" wire:navigate href="{{ route('booking-history') }}">Bookings <i class="fa-solid fa-arrow-right"></i></a>
