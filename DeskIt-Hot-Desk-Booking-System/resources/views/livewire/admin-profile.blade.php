@@ -2,7 +2,7 @@
 
     <div class="flex justify-center items-center mt-2">
     
-        <div class="flex flex-row justify-center items-center mt-4 bg-white ml-16 mb-10 w-[80%] rounded-xl shadow-md"
+        <div class="flex flex-row justify-center items-center mt-4 bg-white ml-16 mb-10 w-[80%] rounded-xl shadow-md element-selector"
             style="border:1px solid rgba(128, 128, 128, 0.2);">
             <div class="self-start w-full">
 
@@ -10,14 +10,14 @@
                 <div class="flex" style=" border-bottom: 1px solid rgba(128, 128, 128, 0.2);">
 
                     {{-- Account Settings --}}
-                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 rounded-tl-xl {{ $activeSection == 1 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
+                    <div class=" inverter inverter-text px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 rounded-tl-xl {{ $activeSection == 1 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : ' inverter-text2' }}"
                         wire:click="setActiveSection(1)">
                         <h2 class="justify-center text-xl">Account Settings</h2>
                     </div>
 
                     {{-- Manage Users (hidden for employees) --}}
                     @if(Auth::user()->roles->whereNotIn('name', 'employee')->isNotEmpty())
-                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSection == 2 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
+                    <div class=" inverter inverter-text px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSection == 2 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : ' inverter-text2' }}"
                         wire:click="setActiveSection(2)">
                         <h2 class="justify-center text-xl">Manage Users</h2>
                     </div>
@@ -27,7 +27,7 @@
 
                     {{-- Notification Settings(hidden for admins) --}}
                     @if(Auth::user()->roles->where('name', 'employee')->isNotEmpty())
-                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200  {{ $activeSection == 3 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : '' }}"
+                    <div class=" inverter inverter-text px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200  {{ $activeSection == 3 ? 'border-solid border-yellowB border-b-[3px] bg-yellowLight' : ' inverter-text2' }}"
                         wire:click="setActiveSection(3)">
                         <h2 class="justify-center text-xl">Notification Settings</h2>
                     </div>
@@ -40,14 +40,14 @@
                 @if($activeSection === 1)    
                     <div class="flex flex-row">
                         <div class="flex flex-col m-10">
-                            <div class="flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : '' }}"
+                            <div class="inverter inverter-text flex self-center rounded-xl pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 1 ? 'bg-yellowLight' : ' inverter-text2' }}"
                                 {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
                                 >
                                 <h2 wire:click="setActiveAS(1)" class="text-lg">
                                     Profile Information <i class="fa-solid fa-chevron-right pl-10"></i></h2>
                             </div>
 
-                            <div class="flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : '' }}"
+                            <div class="inverter inverter-text flex self-center rounded-xl mt-2 pt-2 px-2 w-60 cursor-pointer border-1 border-solid border-gray-400 transition ease-in-out delay-50 hover:bg-yellowA duration-100 {{ $activeSecondaryTabAS == 2 ? 'bg-yellowLight' : 'inverter-text2' }}"
                                 {{-- style="border:1px solid rgba(128, 128, 128, 0.9);" --}}
                                 >
                                 <h2 wire:click="setActiveAS(2)" class=" text-lg">
@@ -62,8 +62,8 @@
                             </div>
                             
                             @elseif($activeSecondaryTabAS === 2)
-                            <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10">
-                                <div class="max-w-xl ">
+                            <div class="p-4 sm:p-8 bg-white sm:rounded-lg ml-10 element-selector">
+                                <div class="max-w-xl">
                                     @include('profile.partials.update-password-form')
                                 </div>
                             </div>  
@@ -85,13 +85,13 @@
                         {{-- ADMINS TAB --}}
                         @if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
                         {{-- <div class="px-4 pt-3 pb-2 transition ease-in-out delay-100 hover:bg-yellowA duration-300 {{ $activeSecondaryTabMU == 'admins' ? 'border-solid border-yellowB border-b-[3px]  bg-yellowLight' : '' }}"> --}}
-                        <div class="mx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'admins' ? 'bg-white' : '' }}"
+                        <div class="inverter inverter-text mx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'admins' ? 'bg-white' : 'inverter-text2' }}"
                             wire:click="setActiveMU('admins')">
                             <h2 class="mt-1 text-xl">Admins</h2>
                         </div>
                         
                         {{-- OFFICE MANAGERS TAB --}}
-                        <div class="mx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'oms' ? 'bg-white' : '' }}"
+                        <div class="inverter inverter-text mx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'oms' ? 'bg-white' : 'inverter-text2' }}"
                             wire:click="setActiveMU('oms')">
                             <h2 class="mt-1 text-xl">Office Managers</h2>
                         </div>
@@ -99,14 +99,14 @@
                         @endif
 
                         {{-- EMPLOYEES TAB --}}
-                        <div class="mx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'emps' ? 'bg-white' : '' }}"
+                        <div class="inverter inverter-textmx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'emps' ? 'bg-white' : 'inverter-text2' }}"
                             wire:click="setActiveMU('emps')">
                             <h2 class="mt-1 text-xl">Employees</h2>
                         </div>
     
                         @if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
                         {{-- INACTIVE/PENDING USERS TAB--}}
-                        <div class="mx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'pendings' ? 'bg-white' : '' }}"
+                        <div class="inverter inverter-text mx-3 px-4 py-1 rounded-t-lg cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 {{ $activeSecondaryTabMU == 'pendings' ? 'bg-white' : 'inverter-text2' }}"
                             wire:click="setActiveMU('pendings')">
                             <h2 class="mt-1 text-xl">Inactive/Pending Users</h2>
                         </div>
@@ -470,7 +470,7 @@
                                                 </div>
                                         
                                                 <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                                                    <button class=" lift flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
                                                             wire:click="activateUser"
                                                             x-on:click="$dispatch('close-modal')">
                                                         Activate
@@ -492,7 +492,7 @@
                                                 </div>
                                         
                                                 <div class="flex justify-center mt-3">
-                                                    <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                                                    <button class=" lift flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
                                                             wire:click="deleteUser"
                                                             x-on:click="$dispatch('close-modal')">
                                                         Delete
@@ -537,7 +537,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                        <button class=" lift flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
                                 wire:click="makeEmp"
                                 x-on:click="$dispatch('close-modal')">
                             Make Employee
@@ -558,7 +558,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                        <button class=" lift flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
                                 wire:click="makeOM"
                                 x-on:click="$dispatch('close-modal')">
                             Make Office Mgr.
@@ -579,7 +579,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class="flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                        <button class=" lift flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
                                 wire:click="makeAdmin"
                                 x-on:click="$dispatch('close-modal')">
                                 
@@ -654,7 +654,7 @@
                         </div>
 
                         {{-- Save Button --}}
-                        <div class="flex justify-center items-center mt-3">
+                        <div class=" lift flex justify-center items-center mt-3">
                             <button x-on:click="$dispatch('close-modal')"
                                     wire:submit wire:click='editProfileSave'
                                     class="border-solid border-blue-400 border-1 bg-blue-300 rounded-xl px-4 py-2 font-medium text-xl text-blue-50"
@@ -679,7 +679,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class="flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
+                        <button class=" lift flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
                                 wire:click="deactUser"
                                 x-on:click="$dispatch('close-modal')">
                             Deactivate
@@ -701,7 +701,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class="flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                        <button class=" lift flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
                                 wire:click="deleteUser"
                                 x-on:click="$dispatch('close-modal')">
                             Delete

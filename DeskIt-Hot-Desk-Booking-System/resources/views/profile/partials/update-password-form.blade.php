@@ -25,7 +25,7 @@
           <div class="col-md-12 flex">
               <div class="flex-1">
                 <label for="current_password">Current Password</label>
-                <input type="password" id="current_password" wire:model.defer="current_password" class="form-control element-selector">
+                <input type="password" id="current_password" wire:model.defer="current_password" class="form-control invert">
                 
               </div>
 
@@ -48,7 +48,7 @@
           <div class="col-md-12 flex">
               <div class="flex-1">
                   <label for="password">New Password</label>
-                  <input type="password" id="password" wire:model.defer="password" class="form-control mt-1 element-selector">
+                  <input type="password" id="password" wire:model.defer="password" class="form-control mt-1 invert">
               </div>
 
               <div class="flex-1 ml-3 mt-3">
@@ -70,7 +70,7 @@
           <div class="col-md-12 flex">
               <div class="flex-1">
                   <label for="password_confirmation">Confirm New Password</label>
-                  <input type="password" id="password_confirmation" wire:model.defer="password_confirmation" class="form-control mt-1 element-selector">
+                  <input type="password" id="password_confirmation" wire:model.defer="password_confirmation" class="form-control mt-1 invert">
                   
               </div>
 
@@ -90,7 +90,7 @@
 
       {{-- submit button --}}
       <div class="mt-3">
-          <button wire:submit wire:click='updatePassword' class="bg-amber-300 hover:bg-amber-400 text-gray-600 font-bold py-2 px-4 rounded-md">
+          <button wire:submit wire:click='updatePassword' class="text-white bg-amber-400 hover:bg-amber-300 text-gray-600 font-bold py-2 px-4 rounded-md">
               Update Password
           </button>
       </div>

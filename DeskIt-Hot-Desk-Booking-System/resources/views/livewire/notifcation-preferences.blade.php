@@ -1,4 +1,4 @@
-<div class="">
+<div class="element-selector">
     <div>
         <h3 class="text-base pt-4 px-4">Choose which notifications you want to receive and how you'd like to be notified.
             Please note that while you can manage most of your notification preferences, we will still send you
@@ -6,7 +6,7 @@
             information.</h3>
 
     </div>
-    <div class="m-10 border border-2 rounded-xl">
+    <div class="m-10 border border-2 rounded-xl bground element-selector">
         <table>
             <thead class=" px-3 text-center text-base border-b bg-gray">
                 <th class="p-2 border-r">Activity</th>
@@ -18,10 +18,10 @@
                 <tr class="border-b">
                     <td class="p-2 border-r font-medium"> Booking Reminders </td>
                     <td class="border-r"> These are notifications for your upcoming bookings.</td>
-                    <td class="text-center border-r">
+                    <td class="text-center border-r inverter">
                         <i class="fa-solid fa-toggle-{{ $bookingRemindersDb ? 'on  text-green' : 'off text-darkgray' }} text-2xl" style="cursor: pointer;" wire:click="toggle('booking_reminders_db')"></i>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center inverter">
                         <i class="fa-solid fa-toggle-{{ $bookingRemindersEmail ? 'on  text-green' : 'off text-darkgray' }} text-2xl" style="cursor: pointer;" wire:click="toggle('booking_reminders_email')"></i>
                     </td>
                 </tr>
@@ -38,10 +38,10 @@
                     <tr>
                         <td class="pl-4 border-r">Desk reservation approval</td>
                         <td class="border-r">These are notifications for confirmations of your approved bookings.</td>
-                        <td class="border-r text-center">
+                        <td class="border-r text-center inverter">
                             <i class="fa-solid fa-toggle-{{ $reservedDeskStatusDb ? 'on  text-green' : 'off text-darkgray' }} text-2xl" style="cursor: pointer;" wire:click="toggle('reserved_desk_status_db')"></i>
                         </td>
-                        <td class="border-r text-center">
+                        <td class="border-r text-center inverter">
                             <i class="fa-solid fa-toggle-{{ $reservedDeskStatusEmail ? 'on  text-green' : 'off text-darkgray' }} text-2xl" style="cursor: pointer;" wire:click="toggle('reserved_desk_status_email')"></i>
                         
                         </td>

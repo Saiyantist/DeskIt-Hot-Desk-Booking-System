@@ -28,24 +28,12 @@
         .darkmode-layer, .darkmode-toggle {
             z-index: 20;
         }
-        .darkmode--activated .navbar{
-            -webkit-filter: invert(1);
-            filter: invert(1);
-        }
-        .darkmode--activated .sidebar-item {
-            -webkit-filter: invert(1);
-            filter: invert(1);
-        }
-        .darkmode--activated .toggle-btn {
-            -webkit-filter: invert(1);
-            filter: invert(1);
-        }
         .darkmode--activated .element-selector {
             background-color: #c7c6c6 !important;
             color: #000000 !important; 
         }
         .darkmode--activated  {
-            background-color:  #fcfeff !important; 
+            background-color:  #fcfeff !important; /* Dark gray background similar to Twitter */
             color:  #15202B !important;
             position: relative;
         }
@@ -53,19 +41,41 @@
             -webkit-filter: invert(1);
             filter: invert(1);
         }
+        .darkmode--activated .inverter-text {
+            color:  #000000 !important;
+        }
         .darkmode--activated .backdrop {
             background: rgba(255, 255, 255, 0.3); 
-
+            
         }
         .darkmode--activated .bground {
             filter: grayscale(50%) brightness(80%);
         }
-        
-        .darkmode--activated .text-white {
-            color: #000000 !important; 
+        .darkmode--activated .bground2 {
+            background-color:  #353535 !important; 
+            color:  #ffffff !important;
         }
-        .darkmode--activated .text-green-50{
-            color: #000000 !important; 
+        .darkmode--activated .bground3 {
+            background-color:  #000000 !important; 
+            color:  #ffffff !important;
+        }
+
+        .darkmode--activated .bg-amber-400,
+        .darkmode--activated .lift,
+        .darkmode--activated button.hover\:bg-yellowA, 
+        .darkmode--activated  button.hover\:bg-blue-200,    
+        .darkmode--activated  button.hover\:bg-slate-300,
+        .darkmode--activated  button.hover\:bg-green-300,
+        .darkmode--activated  button.hover\:bg-red-300,
+        .darkmode--activated .text-white,
+        .darkmode--activated .navbar,
+        .darkmode--activated .navbar-brand,
+        .darkmode--activated .bg-yellowB,
+        .darkmode--activated .bg-yellowA,  
+        .darkmode--activated .bg-amber-300,  
+        .darkmode--activated [class^="bg-gradient"] {
+            -webkit-filter: invert(1);
+            filter: invert(1);
         }
     </style>
     <script>

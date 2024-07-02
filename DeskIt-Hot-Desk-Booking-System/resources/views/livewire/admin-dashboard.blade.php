@@ -11,8 +11,8 @@
                 <!-- Calendar Section -->
 
                 <div class="bg-amber-300 shadow rounded-lg flex-shrink-0 text-center">
-                    <div class="text-xl font-semibold m-1 text-white">{{ $currentMonth }}</div>
-                    <div class="p-3 bg-white">
+                    <div class="text-xl font-semibold m-1 text-white inverter-text">{{ $currentMonth }}</div>
+                    <div class="p-3 bg-white ">
                         <div class="text-3xl font-bold mb-1">{{ $currentDay }}</div>
                         <div class="text-base">{{ $currentWeek }}</div>
                         <div class="text-sm">{{ $currentTime }}</div>
@@ -76,7 +76,7 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-r from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2">
+                        class="bg-gradient-to-r from-yellow-100 to-yellow-200 flex flex-col items-center justify-center p-2">
 
                         <img src="{{ asset('images/available.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -94,7 +94,7 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-l from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
+                        class="bg-gradient-to-l from-yellow-100 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
 
                         <img src="{{ asset('images/not.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -133,7 +133,7 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-r from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2">
+                        class="bg-gradient-to-r from-yellow-100 to-yellow-200 flex flex-col items-center  justify-center p-2">
 
                         <img src="{{ asset('images/available.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -150,7 +150,7 @@
                         </table>
                     </div>
                     <div
-                        class="bg-gradient-to-l from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
+                        class="bg-gradient-to-l from-yellow-100 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
 
                         <img src="{{ asset('images/not.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -175,7 +175,7 @@
                 {{-- Tabs? --}}
                 <div class="self-start w-full flex justify-between">
                     {{-- Bookings tab? --}}
-                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowA duration-200 rounded-tl-xl border-solid border-yellowB border-b-[3px] bg-yellowLight"
+                    <div class="px-4 pt-3 pb-2 cursor-pointer transition ease-in-out delay-50 hover:bg-yellowLight duration-200 rounded-tl-xl border-solid border-yellowB border-b-[3px] bg-yellowA"
                         wire:click="">
                         <h2 class="justify-center text-xl">Bookings</h2>
                     </div>
@@ -284,7 +284,7 @@
             <div class="w-1/2">
                 <div class="bg-white p-6 rounded-lg shadow-md element-selector">
                     <div class="flex justify-end mb-3">
-                        <button wire:navigate href="{{route('book-behalf')}}" class="btn btn-warning text-white">
+                        <button wire:navigate href="{{route('book-behalf')}}" class=" bg-yellowB text-white p-2 rounded-lg">
                             <img class="h-6 w-6 inline-block mr-2" src="{{ asset('images/plus.svg') }}"
                                 alt="Create Booking">
                             <span>Create Booking</span>
@@ -294,7 +294,7 @@
                     <div class="bg-white p-1 rounded-lg shadow-sm">
                         <div class="flex justify-around items-center text-center m-3">
                             <div class="bg-yellowB p-2 rounded-lg w-32">
-                                <p class="text-sm text-white m-0"> Total Bookings: <span class="font-semibold">{{ $totalBookings }}</span></p>
+                                <p class="text-sm text-white m-0 inverter-text"> Total Bookings: <span class="font-semibold">{{ $totalBookings }}</span></p>
                             </div>
                             <div class="relative">
                                 <select id="weekSelector"
@@ -304,7 +304,7 @@
                                 </select>
                                 <div
                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
-                                    <i class="fa-solid fa-chevron-down text-xs text-white"></i>
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
                                 </div>
                             </div>
                         </div>

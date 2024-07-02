@@ -9,7 +9,7 @@
     style="display: none;"
     x-transition.delay.350ms
 
-    class="fixed z-50 inset-0 bg-white-500 inverter backdrop">
+    class="fixed z-50 inset-0 bg-white-500 backdrop">
 
     {{-- <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px]" --}}
     <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px] backdrop-brightness-[0.60]"
@@ -33,7 +33,7 @@
             </div>
             @endif
             <hr class="bg-darkBlue m-0 p-0">
-            <div class="flex h-[85.7%] items-center justify-center bg-white rounded-bottom-4 p-0">
+            <div class=" lift flex h-[85.7%] items-center justify-center bg-white rounded-bottom-4 p-0">
                 {{ $body }}
             </div>
 
@@ -53,7 +53,7 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class=" lift flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
     
@@ -73,7 +73,7 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class=" lift flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
 
@@ -93,7 +93,7 @@
             </div>
             @endif
             <hr class="bg-darkRed m-0 p-0">
-            <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+            <div class=" lift flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
     {{-- Make Emp/OM/Admin MODALS --}}
@@ -112,7 +112,7 @@
             </div>
             @endif
             <hr class="bg-darkRed m-0 p-0">
-            <div class="flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
+            <div class=" lift flex h-[76.7%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
 
@@ -132,7 +132,7 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class=" lift flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
     {{-- Decline Booking Modal  --}}
@@ -151,7 +151,7 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class=" lift flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
     {{-- Disable Desk Modal --}}
@@ -170,7 +170,7 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class=" lift flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
     {{--Enable Desk Modal  --}}
@@ -189,7 +189,7 @@
                 </div>
                 @endif
                 <hr class="bg-darkergray m-0 p-0">
-                <div class="flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
+                <div class=" lift flex h-[81%] items-center justify-center bg-white rounded-bottom-4 ">
                     {{ $body }}
                 </div>
 
@@ -208,7 +208,7 @@
             </div>
             @endif
             <hr class="bg-darkergray m-0 p-0">
-            <div class="flex h-[85%] items-center justify-center bg-white rounded-bottom-4 ">
+            <div class=" lift flex h-[85%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
 
@@ -227,7 +227,7 @@
           </div>
           @endif
           <hr class="bg-darkergray m-0 p-0">
-          <div class="flex h-[85%] items-center justify-center bg-white rounded-bottom-4 ">
+          <div class=" lift flex h-[85%] items-center justify-center bg-white rounded-bottom-4 ">
               {{ $body }}
           </div>
 
@@ -246,7 +246,7 @@
             </div>
             @endif
             <hr class="bg-darkergray m-0 p-0">
-            <div class="flex h-[78%] items-center justify-center bg-white rounded-bottom-4 ">
+            <div class=" lift flex h-[78%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
     
@@ -265,7 +265,7 @@
             </div>
             @endif
             <hr class="bg-darkergray m-0 p-0">
-            <div class="flex h-[82%] items-center justify-center bg-white rounded-bottom-4 ">
+            <div class=" lift flex h-[82%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
     {{-- Warning 2 Booking Modal  --}}
@@ -284,7 +284,7 @@
             </div>
             @endif
             <hr class="bg-darkergray m-0 p-0">
-            <div class="flex h-[72%] items-center justify-center bg-white rounded-bottom-4 ">
+            <div class=" lift flex h-[72%] items-center justify-center bg-white rounded-bottom-4 ">
                 {{ $body }}
             </div>
     @endif

@@ -1,4 +1,4 @@
-<div class=" bg-white " style="width: 80%;">
+<div class=" bg-white element-selector" style="width: 80%;">
     <div class=" h-fit relative" style="border-left:1px solid rgba(128, 128, 128, 0.2);">
         <div class="flex justify-between">
 
@@ -33,7 +33,7 @@
                         <h2 class="text-lg ml-2">Full Name</h2>
     
                         @if ($editMode)
-                        <input class="border p-2 rounded-lg w-80 element-selector" 
+                        <input class="border p-2 rounded-lg w-80 bground3" 
                             wire:model.live="name" 
                             type="text" 
                             name="name"
@@ -41,7 +41,7 @@
                             >
                     
                         @else
-                        <div class="border p-2 rounded-lg w-80 element-selector" 
+                        <div class="border p-2 rounded-lg w-80 bground3" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->name }}
                         </div>
@@ -54,13 +54,13 @@
                         <h2 class="text-lg ml-2">Email</h2>
     
                         @if ($editMode)
-                        <input class="border p-2 rounded-lg w-80 element-selector" 
+                        <input class="border p-2 rounded-lg w-80 bground3" 
                             wire:model.live="email" type="email"
                             {{-- @click.away="$wire.set('editMode', false)" --}}
                             >
                             
                         @else
-                        <div class="border p-2 rounded-lg w-80 element-selector" 
+                        <div class="border p-2 rounded-lg w-80 bground3" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->email }}
                         </div>
@@ -77,7 +77,7 @@
                         <h2 class="text-lg ml-2">Gender</h2>
     
                         @if ($editMode)
-                        <select class="border p-2 rounded-lg w-80 element-selector" name="gender" 
+                        <select class="border p-2 rounded-lg w-80 bground3" name="gender" 
                             wire:model.live="editGender"
                             {{-- @click.away="$wire.set('editMode', false)" --}}
                             >
@@ -95,7 +95,7 @@
                         </select>
     
                         @else
-                        <div class="border p-2 rounded-lg w-80 element-selector" 
+                        <div class="border p-2 rounded-lg w-80 bground3" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->gender }}
                         </div>
@@ -108,14 +108,14 @@
                         <h2 class="text-lg ml-2">Birthday</h2>
     
                         @if ($editMode)
-                        <input class="border p-2 rounded-lg w-80 element-selector" 
+                        <input class="border p-2 rounded-lg w-80 bground3" 
                             wire:model.live="birthday" type="date"
                             name="birthday"
                             {{-- @click.away="$wire.set('editMode', false)" --}}
                             >
                             
                         @else
-                        <div class="border p-2 rounded-lg w-80 element-selector" 
+                        <div class="border p-2 rounded-lg w-80 bground3" 
                             wire:click="toggleEditMode">
                             {{ Auth::user()->birthday }}
                         </div>

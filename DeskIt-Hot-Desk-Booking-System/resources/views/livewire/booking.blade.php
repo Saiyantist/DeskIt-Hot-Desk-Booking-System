@@ -5,9 +5,9 @@
     <main class="flex flex-row justify-center items-center my-4 gap-4">
         
         <section class="flex flex-col w-96 ml-10 justify-center">
-            <div class=" border shadow-lg px-4 py-3 ml-10 rounded-xl element-selector">
+            <div class=" border shadow-lg px-4 py-3 ml-10 rounded-xl inverter bground2">
             
-                <p class="text-2xl py-1 text-center text-slate-600 font-mono italic rounded-lg drop-shadow-md ">Book a Desk</p>
+                <p class="text-2xl py-1 text-center text-slate-600 font-mono italic rounded-lg drop-shadow-md inverter">Book a Desk</p>
    
                 <div class="flex">
                 
@@ -94,7 +94,7 @@
                     @endif
                 </div>
     
-                <div class="flex items-center justify-center">
+                <div class="flex items-center justify-center inverter">
                     {{-- Booking Button --}}
                     <button class="book justify-center items-center bg-amber-400 hover:bg-amber-500 text-white font-bold tracking-wide rounded-xl w-36 h-10 p-1 mb-2 text-lg"
                         :disabled={{$selectedDesk === '-'}}
@@ -172,7 +172,7 @@
             </div>
 
             {{-- Desk Map --}}
-            <div class=" w-12/12 h-fit bg-gray desk">
+            <div class=" w-12/12 h-fit bg-gray desk inverter">
                 <div class="bg-gray desk m-4 flex flex-row relative justify-center element-selector">
 
                     <div class="absolute bottom-0 left-0">
@@ -198,7 +198,7 @@
                                     <a><img class="" src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"/></a>
                                 
                                     {{-- Label and Circle --}}
-                                    <div class="position-absolute"> 
+                                    <div class="lift position-absolute"> 
                                         <div class='ml-3 mt-4'>
 
                                             {{-- Availability Circle --}}
@@ -237,7 +237,7 @@
                                     <a><img src="{{ asset('images/left-chair.svg') }}" alt="SVG Image"/></a>
                                 
                                     {{-- Label and Circle --}}
-                                    <div class="position-absolute"> 
+                                    <div class="lift position-absolute"> 
                                         <div class='ml-3 mt-4'>
 
                                             {{-- Availability Circle --}}
@@ -291,7 +291,7 @@
                                         <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
     
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16"> 
+                                        <div class="lift position-absolute w-16"> 
                                             <div class='flex flex-row align-items-end'>
     
                                                 {{-- Availability Circle --}}
@@ -334,7 +334,7 @@
                                         <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16 "> 
+                                        <div class="lift position-absolute w-16 "> 
                                             <div class='flex flex-row align-items-end '>
 
                                                 {{-- Availability Circle --}}
@@ -392,7 +392,7 @@
                                         <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16 "> 
+                                        <div class="lift position-absolute w-16 "> 
                                             <div class='flex flex-row align-items-end mt-2.5'>
 
                                                 {{-- Availability Circle --}}
@@ -435,7 +435,7 @@
                                         <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16 "> 
+                                        <div class="lift position-absolute w-16 "> 
                                             <div class='flex flex-row align-items-end mt-2.5'>
 
                                                 {{-- Availability Circle --}}
@@ -493,7 +493,7 @@
                                         <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16 "> 
+                                        <div class="lift position-absolute w-16 "> 
                                             <div class='flex flex-row align-items-end '>
 
                                                 {{-- Availability Circle --}}
@@ -536,7 +536,7 @@
                                         <a><img class="w-16" src="{{ asset('images/bottom-chair.svg') }}" alt="SVG Image"/></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16 "> 
+                                        <div class="lift position-absolute w-16 "> 
                                             <div class='flex flex-row align-items-end '>
 
                                                 {{-- Availability Circle --}}
@@ -595,7 +595,7 @@
                                         <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16 "> 
+                                        <div class="lift position-absolute w-16 "> 
                                             <div class='flex flex-row align-items-end mt-2.5'>
 
                                                 {{-- Availability Circle --}}
@@ -638,7 +638,7 @@
                                         <a><img class="w-16" src="{{ asset('images/top-chair.svg') }}" alt="SVG Image"/></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute w-16 "> 
+                                        <div class="lift position-absolute w-16 "> 
                                             <div class='flex flex-row align-items-end mt-2.5'>
 
                                                 {{-- Availability Circle --}}
@@ -698,7 +698,7 @@
                                         <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute mr-1"> 
+                                        <div class="lift position-absolute mr-1"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -735,7 +735,7 @@
                                         <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute "> 
+                                        <div class="lift position-absolute "> 
                                             <div class='flex flex-row' style="margin-right: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -774,7 +774,7 @@
                                         <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute mr-1"> 
+                                        <div class="lift position-absolute mr-1"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -811,7 +811,7 @@
                                         <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute "> 
+                                        <div class="lift position-absolute "> 
                                             <div class='flex flex-row' style="margin-right: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -858,7 +858,7 @@
                                         <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute"> 
+                                        <div class="lift position-absolute"> 
                                             <div class='flex flex-row' style="margin-left: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -896,7 +896,7 @@
                                         <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute ml-1 mb-2"> 
+                                        <div class="lift position-absolute ml-1 mb-2"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -936,7 +936,7 @@
                                         <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute"> 
+                                        <div class="lift position-absolute"> 
                                             <div class='flex flex-row' style="margin-left: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -974,7 +974,7 @@
                                         <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute ml-1 mb-2"> 
+                                        <div class="lift position-absolute ml-1 mb-2"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -1026,7 +1026,7 @@
                                         <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute mr-1"> 
+                                        <div class="lift position-absolute mr-1"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -1063,7 +1063,7 @@
                                         <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute "> 
+                                        <div class="lift position-absolute "> 
                                             <div class='flex flex-row' style="margin-right: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -1102,7 +1102,7 @@
                                         <a><img src="{{ asset('images/left-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute mr-1"> 
+                                        <div class="lift position-absolute mr-1"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -1139,7 +1139,7 @@
                                         <a><img src="{{ asset('images/top-cubic.svg') }}" class="flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute "> 
+                                        <div class="lift position-absolute "> 
                                             <div class='flex flex-row' style="margin-right: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -1224,7 +1224,7 @@
                                         <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute ml-1 mb-2"> 
+                                        <div class="lift position-absolute ml-1 mb-2"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -1302,7 +1302,7 @@
                                         <a><img src="{{ asset('images/right-cubic.svg') }}" class=" flex w-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute ml-1 mb-2"> 
+                                        <div class="lift position-absolute ml-1 mb-2"> 
                                             <div class=''>
 
                                                 {{-- Availability Circle --}}
@@ -1376,7 +1376,7 @@
                 {{-- Button --}}
                 <div class="flex justify-center">
                     <button
-                        class="flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        class="lift flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
                         wire:click="book" x-on:click="$dispatch('close-modal'); $dispatch('open-modal', {name: 'desk-booking-modal'});">
                         Desk It
                     </button>
@@ -1403,7 +1403,7 @@
                 {{-- Button --}}
                 <div class="flex justify-center">
                     <button
-                        class="flex items-center border-solid border-yellowBdarker border-1 bg-yellowB px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        class="lift flex items-center border-solid border-yellowBdarker border-1 bg-yellowB px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
                         wire:click="goHome" x-on:click="$dispatch('close-modal')">
                         Go Home
                     </button>
