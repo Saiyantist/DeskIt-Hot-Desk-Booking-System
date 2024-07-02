@@ -9,7 +9,7 @@
     style="display: none;"
     x-transition.delay.350ms
 
-    class="fixed z-50 inset-0 bg-white-500 inverter">
+    class="fixed z-50 inset-0 bg-white-500 inverter backdrop">
 
     {{-- <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px]" --}}
     <div x-on:click="$dispatch('close-modal')" class="fixed inset-0 backdrop-blur-[2px] backdrop-brightness-[0.60]"

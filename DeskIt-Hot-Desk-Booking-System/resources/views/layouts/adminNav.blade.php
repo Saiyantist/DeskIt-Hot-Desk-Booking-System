@@ -97,9 +97,7 @@ $currentRoute = Route::currentRouteName();
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                         @csrf
                     </form>
-                
                 </li>
-
             </ul>
         </aside>
     </div>

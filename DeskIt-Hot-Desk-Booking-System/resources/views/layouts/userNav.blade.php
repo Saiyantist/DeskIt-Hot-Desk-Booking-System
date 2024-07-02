@@ -148,7 +148,7 @@ $currentRoute = Route::currentRouteName();
         {{-- Logout Modal --}}
         <x-modal name="logout-modal" title="Logout">
             <x-slot:body>
-                <div class='flex flex-column items-center justify-center rounded-3 w-[100%] h-fit p-2'>
+                <div class='flex flex-column items-center justify-center rounded-3 w-[100%] h-[40%] p-2'>
                     <div class='flex flex-column items-center justify-center text-center'>
                         <img src="{{ asset('images/!.svg') }}" class="w-10 h-10 mb-2">
                         <h2 class="text-lg font-semibold ">You are attempting to LOGOUT Deskit.</h2>

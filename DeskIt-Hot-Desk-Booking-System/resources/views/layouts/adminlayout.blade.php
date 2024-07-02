@@ -56,6 +56,21 @@
             -webkit-filter: invert(1);
             filter: invert(1);
         }
+        .darkmode--activated .backdrop {
+            background: rgba(255, 255, 255, 0.3); 
+            
+        }
+        .darkmode--activated .bground {
+            filter: grayscale(50%) brightness(80%);
+        }
+        
+        .darkmode--activated .text-white {
+            color: #000000 !important; 
+        }
+        .darkmode--activated .text-green-50{
+            color: #000000 !important; 
+        }
+
     </style>
     <script>
     function darkModeToggle() {

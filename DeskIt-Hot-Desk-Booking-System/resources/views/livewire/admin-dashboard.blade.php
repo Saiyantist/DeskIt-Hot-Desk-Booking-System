@@ -58,7 +58,7 @@
                 {{-- floor 1 Bookings --}}
                 <div class="w-1/2 flex flex-row shadow text-center">
                     <div
-                        class="bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200 p-2 flex flex-col items-center justify-center rounded-l-lg">
+                        class="bg-gradient-to-l from-yellow-200 via-yellow-300 to-yellow-200 p-2 flex flex-col items-center justify-center rounded-l-lg">
 
                         <img src="{{ asset('images/floorOne.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -76,7 +76,7 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-b from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2">
+                        class="bg-gradient-to-r from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2">
 
                         <img src="{{ asset('images/available.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -94,7 +94,7 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-t from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
+                        class="bg-gradient-to-l from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
 
                         <img src="{{ asset('images/not.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -115,7 +115,7 @@
                 {{-- floor 2 bookings --}}
                 <div class="w-1/2 flex flex-row shadow text-center">
                     <div
-                        class="bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200 p-2 flex flex-col items-center justify-center rounded-l-lg">
+                        class="bg-gradient-to-l from-yellow-200 via-yellow-300 to-yellow-200 p-2 flex flex-col items-center justify-center rounded-l-lg">
 
                         <img src="{{ asset('images/floortwo.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -133,7 +133,7 @@
                     </div>
 
                     <div
-                        class="bg-gradient-to-b from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2">
+                        class="bg-gradient-to-r from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2">
 
                         <img src="{{ asset('images/available.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -150,7 +150,7 @@
                         </table>
                     </div>
                     <div
-                        class="bg-gradient-to-t from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
+                        class="bg-gradient-to-l from-yellow-50 to-yellow-200 flex flex-col items-center  justify-center p-2 rounded-r-lg ">
 
                         <img src="{{ asset('images/not.svg') }}" class="h-5 w-5 mb-2" alt="Total Bookings">
                         <table>
@@ -292,20 +292,19 @@
                     </div>
                     <h2 class="text-lg font-semibold mb-3">Booking Statistics</h2>
                     <div class="bg-white p-1 rounded-lg shadow-sm">
-                        <div class="flex justify-around items-center text-center mb-3">
-                            <div class="bg-yellowB p-2 rounded-lg">
-                                <span class="text-sm text-white">Total Bookings</span>
-                                <p class="text-sm font-semibold text-white m-0">{{ $totalBookings }}</p>
+                        <div class="flex justify-around items-center text-center m-3">
+                            <div class="bg-yellowB p-2 rounded-lg w-32">
+                                <p class="text-sm text-white m-0"> Total Bookings: <span class="font-semibold">{{ $totalBookings }}</span></p>
                             </div>
                             <div class="relative">
                                 <select id="weekSelector"
-                                    class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    class="block appearance-none w-32 bg-yellowB border text-white px-3 py-2 rounded leading-tight focus:outline-none focus:bg-yellowB focus:border-gray-500 text-base">
                                     <option value="this_week">This Week</option>
                                     <option value="last_week">Last Week</option>
                                 </select>
                                 <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-100">
-                                    <img src="/images/dropdown.svg" alt="Dropdown Icon">
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
+                                    <i class="fa-solid fa-chevron-down text-xs text-white"></i>
                                 </div>
                             </div>
                         </div>

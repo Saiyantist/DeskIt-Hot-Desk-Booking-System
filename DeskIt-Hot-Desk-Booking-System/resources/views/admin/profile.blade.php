@@ -5,7 +5,7 @@
     @section('content')
    <section id="sect">
         <div class="flex justify-center items-center mt-16 ml-35">
-            <div class="bg-white ml-20 mt-10 w-11/12 h-56 flex justify-start items-center drop-shadow-lg">
+            <div class="bg-white ml-20 mt-10 w-11/12 h-56 flex justify-start items-center drop-shadow-lg element-selector">
 
                 <div class="flex relative z-40">
                     <!-- Profile Picture -->

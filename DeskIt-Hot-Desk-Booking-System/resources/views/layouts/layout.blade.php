@@ -23,7 +23,7 @@
     
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js" defer></script>
     <style>
         .darkmode-layer, .darkmode-toggle {
             z-index: 20;
@@ -45,13 +45,27 @@
             color: #000000 !important; 
         }
         .darkmode--activated  {
-            background-color:  #fcfeff !important; /* Dark gray background similar to Twitter */
+            background-color:  #fcfeff !important; 
             color:  #15202B !important;
             position: relative;
         }
         .darkmode--activated .inverter {
             -webkit-filter: invert(1);
             filter: invert(1);
+        }
+        .darkmode--activated .backdrop {
+            background: rgba(255, 255, 255, 0.3); 
+
+        }
+        .darkmode--activated .bground {
+            filter: grayscale(50%) brightness(80%);
+        }
+        
+        .darkmode--activated .text-white {
+            color: #000000 !important; 
+        }
+        .darkmode--activated .text-green-50{
+            color: #000000 !important; 
         }
     </style>
     <script>

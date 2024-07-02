@@ -77,6 +77,7 @@ final class UserDashboardBooking extends PowerGridComponent
             Column::make('ID', 'id')
                 ->searchable()
                 ->sortable(),
+                
 
             Column::make('Desk #', 'desk_num')
                 ->searchable()
