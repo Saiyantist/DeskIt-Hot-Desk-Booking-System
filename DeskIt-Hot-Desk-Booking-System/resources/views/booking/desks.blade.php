@@ -9,15 +9,15 @@
 
         {{-- Date Picker --}}
         <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
-            <x-calendar>
-            </x-calendar>
+            {{-- <x-calendar>
+            </x-calendar> --}}
         </div>
 
 
         {{-- Floor Chooser --}}
         <div x-data="{ open: false }" @click.away="open = false" class="relative text-center my-2">
-            <x-floor>
-            </x-floor>
+            {{-- <x-floor>
+            </x-floor> --}}
         </div>
 
         {{-- See Available --}}

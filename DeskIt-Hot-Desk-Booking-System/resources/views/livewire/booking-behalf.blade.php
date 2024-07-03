@@ -11,7 +11,7 @@
 
                 <p class="book-desk text-2xl py-4 bg-yellowB text-center font-medium text-white">Book a Desk</p>
 
-                <div class="px-3">
+                <div class="px-3 inverter">
 
                      {{-- Floor --}}
                      <div class="flex flex-row justify-content-between my-2">

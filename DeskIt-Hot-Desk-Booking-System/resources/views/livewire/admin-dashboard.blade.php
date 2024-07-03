@@ -1,10 +1,11 @@
-<main class="rounded-lg mt-16 ml-16 overflow-hidden">
+<main class="rounded-lg mt-16 ml-16 overflow-hidden py-4">
     <div class="container grid grid-cols-1 gap-4">
         <!-- Left Column -->
         <div class="col-span-2 lg:col-span-2 space-y-4 lg:ml-5">
 
-            <div class=" rounded-lg ">
-                <h1 class="text-3xl font-bold mt-4">Welcome!</h1>
+            <div class="flex flex-row rounded-lg mt-4 gap-2">
+                <h1 class="text-3xl font-bold">Welcome,</h1>
+                <h1 class="text-3xl font-normal">{{ $user }}!</h1>
             </div>
 
             <div class=" flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 p-2 rounded-lg">
@@ -185,14 +186,14 @@
                         </div>
                         <div>
                             @if (Config::get('bookings.auto_accept'))
-                            <i class="fa-solid fa-toggle-on text-2xl w-10 text-center 
+                            <i class="fa-solid fa-toggle-on text-2xl w-10 text-center cursor-pointer
                                 justify-center items-center bg-green-500 text-white hover:bg-green-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
                                 wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit
                                 >
                             </i>
                             @else
 
-                            <i class="fa-solid fa-toggle-off text-2xl w-10 text-center 
+                            <i class="fa-solid fa-toggle-off text-2xl w-10 text-center cursor-pointer
                                 justify-center items-center bg-gray-500 text-white hover:bg-gray-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
                                 wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit
                                 >
@@ -269,14 +270,14 @@
                         </table>
                     </div>
                     <div class="mt-4">
-                        {{ $bookings->links() }}
-                        @if ($bookings->previousPageUrl())
+                        {{ $bookings->links('vendor.pagination.bootstrap-5') }}
+                        {{-- @if ($bookings->previousPageUrl())
                         <a href="{{ $bookings->previousPageUrl() }}" class="ml-2">&larr; Previous Page</a>
                         @endif
 
                         @if ($bookings->hasMorePages())
                         <a href="{{ $bookings->nextPageUrl() }}" class="ml-2">Next Page &rarr;</a>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>

@@ -29,6 +29,8 @@ class AdminDashboard extends Component
 
     use WithPagination;
 
+    public $user;
+
     public $perPage = 10;
     public $totalBookings;
     public $newBookings;
@@ -75,6 +77,7 @@ class AdminDashboard extends Component
 
     public function mount()
     {   
+        $this->user = Auth::user()->name;
         $deskRange = range(1, 36);
         $deskRange2 = range(37, 72);
 

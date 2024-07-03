@@ -31,13 +31,14 @@ class IssueController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($issueId)
     {
         // dd($id);
         // $issue = Issue::with('responses')->findOrFail($id);
         // return view('admin.issue', compact('issue'));
         // return view('admin.issue', ['issueId' => $id]);
-        return view('admin.issue', ['issueId' => $id]);
+        // return view('admin.issue', ['showIssue' => $id]);
+        return view('admin.issue', ['issueId' => $issueId]);
     }
 
     /**

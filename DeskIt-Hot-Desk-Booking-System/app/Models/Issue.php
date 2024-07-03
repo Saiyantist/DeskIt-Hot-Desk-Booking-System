@@ -9,7 +9,16 @@ class Issue extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'subject', 'description', 'type', 'status', 'user_id',];
+    protected $fillable = [
+        'subject',
+        'description',
+        'type',
+        'status',
+        'user_id',
+        'desk_id',
+        'resolved_at',
+        'created_at',
+    ];
 
     public function user()
     {
@@ -24,5 +33,13 @@ class Issue extends Model
     public function responses()
     {
         return $this->hasMany(Response::class);
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        $query
+        ->where('users.name', 'like', "%{$value}%")
+        ->orWhere('desks.desk_num', 'like', "%{$value}%")
+        ->orWhere('subject', 'like', "%{$value}%");
     }
 }
