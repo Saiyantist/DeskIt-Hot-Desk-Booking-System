@@ -1,4 +1,4 @@
-<div x-data="{ showModal: false }" wire:poll="updateNotification">
+<div x-data="{ showModal: false }"  wire:poll="updateNotification">
     {{-- Navigation Bell Button--}}
     @php
     $currentRoute = Route::currentRouteName();
@@ -74,17 +74,16 @@
                                         <div class="flex justify-end">
                                             @if($notification)
                                                 @if(is_null($notification->read_at))
-                                                    <button wire:click="markAsRead('{{ $notification->id }}')"
-                                                        class="text-blue-500 inverter">
+                                                    <button x-on:click="$wire.call('markAsRead', '{{ $notification->id }}')" class="text-blue-500 inverter">
                                                         Mark as Read
                                                     </button>
                                                 @else
-                                                    <button wire:click="markAsUnread('{{ $notification->id }}')"
-                                                        class="text-gray-500 inverter">
+                                                    <button x-on:click="$wire.call('markAsUnread', '{{ $notification->id }}')" class="text-gray-500 inverter">
                                                         Mark as Unread
                                                     </button>
                                                 @endif
                                             @endif
+
                                         </div>
                                     </div>
                                     @endforeach

@@ -97,7 +97,7 @@ $currentRoute = Route::currentRouteName();
 
                     {{-- dashboard --}}
                     <li class="sidebar-item">
-                        <a href="{{ route('dashboard') }}"
+                        <a wire:navigate href="{{ route('dashboard') }}"
                             class="hidden sidebar-link {{ $currentRoute === 'dashboard' ? 'active' : '' }}">
                             <img src="{{ asset('images/home.svg') }}" class="py-3 default-image"
                                 alt="Default SVG Image">

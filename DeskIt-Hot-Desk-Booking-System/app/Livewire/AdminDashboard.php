@@ -117,8 +117,7 @@ class AdminDashboard extends Component
             ->count();
 
         $this->fetchBookings();
-
-        $this->autoAccept = Config::get('bookings.auto_accept');
+        $this->autoAccept = Config::get('bookings.auto_accept', false);
 
         date_default_timezone_set('Asia/Manila'); 
         $this->currentMonth = Carbon::now()->format('F Y');  // Full month name
@@ -154,8 +153,6 @@ class AdminDashboard extends Component
         // Toggle the autoAccept property
         $this->autoAccept = !$this->autoAccept; 
         $this->updateAutoAccept();
-        $this->dispatch('refreshPage');
-        
     }   
 
     // Configuration process for the Toggle Auto Accept Functionality
@@ -215,7 +212,7 @@ class AdminDashboard extends Component
             }
     
             // Dispatch the refreshPage event
-            $this->dispatch('refreshPage');
+            // $this->dispatch('refreshPage');
         }
     }
 
@@ -238,7 +235,7 @@ class AdminDashboard extends Component
                 $user->notify(new DeclineBookingEmail($booking));
             }
             
-            $this->dispatch('refreshPage');
+            // $this->dispatch('refreshPage');ad
         }
     }
 

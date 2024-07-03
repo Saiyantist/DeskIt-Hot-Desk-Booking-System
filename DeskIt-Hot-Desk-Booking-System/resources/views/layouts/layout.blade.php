@@ -7,8 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{config('app.name', 'laravel')}}</title>
 
-    
-    <!-- Load essential CSS first -->
     <link rel="stylesheet" href="/css/stylesLayout.css">
     <script src="{{ asset('js/layout.js') }}" defer></script> 
     

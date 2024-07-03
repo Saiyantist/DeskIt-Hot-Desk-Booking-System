@@ -163,10 +163,9 @@
                 </div>
 
                 {{-- Onboarding Guide --}}
-                <div class="absolute right-5">
-                    <a class="helpIcon cursor-pointer">
+                <div class="absolute right-5" x-data="introTour">
+                    <a class="helpIcon cursor-pointer" @click="startIntro">
                         <img src="{{ asset('images/help.svg') }}" class="w-8 h-8">
-                        <script>startIntro();</script>
                     </a>
                 </div>
             </div>
@@ -1404,7 +1403,7 @@
                 <div class="flex justify-center lift-modal">
                     <button
                         class="inverter-text flex items-center border-solid border-yellowBdarker border-1 bg-yellowB px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
-                        wire:click="goHome" x-on:click="$dispatch('close-modal')">
+                        wire:navigate href="{{ route('dashboard') }}" x-on:click="$dispatch('close-modal')">
                         Go Home
                     </button>
                 </div>
@@ -1477,7 +1476,19 @@
     </x-modal>
 
 
+    @if (!$tutorialCompleted)
+    <div x-data="{ showTutorial: true }" x-init="() => {
+        Livewire.on('completeTutorial', () => {
+            Alpine.store('showTutorial', false);
+        });
+    
+        if (showTutorial) {
+            startIntro();
+        }
+    }">
+        <script src="{{ asset('js/myScript4.js') }}"></script>
 
-    <script src="{{ asset('js/myScript3.js') }}">
-    </script>
+    </div>
+    @endif
+    <script src="{{ asset('js/myScript3.js') }}"></script>
 </div>

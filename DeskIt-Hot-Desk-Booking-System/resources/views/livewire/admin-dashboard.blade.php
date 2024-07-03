@@ -184,20 +184,15 @@
                             <h6 class="m-0 p-0">Enable Automatic Booking</h6>
                         </div>
                         <div>
-                            @if (Config::get('bookings.auto_accept'))
-                            <i class="fa-solid fa-toggle-on text-2xl w-10 text-center 
-                                justify-center items-center bg-green-500 text-white hover:bg-green-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
-                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit
-                                >
+                            @if ($autoAccept)
+                            <i class="fa-solid fa-toggle-on text-2xl w-10 text-center justify-center items-center bg-green-500 text-white hover:bg-green-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
+                                wire:click="toggleAutoAccept">
                             </i>
-                            @else
-
-                            <i class="fa-solid fa-toggle-off text-2xl w-10 text-center 
-                                justify-center items-center bg-gray-500 text-white hover:bg-gray-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
-                                wire:model.change="autoAccept" wire:click='toggleAutoAccept' wire:submit
-                                >
+                        @else
+                            <i class="fa-solid fa-toggle-off text-2xl w-10 text-center justify-center items-center bg-gray-500 text-white hover:bg-gray-300 hover:text-white font-bold rounded-xl p-0 px-[0.5] ml-4"
+                                wire:click="toggleAutoAccept">
                             </i>
-                            @endif
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -205,7 +200,7 @@
                 <div class="p-3 bg-gray-100 element-selector">
 
                     <!-- Yajra Datatable -->
-                    <div class="bg-white p-3">
+                    <div class="bg-white p-3" wire:poll.5s>
                         <table id="bookingsTable" class="table text-center">
                             <thead>
                                 <tr>
@@ -219,7 +214,7 @@
                             </thead>
                             <tbody>
                                 @foreach($bookingsData as $booking)
-                                <tr">
+                                <tr>
                                     <td>{{ $booking['Id'] }}</td>
                                     <td class="max-w-44 truncate ...">{{ $booking['Name'] }}</td>
                                     <td>{{ $booking['Date'] }}</td>
@@ -269,14 +264,20 @@
                         </table>
                     </div>
                     <div class="mt-4">
+                        @foreach ($bookings as $booking)
+                            <!-- Render each booking -->
+                        @endforeach
+
                         {{ $bookings->links() }}
+
                         @if ($bookings->previousPageUrl())
-                        <a href="{{ $bookings->previousPageUrl() }}" class="ml-2">&larr; Previous Page</a>
+                            <a href="#" wire:click.prevent="previousPage" class="ml-2">&larr; Previous Page</a>
                         @endif
 
                         @if ($bookings->hasMorePages())
-                        <a href="{{ $bookings->nextPageUrl() }}" class="ml-2">Next Page &rarr;</a>
+                            <a href="#" wire:click.prevent="nextPage" class="ml-2">Next Page &rarr;</a>
                         @endif
+
                     </div>
                 </div>
             </div>

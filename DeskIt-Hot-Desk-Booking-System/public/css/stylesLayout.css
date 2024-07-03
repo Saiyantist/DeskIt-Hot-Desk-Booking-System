@@ -33,7 +33,7 @@
     color:  #ffffff !important;
 }
 
-/* .darkmode--activated , */
+.darkmode--activated body,
 .darkmode--activated .bg-amber-400,
 .darkmode--activated .lift-modal,
 .darkmode--activated button.hover\:bg-yellowA, 
@@ -63,4 +63,19 @@
     border: none;
     border-left: 5px solid #044AFC;
     padding: 3px;
-   }
+}
+
+.darkmode--activated .text-welcome {
+    color:  #ffffff !important;
+}
+
+.darkmode--activated .lift2 {
+    background-color:  #000000 !important;
+}
+.darkmode--activated .lift3 {
+    background-color:  #272727 !important;
+}
+
+.darkmode--activated .text-hey {
+    color:  #044AFC !important;
+}
