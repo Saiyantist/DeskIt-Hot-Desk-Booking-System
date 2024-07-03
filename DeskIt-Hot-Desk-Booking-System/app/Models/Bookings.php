@@ -26,7 +26,17 @@ class Bookings extends Model
 
 
         static::creating(function ($Bookings) {
+            
+            $currentUser = Auth::user();
             $autoAccept = config('bookings.auto_accept');
+
+            // Check if the current user is an admin
+            $isAdmin = $currentUser && $currentUser->roles()->whereIn('name', ['admin', 'superadmin'])->exists();
+
+            if ($isAdmin) {
+                return;
+            }
+
 
             if ($autoAccept) {
                 $Bookings->status = 'accepted';

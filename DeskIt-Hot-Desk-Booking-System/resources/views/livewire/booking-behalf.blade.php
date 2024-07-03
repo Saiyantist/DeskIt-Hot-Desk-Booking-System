@@ -11,7 +11,7 @@
 
                 <p class="book-desk text-2xl py-4 bg-yellowB text-center font-medium text-white">Book a Desk</p>
 
-                <div class="px-3">
+                <div class="px-3 inverter">
 
                      {{-- Floor --}}
                      <div class="flex flex-row justify-content-between my-2">
@@ -1386,12 +1386,12 @@
             <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
 
                 <div class="">
-                    @if(session('autoAccept'))
-                        <p class="text-center text-2xl">{{session('autoAccept')}}</p>
-                    @elseif(session('pending'))
+                    {{-- @if(session('autoAccept')) --}}
+                    <p class="text-center text-2xl">Desk Booked Successfully!</p>
+                    {{-- @elseif(session('pending'))
                         <p class="text-center text-2xl">{{session('pending')}}</p>
                         <p class="text-center text-lg">Please wait for approval.</p>
-                    @endif
+                    @endif --}}
                 </div>
 
                 {{-- Button --}}

@@ -1,10 +1,11 @@
-<main class="rounded-lg mt-16 ml-16 overflow-hidden">
+<main class="rounded-lg mt-16 ml-16 overflow-hidden py-4">
     <div class="container grid grid-cols-1 gap-4">
         <!-- Left Column -->
         <div class="col-span-2 lg:col-span-2 space-y-4 lg:ml-5">
 
-            <div class=" rounded-lg ">
-                <h1 class="text-3xl font-bold mt-4">Welcome!</h1>
+            <div class="flex flex-row rounded-lg mt-4 gap-2">
+                <h1 class="text-3xl font-bold">Welcome,</h1>
+                <h1 class="text-3xl font-normal">{{ $user }}!</h1>
             </div>
 
             <div class=" flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 p-2 rounded-lg">
@@ -181,7 +182,7 @@
                     </div>
                     <div class="flex justify-center items-center mx-10">
                         <div>
-                            <h6 class="m-0 p-0">Enable Automatic Booking</h6>
+                            <h6 class="m-0 p-0">Enable Automatic Approval of Booking</h6>
                         </div>
                         <div>
                             @if ($autoAccept)
