@@ -14,7 +14,7 @@ class AdminIssues extends Component
     public $search = '';
     public $type = '';
     
-    public $sortBy = 'created_at';
+    public $sortBy = 'id';
     public $sorting = 'DESC';
     
     public $perPage = 5;

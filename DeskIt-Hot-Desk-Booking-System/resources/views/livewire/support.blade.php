@@ -93,4 +93,10 @@
    </div>
    
    @include("admin.modals.newFeedbackandReport")
+   @if (session('success'))
+    <script>
+        alert('{{ session('success') }}');
+    </script>
+   @endif
+
 </div>
