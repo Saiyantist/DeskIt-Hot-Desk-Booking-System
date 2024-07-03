@@ -182,7 +182,7 @@
                     </div>
                     <div class="flex justify-center items-center mx-10">
                         <div>
-                            <h6 class="m-0 p-0">Enable Automatic Booking</h6>
+                            <h6 class="m-0 p-0">Enable Automatic Approval of Booking</h6>
                         </div>
                         <div>
                             @if (Config::get('bookings.auto_accept'))

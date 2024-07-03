@@ -124,14 +124,10 @@ class BookingBehalf extends Component
         {
             $this->dispatch('open-modal', name: 'confirm-booking-modal');
         }
-        elseif (!($date && $floor && ($selectedDesk != '-') && $time && $user && empty($this->userBooking)))
+        elseif ($date && $floor && ($selectedDesk != '-') && $time && $user && !empty($this->userBooking))
         {
             $this->dispatch('open-modal', name: 'warning-booking-modal');
         } 
-        elseif (false && ($date && $floor && ($selectedDesk != '-') && $time && $user))
-        {
-            $this->showWarning3 = true;
-        }
     }
 
     public function closeModal()
@@ -173,12 +169,12 @@ class BookingBehalf extends Component
             $this->refreshMap(); 
         }
 
-        if(Config::get('bookings.auto_accept')){
-            session()->flash('autoAccept', 'Desk Booked Successfully!');
-        }
-        else{
-            session()->flash('pending', 'Desk Booking is placed!');
-        }
+        // if(Config::get('bookings.auto_accept')){
+        //     session()->flash('autoAccept', 'Desk Booked Successfully!');
+        // }
+        // else{
+        //     session()->flash('pending', 'Desk Booking is placed!');
+        // }
 
 
         // $status = "booked";

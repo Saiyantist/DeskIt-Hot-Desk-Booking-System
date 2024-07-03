@@ -1386,12 +1386,12 @@
             <div class='flex flex-column justify-evenly rounded-3 w-[100%] h-[100%]'>
 
                 <div class="">
-                    @if(session('autoAccept'))
-                        <p class="text-center text-2xl">{{session('autoAccept')}}</p>
-                    @elseif(session('pending'))
+                    {{-- @if(session('autoAccept')) --}}
+                    <p class="text-center text-2xl">Desk Booked Successfully!</p>
+                    {{-- @elseif(session('pending'))
                         <p class="text-center text-2xl">{{session('pending')}}</p>
                         <p class="text-center text-lg">Please wait for approval.</p>
-                    @endif
+                    @endif --}}
                 </div>
 
                 {{-- Button --}}
