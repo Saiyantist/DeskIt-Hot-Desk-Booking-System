@@ -472,9 +472,9 @@
                     <span class="text-lg text-center truncate ...">User: {{$alterBooking->user->name}}</span>
                 </div>
 
-                <div class="flex justify-center">
+                <div class="flex justify-center mt-4">
                     <button
-                        class="flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        class="lift flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
                         wire:click="acceptBooking" x-on:click="$dispatch('close-modal')">
                         Accept
                     </button>
@@ -496,9 +496,9 @@
                     <span class="text-lg text-center truncate ...">User: {{$alterBooking->user->name}}</span>
                 </div>
 
-                <div class="flex justify-center">
+                <div class="flex justify-center mt-4">
                     <button
-                        class="flex items-center border-solid border-red-500 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                        class="lift flex items-center border-solid border-red-500 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
                         wire:click="declineBooking" x-on:click="$dispatch('close-modal')">
                         Decline
                     </button>

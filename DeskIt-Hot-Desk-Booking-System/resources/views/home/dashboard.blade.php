@@ -4,7 +4,7 @@
     <section class="bg-pink">
         <div class="mt-16" >
             <h2 class="pl-32 pt-12">Good Morning,
-                <span class=" text-yellowB"> {{Auth::user()->name}}</span>
+                <span class=" text-yellowB inverter"> {{Auth::user()->name}}</span>
             </h2>
             <h6 class="pl-32 font-light text-lg">Let's do the best today!</h6>
         </div>

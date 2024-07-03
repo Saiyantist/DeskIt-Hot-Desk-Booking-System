@@ -14,14 +14,14 @@
                      {{-- Floor --}}
                     <div class=" w-5/12 pr-2">
                         <p class="text-base text-left">Floor#:
-                            <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $floor }}</span>
+                            <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center inverter-text">{{ $floor }}</span>
                         </p>
                     </div>
                     
                     {{-- Date --}}
                     <div class=" w-7/12">
                         <p class="text-base text-left">Date:
-                           <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $date }}</span>
+                           <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center inverter-text">{{ $date }}</span>
                        </p>
                     </div>
                 </div>
@@ -32,14 +32,14 @@
                         {{-- Time --}}
                         <div class=" w-9/12 pr-2">
                             <p class="text-base text-left">Time:
-                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $time }}</span>
+                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center inverter-text">{{ $time }}</span>
                             </p>
                         </div>
 
                         {{-- Desk --}}
                         <div class="w-5/12">
                             <p class="text-base text-left">Desk#:
-                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center ">{{ $selectedDesk }}</span>
+                                <span class="text-base bg-white border shadow-sm border-slate-300 spanlaceholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md focus:ring-1 h-10 flex items-center justify-center inverter-text">{{ $selectedDesk }}</span>
                             </p>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                                                         <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                 @endif
                                                 @else
-                                                    <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                             @endif
 
                                             {{-- Dynamic Desk Number --}}
@@ -252,7 +252,7 @@
                                                         <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                 @endif
                                                 @else
-                                                    <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                    <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                             @endif
 
                                             {{-- Dynamic Desk Number --}}
@@ -307,7 +307,7 @@
                                                                 <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
     
@@ -350,7 +350,7 @@
                                                                 <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -408,7 +408,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -451,7 +451,7 @@
                                                                 <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -509,7 +509,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -552,7 +552,7 @@
                                                                 <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -611,7 +611,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -654,7 +654,7 @@
                                                                 <img style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -714,7 +714,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -751,7 +751,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -790,7 +790,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -827,7 +827,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -874,7 +874,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -912,7 +912,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -952,7 +952,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -990,7 +990,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1042,7 +1042,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1079,7 +1079,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1118,7 +1118,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1155,7 +1155,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1186,7 +1186,7 @@
                                         <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute"> 
+                                        <div class="lift position-absolute"> 
                                             <div class='flex flex-row' style="margin-left: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -1202,7 +1202,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1240,7 +1240,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1264,7 +1264,7 @@
                                         <a><img src="{{ asset('images/bottom-cubic.svg') }}" class=" flex h-14" alt="SVG Image"></a>
 
                                         {{-- Label and Circle --}}
-                                        <div class="position-absolute"> 
+                                        <div class="lift position-absolute"> 
                                             <div class='flex flex-row' style="margin-left: 0.5em; width: 4.1rem">
 
                                                 {{-- Availability Circle --}}
@@ -1280,7 +1280,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1318,7 +1318,7 @@
                                                                 <img  style="width: 1.4rem" src="{{ asset('images/circleAvailable.svg')}}" alt="SVG Image"/>
                                                         @endif
                                                         @else
-                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}" alt="SVG Image"/>
+                                                            <img style="width: 1.4rem" src="{{ asset('images/circleInvisible.svg')}}"class="inverter" alt="SVG Image"/>
                                                     @endif
                                                 </div>
 
@@ -1376,7 +1376,7 @@
                 {{-- Button --}}
                 <div class="flex justify-center">
                     <button
-                        class="lift flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        class="lift-modal flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
                         wire:click="book" x-on:click="$dispatch('close-modal'); $dispatch('open-modal', {name: 'desk-booking-modal'});">
                         Desk It
                     </button>
@@ -1401,9 +1401,9 @@
                 </div>
 
                 {{-- Button --}}
-                <div class="flex justify-center">
+                <div class="flex justify-center lift-modal">
                     <button
-                        class="lift flex items-center border-solid border-yellowBdarker border-1 bg-yellowB px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                        class="inverter-text flex items-center border-solid border-yellowBdarker border-1 bg-yellowB px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
                         wire:click="goHome" x-on:click="$dispatch('close-modal')">
                         Go Home
                     </button>

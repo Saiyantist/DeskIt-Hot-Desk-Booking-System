@@ -10,10 +10,11 @@ $currentRoute = Route::currentRouteName();
             <div class="w-full flex justify-between">
             
                 {{-- Brand Logo --}}
-                <div class="navbar-brand" > 
-                    <img src="{{ asset('images/deskit_logo.png') }}"
-                    class="object-contain" alt="logo">
+                <div class="navbar-brand flex">
+                    <img src="{{ asset('images/deskit_logo1.png') }}" class="object-contain -mr-[4.5rem] -ml-10" alt="logo">
+                    <img src="{{ asset('images/deskit_logoText.png') }}" class="object-contain -ml-20 inverter" alt="logo text">
                 </div>
+                
 
                 {{-- Profile --}}
                 <div class="justify-content-lg-end d-flex flex-row px-2">

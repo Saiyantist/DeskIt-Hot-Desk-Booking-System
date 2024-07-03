@@ -1,7 +1,7 @@
 <div class="flex justify-center">
-    <div class="text-base w-[60%] bg-white p-10 shadow-md rounded-lg" wire:poll.5s>
+    <div class="text-base w-[60%] bg-white p-10 shadow-md rounded-lg element-selector" wire:poll.5s>
         @foreach ($notifications as $notification)
-        <div class="{{ $notification->read_at ? 'bg-gray' : 'bg-white' }} p-3 mb-1 rounded-lg border border-2">
+        <div class="{{ $notification->read_at ? 'bg-gray' : 'bg-white bground' }} p-3 mb-1 rounded-lg border border-2">
             <div class="text-block text-base">
                 <div class="font-semibold pb-1"> {{ $notification->data['title'] }}</div>
                 <div class="pb-1">

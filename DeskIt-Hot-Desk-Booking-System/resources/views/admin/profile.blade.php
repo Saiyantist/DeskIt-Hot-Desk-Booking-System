@@ -44,7 +44,12 @@
    </section>
 
     <section class="mt-1">
-        @livewire('admin-profile')
+        @if (request()->routeIs('userProfileSetting'))
+        @livewire('admin-profile', ['activeSection' => 3])
+        @else
+            @livewire('admin-profile')
+        @endif
+        {{--
     </section>
     @endsection
 </x-app-layout>

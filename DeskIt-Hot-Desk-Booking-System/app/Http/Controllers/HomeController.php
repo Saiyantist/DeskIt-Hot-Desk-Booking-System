@@ -83,7 +83,7 @@ class HomeController extends Controller
                     'statusTitle' => 'Status: ' . $status,
                     'start' => $bookingDate,
                     'end' => $bookingDate,
-                    "className" => "bground",
+                    "className" => "t-data",
                 ];
             }
         }

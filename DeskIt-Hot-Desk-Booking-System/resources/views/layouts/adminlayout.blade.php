@@ -7,6 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{config('app.name', 'laravel')}}</title>
 
+    <link rel="stylesheet" href="/css/stylesAdminLayout.css">
+    <script src="{{ asset('js/adminLayout.js') }}" defer></script>
+
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/stylesWelcome.css">
     <link rel="stylesheet" href="/css/stylesBooking.css">
@@ -24,108 +27,7 @@
     <!-- DataTables CSS -->
     <link href="{{ asset('vendor/powergrid/powergrid.css') }}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    @livewireStyles
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
-    <style>
-        .darkmode-layer, .darkmode-toggle {
-            z-index: 20;
-        }
-        .darkmode--activated .element-selector {
-            background-color: #c7c6c6 !important;
-            color: #000000 !important; 
-        }
-        .darkmode--activated  {
-            background-color:  #fcfeff !important; /* Dark gray background similar to Twitter */
-            color:  #15202B !important;
-            position: relative;
-        }
-        .darkmode--activated .inverter {
-            -webkit-filter: invert(1);
-            filter: invert(1);
-        }
-        .darkmode--activated .inverter-text {
-            color:  #000000 !important;
-        }
-        .darkmode--activated .inverter-text2 {
-            color:  #ffffff !important;
-        }
-
-        .darkmode--activated .backdrop {
-            background: rgba(255, 255, 255, 0.3); 
-            
-        }
-        .darkmode--activated .bground {
-            filter: grayscale(50%) brightness(80%);
-        }
-        .darkmode--activated .bground2 {
-            background-color:  #353535 !important; 
-            color:  #ffffff !important;
-        }
-        .darkmode--activated .bground3 {
-            background-color:  #000000 !important; 
-            color:  #ffffff !important;
-        }
-        .darkmode--activated .invert-hover{
-            background-color: #072163; /* Inverted color */
-            color: #fff;
-        }
-
-
-        .darkmode--activated .lift,
-        .darkmode--activated button.hover\:bg-yellowA, 
-        .darkmode--activated  button.hover\:bg-blue-200,    
-        .darkmode--activated  button.hover\:bg-slate-300,
-        .darkmode--activated  button.hover\:bg-green-300,
-        .darkmode--activated  button.hover\:bg-red-300,
-        .darkmode--activated .text-white,
-        .darkmode--activated .navbar,
-        .darkmode--activated .navbar-brand,
-        .darkmode--activated .bg-yellowB,
-        .darkmode--activated .bg-yellowA,  
-        .darkmode--activated .bg-amber-300,  
-        .darkmode--activated [class^="bg-gradient"] {
-            -webkit-filter: invert(1);
-            filter: invert(1);
-        }
-    </style>
-    <script>
-    function darkModeToggle() {
-        return {
-            darkmode: null,
-            isDarkMode: false,
-            init() {
-                // Initialize darkmode instance
-                this.darkmode = new Darkmode({ 
-                    time: '0.5s',
-                    mixColor: '#ffffff', 
-                    backgroundColor: '#FCF8F8',
-                    buttonColorDark: '#333333',
-                    buttonColorLight: '#ffffff', 
-                    label: '🌓',
-                    saveInCookies: true,
-                    autoMatchOsTheme: false,
-                    
-                });
-                this.darkmode.showWidget();
-
-                // Apply dark mode on load if saved
-                if (this.darkmode.isActivated()) {
-                    this.isDarkMode = true;
-                }
-            },
-            toggleDarkMode() {
-                this.darkmode.toggle();
-                this.isDarkMode = this.darkmode.isActivated();
-                
-            },
-        };
-    }
-
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('darkModeToggle', darkModeToggle());
-    });
-</script>      
+    @livewireStyles  
 </head>
 
 <body>

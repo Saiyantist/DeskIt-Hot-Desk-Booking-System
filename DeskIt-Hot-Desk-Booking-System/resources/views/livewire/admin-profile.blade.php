@@ -459,49 +459,7 @@
                                         <img src="{{ asset('images/delete.svg') }}" class="h-6">
                                     </button>
 
-                                    {{-- Activate Modal --}}
-                                    <x-modal name="activate-modal" title="Activate User">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($activateUserId)
-                                                <div class='flex flex-column justify-center'>
-                                                    <p class="text-lg text-center">Are you sure you want to ACTIVATE</p>
-                                                    <p class="text-lg text-center truncate ...">User: {{$activateUserId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class=" lift flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
-                                                            wire:click="activateUser"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Activate
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
-
-                                    {{-- Delete Modal --}}
-                                    <x-modal name="delete-modal" title="Delete User">
-                                        <x-slot:body>
-                                            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
-                                                @if($deleteUserId)
-                                                <div class='flex flex-column justify-center'>
-                                                    <p class="text-lg text-center">Are you sure you want to DELETE</p>
-                                                    <p class="text-lg text-center truncate ...">User: {{$deleteUserId->name}}</p>
-                                                </div>
-                                        
-                                                <div class="flex justify-center mt-3">
-                                                    <button class=" lift flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
-                                                            wire:click="deleteUser"
-                                                            x-on:click="$dispatch('close-modal')">
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </x-slot:body>
-                                    </x-modal>
+                                   
 
                                     {{-- <a wire:click="openModal2({{ $user3->id }})"
                                         style="cursor: pointer; display: flex; justify-content: center; padding-right: 10px">
@@ -527,6 +485,50 @@
         </div>
 
     {{-- Modals--}}
+     {{-- Activate Modal --}}
+     <x-modal name="activate-modal" title="Activate User">
+        <x-slot:body>
+            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                @if($activateUserId)
+                <div class='flex flex-column justify-center'>
+                    <p class="text-lg text-center">Are you sure you want to ACTIVATE</p>
+                    <p class="text-lg text-center truncate ...">User: {{$activateUserId->name}}</p>
+                </div>
+        
+                <div class="flex justify-center mt-3">
+                    <button class="lift-modal flex items-center border-solid border-green-500 border-1 bg-green-300 px-4 py-2 rounded-4 font-semibold text-lg text-green-50"
+                            wire:click="activateUser"
+                            x-on:click="$dispatch('close-modal')">
+                        Activate
+                    </button>
+                </div>
+                @endif
+            </div>
+        </x-slot:body>
+    </x-modal>
+
+    {{-- Delete Modal --}}
+    <x-modal name="delete-modal" title="Delete User">
+        <x-slot:body>
+            <div class='flex flex-column justify-center rounded-3 w-[90%] h-[85%] p-2'>
+                @if($deleteUserId)
+                <div class='flex flex-column justify-center'>
+                    <p class="text-lg text-center">Are you sure you want to DELETE</p>
+                    <p class="text-lg text-center truncate ...">User: {{$deleteUserId->name}}</p>
+                </div>
+        
+                <div class="flex justify-center mt-3">
+                    <button class="lift-modal flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                            wire:click="deleteUser"
+                            x-on:click="$dispatch('close-modal')">
+                        Delete
+                    </button>
+                </div>
+                @endif
+            </div>
+        </x-slot:body>
+    </x-modal>
+    
         {{-- Make Emp Modal --}}
         <x-modal name="makeEmp-modal" title="Change to Employee">
             <x-slot:body>
@@ -537,7 +539,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class=" lift flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                        <button class="lift-modal flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
                                 wire:click="makeEmp"
                                 x-on:click="$dispatch('close-modal')">
                             Make Employee
@@ -558,7 +560,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class=" lift flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                        <button class="lift-modal flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
                                 wire:click="makeOM"
                                 x-on:click="$dispatch('close-modal')">
                             Make Office Mgr.
@@ -579,7 +581,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class=" lift flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
+                        <button class="lift-modal flex items-center border-solid border-yellowB border-1 bg-yellowLight px-4 py-2 rounded-4 font-medium text-lg text-yellowBdarker"
                                 wire:click="makeAdmin"
                                 x-on:click="$dispatch('close-modal')">
                                 
@@ -654,7 +656,7 @@
                         </div>
 
                         {{-- Save Button --}}
-                        <div class=" lift flex justify-center items-center mt-3">
+                        <div class="lift-modal flex justify-center items-center mt-3">
                             <button x-on:click="$dispatch('close-modal')"
                                     wire:submit wire:click='editProfileSave'
                                     class="border-solid border-blue-400 border-1 bg-blue-300 rounded-xl px-4 py-2 font-medium text-xl text-blue-50"
@@ -679,7 +681,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class=" lift flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
+                        <button class="lift-modal flex items-center border-solid border-slate-300 border-1 bg-slate-300 px-4 py-2 rounded-4 font-medium text-lg text-white"
                                 wire:click="deactUser"
                                 x-on:click="$dispatch('close-modal')">
                             Deactivate
@@ -701,7 +703,7 @@
                     </div>
             
                     <div class="flex justify-center mt-3">
-                        <button class=" lift flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
+                        <button class="lift-modal flex items-center border-solid border-red-400 border-1 bg-red-300 px-4 py-2 rounded-4 font-semibold text-lg text-red-50"
                                 wire:click="deleteUser"
                                 x-on:click="$dispatch('close-modal')">
                             Delete

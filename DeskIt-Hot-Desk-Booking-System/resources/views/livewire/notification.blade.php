@@ -5,13 +5,13 @@
 @endphp
 
     <button 
-        {{-- wire:click="updateNotification"  --}}
         type="button" 
         class="flex relative"
         @click="showModal = true"
-        @if($currentRoute === 'notification' || $currentRoute === 'userNotification') disabled @endif
+        @if($currentRoute === 'notification' || $currentRoute === 'userNotification') disabled 
+        wire:ignore @endif
     >
-        <i class="fa-regular fa-bell @if($currentRoute === 'notification' || $currentRoute === 'userNotification') fa-solid fa-bell text-yellowB  bg-gray-100 p-1.5 px-2.5 rounded-full @endif"></i>
+        <i class="fa-regular fa-bell @if($currentRoute === 'notification' || $currentRoute === 'userNotification') fa-solid fa-bell text-yellowB inverter bg-gray-100 p-1.5 px-2.5 rounded-full @endif"></i>
 
         @if(!($currentRoute === 'notification' || $currentRoute === 'userNotification'))
             <h6 class="ml-1 border border-2 border-blue px-1 rounded-md text-xs element-selector">{{ $unreadCount }}</h6>
@@ -25,7 +25,7 @@
 
             {{-- Modal Panel --}}
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-y-auto shadow-xl transform transition-all sm:my-4 sm:align-middle sm:max-w-lg sm:w-full border border-2 max-h-screen" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                <div class="bg-white px-2 pt-4 pb-4 sm:pb-4">
+                <div class="bg-white px-2 pt-4 pb-4 sm:pb-4 element-selector">
                     {{-- Modal content --}}
                     <div class="sm:flex sm:items-start max-h-96">
                         <div class="text-left sm:px-4 w-96">
@@ -38,7 +38,7 @@
                                     <a @click="showModal1 = !showModal1" class=" cursor-pointer text-block">
                                         <i class="fa-solid fa-ellipsis"></i>
                                     </a>
-                                    <div x-show="showModal1" @click.away="showModal1 = false" x-cloak class="absolute bg-white shadow-sm p-3 right-6 top-0 w-max rounded-lg">
+                                    <div x-show="showModal1" @click.away="showModal1 = false" x-cloak class="absolute bg-white shadow-sm p-3 right-6 top-0 w-max rounded-lg bground z-20">
                                         <div class="flex flex-col">
                                             <a wire:navigate href="{{ Auth::user()->hasRole('admin') || Auth::user()->hasRole('superadmin') ? route('notification') : route('userNotification') }}" class="text-block pb-1 text-sm no-underline"><i class="fa-regular fa-eye text-sm"></i> See all</a>
                                             @if(Auth::user()->roles->where('name', 'employee')->isNotEmpty())
@@ -49,10 +49,10 @@
                                 </div>
                             </div>
                             <div class="text-base mb-2">
-                                <button wire:click="markAllAsRead" class=" text-yellowB mr-3">
+                                <button wire:click="markAllAsRead" class=" text-yellowB mr-3 inverter">
                                     Mark All as Read
                                 </button>
-                                <button wire:click="clearAll" class=" text-red">
+                                <button wire:click="clearAll" class="text-red inverter">
                                     Clear All
                                 </button>
                             </div>
@@ -62,7 +62,7 @@
                                                                 
                                 <div class="text-base">
                                     @foreach ($notifications as $notification)
-                                    <div class="{{ $notification->read_at ? 'bg-gray' : 'bg-white' }} p-3 mb-1 rounded-lg border border-b-2">
+                                    <div class="{{ $notification->read_at ? 'bg-gray' : 'bg-white bground' }} p-3 mb-1 rounded-lg border border-b-2">
                                         <div class="text-block text-base">
                                             <div class="font-semibold pb-1"> {{ $notification->data['title'] }}</div>
                                             <div class="pb-1">
@@ -75,12 +75,12 @@
                                             @if($notification)
                                                 @if(is_null($notification->read_at))
                                                     <button wire:click="markAsRead('{{ $notification->id }}')"
-                                                        class="text-blue-500">
+                                                        class="text-blue-500 inverter">
                                                         Mark as Read
                                                     </button>
                                                 @else
                                                     <button wire:click="markAsUnread('{{ $notification->id }}')"
-                                                        class="text-gray-500">
+                                                        class="text-gray-500 inverter">
                                                         Mark as Unread
                                                     </button>
                                                 @endif

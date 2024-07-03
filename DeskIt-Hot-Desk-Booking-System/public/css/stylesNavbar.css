@@ -19,13 +19,11 @@ html {
 }
 
 .navbar .navbar-brand {
-    padding: 10px;
 }
 
 .navbar-brand img {
     width: 210px; 
     height: 37px;
-    padding-left: 15%;
 }
 
 .navbar .nav-item {

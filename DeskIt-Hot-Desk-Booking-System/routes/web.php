@@ -171,7 +171,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // changed from home.profile, because it exposes an admin page (admin.profile).
     })->name('userProfile');
     Route::get('/user/profile/notification-settings', function () {
-        return view('home.profile');
+        return view('admin.profile');
     })->name('userProfileSetting');
     Route::get('/user/support', function () {
         return view('support.support');
