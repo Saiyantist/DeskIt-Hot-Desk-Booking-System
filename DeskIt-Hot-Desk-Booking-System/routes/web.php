@@ -48,6 +48,9 @@ Route::get('/test-notification', function () {
     return 'Notification sent!';
 });
 
+/**
+ *  Routes for Development Testing convenience
+ */
 Route::get('/dbconn', function () {
     if (DB::connection()->getPdo()){
         return "successfully Connected to DB: " . DB::connection()->getDatabaseName();
@@ -105,10 +108,7 @@ Route::get('rAll', function () {
     return ('removed employee role to all users except current user.');
 });
 
-Route::get('r', function () {
-    auth()->user()->roles()->detach();
-    return ('detached all roles');
-});
+Route::get('r', function () {auth()->user()->roles()->detach();return ('detached all roles');});
 
 
 
@@ -128,13 +128,9 @@ Route::get('/waiting', [WelcomeController::class, 'show4'])->name('waiting');
  */
 Route::get('/dashboard', function () {
     $user = Auth::user();
-    /** ADMINS */   
-    if ($user->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {return view('admin.dashboard'); } 
-    /** EMPLOYEE */
-    if ($user->hasRole('employee')) {return app(HomeController::class)->dashboard(); }   
-    /** NO ROLE */
-    elseif (!$user->hasAnyRole(['superadmin', 'admin', 'officemanager', 'employee'])) {return redirect()->route('waiting'); }
-    // Default fallback (this should not happen under normal circumstances)
+    if ($user->hasAnyRole(['superadmin', 'admin', 'officemanager'])) {return view('admin.dashboard'); }     /** ADMINS */   
+    if ($user->hasRole('employee')) {return app(HomeController::class)->dashboard(); }      /** EMPLOYEE */
+    elseif (!$user->hasAnyRole(['superadmin', 'admin', 'officemanager', 'employee'])) {return redirect()->route('waiting'); }       /** NO ROLE */
     else {return abort(403, 'Unauthorized'); }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -155,24 +151,13 @@ Route::middleware('auth')->group(function () {
  * HOME Routes
  */
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/user/notification', function () {
-        return view('home.notifications');
-        // changed from home.profile, because it exposes an admin page (admin.profile).
-    })->name('userNotification');
+    Route::get('/user/notification', function () {return view('home.notifications');})->name('userNotification');
     Route::get('/user/bookings/{userId}', [HomeController::class, 'getUserBookings'])->name('user.bookings');
-    Route::get('/user/profile', function () {
-        return view('admin.profile');
-        // changed from home.profile, because it exposes an admin page (admin.profile).
-    })->name('userProfile');
-    Route::get('/user/profile/notification-settings', function () {
-        return view('admin.profile');
-    })->name('userProfileSetting');
-    Route::get('/user/support', function () {
-        return view('support.support');
-    })->name('userSupport');
-    Route::get('/user/booking-history', function () {
-        return view('home.bookingHistory');
-    })->name('booking-history');
+    Route::get('/user/profile', function () {return view('admin.profile');})->name('userProfile'); // changed from home.profile, because it exposes an admin page (admin.profile). 
+    Route::get('/user/profile/notification-settings', function () {return view('admin.profile');})->name('userProfileSetting');
+    Route::get('/user/support', function () {return view('support.support');})->name('userSupport');
+    Route::post('/user/support', [IssueController::class, 'store'])->name('issue.store');
+    Route::get('/user/booking-history', function () {return view('home.bookingHistory');})->name('booking-history');
 });
 
 
@@ -209,11 +194,8 @@ Route::middleware(['auth', 'role:admin', 'verified'])->group(function () {
     Route::get('/admin/profile', function () {return view('admin.profile');})->name('profile');
     Route::get('/admin/profile-edit', function () {return view('admin.profileEdit');})->name('profile-edit');
     Route::get('/admin/support', function () {return view('support.support');})->name('support');
-
     Route::get("/admin/issues", function() { return view('admin.issues'); })->name('issues');
     Route::get('/admin/issues/{issueId}', [IssueController::class, 'show'])->name('admin.issue');
-
-    // changed from home.profile, because it exposes an admin page (admin.profile).
     Route::get('/admin/notification', function () {return view('admin.notifications');})->name('notification');
 });
 

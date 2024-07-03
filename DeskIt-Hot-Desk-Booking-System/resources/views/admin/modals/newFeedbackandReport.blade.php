@@ -2,7 +2,7 @@
     $formattedDate = now()->format('m-d-Y');
 @endphp
 
-<form action="" method="post" enctype="multipart/form-data">
+<form action="{{ route('issue.store') }}" method="post" enctype="multipart/form-data">
     @csrf
 
     <div class="modal fade text-left inverter" id="ModalCreate" tabindex="-1" role="dialog" aria-hidden="true">
@@ -21,25 +21,38 @@
                    
                 </div>
                 <div class="modal-body">
-                    <div class="form-group mb-2">
-                        <Strong for="email">Email <span class="text-red inverter">*</span></Strong>
-                        <input type="email" id="email" name="email" class="form-control my-2 bground3" required>
-
-                        
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
+                    @endif
                     <div class="form-group mb-2">
-                        <strong class="text-start">Select Feedback <span class="text-red inverter">*</span></strong>
-                        <select class="form-select text-center my-2 bground3" required>
+                        <Strong for="deskNumber">Desk Number <span class="text-red inverter">*</span></Strong>
+                        <input type="number" id="deskNumber" name="deskNumber" class="form-control my-2 bground3" min="101" max="236" required>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <Strong for="subject">Subject <span class="text-red inverter">*</span></Strong>
+                        <input type="text" id="subject" name="subject" class="form-control my-2 bground3" required>
+                    </div>
+                    
+                    <div class="form-group mb-2">
+                        <strong class="text-start">Select Issue type <span class="text-red inverter">*</span></strong>
+                        <select class="form-select text-center my-2 bground3" name="type" required>
                         <option value="">Choose one</option>
-                        <option value="1">Report a Bug</option>
-                        <option value="2">Give Feedback</option>
+                        <option value="bug">Report a Bug</option>
+                        <option value="feedback">Give Feedback</option>
                         </select>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group m-2">
-                            <strong>Describe the Issue <span class="text-red inverter">*</span></strong>
-                            <textarea id="desc" name="desc" placeholder="description" class="bground3 border border-gray-300 rounded w-full my-2 px-3 p-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 h-20 resize-none" required></textarea>
+                            <strong>Describe your Experience <span class="text-red inverter">*</span></strong>
+                            <textarea id="description" name="description" placeholder="description" class="bground3 border border-gray-300 rounded w-full my-2 px-3 p-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 h-20 resize-none" required></textarea>
                         </div>
 
                         </div>
