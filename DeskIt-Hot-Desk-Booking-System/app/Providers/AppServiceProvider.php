@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Services\AuditTrailService;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,9 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(AuditTrailService::class, function ($app) {
-            return new AuditTrailService();
-        });
+       
     }
 
     /**

@@ -6,7 +6,7 @@ use App\Models\AuditTrail;
 
 class AuditTrailService
 {
-    public function createTrail($email = null, $action_type, $action_details, $status, $additional_context = null)
+    public static function createTrail($email = null, $action_type, $action_details, $status, $additional_context = null)
     {
         AuditTrail::create([
             'user_id' => auth()->id(),

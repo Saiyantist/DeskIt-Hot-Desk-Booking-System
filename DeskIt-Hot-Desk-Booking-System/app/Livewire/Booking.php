@@ -18,11 +18,6 @@ use function PHPUnit\Framework\returnValue;
 class Booking extends Component
 {
 
-    protected $auditTrailService;
-
-    public function __construct(AuditTrailService $auditTrailService){
-        $this->auditTrailService = $auditTrailService;
-    }
     // use HandlesEvents;
     public $date;
     public $time;
@@ -160,7 +155,7 @@ class Booking extends Component
             ]);
 
             
-            $this->auditTrailService->createTrail(Auth::user()->email, "Book", Auth::user()->name ." booked for desk" . $selectedDeskID, "success");
+            AuditTrailService::createTrail(Auth::user()->email, "Book", Auth::user()->name ." booked for desk" . $selectedDeskID, "success");
 
             $this->selectedDesk = '-';
             $this->bookedDesk = '-';
