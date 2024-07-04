@@ -25,7 +25,7 @@
 
             {{-- Modal Panel --}}
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-y-auto shadow-xl transform transition-all sm:my-4 sm:align-middle sm:max-w-lg sm:w-full border border-2 max-h-screen" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                <div class="bg-white px-2 pt-4 pb-4 sm:pb-4 element-selector">
+                <div class="bg-white px-2 pt-4 pb-4 sm:pb-4">
                     {{-- Modal content --}}
                     <div class="sm:flex sm:items-start max-h-96">
                         <div class="text-left sm:px-4 w-96">
