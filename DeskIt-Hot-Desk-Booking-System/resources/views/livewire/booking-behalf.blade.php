@@ -11,12 +11,12 @@
 
                 <p class="book-desk text-2xl py-4 bg-yellowB text-center font-medium text-white">Book a Desk</p>
 
-                <div class="px-3 inverter">
+                <div class="px-3 inverter text-welcome">
 
                      {{-- Floor --}}
                      <div class="flex flex-row justify-content-between my-2">
                         <div>
-                            <p class="text-lg text-left">Floor#:</h6>
+                            <p class="inverter text-lg text-left">Floor#:</h6>
                         </div>
                         <div>
                             <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $floor }}</h6>
@@ -25,13 +25,13 @@
 
                     {{-- Date --}}
                     <div class="flex flex-row justify-content-between mb-2">
-                        <p class="text-lg text-left">Date:</h6>
+                        <p class="inverter text-lg text-left">Date:</h6>
                         <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $date }}</h6>
                     </div>
 
                     {{-- Time --}}
                     <div class="flex flex-row justify-content-between mb-2">
-                        <p class="m-0 text-lg text-left">Time:</h6>
+                        <p class="m-0 inverter text-lg text-left">Time:</h6>
                         <p class="text-sm bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center">{{ $time }}</h6>
                     </div>
 
@@ -40,7 +40,7 @@
 
                         {{-- Label --}}
                         <div>
-                            <p class="text-lg text-left">Book for:</h6>
+                            <p class="inverter text-lg text-left">Book for:</h6>
                         </div>
 
                         {{-- Text --}}
@@ -58,7 +58,7 @@
                     {{-- Desk --}}
                     <div class="flex flex-row justify-content-between">
                         <div>
-                            <p class="text-lg text-left">Desk#:</h6>
+                            <p class="inverter text-lg text-left">Desk#:</h6>
                         </div>
                         <div>
                             <p class="text-lg bg-white border shadow-sm border rounded-xl border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 w-36 rounded-md focus:ring-1 h-10 mb-2 flex items-center justify-center"> {{ $selectedDesk }}</h6>
