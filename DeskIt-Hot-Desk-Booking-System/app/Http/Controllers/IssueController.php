@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Desk;
 use App\Models\Issue;
+use App\Services\AuditTrailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,8 @@ class IssueController extends Controller
             'user_id'=> Auth::user()->id,
             'desk_id' => $deskId[0],
         ]);
+
+        AuditTrailService::createTrail(Auth::user()->email, "Issue Create", Auth::user()->name ." reported for desk " . $validated['deskNumber'], "success");
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Your feedback has been submitted successfully.');
