@@ -1,16 +1,16 @@
 <div>
-    <div class="w-[70%] mx-auto bg-gray m-0 px-4 pb-4 rounded-lg shadow-md">
+    <div class="w-[70%] mx-auto bg-gray m-0 px-4 pb-4 rounded-lg shadow-md element-selector">
         <header class='pt-4'>
 
             {{-- Issue --}}
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-row justify-between lift">
 
                 {{-- Back and Issue Details --}}
                 <div class="flex items-center gap-3">
                     <svg width="50" height="50" viewBox="0 0 291 479" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        class="cursor-pointer px-2 py-3 rounded-xl hover:bg-medgrey"
+                        class="cursor-pointer px-2 py-3 rounded-xl hover:bg-medgrey inverter"
                         {{-- wire:navigate --}}
-                        wire:click="goBack"
+                        onclick="goBack()"
                         ><path d="M8.08254 221.018L220.807 8.30422C231.063 -1.95167 247.7 -1.95167 257.956 8.30422L282.769 33.1175C293.014 43.3625 293.025 59.9558 282.813 70.2226L114.221 239.592L282.802 408.973C293.025 419.24 293.003 435.833 282.759 446.078L257.945 470.892C247.689 481.148 231.052 481.148 220.796 470.892L8.08254 258.167C-2.17335 247.911 -2.17335 231.274 8.08254 221.018Z" fill="black"/>
                     </svg>
 
@@ -49,7 +49,7 @@
             </div>
             
             {{-- Subject --}}
-            <div class="my-3 p-4 bg-yellowLight items-center rounded-t-lg shadow-sm">
+            <div class="my-3 p-4 bg-yellowLight items-center rounded-t-lg shadow-sm inverter">
                 <span class="text-2xl font-semibold capitalize">{{$issue->subject}}</span>
             </div>
         </header>
@@ -86,4 +86,9 @@
             <li>{{ $response->content }}</li>
         @endforeach
     </ul>  --}}
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </div>

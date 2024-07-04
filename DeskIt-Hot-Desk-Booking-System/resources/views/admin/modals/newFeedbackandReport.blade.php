@@ -33,6 +33,19 @@
                     <div class="form-group mb-2">
                         <Strong for="deskNumber">Desk Number <span class="text-red inverter">*</span></Strong>
                         <input type="number" id="deskNumber" name="deskNumber" class="form-control my-2 bground3" min="101" max="236" required>
+                        <script>
+                            // JavaScript to dynamically adjust min and max attributes based on user input or condition
+                            document.getElementById('deskNumber').addEventListener('input', function() {
+                                let value = parseInt(this.value);
+                                    if ((value >= 101 && value <= 136) || (value >= 201 && value <= 236)) {
+                                        // Value is within allowed ranges
+                                        this.setCustomValidity(''); // Clear any previous validation error
+                                    } else {
+                                        // Value is outside allowed ranges
+                                        this.setCustomValidity('Please enter a desk number between 101-136 or 201-236');
+                                    }
+                            });
+                        </script>
                     </div>
 
                     <div class="form-group mb-2">
@@ -63,9 +76,9 @@
                     </div>
 
                     <div class="mb-4 mt-1 d-flex justify-end">
-                        <button type="button" class="inverter-text btn grey btn-outline-secondary mx-3" data-dismiss="modal">{{
+                        <button type="button" class="lift btn grey btn-outline-secondary mx-3" data-dismiss="modal">{{
                             __('Cancel') }}</button>
-                        <button type="submit" class="inverter-text btn btn-outline-warning text-dark mr-8">{{ __('Submit') }}</button>
+                        <button type="submit" class="lift btn btn-outline-warning text-dark mr-8">{{ __('Submit') }}</button>
                     </div>
                 </div>
             </div>

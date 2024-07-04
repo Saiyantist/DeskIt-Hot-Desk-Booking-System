@@ -56,8 +56,33 @@
     -webkit-filter: invert(1);
     filter: invert(1);
 }
+.darkmode--activated .hover\:bgyl:hover {
+    background-color: rgba(154, 199, 251, 0.4);
+
+}
+
 .darkmode--activated .lift {
     -webkit-filter: invert(1);
     filter: invert(1);
     color:  #ffffff !important;
+}
+
+.darkmode--activated .text-welcome {
+    color:  #ffffff !important;
+}
+
+.darkmode--activated .lift2 {
+    background-color:  #000000 !important;
+}
+.darkmode--activated .lift3 {
+    background-color:  #272727 !important;
+}
+
+.darkmode--activated .lift4 {
+    background-color:  #e1e1e1 !important;
+}
+.darkmode--activated .lift5 {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+    color:  #000000 !important;
 }

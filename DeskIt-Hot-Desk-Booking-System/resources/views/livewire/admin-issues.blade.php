@@ -1,22 +1,22 @@
 <div>
     {{-- Dito ilalagay ang Powergrid Table--}}
-    <div class="bg-white shadow-md rounded-t-lg rounded-b-lg">
+    <div class="bg-white shadow-md rounded-t-lg rounded-b-lg element-selector">
         <div class="py-4">
             <span class="text-3xl ml-10 font-semibold">Desk Issues</span> 
         </div>
 
-        <section class="bg-gray rounded-b-lg">
+        <section class="bg-gray rounded-b-lg inverter4">
             <div class="mx-auto max-w-screen-xl ">
 
                 <div class="relative overflow-hidden">
                     <div class="flex items-center justify-between d p-4">
-                        <div class="flex">
+                        <div class="flex bground">
                             <input  type="text"
                                 wire:model.live.debounce.200ms ='search'
                                 class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 "
                                 placeholder="Search" required="">
                         </div>
-                        <div class="flex space-x-3">
+                        <div class="flex bground space-x-3">
                             <div class="flex space-x-3 items-center">
                                 <label class="w-40 text-sm font-medium text-gray-900">Issue Type :</label>
                                 <select 
@@ -31,9 +31,9 @@
                     </div>
 
                     {{-- Table --}}
-                    <div class="overflow-x-auto px-3">
+                    <div class="overflow-x-auto px-3" wire:poll.5s>
                         <table class="bg-white w-full text-sm text-left text-black dark:text-white">
-                            <thead class="text-xs text-gray-700 uppercase bg-yellow-200">
+                            <thead class="text-xs text-gray-700 uppercase bg-yellow-200 inverter">
                                 <tr>
                                     <th scope="col" class="px-4 py-3 w-8" wire:click="setSortBy('id')">
                                         <button class="flex flex-row justify-center w-full">
@@ -135,23 +135,23 @@
                             <tbody>
                                 @if($issues)
                                     @foreach($issues as $issue)
-                                    <tr class="border-b dark:border-gray-700 hover:bg-yellowLight cursor-pointer"
+                                    <tr class="border-b dark:border-gray-700 hover:bg-yellowLight hover:bgyl cursor-pointer"
                                         wire:navigate
                                         href="{{ route('admin.issue', ['issueId' => $issue->id]) }}"
                                         >
                                         <th scope="row"
-                                            class="px-4 py-3 text-center font-medium whitespace-nowrap text-yellowBdarker">
+                                            class="px-4 py-3 text-center font-medium whitespace-nowrap text-yellowBdarker inverter">
                                             {{ $issue->id}}</th>
                                         <td class="px-4 py-3 text-center">{{ $issue->desk->desk_num }}</td>
                                         <td class="px-4 py-3 text-center max-w-60 truncate ...">{{ $issue->user->name }}</td>
                                         <td class="px-4 py-3 text-center max-w-80 truncate ...">{{ $issue->subject }}</td>
                                         <td class="px-4 py-3 text-center">{{ $issue->created_at }}</td>
                                         @if($issue->status == 'to review')
-                                        <td class="px-4 py-3 text-center text-darkgray">{{ $issue->status }}</td>
+                                        <td class="px-4 py-3 text-center text-darkgray inverter">{{ $issue->status }}</td>
                                         @elseif($issue->status == 'reviewing')
-                                        <td class="px-4 py-3 text-center font-bold text-yellowB italic">{{ $issue->status }}</td>
+                                        <td class="px-4 py-3 text-center font-bold text-yellowB italic inverter">{{ $issue->status }}</td>
                                         @elseif($issue->status == 'resolved')
-                                        <td class="px-4 py-3 text-center font-bold text-green">{{ $issue->status }}</td>
+                                        <td class="px-4 py-3 text-center font-bold text-green inverter">{{ $issue->status }}</td>
                                         @endif
                                         {{-- <td class="px-4 py-3 text-center flex items-center justify-end">
                                             <button class="px-3 py-1 bg-red-500 text-white rounded">X</button>
@@ -166,7 +166,7 @@
                     {{-- Pagination --}}
                     <div class="py-4 px-3">
                         <div class="flex ">
-                            <div class="flex space-x-4 items-center mb-3">
+                            <div class="flex space-x-4 items-center mb-3 bground">
                                 <label class="w-32 text-sm font-medium text-gray-900">Per Page</label>
                                 <select
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
