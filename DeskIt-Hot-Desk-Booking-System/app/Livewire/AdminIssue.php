@@ -3,9 +3,11 @@
 namespace App\Livewire;
 
 use App\Models\Issue;
+use App\Services\AuditTrailService;
 use Livewire\Component;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class AdminIssue extends Component
 {
@@ -51,6 +53,8 @@ class AdminIssue extends Component
         {
             $this->issue->update(['status' => 'resolved','resolved_at' => Carbon::now()]);
         }
+
+        AuditTrailService::createTrail(Auth::user()->email, "Issue Update", Auth::user()->name ." updated issue " . $this->issue->id . " into status \"" . $this->issue->status . "\"", "success");
     }
 
     public function goBack()

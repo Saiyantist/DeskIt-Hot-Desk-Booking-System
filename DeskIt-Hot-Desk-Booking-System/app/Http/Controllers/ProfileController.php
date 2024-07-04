@@ -12,24 +12,23 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-
     public function show(): View {
-        return view('profile.profile');
+        $user = Auth::user();
+        $avatarUrl = $user->avatar ? Storage::url($user->avatar) : asset('images/anonymous.jpg');
+        return view('profile.profile', ['avatarUrl' => $avatarUrl]);
     }
 
-    /**
-     * Display the user's profile form.
-     */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+        $avatarUrl = $user->avatar ? Storage::url($user->avatar) : asset('images/anonymous.jpg');
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'avatarUrl' => $avatarUrl,
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
@@ -40,7 +39,6 @@ class ProfileController extends Controller
             $user->email_verified_at = null;
         }
 
-        // Handle avatar upload
         if ($request->hasFile('avatar')) {
             $request->validate([
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -48,7 +46,6 @@ class ProfileController extends Controller
 
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
 
-            // Delete the old avatar if it exists
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }
@@ -61,9 +58,6 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

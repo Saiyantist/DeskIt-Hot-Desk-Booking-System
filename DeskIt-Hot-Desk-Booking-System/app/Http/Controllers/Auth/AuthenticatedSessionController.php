@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+use App\Services\AuditTrailService;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -25,9 +27,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        
         $request->authenticate();
         $request->session()->regenerate();
-
+        
+        $user = Auth::user();
+        AuditTrailService::createTrail($user->email, 'Login', $user->name . ' logged in', 'success');
         // Checks if authenticating user is not NEW.
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended(RouteServiceProvider::HOME);
@@ -38,7 +43,8 @@ class AuthenticatedSessionController extends Controller
             $request->user()->sendEmailVerificationNotification();
         }
         
-        return redirect()->route('dashboard'); 
+        
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -51,9 +57,11 @@ class AuthenticatedSessionController extends Controller
         //     $user->email_verified_at = null;
         //     $user->save();
         // }
+        $user = Auth::user();
+
+        AuditTrailService::createTrail($user->email, 'Logout', $user->name . ' logged out', 'success');
 
         // Removed this because this will make any user at logout seem like a NEW user again.
-
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
