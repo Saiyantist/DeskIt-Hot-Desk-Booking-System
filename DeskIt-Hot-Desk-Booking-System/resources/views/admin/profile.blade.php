@@ -9,8 +9,7 @@
 
                 <div class="flex relative z-40">
                     <!-- Profile Picture -->
-                    <img class="w-40 h-40 rounded-full border border-gray-500 ml-10" src="/images/anonymous.jpg"
-                        alt="Profile Picture">
+                    <img class="w-40 h-40 rounded-full border border-gray-500 ml-10" src="{{ Auth::user()->avatar ? asset('storage/' .Auth::user()->avatar) : asset('images/anonymous.jpg') }}" alt="Profile Picture">
                     <div class="flex self-end -ml-10 mr-5">
                         <a href="#ModalCreate" data-toggle="modal"><img src="{{ asset('images/cam.svg') }}"></a>
                     </div>
