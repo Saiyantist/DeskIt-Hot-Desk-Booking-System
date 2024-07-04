@@ -265,7 +265,7 @@
                         </table>
                     </div>
                     <div class="mt-4">
-                        {{ $bookings->links("vendor.pagination.bootstrap-5") }}
+                        {{ $bookings->links("vendor.pagination.custom-pagination") }}
                     </div>
                 </div>
             </div>

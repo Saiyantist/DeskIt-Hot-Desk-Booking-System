@@ -180,7 +180,7 @@
                                 </select>
                             </div>
                         </div>
-                        {{ $issues->links('vendor.pagination.bootstrap-5')}}
+                        {{ $issues->links('vendor.pagination.custom-pagination')}}
                     </div>
                 </div>
             </div>
