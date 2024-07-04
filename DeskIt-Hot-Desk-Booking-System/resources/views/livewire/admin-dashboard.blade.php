@@ -265,20 +265,7 @@
                         </table>
                     </div>
                     <div class="mt-4">
-                        @foreach ($bookings as $booking)
-                            <!-- Render each booking -->
-                        @endforeach
-
-                        {{ $bookings->links() }}
-
-                        @if ($bookings->previousPageUrl())
-                            <a href="#" wire:click.prevent="previousPage" class="ml-2">&larr; Previous Page</a>
-                        @endif
-
-                        @if ($bookings->hasMorePages())
-                            <a href="#" wire:click.prevent="nextPage" class="ml-2">Next Page &rarr;</a>
-                        @endif
-
+                        {{ $bookings->links("vendor.pagination.bootstrap-5") }}
                     </div>
                 </div>
             </div>
