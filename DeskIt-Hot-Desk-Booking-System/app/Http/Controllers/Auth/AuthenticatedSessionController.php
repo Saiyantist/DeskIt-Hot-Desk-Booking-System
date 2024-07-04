@@ -10,8 +10,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+use App\Services\AuditTrailService;
+
 class AuthenticatedSessionController extends Controller
 {
+
+    protected $auditTrailService;
+
+    public function __construct(AuditTrailService $auditTrailService)
+    {
+        $this->auditTrailService = $auditTrailService;
+    }
     /**
      * Display the login view.
      */
@@ -37,8 +46,8 @@ class AuthenticatedSessionController extends Controller
         else {
             $request->user()->sendEmailVerificationNotification();
         }
-        
-        return redirect()->route('dashboard'); 
+
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -52,8 +61,10 @@ class AuthenticatedSessionController extends Controller
         //     $user->save();
         // }
 
-        // Removed this because this will make any user at logout seem like a NEW user again.
+        $user = Auth::user();
 
+        // Removed this because this will make any user at logout seem like a NEW user again.
+        $this->auditTrailService->createTrail($user->email, 'Logout', $user->name . ' logged out', 'success');
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

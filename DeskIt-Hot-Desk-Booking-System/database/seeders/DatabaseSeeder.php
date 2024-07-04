@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DeskSeeder::class,
             BookingSeeder::class,
+            IssueSeeder::class,
         ]);
     }    
 }

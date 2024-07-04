@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\Desk;
 use App\Models\Bookings;
 use App\Models\User;
+use App\Services\AuditTrailService;
 use Illuminate\Validation\Rules\Can;
 use Livewire\Features\SupportEvents\HandlesEvents;
 
@@ -16,6 +17,12 @@ use function PHPUnit\Framework\returnValue;
 
 class Booking extends Component
 {
+
+    protected $auditTrailService;
+
+    public function __construct(AuditTrailService $auditTrailService){
+        $this->auditTrailService = $auditTrailService;
+    }
     // use HandlesEvents;
     public $date;
     public $time;
@@ -151,6 +158,10 @@ class Booking extends Component
                 "user_id" => $user,
                 "desk_id" => $selectedDeskID,
             ]);
+
+            
+            $this->auditTrailService->createTrail(Auth::user()->email, "Book", Auth::user()->name ." booked for desk" . $selectedDeskID, "success");
+
             $this->selectedDesk = '-';
             $this->bookedDesk = '-';
             // $this->showNotification = true;
