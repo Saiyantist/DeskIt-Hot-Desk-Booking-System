@@ -158,6 +158,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/support', function () {return view('support.support');})->name('userSupport');
     Route::post('/user/support', [IssueController::class, 'store'])->name('issue.store');
     Route::get('/user/booking-history', function () {return view('home.bookingHistory');})->name('booking-history');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 
