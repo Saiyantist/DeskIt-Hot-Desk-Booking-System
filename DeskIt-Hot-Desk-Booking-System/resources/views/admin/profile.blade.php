@@ -49,7 +49,6 @@
         @else
             @livewire('admin-profile')
         @endif
-        {{--
     </section>
     @endsection
 </x-app-layout>
